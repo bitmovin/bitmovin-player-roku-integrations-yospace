@@ -11,7 +11,6 @@
 - `CHANGELOG` entry
   - Correct version
   - Correct section and correct section order (Added/Changed/Deprecated/Removed/Fixed)
-  - Comprehensible to customers, i.e. without "secret" internal knowledge
   - Without redundancy (e.g. no `Added foo` in `Added` section but rather just `Foo`)
   - No typos
   - Coherent argumentation why an entry is not needed

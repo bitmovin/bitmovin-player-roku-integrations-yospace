@@ -1,7 +1,4 @@
-## Description
-- Issue: https://github.com/bitmovin/player-issues-roku/issues/<number>
-
-## Problem
+## Problem Description
 <!-- Describe the problem briefly -->
 
 ## Fix
@@ -12,16 +9,13 @@
 
 ## Checklist (for PR submitters and reviewers)
 - `CHANGELOG` entry
-  - Correct player version
-  - Correct section and correct section order (Added/Changed/Deprecated/Removed/Fixed/Internal)
+  - Correct version
+  - Correct section and correct section order (Added/Changed/Deprecated/Removed/Fixed)
   - Comprehensible to customers, i.e. without "secret" internal knowledge
   - Without redundancy (e.g. no `Added foo` in `Added` section but rather just `Foo`)
   - No typos
-  - Link to issue (on new line) or `(untracked)` suffix (on same line)
   - Coherent argumentation why an entry is not needed
 - Tests
   - Test(s) within the PR, and/or
   - Link(s) to existing test class(es) that cover the PR, and/or
   - Coherent argumentation why the PR cannot be covered by tests
-
-<!-- For every PR that gets merged although it violates the checklist, the PR submitter and all reviewers buy a round of drinks for the whole player team! -->

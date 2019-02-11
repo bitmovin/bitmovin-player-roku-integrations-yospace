@@ -21,7 +21,7 @@ sub init()
   m.top.appendChild(m.bitmovinYospacePlayerSDK)
   m.bitmovinYospacePlayerSDK.observeField("loadStatus", "onLoadStatusChanged")
 
-
+  'TODO: replace button workaround with an actual solution'
   bttn = m.top.findNode("bttnSetup")
   bttn.observeField("buttonSelected", "onButtonPressed")
   bttn.setFocus(true)

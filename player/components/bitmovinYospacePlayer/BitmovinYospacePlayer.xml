@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BitmovinYospacePlayer" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
+  <interface>
+    <field id="BitmovinPlayerState" type="assocarray" />
+    <field id="BitmovinFunctions" type="assocarray" />
+    <field id="BitmovinFields" type="assocarray" />
+
+    <function name="setup" />
+    <function name="play" />
+    <function name="pause" />
+    <function name="unload" />
+    <function name="preload" />
+    <function name="seek" />
+    <function name="load" />
+    <function name="mute" />
+    <function name="unmute" />
+    <function name="isMuted" />
+    <function name="captionMode" />
+    <function name="isPlaying" />
+    <function name="isPaused" />
+    <function name="isStalled" />
+    <function name="availableSubtitles" />
+    <function name="getSubtitle" />
+    <function name="setSubtitle" />
+    <function name="availableAudio" />
+    <function name="getAudio" />
+    <function name="setAudio" />
+
+    <field id="playerState" type="string" value="" />
+    <field id="error" type="assocarray" alwaysNotify="true" />
+    <field id="warning" type="assocarray" alwaysNotify="true" />
+    <field id="seek" type="boolean" alwaysNotify="true" />
+    <field id="seeked" type="float" alwaysNotify="true" />
+  </interface>
+</component>

@@ -5,7 +5,7 @@ sub init()
   m.bitmovinPlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
   m.bitmovinPlayerSDK.id = "BitmovinPlayerSDK"
   ' NOTE: for dev purposes, a node server can be spun up that has the player library as a zip file
-  m.bitmovinPlayerSDK.uri = "http://192.168.1.48:8080/roku/BitmovinPlayer.zip"
+  m.bitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
   ' Adding the ComponentLibrary node to the scene will start the download of the library
   m.top.appendChild(m.bitmovinPlayerSDK)
   m.bitmovinPlayerSDK.observeField("loadStatus", "onLoadStatusChanged")
@@ -16,7 +16,7 @@ sub init()
   m.bitmovinYospacePlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
   m.bitmovinYospacePlayerSDK.id = "BitmovinYospacePlayerSDK"
   ' NOTE: for dev purposes, a node server can be spun up that has the player library as a zip file
-  m.bitmovinYospacePlayerSDK.uri = "http://192.168.1.48:8080/roku/player.zip"
+  m.bitmovinYospacePlayerSDK.uri = "http://YOUR-IP-HERE:8080/bitmovinyospaceplayer.zip"
   ' Adding the ComponentLibrary node to the scene will start the download of the library
   m.top.appendChild(m.bitmovinYospacePlayerSDK)
   m.bitmovinYospacePlayerSDK.observeField("loadStatus", "onLoadStatusChanged")

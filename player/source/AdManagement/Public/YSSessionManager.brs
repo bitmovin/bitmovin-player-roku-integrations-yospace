@@ -299,9 +299,6 @@ end sub
 
 ' CreateForVOD
 sub ys_yssm_createvod(url as String, props = invalid as Dynamic, cb = invalid as Dynamic)
-    print "in create Vod"
-    print url
-    print cb
     YO_TRACE("Creating for VOD: {0}", url)
 
     if (props <> invalid) then

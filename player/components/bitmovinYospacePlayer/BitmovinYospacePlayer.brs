@@ -20,8 +20,11 @@ sub init()
 end sub
 
 '---------------------------- bitmovin player api function ----------------------------
+'OVERRIDEN setup method
 sub setup(params)
-  m.top.findNode("BitmovinPlayer").callFunc(m.top.BitmovinFunctions.SETUP, params)
+  m.config = {}
+  m.config.append(params)
+  requestYospaceURL(m.config)
 end sub
 
 sub play(params)
@@ -44,7 +47,6 @@ sub seek(params)
   m.top.findNode("BitmovinPlayer").callFunc(m.top.BitmovinFunctions.SEEK, params)
 end sub
 
-'TO BE OVERRIDEN'
 sub load(params)
   m.top.findNode("BitmovinPlayer").callFunc(m.top.BitmovinFunctions.LOAD, params)
 end sub
@@ -99,6 +101,17 @@ end sub
 
 sub setAudio(params)
   m.top.findNode("BitmovinPlayer").callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
+end sub
+
+'---------------------------- yospace api calls ----------------------------
+
+sub requestYospaceURL(config)
+  m.session.CreateForVOD(config.source.hls, {}, yo_Callback(cb_session_ready))
+end sub
+
+sub cb_session_ready(response as Dynamic)
+  m.config.source.hls = m.session.GetMasterPlaylist()
+  load(m.config.source)
 end sub
 
 '---------------------------- yospace callbacks ----------------------------

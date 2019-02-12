@@ -18,6 +18,8 @@ sub init()
   m.player["AdvertEnd"]       = yo_Callback(cb_advert_end, m)
   m.player["AdBreakEnd"]      = yo_Callback(cb_ad_break_end, m)
   m.player["UpdateTimeline"]  = yo_Callback(cb_update_timeline, m)
+
+  m.timeline = []
 end sub
 
 '---------------------------- bitmovin player api function ----------------------------
@@ -111,10 +113,13 @@ end sub
 '---------------------------- yospace api calls ----------------------------
 
 sub requestYospaceURL(config)
-  m.session.CreateForVOD(config.source.hls, {}, yo_Callback(cb_session_ready))
+  'm.session.CreateForVOD(config.source.hls, {}, yo_Callback(cb_session_ready))
+  m.session.CreateForLive(config.source.hls, {}, yo_Callback(cb_session_ready))
 end sub
 
 sub cb_session_ready(response as Dynamic)
+  m.session.RegisterPlayer(m.player)
+  m.timeline = m.session.GetTimeline()
   m.config.source.hls = m.session.GetMasterPlaylist()
   load(m.config.source)
 end sub

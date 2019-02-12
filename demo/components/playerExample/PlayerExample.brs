@@ -44,10 +44,10 @@ sub onLoadStatusChanged()
 
     m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
     m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
-    m.bitmovinPlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
-    m.bitmovinPlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
-    m.bitmovinPlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
-    m.bitmovinPlayer.ObserveField(m.BitmovinFields.SEEKED, "onSeeked")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEKED, "onSeeked")
 
     m.top.appendChild(m.bitmovinYospacePlayer)
 

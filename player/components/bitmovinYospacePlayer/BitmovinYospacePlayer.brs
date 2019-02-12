@@ -4,6 +4,7 @@ sub init()
 
   m.top.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
   m.top.BitmovinFields = m.bitmovinPlayer.BitmovinFields
+  m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
 
   m.top.appendChild(m.bitmovinPlayer)
 
@@ -102,6 +103,10 @@ end sub
 sub setAudio(params)
   m.top.findNode("BitmovinPlayer").callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
 end sub
+
+'---------------------------- additional wrappen functions ----------------------------
+
+
 
 '---------------------------- yospace api calls ----------------------------
 

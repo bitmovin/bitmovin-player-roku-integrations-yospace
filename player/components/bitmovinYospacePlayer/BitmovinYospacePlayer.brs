@@ -18,7 +18,6 @@ sub init()
   m.player["AdvertStart"]     = yo_Callback(cb_advert_start, m)
   m.player["AdvertEnd"]       = yo_Callback(cb_advert_end, m)
   m.player["AdBreakEnd"]      = yo_Callback(cb_ad_break_end, m)
-  m.player["UpdateTimeline"]  = yo_Callback(cb_update_timeline, m)
 
   m.timeline = []
 end sub
@@ -175,13 +174,13 @@ end sub
 sub cb_session_ready(response as Dynamic)
   m.session.RegisterPlayer(m.player)
   m.timeline = m.session.GetTimeline()
-  cb_update_timeline(m.timeline)
   m.config.source.hls = m.session.GetMasterPlaylist()
   load(m.config.source)
 end sub
 
 '---------------------------- yospace callbacks ----------------------------
 ' Called whenever the player enters an advert break
+sub cb_ad_break_start(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK START")
 end sub
 
@@ -198,8 +197,4 @@ end sub
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
-end sub
-
-sub cb_update_timeline(tl as Dynamic)
-  print "in cb_update_timeline"
 end sub

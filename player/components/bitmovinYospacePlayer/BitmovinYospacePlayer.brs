@@ -50,7 +50,19 @@ sub seek(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, params)
 end sub
 
+'OVERRIDEN load method
 sub load(params)
+  video = m.bitmovinPlayer.findNode("MainVideo")
+  video.observeField("state", "onVideoPlaybackState")
+  video.observeField("position", "onVideoPosition")
+  video.observeField("timedMetaData", "onTimedMetaData")
+
+  video.timedMetaDataSelectionKeys = ["*"]
+
+  video.notificationInterval = 0.5
+
+  video.enableTrickPlay = false
+
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, params)
 end sub
 
@@ -107,11 +119,33 @@ sub setAudio(params)
 end sub
 
 '---------------------------- additional wrappen functions ----------------------------
+sub onVideoPlaybackState()
+  video = m.bitmovinPlayer.findNode("MainVideo")
+  if video.state = "finished"
+    m.session.ReportPlayerEvent(YSPlayerEvents().END)
+  else if video.state = "buffering"
+    m.session.ReportPlayerEvent(YSPlayerEvents().BUFFER)
+  else if video.state = "playing"
+    m.session.ReportPlayerEvent(YSPlayerEvents().RESUME)
+  else if video.state = "paused"
+    m.session.ReportPlayerEvent(YSPlayerEvents().PAUSE)
+  else if video.state = "stopped"
+    m.session.ReportPlayerEvent(YSPlayerEvents().STALL)
+  else
+    print "unhandled video state: "; video.state
+  end if
+end sub
 
+sub onVideoPosition()
+  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.bitmovinPlayer.findNode("MainVideo").position)
+end sub
 
+sub onTimedMetaData()
+  print "Timed Meta Data:"
+  print  m.bitmovinPlayer.findNode("MainVideo").timedMetaData
+end sub
 
 '---------------------------- yospace api calls ----------------------------
-
 sub requestYospaceURL(config)
   'm.session.CreateForVOD(config.source.hls, {}, yo_Callback(cb_session_ready))
   m.session.CreateForLive(config.source.hls, {}, yo_Callback(cb_session_ready))
@@ -125,7 +159,6 @@ sub cb_session_ready(response as Dynamic)
 end sub
 
 '---------------------------- yospace callbacks ----------------------------
-
 sub cb_ad_break_start(dummy = invalid as Dynamic)
     YO_TRACE("AD BREAK START")
 end sub

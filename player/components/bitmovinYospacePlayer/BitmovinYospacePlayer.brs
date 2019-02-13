@@ -8,6 +8,7 @@ sub init()
 
   m.top.appendChild(m.bitmovinPlayer)
 
+  YO_LOGLEVEL(YospaceVerbosity().TRACE)
   'inizialize the yospace sdk
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
@@ -61,7 +62,8 @@ sub load(params)
 
   video.notificationInterval = 0.5
 
-  video.enableTrickPlay = false
+  'the player sets this to "true" regradless of the stream being live or VOD
+  'video.enableTrickPlay = false
 
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, params)
 end sub
@@ -118,7 +120,7 @@ sub setAudio(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
 end sub
 
-'---------------------------- additional wrappen functions ----------------------------
+'---------------------------- additional callbacks used by the yospace sdk ----------------------------
 sub onVideoPlaybackState()
   video = m.bitmovinPlayer.findNode("MainVideo")
   if video.state = "finished"
@@ -141,105 +143,63 @@ sub onVideoPosition()
 end sub
 
 sub onTimedMetaData()
-  print "Timed Meta Data:"
-  print  m.bitmovinPlayer.findNode("MainVideo").timedMetaData
+  print "Timed Meta Data revieved"
+  id3 = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
+  if (yo_IsNotNull(id3)) then
+    id3obj = {}
+    if (id3.Count() = 6) then
+      for each i in id3
+        if (len(i) = 4) then
+          hex = id3[i]
+          parsed = ""
+          for j = 3 to len(hex) step 2
+            pair = mid(hex, j, 2)
+            parsed = parsed + chr(val(pair, 16))
+          end for
+          YO_DEBUG("Decoded ID3 tag: {0} as {1}", i, parsed)
+          id3obj[i] = parsed
+        end if
+      end for
+      m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, id3obj)
+    end if
+  end if
 end sub
 
 '---------------------------- yospace api calls ----------------------------
 sub requestYospaceURL(config)
-  'm.session.CreateForVOD(config.source.hls, {}, yo_Callback(cb_session_ready))
-  m.session.CreateForLive(config.source.hls, {}, yo_Callback(cb_session_ready))
+  'TODO: Once the config file contains a way to tell if VOD or live should be used, check the config file so that the appropriate function can be called.
+  'm.session.CreateForVOD(config.source.hls, {USE_ID3:false}, yo_Callback(cb_session_ready))
+  m.session.CreateForLive(config.source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
 end sub
 
 sub cb_session_ready(response as Dynamic)
   m.session.RegisterPlayer(m.player)
   m.timeline = m.session.GetTimeline()
+  cb_update_timeline(m.timeline)
   m.config.source.hls = m.session.GetMasterPlaylist()
   load(m.config.source)
 end sub
 
 '---------------------------- yospace callbacks ----------------------------
-sub cb_ad_break_start(dummy = invalid as Dynamic)
-    YO_TRACE("AD BREAK START")
+' Called whenever the player enters an advert break
+  YO_TRACE("AD BREAK START")
 end sub
 
 ' Called whenever an individual advert starts
 sub cb_advert_start(miid as String)
-    YO_TRACE("ADVERT START for {0}", miid)
-
-    ' Display the "Advertisement" overlay
-    m.advert.visible = true
+  YO_TRACE("ADVERT START for {0}", miid)
 end sub
 
 ' Called whenever an individual advert completes
 sub cb_advert_end(miid as String)
-    YO_TRACE("ADVERT END for {0}", miid)
-
-    ' Hide the "Advertisement" overlay
-    m.advert.visible = false
+  YO_TRACE("ADVERT END for {0}", miid)
 end sub
 
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
-    YO_TRACE("AD BREAK END")
-
-    if (m.seekTarget <> -1) then
-        YO_DEBUG(" ************ POST ADVERT SEEK ALLOWED")
-        m.video.seek = m.seekTarget
-        m.seekTarget = -1
-    end if
+  YO_TRACE("AD BREAK END")
 end sub
 
 sub cb_update_timeline(tl as Dynamic)
-    YO_DEBUG("TIMELINE UPDATED IN APP")
-
-    if (tl <> invalid) then
-        ' For this demo app, we will pre-process the timeline
-        ' into an array suitable for display by our Hud component
-        eles = tl.GetAllElements()
-        dur     = 0.0   ' Total timeline duration
-        content = {}
-        content["elements"] = []
-
-        for each ele in eles
-            if ele.GetType() = "VOD" then
-                ' Add a simply VOD element
-                content["elements"].Push({mode:"VOD", size:ele.GetDuration()})
-            else if ele.GetType() = "LIVE" then
-                ' Add a piece of live content
-                content["elements"].Push({mode:"LIVE", size:ele.GetDuration()})
-            else
-                ' For advert breaks, we are given the entire break
-                ads = ele.GetAdverts().GetAdverts()
-
-                ' So we will iterate through the break to add individual ad pieces
-                for each ad in ads
-                    ' Add a single advert item. Notionally, IsActive() means that the
-                    ' ad should be watched and should not be "skippable"
-                    content["elements"].Push({mode:"ADVERT", size:ad.GetDuration(), state:ad.IsActive()})
-                end for
-            end if
-
-            ' Record the duration into the total duration count
-            dur = dur + ele.GetDuration()
-        end for
-
-        ' Assign the final total duration calculated and pass the
-        ' timeline object to our Hud component
-        YO_TRACE("Total Duration: {0}", dur)
-        content["duration"] = dur
-        m.hud.content       = content
-
-        ' Set the total stream duration as appropriate
-        if (m.session.GetSession()._CLASSNAME = "YSLiveSession") then
-            ' We ensure that the duration is not set for live content
-            ' so that the progress tracker and timeline isn't displayed
-            m.hud.duration = 0.0
-        else
-            ' Update the duration in the Hud
-            m.hud.duration = dur
-        end if
-    else
-        YO_WARN("Timeline was invalid")
-    end if
+  print "in cb_update_timeline"
 end sub

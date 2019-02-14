@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="BitmovinYospacePlayer" extends="Group">
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
+  <children>
+    <LoadPlayerTask id="loadPlayerTask" />
+  </children>
   <interface>
     <field id="BitmovinPlayerState" type="assocarray" />
     <field id="BitmovinFunctions" type="assocarray" />
     <field id="BitmovinFields" type="assocarray" />
+
+    <field id="isPlayerReady" type="boolean" value="false" />
 
     <function name="setup" />
     <function name="play" />
@@ -34,7 +39,7 @@
     <field id="seek" type="boolean" alwaysNotify="true" />
     <field id="seeked" type="float" alwaysNotify="true" /> -->
   </interface>
-  
+
   <!-- Yospace - server-side-ad-insertion -->
   <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YSDebugLog.brs" />
   <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/rtGeneral.brs" />

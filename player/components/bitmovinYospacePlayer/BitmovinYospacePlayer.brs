@@ -1,12 +1,5 @@
 sub init()
-  m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
-  m.bitmovinPlayer.id = "BitmovinPlayer"
-
-  m.top.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
-  m.top.BitmovinFields = m.bitmovinPlayer.BitmovinFields
-  m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
-
-  m.top.appendChild(m.bitmovinPlayer)
+  m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
 
   YO_LOGLEVEL(YospaceVerbosity().TRACE)
   'inizialize the yospace sdk
@@ -18,6 +11,20 @@ sub init()
   m.player["AdvertStart"]     = yo_Callback(cb_advert_start, m)
   m.player["AdvertEnd"]       = yo_Callback(cb_advert_end, m)
   m.player["AdBreakEnd"]      = yo_Callback(cb_ad_break_end, m)
+end sub
+
+sub onBitmovinPlayerSDKLoaded()
+  if m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").loadStatus = "ready"
+    m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
+    m.bitmovinPlayer.id = "BitmovinPlayer"
+
+    m.top.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
+    m.top.BitmovinFields = m.bitmovinPlayer.BitmovinFields
+    m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
+
+    m.top.appendChild(m.bitmovinPlayer)
+    m.top.isPlayerReady = true
+  end if
 end sub
 
 '---------------------------- bitmovin player api function ----------------------------

@@ -1,49 +1,30 @@
 sub init()
   m.playerConfig = getExamplePlayerConfig()
 
-  ' Creates the ComponentLibrary (the BitmovinPlayerSDK in this case)
-  m.bitmovinPlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
-  m.bitmovinPlayerSDK.id = "BitmovinPlayerSDK"
-  m.bitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
-  ' Adding the ComponentLibrary node to the scene will start the download of the library
-  m.top.appendChild(m.bitmovinPlayerSDK)
-  m.bitmovinPlayerSDK.observeField("loadStatus", "onLoadStatusChanged")
-
-  '------------------------------------------------------------------------------------------------'
-
   ' Creates another ComponentLibrary for the yospace wrapper
   m.bitmovinYospacePlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
   m.bitmovinYospacePlayerSDK.id = "BitmovinYospacePlayerSDK"
   ' NOTE: for dev purposes, a node server can be spun up that has the player library as a zip file
-  m.bitmovinYospacePlayerSDK.uri = "http://YOUR-IP-HERE:8080/bitmovinyospaceplayer.zip"
+  m.bitmovinYospacePlayerSDK.uri = "http://192.168.1.48:8080/roku/player.zip"
   m.top.appendChild(m.bitmovinYospacePlayerSDK)
   m.bitmovinYospacePlayerSDK.observeField("loadStatus", "onLoadStatusChanged")
-
-  'TODO: replace button workaround with an actual solution'
-  bttn = m.top.findNode("bttnSetup")
-  bttn.observeField("buttonSelected", "onButtonPressed")
-  bttn.setFocus(true)
-end sub
-
-'TODO: Replace the button workaround with an actual solution'
-sub onButtonPressed()
-  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
 end sub
 
 ' The ComponentLibrary loadStatus field can equal "none", "ready", "loading" or "failed"
 sub onLoadStatusChanged()
-  print "LOAD STATUS FOR PLAYER LIBRARY: "; m.bitmovinPlayerSDK.loadStatus
   print "LOAD STATUS FOR YOSPACE PLAYER LIBRARY: "; m.bitmovinYospacePlayerSDK.loadStatus
-
-  if m.bitmovinYospacePlayerSDK.loadStatus="ready" and m.bitmovinPlayerSDK.loadStatus="ready"
-    ' Once the player library and the wrapper are loaded and ready, we can use the wrapper to reference the BitmovinPlayer component
+  if m.bitmovinYospacePlayerSDK.loadStatus="ready"
+    ' Once the player library is loaded and ready, we can use is to reference the BitmovinPlayer component
     m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayerSDK:BitmovinYospacePlayer")
+    m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
+  end if
+end sub
 
+function onPlayerReady()
+  if m.bitmovinYospacePlayer.isPlayerReady = true
     m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
     m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
 
-    m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
-    m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
@@ -59,8 +40,10 @@ sub onLoadStatusChanged()
     'm.bitmovinPlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
 
     'm.bitmovinPlayer.ObserveField("videoState", "onStateChange")
+
+    m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
   end if
-end sub
+end function
 
 sub catchVideoError()
   print "ERROR: "; m.bitmovinYospacePlayer.error.code.toStr() + ": " + m.bitmovinYospacePlayer.error.message

@@ -18,8 +18,6 @@ sub init()
   m.player["AdvertStart"]     = yo_Callback(cb_advert_start, m)
   m.player["AdvertEnd"]       = yo_Callback(cb_advert_end, m)
   m.player["AdBreakEnd"]      = yo_Callback(cb_ad_break_end, m)
-
-  m.timeline = []
 end sub
 
 '---------------------------- bitmovin player api function ----------------------------
@@ -177,7 +175,6 @@ end sub
 
 sub cb_session_ready(response as Dynamic)
   m.session.RegisterPlayer(m.player)
-  m.timeline = m.session.GetTimeline()
   m.config.source.hls = m.session.GetMasterPlaylist()
   load(m.config.source)
 end sub

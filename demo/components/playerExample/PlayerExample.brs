@@ -5,7 +5,7 @@ sub init()
   m.bitmovinYospacePlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
   m.bitmovinYospacePlayerSDK.id = "BitmovinYospacePlayerSDK"
   ' NOTE: for dev purposes, a node server can be spun up that has the player library as a zip file
-  m.bitmovinYospacePlayerSDK.uri = "http://192.168.1.48:8080/roku/player.zip"
+  m.bitmovinYospacePlayerSDK.uri = "http://YOUR-IP-HERE:8080/roku/player.zip"
   m.top.appendChild(m.bitmovinYospacePlayerSDK)
   m.bitmovinYospacePlayerSDK.observeField("loadStatus", "onLoadStatusChanged")
 end sub
@@ -32,16 +32,12 @@ function onPlayerReady()
 
     m.top.appendChild(m.bitmovinYospacePlayer)
 
-    'm.bitmovinPlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
+    m.bitmovinPlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
 
     ' Testing that error is thrown correctly, can't play without a source
-    'm.bitmovinPlayer.callFunc(m.BitmovinFunctions.PLAY, invalid)
+    m.bitmovinPlayer.callFunc(m.BitmovinFunctions.PLAY, invalid)
 
-    'm.bitmovinPlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
-
-    'm.bitmovinPlayer.ObserveField("videoState", "onStateChange")
-
-    m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
+    m.bitmovinPlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
   end if
 end function
 

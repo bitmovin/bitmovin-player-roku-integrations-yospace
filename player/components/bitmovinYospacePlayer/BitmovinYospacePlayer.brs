@@ -167,7 +167,7 @@ end sub
 '---------------------------- yospace api calls ----------------------------
 sub requestYospaceURL(config)
   'TODO: Once the config file contains a way to tell if VOD or live should be used, check the config file so that the appropriate function can be called.
-  isLive = true
+  isLive = false
   if isLive
      m.session.CreateForLive(config.source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
   else

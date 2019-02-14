@@ -32,12 +32,12 @@ function onPlayerReady()
 
     m.top.appendChild(m.bitmovinYospacePlayer)
 
-    m.bitmovinPlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
+    m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
 
     ' Testing that error is thrown correctly, can't play without a source
-    m.bitmovinPlayer.callFunc(m.BitmovinFunctions.PLAY, invalid)
+    m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.PLAY, invalid)
 
-    m.bitmovinPlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
+    m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
   end if
 end function
 

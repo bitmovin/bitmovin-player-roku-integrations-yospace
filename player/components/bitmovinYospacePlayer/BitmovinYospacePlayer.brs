@@ -1,4 +1,6 @@
 sub init()
+  m.source = {}
+
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
 
   YO_LOGLEVEL(YospaceVerbosity().TRACE)
@@ -30,9 +32,17 @@ end sub
 '---------------------------- bitmovin player api function ----------------------------
 'OVERRIDEN setup method
 sub setup(params)
-  m.config = {}
-  m.config.append(params)
-  requestYospaceURL(m.config)
+  config = {}
+  config.append(params)
+  if (config.source <> invalid)
+    setupCfg = {}
+    setupCfg.append(config)
+    setupCfg.source = invalid
+    m.bitmovinplayer.callFunc(m.top.BitmovinFunctions.SETUP, setupCfg)
+    load(config.source)
+  else
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SETUP, config)
+  end if
 end sub
 
 sub play(params)
@@ -57,6 +67,7 @@ end sub
 
 'OVERRIDEN load method
 sub load(params)
+  m.source.append(params)
   video = m.bitmovinPlayer.findNode("MainVideo")
   video.observeField("state", "onVideoPlaybackState")
   video.observeField("position", "onVideoPosition")
@@ -69,7 +80,7 @@ sub load(params)
   'the player sets this to "true" regradless of the stream being live or VOD
   'video.enableTrickPlay = false
 
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, params)
+  requestYospaceURL(m.source)
 end sub
 
 sub mute(params)
@@ -170,20 +181,20 @@ sub onTimedMetaData()
 end sub
 
 '---------------------------- yospace api calls ----------------------------
-sub requestYospaceURL(config)
+sub requestYospaceURL(source)
   'TODO: Once the config file contains a way to tell if VOD or live should be used, check the config file so that the appropriate function can be called.
   isLive = false
   if isLive
-     m.session.CreateForLive(config.source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
+     m.session.CreateForLive(source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
   else
-    m.session.CreateForVOD(config.source.hls, {USE_ID3:false}, yo_Callback(cb_session_ready))
+    m.session.CreateForVOD(source.hls, {USE_ID3:false}, yo_Callback(cb_session_ready))
   end if
 end sub
 
 sub cb_session_ready(response as Dynamic)
   m.session.RegisterPlayer(m.player)
-  m.config.source.hls = m.session.GetMasterPlaylist()
-  load(m.config.source)
+  m.source.hls = m.session.GetMasterPlaylist()
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub
 
 '---------------------------- yospace callbacks ----------------------------

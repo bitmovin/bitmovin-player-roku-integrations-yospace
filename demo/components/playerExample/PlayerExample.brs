@@ -33,7 +33,7 @@ function onPlayerReady()
     m.top.appendChild(m.bitmovinYospacePlayer)
 
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
-    m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
+    'm.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
   end if
 end function
 

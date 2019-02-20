@@ -1,9 +1,10 @@
 sub init()
   m.source = {}
-
+  m.adStartPoint = 0
+  m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+  YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
-  YO_LOGLEVEL(YospaceVerbosity().TRACE)
   'inizialize the yospace sdk
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
@@ -32,8 +33,12 @@ end sub
 '---------------------------- bitmovin player api function ----------------------------
 'OVERRIDEN setup method
 sub setup(params)
+  'yospace config'
+  if params.yospaceConfig.debugVerbosity <> invalid
+    YO_LOGLEVEL(params.yospaceConfig.debugVerbosity)
+  end if
   config = {}
-  config.append(params)
+  config.append(params.config)
   if (config.source <> invalid)
     setupCfg = {}
     setupCfg.append(config)
@@ -135,6 +140,58 @@ sub setAudio(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
 end sub
 
+'---------------------------- ad api ----------------------------
+sub ad_skip()
+  ad = ad_getActiveAd()
+  if ad <> invalid and m.adStartPoint <> 0
+    adDuration = ad.GetDuration()
+    skipDestination = adDuration + m.adStartPoint
+    m.adStartPoint = 0
+    seek(skipDestination)
+  end if
+end sub
+
+function ad_list()
+  allAds = []
+  timeline = m.session.GetTimeline()
+  if timeline <> invalid
+    elements = timeline.GetAllElements()
+    for each e in elements
+      if e.getType() = "ADVERT"
+        allAds.push(e)
+      end if
+    end for
+    for each entry in allAds
+      for each e in entry.GetAdverts().GetAdverts() 'every ad break
+        print e 'every advert (in adbreak)
+      end for
+    end for
+  else
+    print "timeline invalid"
+  end if
+end function
+
+function ad_getActiveAdBreak()
+  if m.session.GetSession().GetCurrentAdvert() <> invalid
+    return m.session.GetSession().GetCurrentAdvert().GetBreak()
+  end if
+end function
+
+'returns the currently active ad, returns invalid if no ad is currently active'
+function ad_getActiveAd()
+  return m.session.GetSession().GetCurrentAdvert()
+end function
+
+sub setPolicy()
+  'sets the bitmovin yospace player ad policy:
+  'canMute
+  'canSeek
+  'canSeekTo
+  'canSkip
+  'canPause
+  'canChangePlaybackSpeed
+end sub
+
 '---------------------------- additional callbacks used by the yospace sdk ----------------------------
 sub onVideoPlaybackState()
   video = m.bitmovinPlayer.findNode("MainVideo")
@@ -180,14 +237,14 @@ sub onTimedMetaData()
   end if
 end sub
 
-'---------------------------- yospace api calls ----------------------------
+'---------------------------- yospace api call ----------------------------
 sub requestYospaceURL(source)
-  'TODO: Once the config file contains a way to tell if VOD or live should be used, check the config file so that the appropriate function can be called.
-  isLive = false
-  if isLive
+  if Lcase(source.assetType) = "live"
      m.session.CreateForLive(source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
-  else
+  else if Lcase(source.assetType) = "vod"
     m.session.CreateForVOD(source.hls, {USE_ID3:false}, yo_Callback(cb_session_ready))
+  else
+    print "not supported asset type!"
   end if
 end sub
 
@@ -206,11 +263,13 @@ end sub
 ' Called whenever an individual advert starts
 sub cb_advert_start(miid as String)
   YO_TRACE("ADVERT START for {0}", miid)
+  m.adStartPoint = m.bitmovinPlayer.findNode("MainVideo").position
 end sub
 
 ' Called whenever an individual advert completes
 sub cb_advert_end(miid as String)
   YO_TRACE("ADVERT END for {0}", miid)
+  m.adStartPoint = 0
 end sub
 
 ' Called whenever the player exits an advert break

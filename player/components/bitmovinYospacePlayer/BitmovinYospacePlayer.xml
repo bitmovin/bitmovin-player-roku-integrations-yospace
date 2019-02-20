@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="BitmovinYospacePlayer" extends="Group">
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
   <children>
     <LoadPlayerTask id="loadPlayerTask" />
   </children>
@@ -10,6 +11,7 @@
     <field id="BitmovinFields" type="assocarray" />
 
     <field id="isPlayerReady" type="boolean" value="false" />
+    <field id="DebugVerbosityEnum" type="assocarray" />
 
     <function name="setup" />
     <function name="play" />

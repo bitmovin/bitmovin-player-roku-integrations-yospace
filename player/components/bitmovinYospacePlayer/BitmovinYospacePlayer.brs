@@ -217,6 +217,12 @@ sub setPolicy()
   'canChangePlaybackSpeed
 end sub
 
+sub onAdQuartile(quartile)
+  m.top.AdQuartile = quartile
+  ad = ad_getActiveAd()
+  print "AD: " ; ad.getMediaID() ; " reached " ; m.top.AdQuartile ; " Quartile!"
+end sub
+
 '---------------------------- additional callbacks used by the yospace sdk ----------------------------
 sub onVideoPlaybackState()
   video = m.bitmovinPlayer.findNode("MainVideo")

@@ -1,6 +1,5 @@
 sub init()
   m.source = {}
-  m.adStartPoint = 0
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
@@ -170,10 +169,9 @@ end sub
 '---------------------------- ad api ----------------------------
 sub ad_skip()
   ad = ad_getActiveAd()
-  if ad <> invalid and m.adStartPoint <> 0
-    adDuration = ad.GetDuration()
-    skipDestination = adDuration + m.adStartPoint
-    m.adStartPoint = 0
+  print getPlayerPosition()
+  if ad <> invalid
+    skipDestination = getPlayerPosition() + ad.GetDuration() - ad.GetAlreadyElapsed()
     seek(skipDestination)
   end if
 end sub
@@ -238,7 +236,7 @@ sub onVideoPlaybackState()
 end sub
 
 sub onVideoPosition()
-  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.bitmovinPlayer.findNode("MainVideo").position)
+  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, getPlayerPosition())
 end sub
 
 sub onTimedMetaData()
@@ -290,16 +288,19 @@ end sub
 ' Called whenever an individual advert starts
 sub cb_advert_start(miid as String)
   YO_TRACE("ADVERT START for {0}", miid)
-  m.adStartPoint = m.bitmovinPlayer.findNode("MainVideo").position
 end sub
 
 ' Called whenever an individual advert completes
 sub cb_advert_end(miid as String)
   YO_TRACE("ADVERT END for {0}", miid)
-  m.adStartPoint = 0
 end sub
 
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
 end sub
+
+'---------------------------- util functions ----------------------------
+function getPlayerPosition()
+  return m.bitmovinPlayer.findNode("MainVideo").position
+end function

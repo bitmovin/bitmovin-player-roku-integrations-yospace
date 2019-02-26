@@ -2,6 +2,7 @@
 <component name="BitmovinYospacePlayer" extends="Group">
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
+  <!-- <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/ad.brs" /> -->
   <children>
     <LoadPlayerTask id="loadPlayerTask" />
   </children>
@@ -34,12 +35,11 @@
     <function name="getAudio" />
     <function name="setAudio" />
 
-    <!-- currently not in use bitmovin player fields
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />
     <field id="warning" type="assocarray" alwaysNotify="true" />
     <field id="seek" type="boolean" alwaysNotify="true" />
-    <field id="seeked" type="float" alwaysNotify="true" /> -->
+    <field id="seeked" type="float" alwaysNotify="true" />
   </interface>
 
   <!-- Yospace - server-side-ad-insertion -->

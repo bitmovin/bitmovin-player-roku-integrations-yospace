@@ -35,6 +35,8 @@
     <function name="getAudio" />
     <function name="setAudio" />
 
+    <field id="AdSkipped" type="string" alwaysNotify="true" />
+
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />
     <field id="warning" type="assocarray" alwaysNotify="true" />

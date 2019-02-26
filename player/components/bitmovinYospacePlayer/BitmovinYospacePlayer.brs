@@ -169,10 +169,10 @@ end sub
 '---------------------------- ad api ----------------------------
 sub ad_skip()
   ad = ad_getActiveAd()
-  print getPlayerPosition()
   if ad <> invalid
     skipDestination = getPlayerPosition() + ad.GetDuration() - ad.GetAlreadyElapsed()
     seek(skipDestination)
+    m.top.AdSkipped = ad._INSTANCEID
   end if
 end sub
 

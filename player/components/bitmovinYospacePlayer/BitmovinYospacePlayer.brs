@@ -25,9 +25,36 @@ sub onBitmovinPlayerSDKLoaded()
     m.top.BitmovinFields = m.bitmovinPlayer.BitmovinFields
     m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
 
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.ERROR, "catchVideoError")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.WARNING, "catchVideoWarning")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEK, "onSeek")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
+
     m.top.appendChild(m.bitmovinPlayer)
     m.top.isPlayerReady = true
   end if
+end sub
+
+'---------------------------- bitmovin player field event handlers ----------------------------
+sub catchVideoError()
+  m.top.error = m.bitmovinPlayer.error
+end sub
+
+sub catchVideoWarning()
+  m.top.warning = m.bitmovinplayer.warning
+end sub
+
+sub onSeek()
+  m.top.seek = m.bitmovinPlayer.seek
+end sub
+
+sub onSeeked()
+  m.top.seeked = m.bitmovinPlayer.seeked
+end sub
+
+sub onPlayerStateChanged()
+  m.top.playerState = m.bitmovinPlayer.playerState
 end sub
 
 '---------------------------- bitmovin player api function ----------------------------

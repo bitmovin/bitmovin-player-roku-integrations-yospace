@@ -2,7 +2,7 @@
 <component name="BitmovinYospacePlayer" extends="Group">
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
-  <!-- <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/ad.brs" /> -->
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <children>
     <LoadPlayerTask id="loadPlayerTask" />
   </children>

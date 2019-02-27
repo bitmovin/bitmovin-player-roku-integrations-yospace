@@ -168,7 +168,7 @@ end sub
 
 '---------------------------- ad api ----------------------------
 sub ad_skip()
-  ad = ad_getActiveAd()
+  ad = getCurrentAd()
   if ad <> invalid
     skipDestination = getPlayerPosition() + ad.GetDuration() - ad.GetAlreadyElapsed()
     seek(skipDestination)
@@ -186,25 +186,37 @@ function ad_list()
         allAds.push(e)
       end if
     end for
+    adList = []
     for each entry in allAds
-      for each e in entry.GetAdverts().GetAdverts() 'every ad break
-        print e 'every advert (in adbreak)
-      end for
+      adList.Push(mapAdBreak(entry.GetAdverts()))
     end for
+    return adList
   else
     print "timeline invalid"
   end if
 end function
 
+'returns the ad break of the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAdBreak()
-  if m.session.GetSession().GetCurrentAdvert() <> invalid
-    return m.session.GetSession().GetCurrentAdvert().GetBreak()
+  ad = getCurrentAd()
+  if ad <> invalid
+  ' Variable name cannot be simply "adBreak" as it would interfere with an already existing "adBreak" from the yospaceSDK
+    myAdBreak = ad.GetBreak()
+    if myAdBreak <> invalid
+      return mapAdBreak(myAdBreak)
+    end if
   end if
+  return invalid
 end function
 
-'returns the currently active ad, returns invalid if no ad is currently active'
+'returns the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAd()
-  return m.session.GetSession().GetCurrentAdvert()
+  ad = getCurrentAd()
+  if ad <> invalid
+    return mapAd(ad)
+  else
+    return invalid
+  end if
 end function
 
 sub setPolicy()
@@ -219,7 +231,7 @@ end sub
 
 sub onAdQuartile(quartile)
   m.top.AdQuartile = quartile
-  ad = ad_getActiveAd()
+  ad = getCurrentAd()
   print "AD: " ; ad.getMediaID() ; " reached " ; m.top.AdQuartile ; " Quartile!"
 end sub
 
@@ -309,4 +321,8 @@ end sub
 '---------------------------- util functions ----------------------------
 function getPlayerPosition()
   return m.bitmovinPlayer.findNode("MainVideo").position
+end function
+
+function getCurrentAd()
+  return m.session.GetSession().GetCurrentAdvert()
 end function

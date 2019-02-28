@@ -122,45 +122,45 @@ sub unmute(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.UNMUTE, params)
 end sub
 
-sub isMuted(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_MUTED, params)
-end sub
+function isMuted(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_MUTED, params)
+end function
 
 sub captionMode(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.CAPTION_MODE, params)
 end sub
 
-sub isPlaying(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PLAYING, params)
-end sub
+function isPlaying(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PLAYING, params)
+end function
 
-sub isPaused(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
-end sub
+function isPaused(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
+end function
 
-sub isStalled(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_STALLED, params)
-end sub
+function isStalled(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_STALLED, params)
+end function
 
-sub availableSubtitles(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.AVAILABLE_SUBTITLES, params)
-end sub
+function availableSubtitles(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.AVAILABLE_SUBTITLES, params)
+end function
 
-sub getSubtitles(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_SUBTITLES, params)
-end sub
+function getSubtitle(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_SUBTITLE, params)
+end function
 
 sub setSubtitles(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_SUBTITLES, params)
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_SUBTITLE, params)
 end sub
 
-sub availableAudio(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.AVAILABLE_AUDIO, params)
-end sub
+function availableAudio(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.AVAILABLE_AUDIO, params)
+end function
 
-sub getAudio(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_AUDIO, params)
-end sub
+function getAudio(params)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_AUDIO, params)
+end function
 
 sub setAudio(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
@@ -350,8 +350,7 @@ function toMagicTime(playbackTime)
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))
-        delta = playBackTime - timelineElement.GetOffset()
-        mTime -= delta
+        mTime -= (playBackTime - timelineElement.GetOffset())
       end if
     end if
   end for

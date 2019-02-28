@@ -4,7 +4,7 @@ sub init()
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
-  'inizialize the yospace sdk
+  ' inizialize the yospace sdk
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
@@ -35,7 +35,7 @@ sub onBitmovinPlayerSDKLoaded()
   end if
 end sub
 
-'---------------------------- bitmovin player field event handlers ----------------------------
+' ---------------------------- bitmovin player field event handlers ----------------------------
 sub catchVideoError()
   m.top.error = m.bitmovinPlayer.error
 end sub
@@ -56,10 +56,10 @@ sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
 end sub
 
-'---------------------------- bitmovin player api function ----------------------------
-'OVERRIDEN setup method
+' ---------------------------- bitmovin player api function ----------------------------
+' OVERRIDEN setup method
 sub setup(params)
-  'yospace config'
+  ' yospace config
   if params.yospaceConfig.debugVerbosity <> invalid
     YO_LOGLEVEL(params.yospaceConfig.debugVerbosity)
   end if
@@ -96,7 +96,7 @@ sub seek(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, params)
 end sub
 
-'OVERRIDEN load method
+' OVERRIDEN load method
 sub load(params)
   m.source.append(params)
   video = m.bitmovinPlayer.findNode("MainVideo")
@@ -108,8 +108,8 @@ sub load(params)
 
   video.notificationInterval = 0.5
 
-  'the player sets this to "true" regradless of the stream being live or VOD
-  'video.enableTrickPlay = false
+  ' the player sets this to "true" regradless of the stream being live or VOD
+  ' video.enableTrickPlay = false
 
   requestYospaceURL(m.source)
 end sub
@@ -166,7 +166,7 @@ sub setAudio(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
 end sub
 
-'---------------------------- ad api ----------------------------
+' ---------------------------- ad api ----------------------------
 sub ad_skip()
   ad = getCurrentAd()
   timeline = m.session.GetTimeline()
@@ -215,7 +215,7 @@ function ad_list()
   end if
 end function
 
-'returns the ad break of the currently active ad, returns invalid if no ad is currently active
+' returns the ad break of the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAdBreak()
   ad = getCurrentAd()
   if ad <> invalid
@@ -228,7 +228,7 @@ function ad_getActiveAdBreak()
   return invalid
 end function
 
-'returns the currently active ad, returns invalid if no ad is currently active
+' returns the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAd()
   ad = getCurrentAd()
   if ad <> invalid
@@ -239,20 +239,20 @@ function ad_getActiveAd()
 end function
 
 sub setPolicy()
-  'sets the bitmovin yospace player ad policy:
-  'canMute
-  'canSeek
-  'canSeekTo
-  'canSkip
-  'canPause
-  'canChangePlaybackSpeed
+  ' sets the bitmovin yospace player ad policy:
+  ' canMute
+  ' canSeek
+  ' canSeekTo
+  ' canSkip
+  ' canPause
+  ' canChangePlaybackSpeed
 end sub
 
 sub onAdQuartile(quartile)
   m.top.AdQuartile = quartile
 end sub
 
-'---------------------------- additional callbacks used by the yospace sdk ----------------------------
+' ---------------------------- additional callbacks used by the yospace sdk ----------------------------
 sub onVideoPlaybackState()
   video = m.bitmovinPlayer.findNode("MainVideo")
   if video.state = "finished"
@@ -296,7 +296,7 @@ sub onTimedMetaData()
   end if
 end sub
 
-'---------------------------- yospace api call ----------------------------
+' ---------------------------- yospace api call ----------------------------
 sub requestYospaceURL(source)
   if Lcase(source.assetType) = "live"
      m.session.CreateForLive(source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
@@ -313,7 +313,7 @@ sub cb_session_ready(response as Dynamic)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub
 
-'---------------------------- yospace callbacks ----------------------------
+' ---------------------------- yospace callbacks ----------------------------
 ' Called whenever the player enters an advert break
 sub cb_ad_break_start(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK START")
@@ -334,7 +334,7 @@ sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
 end sub
 
-'---------------------------- util functions ----------------------------
+' ---------------------------- util functions ----------------------------
 function getPlayerPosition()
   return m.bitmovinPlayer.findNode("MainVideo").position
 end function

@@ -1,6 +1,7 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
+
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
@@ -237,16 +238,6 @@ function ad_getActiveAd()
     return invalid
   end if
 end function
-
-sub setPolicy()
-  ' sets the bitmovin yospace player ad policy:
-  ' canMute
-  ' canSeek
-  ' canSeekTo
-  ' canSkip
-  ' canPause
-  ' canChangePlaybackSpeed
-end sub
 
 sub onAdQuartile(quartile)
   m.top.AdQuartile = quartile

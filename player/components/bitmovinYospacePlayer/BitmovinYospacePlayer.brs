@@ -191,7 +191,7 @@ sub ad_skip()
       end if
     end for
     seek(skipDestination)
-    m.top.AdSkipped = ad._INSTANCEID
+    m.top.AdSkipped = ad.GetMediaID()
   end if
 end sub
 

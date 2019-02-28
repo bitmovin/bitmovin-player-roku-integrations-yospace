@@ -167,6 +167,7 @@ sub setAudio(params)
 end sub
 
 '---------------------------- ad api ----------------------------
+'TODO: AlreadyElapsed isn't what it seems to be
 sub ad_skip()
   ad = getCurrentAd()
   if ad <> invalid
@@ -232,7 +233,6 @@ end sub
 sub onAdQuartile(quartile)
   m.top.AdQuartile = quartile
   ad = getCurrentAd()
-  print "AD: " ; ad.getMediaID() ; " reached " ; m.top.AdQuartile ; " Quartile!"
 end sub
 
 '---------------------------- additional callbacks used by the yospace sdk ----------------------------
@@ -258,7 +258,6 @@ sub onVideoPosition()
 end sub
 
 sub onTimedMetaData()
-  print "Timed Meta Data revieved"
   id3 = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
   if (yo_IsNotNull(id3)) then
     id3obj = {}
@@ -325,4 +324,19 @@ end function
 
 function getCurrentAd()
   return m.session.GetSession().GetCurrentAdvert()
+end function
+
+function toMagicTime(playbackTime)
+  mTime = playBackTime
+  for each timelineElement in m.session.GetTimeline().GetAllElements()
+    if timelineElement.GetType() = "ADVERT"
+      if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
+        mTime -= timelineElement.GetDuration()
+      else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))
+        diff = playBackTime - timelineElement.GetOffset()
+        mTime -= diff
+      end if
+    end if
+  end for
+  return mTime
 end function

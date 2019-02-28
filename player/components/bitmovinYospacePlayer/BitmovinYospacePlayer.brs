@@ -167,11 +167,29 @@ sub setAudio(params)
 end sub
 
 '---------------------------- ad api ----------------------------
-'TODO: AlreadyElapsed isn't what it seems to be
 sub ad_skip()
   ad = getCurrentAd()
+  timeline = m.session.GetTimeline()
+  skipDestination = 0
   if ad <> invalid
-    skipDestination = getPlayerPosition() + ad.GetDuration() - ad.GetAlreadyElapsed()
+    for each element in timeline.GetAllElements()
+      if element.getType() = "ADVERT"
+        for each e in element.GetAdverts().GetAdverts()
+          if e._INSTANCEID = ad._INSTANCEID
+            skipDestination = element.GetOffset()
+            ads = e.GetBreak().GetAdverts()
+            for each a in ads
+              if a._INSTANCEID = e._INSTANCEID
+                skipDestination += a.GetDuration()
+                EXIT FOR
+              else
+                skipDestination += a.GetDuration()
+              end if
+            end for
+          end if
+        end for
+      end if
+    end for
     seek(skipDestination)
     m.top.AdSkipped = ad._INSTANCEID
   end if
@@ -232,7 +250,6 @@ end sub
 
 sub onAdQuartile(quartile)
   m.top.AdQuartile = quartile
-  ad = getCurrentAd()
 end sub
 
 '---------------------------- additional callbacks used by the yospace sdk ----------------------------
@@ -333,8 +350,8 @@ function toMagicTime(playbackTime)
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))
-        diff = playBackTime - timelineElement.GetOffset()
-        mTime -= diff
+        delta = playBackTime - timelineElement.GetOffset()
+        mTime -= delta
       end if
     end if
   end for

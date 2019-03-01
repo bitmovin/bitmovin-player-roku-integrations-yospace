@@ -192,7 +192,7 @@ sub ad_skip()
       end if
     end for
     seek(skipDestination)
-    m.top.AdSkipped = ad.GetMediaID()
+    m.top.adSkipped = ad.GetMediaID()
   end if
 end sub
 
@@ -240,7 +240,7 @@ function ad_getActiveAd()
 end function
 
 sub onAdQuartile(quartile)
-  m.top.AdQuartile = quartile
+  m.top.adQuartile = quartile
 end sub
 
 ' ---------------------------- additional callbacks used by the yospace sdk ----------------------------
@@ -308,21 +308,26 @@ end sub
 ' Called whenever the player enters an advert break
 sub cb_ad_break_start(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK START")
+  getCurrentAdBreak()
+  m.top.adBreakStarted = getCurrentAdBreak()._INSTANCEID
 end sub
 
 ' Called whenever an individual advert starts
 sub cb_advert_start(miid as String)
   YO_TRACE("ADVERT START for {0}", miid)
+  m.top.adStarted = getCurrentAd().GetMediaID()
 end sub
 
 ' Called whenever an individual advert completes
 sub cb_advert_end(miid as String)
   YO_TRACE("ADVERT END for {0}", miid)
+  m.top.adFinised = getCurrentAd().GetMediaID()
 end sub
 
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
+  m.top.adBreakFinished = getCurrentAdBreak((getPlayerPosition()-1))._INSTANCEID
 end sub
 
 ' ---------------------------- util functions ----------------------------
@@ -332,6 +337,17 @@ end function
 
 function getCurrentAd()
   return m.session.GetSession().GetCurrentAdvert()
+end function
+
+function getCurrentAdBreak(time = invalid)
+  timeline = m.session.GetTimeline()
+  if time = invalid
+    time = getPlayerPosition()
+  end if
+  element = timeline.GetElementAtTime(time)
+  if element.GetType() = "ADVERT"
+    return element.GetAdverts()
+  end if
 end function
 
 function toMagicTime(playbackTime)

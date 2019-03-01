@@ -41,8 +41,12 @@
     <function name="ad_getActiveAd" />
     <function name="setPolicy" />
 
-    <field id="AdSkipped" type="string" alwaysNotify="true" />
-    <field id="AdQuartile" type="integer" alwaysNotify="true" />
+    <field id="adBreakStarted" type="string" alwaysNotify="true" />
+    <field id="adBreakFinished" type="string" alwaysNotify="true" />
+    <field id="adFinised" type="string" alwaysNotify="true" />
+    <field id="adQuartile" type="integer" alwaysNotify="true" />
+    <field id="adSkipped" type="string" alwaysNotify="true" />
+    <field id="adStarted" type="string" alwaysNotify="true" />
 
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />

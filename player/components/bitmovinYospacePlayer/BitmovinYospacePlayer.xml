@@ -3,6 +3,7 @@
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
   <children>
     <LoadPlayerTask id="loadPlayerTask" />
   </children>

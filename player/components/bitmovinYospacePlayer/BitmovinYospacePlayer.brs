@@ -284,9 +284,9 @@ end sub
 ' ---------------------------- yospace api call ----------------------------
 sub requestYospaceURL(source)
   if Lcase(source.assetType) = "live"
-     m.session.CreateForLive(source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
+     m.session.CreateForLive(source.hls, { USE_ID3: true }, yo_Callback(cb_session_ready))
   else if Lcase(source.assetType) = "vod"
-    m.session.CreateForVOD(source.hls, {USE_ID3:false}, yo_Callback(cb_session_ready))
+    m.session.CreateForVOD(source.hls, { USE_ID3: false }, yo_Callback(cb_session_ready))
   else
     print "not supported asset type!"
   end if

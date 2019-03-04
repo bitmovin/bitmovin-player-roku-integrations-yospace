@@ -215,6 +215,7 @@ function ad_list()
   else
     print "timeline invalid"
   end if
+  return []
 end function
 
 ' returns the ad break of the currently active ad, returns invalid if no ad is currently active

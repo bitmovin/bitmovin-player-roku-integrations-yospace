@@ -20,7 +20,7 @@ sub cb_ad_break_end(dummy = invalid as Dynamic)
 end sub
 
 sub cb_session_ready(response as Dynamic)
-  m.session.RegisterPlayer(m.player)
+  m.session.RegisterPlayer(m.yospaceAdEventCallbacks)
   m.source.hls = m.session.GetMasterPlaylist()
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub

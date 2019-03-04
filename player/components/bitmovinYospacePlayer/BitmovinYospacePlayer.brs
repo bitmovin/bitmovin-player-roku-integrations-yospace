@@ -239,19 +239,19 @@ end sub
 
 ' ---------------------------- additional callbacks used by the yospace sdk ----------------------------
 sub onVideoPlaybackState()
-  video = m.bitmovinPlayer.findNode("MainVideo")
-  if video.state = "finished"
+  videoState = m.bitmovinPlayer.findNode("MainVideo").state
+  if videoState = "finished"
     m.session.ReportPlayerEvent(YSPlayerEvents().END)
-  else if video.state = "buffering"
+  else if videoState = "buffering"
     m.session.ReportPlayerEvent(YSPlayerEvents().BUFFER)
-  else if video.state = "playing"
+  else if videoState = "playing"
     m.session.ReportPlayerEvent(YSPlayerEvents().RESUME)
-  else if video.state = "paused"
+  else if videoState = "paused"
     m.session.ReportPlayerEvent(YSPlayerEvents().PAUSE)
-  else if video.state = "stopped"
+  else if videoState = "stopped"
     m.session.ReportPlayerEvent(YSPlayerEvents().STALL)
   else
-    print "unhandled video state: "; video.state
+    print "unhandled video state: "; videoState
   end if
 end sub
 

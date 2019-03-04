@@ -1,6 +1,7 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
+  ADVERT$ = "ADVERT"
 
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
@@ -174,7 +175,7 @@ sub ad_skip()
   skipDestination = 0
   if ad <> invalid
     for each element in timeline.GetAllElements()
-      if element.getType() = "ADVERT"
+      if element.getType() = ADVERT$
         for each e in element.GetAdverts().GetAdverts()
           if e._INSTANCEID = ad._INSTANCEID
             skipDestination = element.GetOffset()
@@ -202,7 +203,7 @@ function ad_list()
   if timeline <> invalid
     elements = timeline.GetAllElements()
     for each e in elements
-      if e.getType() = "ADVERT"
+      if e.getType() = ADVERT$
         allAds.push(e)
       end if
     end for
@@ -304,7 +305,7 @@ end function
 function toMagicTime(playbackTime)
   mTime = playBackTime
   for each timelineElement in m.session.GetTimeline().GetAllElements()
-    if timelineElement.GetType() = "ADVERT"
+    if timelineElement.GetType() = ADVERT$
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="BitmovinYospacePlayer" extends="Group">
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
+    <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/YospaceCallbacks.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />

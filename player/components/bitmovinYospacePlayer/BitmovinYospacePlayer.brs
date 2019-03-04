@@ -10,11 +10,11 @@ sub init()
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
-  m.player    = {}
-  m.player["AdBreakStart"]    = yo_Callback(cb_ad_break_start, m)
-  m.player["AdvertStart"]     = yo_Callback(cb_advert_start, m)
-  m.player["AdvertEnd"]       = yo_Callback(cb_advert_end, m)
-  m.player["AdBreakEnd"]      = yo_Callback(cb_ad_break_end, m)
+  m.player = {}
+  m.player["AdBreakStart"] = yo_Callback(cb_ad_break_start, m)
+  m.player["AdvertStart"] = yo_Callback(cb_advert_start, m)
+  m.player["AdvertEnd"] = yo_Callback(cb_advert_end, m)
+  m.player["AdBreakEnd"] = yo_Callback(cb_ad_break_end, m)
 end sub
 
 sub onBitmovinPlayerSDKLoaded()

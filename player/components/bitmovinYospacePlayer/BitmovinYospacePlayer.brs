@@ -308,8 +308,9 @@ end sub
 ' Called whenever the player enters an advert break
 sub cb_ad_break_start(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK START")
-  getCurrentAdBreak()
-  m.top.adBreakStarted = getCurrentAdBreak()._INSTANCEID
+  if dummy <> invalid
+    m.top.adBreakStarted = dummy._INSTANCEID
+  end if
 end sub
 
 ' Called whenever an individual advert starts
@@ -327,7 +328,9 @@ end sub
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
-  m.top.adBreakFinished = getCurrentAdBreak((getPlayerPosition()-1))._INSTANCEID
+  if dummy <> invalid
+    m.top.adBreakFinished = dummy._INSTANCEID
+  end if
 end sub
 
 ' ---------------------------- util functions ----------------------------

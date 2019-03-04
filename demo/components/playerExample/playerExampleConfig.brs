@@ -10,7 +10,6 @@ function getExamplePlayerConfig()
     source: {
       hls: "http://csm-e.cds1.yospace.com/access/d/400/u/0/1/130782300?f=0000130753172&format=vmap",
       title: "Test video"
-      assetType: "vod" 'can be "vod" or "live"
     }
   }
 end function

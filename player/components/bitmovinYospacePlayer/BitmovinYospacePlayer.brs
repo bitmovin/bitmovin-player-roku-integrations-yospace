@@ -1,7 +1,7 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
-  ADVERT$ = "ADVERT"
+  m.ADVERT$ = "ADVERT"
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
 
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
@@ -176,7 +176,7 @@ sub ad_skip()
   skipDestination = 0
   if ad <> invalid
     for each element in timeline.GetAllElements()
-      if element.getType() = ADVERT$
+      if element.getType() = m.ADVERT$
         for each e in element.GetAdverts().GetAdverts()
           if e._INSTANCEID = ad._INSTANCEID
             skipDestination = element.GetOffset()
@@ -199,18 +199,18 @@ sub ad_skip()
 end sub
 
 function ad_list()
-  allAds = []
+  advertElements = []
   timeline = m.session.GetTimeline()
   if timeline <> invalid
-    elements = timeline.GetAllElements()
-    for each e in elements
-      if e.getType() = ADVERT$
-        allAds.push(e)
+    timelineElements = timeline.GetAllElements()
+    for each tlElement in timelineElements
+      if tlElement.getType() = m.ADVERT$
+        advertElements.push(tlElement)
       end if
     end for
     adList = []
-    for each entry in allAds
-      adList.Push(mapAdBreak(entry.GetAdverts()))
+    for each adElement in advertElements
+      adList.Push(mapAdBreak(adElement.GetAdverts())) ' GetAdverts() returns the adBreak contained in the advert timeline element
     end for
     return adList
   else
@@ -310,7 +310,7 @@ end function
 function toMagicTime(playbackTime)
   mTime = playBackTime
   for each timelineElement in m.session.GetTimeline().GetAllElements()
-    if timelineElement.GetType() = ADVERT$
+    if timelineElement.GetType() = m.ADVERT$
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))

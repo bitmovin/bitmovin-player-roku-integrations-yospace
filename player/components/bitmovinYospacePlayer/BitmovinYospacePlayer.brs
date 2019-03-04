@@ -220,25 +220,18 @@ end function
 
 ' returns the ad break of the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAdBreak()
-  ad = getCurrentAd()
-  if ad <> invalid
-  ' Variable name cannot be simply "adBreak" as it would interfere with an already existing "adBreak" from the yospaceSDK
-    myAdBreak = ad.GetBreak()
-    if myAdBreak <> invalid
-      return mapAdBreak(myAdBreak)
-    end if
+  if isAdActive()
+    return mapAdBreak(getCurrentAd().GetBreak())
   end if
   return invalid
 end function
 
 ' returns the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAd()
-  ad = getCurrentAd()
-  if ad <> invalid
-    return mapAd(ad)
-  else
-    return invalid
+  if isAdActive()
+    return mapAd(getCurrentAd())
   end if
+  return invalid
 end function
 
 sub setPolicy(p)
@@ -352,4 +345,12 @@ function toMagicTime(playbackTime)
     end if
   end for
   return mTime
+end function
+
+function isAdActive()
+  if getCurrentAd() <> invalid
+    return true
+  else
+    return false
+  end if
 end function

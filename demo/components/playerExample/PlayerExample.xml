@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="PlayerExample" extends="Scene">
+    <children>
+      <Button id="bttnSetup" text="Setup" minWidth="240"/>
+    </children>
     <script type="text/brightscript" uri="pkg:/components/playerExample/PlayerExample.brs" />
     <script type="text/brightscript" uri="pkg:/components/playerExample/playerExampleConfig.brs" />
 </component>

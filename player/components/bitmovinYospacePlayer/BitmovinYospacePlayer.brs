@@ -171,29 +171,9 @@ end sub
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  ad = getCurrentAd()
-  timeline = m.session.GetTimeline()
-  skipDestination = 0
-  if ad <> invalid
-    for each element in timeline.GetAllElements()
-      if element.getType() = m.ADVERT$
-        for each e in element.GetAdverts().GetAdverts()
-          if e._INSTANCEID = ad._INSTANCEID
-            skipDestination = element.GetOffset()
-            ads = e.GetBreak().GetAdverts()
-            for each a in ads
-              if a._INSTANCEID = e._INSTANCEID
-                skipDestination += a.GetDuration()
-                EXIT FOR
-              else
-                skipDestination += a.GetDuration()
-              end if
-            end for
-          end if
-        end for
-      end if
-    end for
-    seek(skipDestination)
+  if isAdActive()
+    ad = getCurrentAd()
+    seek(getAdStartTime(ad) + ad.GetDuration())
     m.top.AdSkipped = ad.GetMediaID()
   end if
 end sub
@@ -327,4 +307,15 @@ function isAdActive()
   else
     return false
   end if
+end function
+
+function getAdStartTime(ad)
+  adStartTime = ad.GetBreak().GetStart()
+  for each advert in ad.GetBreak().GetAdverts()
+    if advert._INSTANCEID = ad._INSTANCEID
+      return adStartTime
+    else
+      adStartTime += advert.GetDuration()
+    end if
+  end for
 end function

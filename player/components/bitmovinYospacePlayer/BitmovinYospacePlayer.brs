@@ -96,7 +96,9 @@ sub preload(params)
 end sub
 
 sub seek(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, params)
+  if m.policy.canSeek()
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, m.policy.canSeekTo(params))
+  end if
 end sub
 
 ' OVERRIDEN load method
@@ -118,7 +120,9 @@ sub load(params)
 end sub
 
 sub mute(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.MUTE, params)
+  if m.policy.canMute()
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.MUTE, params)
+  end if
 end sub
 
 sub unmute(params)
@@ -138,7 +142,9 @@ function isPlaying(params)
 end function
 
 function isPaused(params)
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
+  if m.policy.canPause()
+    return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
+  end if
 end function
 
 function isStalled(params)
@@ -172,9 +178,13 @@ end sub
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
   if isAdActive()
-    ad = getCurrentAd()
-    seek(getAdStartTime(ad) + ad.GetDuration())
-    m.top.AdSkipped = ad.GetMediaID()
+    if m.policy.canSkip() = 0
+      ad = getCurrentAd()
+      seek(getAdStartTime(ad) + ad.GetDuration())
+      m.top.AdSkipped = ad.GetMediaID()
+    else
+      print "Skip not allowed!"
+    end if
   end if
 end sub
 

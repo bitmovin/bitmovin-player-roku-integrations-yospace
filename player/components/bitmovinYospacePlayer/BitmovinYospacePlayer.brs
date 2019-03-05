@@ -308,29 +308,25 @@ end sub
 ' Called whenever the player enters an advert break
 sub cb_ad_break_start(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK START")
-  if dummy <> invalid
     m.top.adBreakStarted = dummy._INSTANCEID
-  end if
 end sub
 
 ' Called whenever an individual advert starts
 sub cb_advert_start(miid as String)
   YO_TRACE("ADVERT START for {0}", miid)
-  m.top.adStarted = getCurrentAd().GetMediaID()
+  m.top.adStarted = miid
 end sub
 
 ' Called whenever an individual advert completes
 sub cb_advert_end(miid as String)
   YO_TRACE("ADVERT END for {0}", miid)
-  m.top.adFinised = getCurrentAd().GetMediaID()
+  m.top.adFinised = miid
 end sub
 
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
-  if dummy <> invalid
     m.top.adBreakFinished = dummy._INSTANCEID
-  end if
 end sub
 
 ' ---------------------------- util functions ----------------------------

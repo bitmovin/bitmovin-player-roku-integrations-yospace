@@ -6,7 +6,7 @@ sub init()
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
   ' inizialize the yospace sdk
-  m.session   = YSSessionManager()
+  m.session = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
   m.player    = {}
@@ -306,27 +306,27 @@ end sub
 
 ' ---------------------------- yospace callbacks ----------------------------
 ' Called whenever the player enters an advert break
-sub cb_ad_break_start(dummy = invalid as Dynamic)
+sub cb_ad_break_start(adBreak = invalid as Dynamic)
   YO_TRACE("AD BREAK START")
-    m.top.adBreakStarted = dummy._INSTANCEID
+  m.top.adBreakStarted = adBreak._INSTANCEID
 end sub
 
 ' Called whenever an individual advert starts
-sub cb_advert_start(miid as String)
-  YO_TRACE("ADVERT START for {0}", miid)
-  m.top.adStarted = miid
+sub cb_advert_start(mediaId as String)
+  YO_TRACE("ADVERT START for {0}", mediaId)
+  m.top.adStarted = mediaId
 end sub
 
 ' Called whenever an individual advert completes
-sub cb_advert_end(miid as String)
-  YO_TRACE("ADVERT END for {0}", miid)
-  m.top.adFinised = miid
+sub cb_advert_end(mediaId as String)
+  YO_TRACE("ADVERT END for {0}", mediaId)
+  m.top.adFinished = mediaId
 end sub
 
 ' Called whenever the player exits an advert break
-sub cb_ad_break_end(dummy = invalid as Dynamic)
+sub cb_ad_break_end(adBreak = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
-    m.top.adBreakFinished = dummy._INSTANCEID
+  m.top.adBreakFinished = adBreak._INSTANCEID
 end sub
 
 ' ---------------------------- util functions ----------------------------
@@ -336,17 +336,6 @@ end function
 
 function getCurrentAd()
   return m.session.GetSession().GetCurrentAdvert()
-end function
-
-function getCurrentAdBreak(time = invalid)
-  timeline = m.session.GetTimeline()
-  if time = invalid
-    time = getPlayerPosition()
-  end if
-  element = timeline.GetElementAtTime(time)
-  if element.GetType() = "ADVERT"
-    return element.GetAdverts()
-  end if
 end function
 
 function toMagicTime(playbackTime)

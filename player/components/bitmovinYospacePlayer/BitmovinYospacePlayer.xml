@@ -43,7 +43,7 @@
 
     <field id="adBreakStarted" type="string" alwaysNotify="true" />
     <field id="adBreakFinished" type="string" alwaysNotify="true" />
-    <field id="adFinised" type="string" alwaysNotify="true" />
+    <field id="adFinished" type="string" alwaysNotify="true" />
     <field id="adQuartile" type="integer" alwaysNotify="true" />
     <field id="adSkipped" type="string" alwaysNotify="true" />
     <field id="adStarted" type="string" alwaysNotify="true" />

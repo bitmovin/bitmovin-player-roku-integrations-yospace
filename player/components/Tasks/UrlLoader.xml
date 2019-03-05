@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Copyright (c) 2016-2018 Yospace Technologies Ltd. All Rights Reserved -->
+<!-- Description This node is a task used to handle loading from external URLs -->
+
+<component name="UrlLoader" extends="Task" xsi:noNamespaceSchemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+
+	<interface>
+		<!-- Receives command to load a URL --> 
+	  <field id="targeturl" 		type="String" alwaysNotify="true"/>
+	  <field id="response"			type="String" alwaysNotify="true"/>
+		<field id="result"				type="int" 		alwaysNotify="true"/>
+	</interface>
+
+  <!-- main handler -->
+	<script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YSDebugLog.brs" />
+  <script type="text/brightscript" uri="pkg:/components/Tasks/UrlLoader.brs" />
+</component>

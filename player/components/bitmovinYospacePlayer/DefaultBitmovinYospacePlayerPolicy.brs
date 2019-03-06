@@ -13,17 +13,16 @@ function getDefaultBitmovinYospacePlayerPolicy()
         end if
       :end function,
 
-    canSeekTo: function(seekTarget as Float) as Float:
-        currentTime = getPlayerPosition()
+    canSeekTo: function(seekTarget as Float, currentTime = getPlayerPosition() as Float) as Float:
         adBreaks = ad_list()
         skippedAdBreaks = []
-        for each ad in adBreaks
-          if ad.scheduleTime > currentTime and ad.scheduleTime < seekTarget
-            skippedAdBreaks.Push(ad)
+        for each adBrk in adBreaks
+          if (adBrk.scheduleTime > currentTime) and (adBrk.scheduleTime < seekTarget)
+            skippedAdBreaks.Push(adBrk)
           end if
         end for
         if skippedAdBreaks.Count() > 0
-          adBreakToPlay = skippedAdBreaks[(skippedAdBreaks.Count()-1)]
+          adBreakToPlay = skippedAdBreaks[0]
           return adBreakToPlay.scheduleTime
         end if
         return seekTarget

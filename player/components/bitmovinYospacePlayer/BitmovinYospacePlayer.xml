@@ -42,6 +42,7 @@
     <function name="ad_getActiveAdBreak" />
     <function name="ad_getActiveAd" />
     <function name="setPolicy" />
+    <function name="isKeyPressValid" />
 
     <field id="AdSkipped" type="string" alwaysNotify="true" />
     <field id="AdQuartile" type="integer" alwaysNotify="true" />

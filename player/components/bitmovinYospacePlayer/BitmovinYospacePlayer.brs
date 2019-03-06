@@ -3,6 +3,7 @@ sub init()
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.ADVERT$ = "ADVERT"
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
+  m.policyHelper_canSeekToStartPosition = -1
 
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
@@ -33,6 +34,10 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
 
+
+    m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid")
+
+
     m.top.appendChild(m.bitmovinPlayer)
     m.top.isPlayerReady = true
   end if
@@ -49,10 +54,16 @@ end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
+  m.policyHelper_canSeekToStartPosition = getPlayerPosition()
 end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
+  allowedSeek = m.policy.canSeekTo(getPlayerPosition(), m.policyHelper_canSeekToStartPosition)
+  if (getPlayerPosition() <> allowedSeek) and (m.policyHelper_canSeekToStartPosition > -1)
+      seek(allowedSeek)
+  end if
+  m.policyHelper_canSeekToStartPosition = -1
 end sub
 
 sub onPlayerStateChanged()
@@ -229,6 +240,16 @@ sub setPolicy(p)
   m.policy = p
 end sub
 
+function isKeyPressValid(key)
+  if key = "right" or key = "left"
+    if m.policy.canSeek()
+      return true
+    end if
+    return false
+  end if
+  return true
+end function
+
 sub onAdQuartile(quartile)
   m.top.AdQuartile = quartile
 end sub
@@ -289,7 +310,7 @@ sub requestYospaceURL(source)
 end sub
 
 ' ---------------------------- util functions ----------------------------
-function getPlayerPosition()
+function getPlayerPosition() as Float
   return m.bitmovinPlayer.findNode("MainVideo").position
 end function
 

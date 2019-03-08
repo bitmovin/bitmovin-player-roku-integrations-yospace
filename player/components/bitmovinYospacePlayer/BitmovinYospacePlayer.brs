@@ -34,9 +34,7 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
 
-
     m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid")
-
 
     m.top.appendChild(m.bitmovinPlayer)
     m.top.isPlayerReady = true

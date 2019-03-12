@@ -6,11 +6,7 @@ function getDefaultBitmovinYospacePlayerPolicy()
 
     canSeek: function() as Boolean:
         ' allow seeking only if no add is playing
-        if getCurrentAd() = invalid
-          return true
-        else
-          return false
-        end if
+        return getCurrentAd() = invalid
       :end function,
 
     canSeekTo: function(seekTarget as Float, currentTime = getPlayerPosition() as Float) as Float:

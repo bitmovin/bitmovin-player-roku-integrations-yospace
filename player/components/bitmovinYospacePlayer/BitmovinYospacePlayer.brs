@@ -57,9 +57,13 @@ end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
+  ' Since there is no way of stopping the default ui and it's build in key event handler
+  ' from seeking to any point in the video,
+  ' the check if seeking is allowed has to be made after seeking has happened
+  ' and, if necessary, has to be corrected.
   allowedSeek = m.policy.canSeekTo(getPlayerPosition(), m.policyHelper_canSeekToStartPosition)
   if (getPlayerPosition() <> allowedSeek) and (m.policyHelper_canSeekToStartPosition > -1)
-      seek(allowedSeek)
+    seek(allowedSeek)
   end if
   m.policyHelper_canSeekToStartPosition = -1
 end sub

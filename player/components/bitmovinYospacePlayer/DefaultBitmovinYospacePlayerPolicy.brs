@@ -18,7 +18,7 @@ function getDefaultBitmovinYospacePlayerPolicy()
           end if
         end for
         if skippedAdBreaks.Count() > 0
-          adBreakToPlay = skippedAdBreaks[0]
+          adBreakToPlay = skippedAdBreaks[skippedAdBreaks.Count()-1]
           return adBreakToPlay.scheduleTime
         end if
         return seekTarget

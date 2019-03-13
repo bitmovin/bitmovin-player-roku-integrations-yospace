@@ -4,6 +4,7 @@ sub init()
   m.ADVERT$ = "ADVERT"
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.policyHelper_canSeekToStartPosition = -1
+  m.policyHelper_originalSeekDestination = -1
 
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
@@ -63,6 +64,7 @@ sub onSeeked()
   ' and, if necessary, has to be corrected.
   allowedSeek = m.policy.canSeekTo(getPlayerPosition(), m.policyHelper_canSeekToStartPosition)
   if (getPlayerPosition() <> allowedSeek) and (m.policyHelper_canSeekToStartPosition > -1)
+    m.policyHelper_originalSeekDestination = getPlayerPosition()
     seek(allowedSeek)
   end if
   m.policyHelper_canSeekToStartPosition = -1
@@ -110,7 +112,9 @@ end sub
 
 sub seek(params)
   if m.policy.canSeek()
-    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, m.policy.canSeekTo(params))
+    seekDestination = m.policy.canSeekTo(params)
+    if seekDestination <> params then m.policyHelper_originalSeekDestination = getPlayerPosition()
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
 end sub
 

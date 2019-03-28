@@ -3,7 +3,7 @@ sub init()
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.ADVERT$ = "ADVERT"
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
-  m.policyHelper_canSeekToStartPosition = -1
+  m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
@@ -53,7 +53,7 @@ end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
-  m.policyHelper_canSeekToStartPosition = getPlayerPosition()
+  m.policyHelper_seekStartPosition = getPlayerPosition()
 end sub
 
 sub onSeeked()
@@ -62,12 +62,12 @@ sub onSeeked()
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
-  allowedSeek = m.policy.canSeekTo(getPlayerPosition(), m.policyHelper_canSeekToStartPosition)
-  if (getPlayerPosition() <> allowedSeek) and (m.policyHelper_canSeekToStartPosition > -1)
+  allowedSeek = m.policy.canSeekTo(getPlayerPosition(), m.policyHelper_seekStartPosition)
+  if (getPlayerPosition() <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
     m.policyHelper_originalSeekDestination = getPlayerPosition()
     seek(allowedSeek)
   end if
-  m.policyHelper_canSeekToStartPosition = -1
+  m.policyHelper_seekStartPosition = -1
 end sub
 
 sub onPlayerStateChanged()

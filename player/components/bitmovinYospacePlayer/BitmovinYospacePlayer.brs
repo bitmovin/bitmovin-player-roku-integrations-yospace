@@ -9,7 +9,7 @@ sub init()
   m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
-  ' inizialize the yospace sdk
+  ' initialize the Yospace SDK
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
@@ -58,7 +58,7 @@ end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
-  ' Since there is no way of stopping the default ui and it's build in key event handler
+  ' Since there is no way of stopping the default UI and its build in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.

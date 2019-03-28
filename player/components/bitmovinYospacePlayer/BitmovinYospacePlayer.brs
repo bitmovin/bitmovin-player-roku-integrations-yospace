@@ -340,11 +340,7 @@ function toMagicTime(playbackTime)
 end function
 
 function isAdActive()
-  if getCurrentAd() <> invalid
-    return true
-  else
-    return false
-  end if
+  return getCurrentAd() <> invalid
 end function
 
 function getAdStartTime(ad)

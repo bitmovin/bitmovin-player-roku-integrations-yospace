@@ -58,13 +58,14 @@ end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
+  currentPlayerPosition = getPlayerPosition()
   ' Since there is no way of stopping the default UI and its build in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
-  allowedSeek = m.policy.canSeekTo(getPlayerPosition(), m.policyHelper_seekStartPosition)
-  if (getPlayerPosition() <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
-    m.policyHelper_originalSeekDestination = getPlayerPosition()
+  allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
+  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
+    m.policyHelper_originalSeekDestination = currentPlayerPosition
     seek(allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1

@@ -6,4 +6,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Fire `adBreakStart`, `adStart`, `adBreakFinished` and `adBreakFinished`  respectively 
+- Fire `adBreakStart`, `adStart`, `adBreakFinished` and `adBreakFinished` respectively
+  https://github.com/bitmovin/player-issues-roku/issues/23

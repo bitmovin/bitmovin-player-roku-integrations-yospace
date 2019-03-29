@@ -8,4 +8,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Internal
 - The BitmovinPlayer component is now being loaded inside the BitmovinYospacePlayer component
   and does not require a separate xml component.
-  https://github.com/bitmovin/bitmovin-player-roku-integrations-yospace/pull/5
+  https://github.com/bitmovin/player-issues-roku/issues/25

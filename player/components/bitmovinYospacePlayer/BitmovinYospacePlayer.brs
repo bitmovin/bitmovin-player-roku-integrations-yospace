@@ -2,15 +2,25 @@ sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.ADVERT$ = "ADVERT"
+
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
-  m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+  m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
+  m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"
+  m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
+  m.BitmovinPlayerSDK.observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+
+  m.BitmovinPlayerSDKLoaderTask = CreateObject("roSgNode", "Task")
+  m.BitmovinPlayerSDKLoaderTask.appendChild(m.BitmovinPlayerSDK)
+  m.top.appendChild(m.BitmovinPlayerSDKLoaderTask)
+
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
   ' initialize the Yospace SDK
-  m.session   = YSSessionManager()
+  m.session = YSSessionManager()
+
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
   m.yospaceAdEventCallbacks = {}
@@ -21,7 +31,7 @@ sub init()
 end sub
 
 sub onBitmovinPlayerSDKLoaded()
-  if m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").loadStatus = "ready"
+  if m.BitmovinPlayerSDK.loadStatus = "ready"
     m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
     m.bitmovinPlayer.id = "BitmovinPlayer"
 
@@ -258,7 +268,7 @@ function isKeyPressValid(key)
 end function
 
 sub onAdQuartile(quartile)
-  m.top.AdQuartile = quartile
+  m.top.adQuartile = quartile
 end sub
 
 ' ---------------------------- additional callbacks used by the yospace sdk ----------------------------

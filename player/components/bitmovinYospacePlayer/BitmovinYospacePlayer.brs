@@ -3,7 +3,15 @@ sub init()
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.ADVERT$ = "ADVERT"
 
-  m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+  m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
+  m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"
+  m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
+  m.BitmovinPlayerSDK.observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+
+  m.BitmovinPlayerSDKLoaderTask = CreateObject("roSgNode", "Task")
+  m.BitmovinPlayerSDKLoaderTask.appendChild(m.BitmovinPlayerSDK)
+  m.top.appendChild(m.BitmovinPlayerSDKLoaderTask)
+
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
   ' inizialize the yospace sdk
@@ -18,7 +26,7 @@ sub init()
 end sub
 
 sub onBitmovinPlayerSDKLoaded()
-  if m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").loadStatus = "ready"
+  if m.BitmovinPlayerSDK.loadStatus = "ready"
     m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
     m.bitmovinPlayer.id = "BitmovinPlayer"
 

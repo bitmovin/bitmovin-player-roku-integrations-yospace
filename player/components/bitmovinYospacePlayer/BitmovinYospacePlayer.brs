@@ -15,7 +15,7 @@ sub init()
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
   ' inizialize the yospace sdk
-  m.session   = YSSessionManager()
+  m.session = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
   m.yospaceAdEventCallbacks = {}
@@ -223,7 +223,7 @@ function ad_getActiveAd()
 end function
 
 sub onAdQuartile(quartile)
-  m.top.AdQuartile = quartile
+  m.top.adQuartile = quartile
 end sub
 
 ' ---------------------------- additional callbacks used by the yospace sdk ----------------------------

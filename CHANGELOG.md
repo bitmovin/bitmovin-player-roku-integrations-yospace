@@ -7,3 +7,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Support for a custom Yospace ad policy as well as a default policy if none is set.
+  https://github.com/bitmovin/player-issues-roku/issues/22

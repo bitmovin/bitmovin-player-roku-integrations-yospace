@@ -5,9 +5,6 @@
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
-  <children>
-    <LoadPlayerTask id="loadPlayerTask" />
-  </children>
   <interface>
     <field id="BitmovinPlayerState" type="assocarray" />
     <field id="BitmovinFunctions" type="assocarray" />
@@ -44,8 +41,12 @@
     <function name="setPolicy" />
     <function name="isKeyPressValid" />
 
-    <field id="AdSkipped" type="string" alwaysNotify="true" />
-    <field id="AdQuartile" type="integer" alwaysNotify="true" />
+    <field id="adBreakStarted" type="string" alwaysNotify="true" />
+    <field id="adBreakFinished" type="string" alwaysNotify="true" />
+    <field id="adFinished" type="string" alwaysNotify="true" />
+    <field id="adQuartile" type="integer" alwaysNotify="true" />
+    <field id="adSkipped" type="string" alwaysNotify="true" />
+    <field id="adStarted" type="string" alwaysNotify="true" />
 
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />

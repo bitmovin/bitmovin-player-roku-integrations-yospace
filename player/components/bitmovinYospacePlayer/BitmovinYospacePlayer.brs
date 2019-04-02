@@ -1,23 +1,32 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
+  m.ADVERT$ = "ADVERT"
 
-  m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+  m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
+  m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"
+  m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
+  m.BitmovinPlayerSDK.observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+
+  m.BitmovinPlayerSDKLoaderTask = CreateObject("roSgNode", "Task")
+  m.BitmovinPlayerSDKLoaderTask.appendChild(m.BitmovinPlayerSDK)
+  m.top.appendChild(m.BitmovinPlayerSDKLoaderTask)
+
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
   ' inizialize the yospace sdk
   m.session = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
-  m.player    = {}
-  m.player["AdBreakStart"]    = yo_Callback(cb_ad_break_start, m)
-  m.player["AdvertStart"]     = yo_Callback(cb_advert_start, m)
-  m.player["AdvertEnd"]       = yo_Callback(cb_advert_end, m)
-  m.player["AdBreakEnd"]      = yo_Callback(cb_ad_break_end, m)
+  m.yospaceAdEventCallbacks = {}
+  m.yospaceAdEventCallbacks["AdBreakStart"] = yo_Callback(cb_ad_break_start, m)
+  m.yospaceAdEventCallbacks["AdvertStart"] = yo_Callback(cb_advert_start, m)
+  m.yospaceAdEventCallbacks["AdvertEnd"] = yo_Callback(cb_advert_end, m)
+  m.yospaceAdEventCallbacks["AdBreakEnd"] = yo_Callback(cb_ad_break_end, m)
 end sub
 
 sub onBitmovinPlayerSDKLoaded()
-  if m.top.findNode("loadPlayerTask").findNode("BitmovinPlayerSDK").loadStatus = "ready"
+  if m.BitmovinPlayerSDK.loadStatus = "ready"
     m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
     m.bitmovinPlayer.id = "BitmovinPlayer"
 
@@ -169,74 +178,48 @@ end sub
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  ad = getCurrentAd()
-  timeline = m.session.GetTimeline()
-  skipDestination = 0
-  if ad <> invalid
-    for each element in timeline.GetAllElements()
-      if element.getType() = "ADVERT"
-        for each e in element.GetAdverts().GetAdverts()
-          if e._INSTANCEID = ad._INSTANCEID
-            skipDestination = element.GetOffset()
-            ads = e.GetBreak().GetAdverts()
-            for each a in ads
-              if a._INSTANCEID = e._INSTANCEID
-                skipDestination += a.GetDuration()
-                EXIT FOR
-              else
-                skipDestination += a.GetDuration()
-              end if
-            end for
-          end if
-        end for
-      end if
-    end for
-    seek(skipDestination)
-    m.top.adSkipped = ad.GetMediaID()
+  if isAdActive()
+    ad = getCurrentAd()
+    seek(getAdStartTime(ad) + ad.GetDuration())
+    m.top.AdSkipped = ad.GetMediaID()
   end if
 end sub
 
 function ad_list()
-  allAds = []
+  advertElements = []
   timeline = m.session.GetTimeline()
   if timeline <> invalid
-    elements = timeline.GetAllElements()
-    for each e in elements
-      if e.getType() = "ADVERT"
-        allAds.push(e)
+    timelineElements = timeline.GetAllElements()
+    for each tlElement in timelineElements
+      if tlElement.getType() = m.ADVERT$
+        advertElements.push(tlElement)
       end if
     end for
     adList = []
-    for each entry in allAds
-      adList.Push(mapAdBreak(entry.GetAdverts()))
+    for each adElement in advertElements
+      adList.Push(mapAdBreak(adElement.GetAdverts())) ' GetAdverts() returns the adBreak contained in the advert timeline element
     end for
     return adList
   else
     print "timeline invalid"
   end if
+  return []
 end function
 
 ' returns the ad break of the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAdBreak()
-  ad = getCurrentAd()
-  if ad <> invalid
-  ' Variable name cannot be simply "adBreak" as it would interfere with an already existing "adBreak" from the yospaceSDK
-    myAdBreak = ad.GetBreak()
-    if myAdBreak <> invalid
-      return mapAdBreak(myAdBreak)
-    end if
+  if isAdActive()
+    return mapAdBreak(getCurrentAd().GetBreak())
   end if
   return invalid
 end function
 
 ' returns the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAd()
-  ad = getCurrentAd()
-  if ad <> invalid
-    return mapAd(ad)
-  else
-    return invalid
+  if isAdActive()
+    return mapAd(getCurrentAd())
   end if
+  return invalid
 end function
 
 sub onAdQuartile(quartile)
@@ -245,19 +228,19 @@ end sub
 
 ' ---------------------------- additional callbacks used by the yospace sdk ----------------------------
 sub onVideoPlaybackState()
-  video = m.bitmovinPlayer.findNode("MainVideo")
-  if video.state = "finished"
+  videoState = m.bitmovinPlayer.findNode("MainVideo").state
+  if videoState = "finished"
     m.session.ReportPlayerEvent(YSPlayerEvents().END)
-  else if video.state = "buffering"
+  else if videoState = "buffering"
     m.session.ReportPlayerEvent(YSPlayerEvents().BUFFER)
-  else if video.state = "playing"
+  else if videoState = "playing"
     m.session.ReportPlayerEvent(YSPlayerEvents().RESUME)
-  else if video.state = "paused"
+  else if videoState = "paused"
     m.session.ReportPlayerEvent(YSPlayerEvents().PAUSE)
-  else if video.state = "stopped"
+  else if videoState = "stopped"
     m.session.ReportPlayerEvent(YSPlayerEvents().STALL)
   else
-    print "unhandled video state: "; video.state
+    print "unhandled video state: "; videoState
   end if
 end sub
 
@@ -290,43 +273,12 @@ end sub
 ' ---------------------------- yospace api call ----------------------------
 sub requestYospaceURL(source)
   if Lcase(source.assetType) = "live"
-     m.session.CreateForLive(source.hls, {USE_ID3:true}, yo_Callback(cb_session_ready))
+     m.session.CreateForLive(source.hls, { USE_ID3: true }, yo_Callback(cb_session_ready))
   else if Lcase(source.assetType) = "vod"
-    m.session.CreateForVOD(source.hls, {USE_ID3:false}, yo_Callback(cb_session_ready))
+    m.session.CreateForVOD(source.hls, { USE_ID3: false }, yo_Callback(cb_session_ready))
   else
     print "not supported asset type!"
   end if
-end sub
-
-sub cb_session_ready(response as Dynamic)
-  m.session.RegisterPlayer(m.player)
-  m.source.hls = m.session.GetMasterPlaylist()
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
-end sub
-
-' ---------------------------- yospace callbacks ----------------------------
-' Called whenever the player enters an advert break
-sub cb_ad_break_start(adBreak = invalid as Dynamic)
-  YO_TRACE("AD BREAK START")
-  m.top.adBreakStarted = adBreak._INSTANCEID
-end sub
-
-' Called whenever an individual advert starts
-sub cb_advert_start(mediaId as String)
-  YO_TRACE("ADVERT START for {0}", mediaId)
-  m.top.adStarted = mediaId
-end sub
-
-' Called whenever an individual advert completes
-sub cb_advert_end(mediaId as String)
-  YO_TRACE("ADVERT END for {0}", mediaId)
-  m.top.adFinished = mediaId
-end sub
-
-' Called whenever the player exits an advert break
-sub cb_ad_break_end(adBreak = invalid as Dynamic)
-  YO_TRACE("AD BREAK END")
-  m.top.adBreakFinished = adBreak._INSTANCEID
 end sub
 
 ' ---------------------------- util functions ----------------------------
@@ -341,7 +293,7 @@ end function
 function toMagicTime(playbackTime)
   mTime = playBackTime
   for each timelineElement in m.session.GetTimeline().GetAllElements()
-    if timelineElement.GetType() = "ADVERT"
+    if timelineElement.GetType() = m.ADVERT$
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))
@@ -350,4 +302,23 @@ function toMagicTime(playbackTime)
     end if
   end for
   return mTime
+end function
+
+function isAdActive()
+  if getCurrentAd() <> invalid
+    return true
+  else
+    return false
+  end if
+end function
+
+function getAdStartTime(ad)
+  adStartTime = ad.GetBreak().GetStart()
+  for each advert in ad.GetBreak().GetAdverts()
+    if advert._INSTANCEID = ad._INSTANCEID
+      return adStartTime
+    else
+      adStartTime += advert.GetDuration()
+    end if
+  end for
 end function

@@ -1,7 +1,7 @@
 sub init()
   m.playerConfig = getExamplePlayerConfig()
 
-  ' Creates another ComponentLibrary for the yospace wrapper
+  ' Creates a ComponentLibrary for the bitmovin yospace player
   m.bitmovinYospacePlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
   m.bitmovinYospacePlayerSDK.id = "BitmovinYospacePlayerSDK"
   ' NOTE: for dev purposes, a node server can be spun up that has the player library as a zip file
@@ -40,8 +40,6 @@ function onPlayerReady()
     }
 
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
-    'm.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
-    'm.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.LOAD, m.playerConfig.source)
   end if
 end function
 

@@ -13,7 +13,7 @@ end function
 function mapAdBreak(myAdBreak)
   aBr = {
     id: myAdBreak.GetIdentifier(),
-    duration: myAdBreak.GetDuration(),
+    scheduleTime: myAdBreak.GetStart(),
     ads: []
   }
   for each ad in myAdBreak.GetAdverts()

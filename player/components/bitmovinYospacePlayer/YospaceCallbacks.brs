@@ -17,6 +17,13 @@ end sub
 ' Called whenever the player exits an advert break
 sub cb_ad_break_end(dummy = invalid as Dynamic)
   YO_TRACE("AD BREAK END")
+  currentElement = m.session.GetTimeline().GetElementAtTime(getPlayerPosition())
+  if m.policyHelper_originalSeekDestination > -1
+    if (currentElement.GetOffset() + currentElement.GetDuration()) > m.policyHelper_originalSeekDestination
+      seek(m.policyHelper_originalSeekDestination)
+      m.policyHelper_originalSeekDestination = -1
+    end if
+  end if
 end sub
 
 sub cb_session_ready(response as Dynamic)

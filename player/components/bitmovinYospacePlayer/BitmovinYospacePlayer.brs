@@ -3,6 +3,10 @@ sub init()
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.ADVERT$ = "ADVERT"
 
+  m.policy = getDefaultBitmovinYospacePlayerPolicy()
+  m.policyHelper_seekStartPosition = -1
+  m.policyHelper_originalSeekDestination = -1
+
   m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
   m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"
   m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
@@ -14,8 +18,9 @@ sub init()
 
   YO_LOGLEVEL(m.top.DebugVerbosityEnum.INFO)
 
-  ' inizialize the yospace sdk
+  ' initialize the Yospace SDK
   m.session = YSSessionManager()
+
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
   m.yospaceAdEventCallbacks = {}
@@ -40,6 +45,8 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
 
+    m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
+
     m.top.appendChild(m.bitmovinPlayer)
     m.top.isPlayerReady = true
   end if
@@ -56,10 +63,22 @@ end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
+  m.policyHelper_seekStartPosition = getPlayerPosition()
 end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
+  currentPlayerPosition = getPlayerPosition()
+  ' Since there is no way of stopping the default UI and its build in key event handler
+  ' from seeking to any point in the video,
+  ' the check if seeking is allowed has to be made after seeking has happened
+  ' and, if necessary, has to be corrected.
+  allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
+  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
+    m.policyHelper_originalSeekDestination = currentPlayerPosition
+    seek(allowedSeek)
+  end if
+  m.policyHelper_seekStartPosition = -1
 end sub
 
 sub onPlayerStateChanged()
@@ -103,7 +122,11 @@ sub preload(params)
 end sub
 
 sub seek(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, params)
+  if m.policy.canSeek()
+    seekDestination = m.policy.canSeekTo(params)
+    if seekDestination <> params then m.policyHelper_originalSeekDestination = getPlayerPosition()
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
+  end if
 end sub
 
 ' OVERRIDEN load method
@@ -125,7 +148,9 @@ sub load(params)
 end sub
 
 sub mute(params)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.MUTE, params)
+  if m.policy.canMute()
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.MUTE, params)
+  end if
 end sub
 
 sub unmute(params)
@@ -145,7 +170,9 @@ function isPlaying(params)
 end function
 
 function isPaused(params)
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
+  if m.policy.canPause()
+    return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
+  end if
 end function
 
 function isStalled(params)
@@ -179,9 +206,13 @@ end sub
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
   if isAdActive()
-    ad = getCurrentAd()
-    seek(getAdStartTime(ad) + ad.GetDuration())
-    m.top.AdSkipped = ad.GetMediaID()
+    if m.policy.canSkip() = 0
+      ad = getCurrentAd()
+      seek(getAdStartTime(ad) + ad.GetDuration())
+      m.top.AdSkipped = ad.GetMediaID()
+    else
+      print "Skip not allowed!"
+    end if
   end if
 end sub
 
@@ -220,6 +251,20 @@ function ad_getActiveAd()
     return mapAd(getCurrentAd())
   end if
   return invalid
+end function
+
+sub setPolicy(p)
+  m.policy = p
+end sub
+
+function isKeyPressValid(key)
+  if key = "right" or key = "left"
+    if m.policy.canSeek()
+      return true
+    end if
+    return false
+  end if
+  return true
 end function
 
 sub onAdQuartile(quartile)
@@ -282,7 +327,7 @@ sub requestYospaceURL(source)
 end sub
 
 ' ---------------------------- util functions ----------------------------
-function getPlayerPosition()
+function getPlayerPosition() as Float
   return m.bitmovinPlayer.findNode("MainVideo").position
 end function
 
@@ -305,11 +350,7 @@ function toMagicTime(playbackTime)
 end function
 
 function isAdActive()
-  if getCurrentAd() <> invalid
-    return true
-  else
-    return false
-  end if
+  return getCurrentAd() <> invalid
 end function
 
 function getAdStartTime(ad)

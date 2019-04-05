@@ -20,14 +20,14 @@
 #endif
 
 function YORokuTasks() as Object
-    ' Class definition
+    ' Class definition    
     this = MakeClass("YORokuTasks", {
         properties: {
         },
-
+    
         methods: {
             '* <p>Called in order to add a loading job into the URL loading queue.</p>
-            '*
+            '* 
             '* @method  AddFetchJob
             '* @param   roString            url     URL to be retrieved
             '* @param   roFunction          goodcb  Callback to be fired on completion (from yo_Callback)
@@ -55,23 +55,23 @@ function YORokuTasks() as Object
     this._data.loader       = CreateObject("roSGNode", "UrlLoader")
     this._data.loader.observeFieldScoped("result", "yo_rt_loaderresponse")
 #else
-    this._data.loader       = invalid
+    this._data.loader       = invalid    
 #end if
 
 #if SHOULD_USE_RAF
     this._data.adIface = Roku_Ads()     ' RAF Modification
     this._data.adIface.enableAdMeasurements(true)' RAF Modification V2 01/2018
 #end if
-
+    
     YO_TRACE("YORokuTasks constructed")
-
+    
     return this
 end function
 
 '-----------------------------------------------------------------------------------------------------------
 ' LOCAL METHOD DEFINITIONS
 '-----------------------------------------------------------------------------------------------------------
-
+ 
 ' CheckJobs
 sub yo_rt_checkjobs()
     if (m._data.loadjobs.count() > 0) then
@@ -79,57 +79,57 @@ sub yo_rt_checkjobs()
         job = m._data.loadjobs[jobid]
         if not job.active then
             YO_DEBUG("Making load job: {0} active", jobid)
-
+            
             job.active = true
-
+            
             ' There can be 2 kinds of jobs - either an Associative Array
             ' which indicates that the job is intended for firing using
             ' the Roku RAF framework, or a URL to be loaded externally
             if type(job.url) = "roAssociativeArray" then
                 trackObj = job.url              ' RAF Jan. 2018
-
+                
                 if invalid <> trackObj["tracking"] and invalid <> trackObj["event"] ' Sanity check RAF Jan. 2018
                     adStruct = {tracking:trackObj.tracking, adServer:invalid}
-
+                    
                     if trackobj.event = "creativeView" and trackObj.tracking[0].event = "impression"
                       event = "impression"
                     else
                       event = trackObj.event
                     end if ' RAF Jan. 2018
-
+                    
                     m._data.adIface.fireTrackingEvents(adStruct, {type:event}) ' non-blocking call RAF Jan.2018
                     yo_rt_loaderresponse("")                                         ' RAF Jan. 2018
                 end if                                                   ' RAF Jan. 2018
             else
-#if USE_LOADER_TASK
-                ' Use separate URLLoader task
+#if USE_LOADER_TASK    
+                ' Use separate URLLoader task        
                 m._data.loader.targeturl = job.url
-#else
+#else                
                 ' Use Brightscript Native (because we are running
                 ' on a separate task thread already)
                 req = CreateObject("roUrlTransfer")
                 m._data.loader = req
                 m._data.msgport = CreateObject("roMessagePort")
-
+                
                 ' Bind and set url request properties
                 ' // TODO: Allow binding different certs?
                 req.SetCertificatesFile("common:/certs/ca-bundle.crt")
                 req.SetMessagePort(m._data.msgport)
                 req.SetUrl(job.url)
-
+                
                 YO_DEBUG("Performing native URL fetch: {0}", job.url)
 
-                ' Begin the request
+                ' Begin the request 
                 resp = ""
                 scode = -1
                 req.AsyncGetToString()
-
+                
                 ' This is a continual loop, but is terminated if needed
                 while true
                     ' Wait for a message from the url transfer port
                     ' // TODO: Allow customizable timeout value?
                     umsg = wait(15000, m._data.msgport)
-
+                    
                     if umsg <> invalid and type(umsg) = "roUrlEvent" then
                         ' Check if it's a type 1 message, otherwise its
                         ' not yet significant
@@ -139,7 +139,7 @@ sub yo_rt_checkjobs()
                             if ((scode >= 200) and (scode <= 399)) then
                                 resp = umsg.GetString()
                             end if
-
+                            
                             ' But in any case, break out of the inner while loop
                             exit while
                         else
@@ -159,14 +159,19 @@ sub yo_rt_checkjobs()
             end if
         else
             YO_DEBUG("Already have an active job. QSize: {0}", m._data.loadjobs.Count())
-            YO_DEBUG("Job is: {0}", job.url)
+            'YO_DEBUG("Job is: {0}", job.url)
         end if
     end if
 end sub
 
 ' AddFetchJob
 sub yo_rt_addfetchjob(source as Dynamic, goodcb as Dynamic, failcb as Dynamic)
-    YO_DEBUG("Adding fetch job: {0}", source)
+    #if SHOULD_USE_RAF
+        YO_DEBUG("Adding RAF job for event")
+    #else
+        YO_DEBUG("Adding fetch job")
+    #end if
+
     jobid = m.GetNextID()
     m._data.loadjobs[jobid] = {url: source, onsuccess:goodcb, onfailure: failcb, active:false, loader:invalid}
     m.CheckJobs()
@@ -181,7 +186,7 @@ sub yo_rt_onloader(resp as Dynamic, rcode = 200 as Integer)
         loadresp = resp
     end if
 
-    ' Sanity check - there should always be jobs!
+    ' Sanity check - there should always be jobs!    
     if (m._data.loadjobs.count() > 0) then
         ' This should be the job which completed
         jobid = m._data.loadjobs.Keys()[0]
@@ -233,7 +238,7 @@ sub yo_rt_setgenre(genres as String, kidsContent as Boolean)
     if (m._data.adIface <> invalid) then
         m._data.adIface.setContentGenre(genres, kidsContent)
     end if
-#end if
+#end if    
 end sub
 
 ' SetContentId
@@ -242,7 +247,7 @@ sub yo_rt_setid(id as String)
     if (m._data.adIface <> invalid) then
         m._data.adIface.setContentId(id)
     end if
-#end if
+#end if    
 end sub
 
 ' SetContentLength
@@ -251,5 +256,5 @@ sub yo_rt_setlength(cl as integer)
     if (m._data.adIface <> invalid) then
         m._data.adIface.setContentLength(cl)
     end if
-#end if
+#end if    
 end sub

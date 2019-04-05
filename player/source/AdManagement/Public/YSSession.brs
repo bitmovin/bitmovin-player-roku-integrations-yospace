@@ -460,7 +460,7 @@ sub ys_yss_destroy()
     m.StopBreakEndTimer()
     
     if (m._data.timeline <> invalid) then
-        m._data.timelint.Destroy()
+        m._data.timeline.Destroy()
         m._data.timeline    = invalid
     end if
 
@@ -736,7 +736,7 @@ sub ys_yss_starttimer(duration = invalid as Dynamic)
     prevbrk = m.GetCurrentBreak()
     m._data.breakendtimer = tim.SetTimeout(realdur, m, function(what)
         YO_TRACE("Break end timer has fired")
-        what.HandleBreakEnd(prevbrk)
+        what.HandleBreakEnd(what.GetCurrentBreak())
     end function)
 end sub
    
@@ -758,12 +758,10 @@ sub ys_yss_breakstart(brk as Dynamic)
     ' This is a new break
     YO_TRACE("YSSession::HandleBreakStart")
 
-    if (brk = invalid) then
-        stop
-    end if
-
-    if (brk.GetVMAPBreak() <> invalid) and (brk.GetVMAPBreak().GetTracking() <> invalid) then
-        brk.GetVMAPBreak().GetTracking().Track("breakStart", {})
+    if (brk <> invalid) then
+        if (brk.GetVMAPBreak() <> invalid) and (brk.GetVMAPBreak().GetTracking() <> invalid) then
+            brk.GetVMAPBreak().GetTracking().Track("breakStart", {})
+        end if
     end if
 
     if (m.GetBreakEndTimer() = invalid) then
@@ -779,18 +777,22 @@ end sub
 sub ys_yss_breakend(brk as Dynamic)
     YO_TRACE("YSSession::HandleBreakEnd")
 
-    if (brk = invalid) then
-        stop
+    if (brk <> invalid) then
+        if (brk.GetVMAPBreak() <> invalid) and (brk.GetVMAPBreak().GetTracking() <> invalid) then
+            brk.GetVMAPBreak().GetTracking().Track("breakEnd", {})
+        end if
     end if
-
-    if (brk.GetVMAPBreak() <> invalid) and (brk.GetVMAPBreak().GetTracking() <> invalid) then
-        brk.GetVMAPBreak().GetTracking().Track("breakEnd", {})
-    end if
-
+    
     if (m.IsInAnAdvert()) then
         ' Stop previous advert as the midd has changed
         if ((m.GetPlayer() <> invalid) and (m.GetPlayer().DoesExist("AdvertEnd"))) then
-            m.GetPlayer().AdvertEnd.invoke(brk)
+            ad = m.GetCurrentAdvert()
+            if (ad <> invalid) then
+                m.GetPlayer().AdvertEnd.invoke(ad.GetMediaID())
+            else
+                YO_WARN("Invoking advert end without a valid advert ID")
+                m.GetPlayer().AdvertEnd.invoke("")
+            end if
         end if
 
         m.GetCurrentAdvert().SetActive(false)

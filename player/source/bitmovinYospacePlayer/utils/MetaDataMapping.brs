@@ -22,7 +22,7 @@ function mapEmsgMetaData(metaData)
   return metaDataObj
 end function
 
-' Fucntion to parse a hex string tailored to the Yospace back end
+' Parses hex values found in ID3 tags which are used by Yospace for ad tracking
 function parseHexString(hexString)
   parsed = ""
   for j = 3 to len(hexString) step 2

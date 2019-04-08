@@ -296,6 +296,10 @@ end sub
 sub onTimedMetaData()
   metaData = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
   if metaData.Source = "emsg" then metaData = mapEmsgMetaData(metaData) else metaData = mapID3MetaData(metaData)
+  if metaData = invalid or metaData.Count() = 0
+    print "Recieved meta data was invalid, not reporting to Yospace"
+    return
+  end if
   m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, metaData)
 end sub
 

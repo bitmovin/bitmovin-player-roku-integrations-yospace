@@ -15,6 +15,7 @@ function mapEmsgMetaData(metaData)
   metaDataObj = {}
   for each token in metaData.MessageData.Tokenize(",")
     pair = token.Tokenize("=")
+    if pair.Count() <> 2 return invalid
     key = pair[0]
     value = pair[1]
     metaDataObj.AddReplace(key, value)

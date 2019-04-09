@@ -55,9 +55,9 @@
     <function name="ad_getActiveAd" />
     <function name="ad_getActiveAdBreak" />
     <function name="ad_list" />
+    <function name="ad_skip" />
     <function name="setPolicy" />
     <function name="isKeyPressValid" />
-    <function name="ad_skip" />
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />

@@ -249,6 +249,10 @@ function isLive()
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE)
 end function
 
+function getConfig()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_CONFIG)
+end function
+
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
   if isAdActive()

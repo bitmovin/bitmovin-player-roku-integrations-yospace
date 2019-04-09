@@ -294,25 +294,13 @@ sub onVideoPosition()
 end sub
 
 sub onTimedMetaData()
-  id3 = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
-  if (yo_IsNotNull(id3)) then
-    id3obj = {}
-    if (id3.Count() = 6) then
-      for each i in id3
-        if (len(i) = 4) then
-          hex = id3[i]
-          parsed = ""
-          for j = 3 to len(hex) step 2
-            pair = mid(hex, j, 2)
-            parsed = parsed + chr(val(pair, 16))
-          end for
-          YO_DEBUG("Decoded ID3 tag: {0} as {1}", i, parsed)
-          id3obj[i] = parsed
-        end if
-      end for
-      m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, id3obj)
-    end if
+  metaData = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
+  if metaData.Source = "emsg" then metaData = mapEmsgMetaData(metaData) else metaData = mapID3MetaData(metaData)
+  if metaData = invalid or metaData.Count() = 0
+    print "Recieved meta data was invalid, not reporting to Yospace"
+    return
   end if
+  m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, metaData)
 end sub
 
 ' ---------------------------- yospace api call ----------------------------

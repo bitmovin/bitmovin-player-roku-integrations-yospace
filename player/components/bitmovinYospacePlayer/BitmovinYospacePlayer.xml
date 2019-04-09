@@ -4,6 +4,7 @@
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/YospaceCallbacks.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
   <interface>
     <field id="BitmovinPlayerState" type="assocarray" />

@@ -40,6 +40,11 @@ function YOPoller() as Object
             }
         },
         methods: {
+            '* Helper method used for shutting down the instance cleanly
+            '*
+            '* @method Destroy
+            "Destroy":          ys_yp_destroy,
+
             '* Determine if the poller is active right now and is polling
             '* periodically
             '* 
@@ -70,6 +75,7 @@ function YOPoller() as Object
     this._data.running      = false
     this._data.timer        = invalid
     this._data.callback     = invalid
+    this._data.scope        = invalid
 
     return this
 end function
@@ -135,4 +141,11 @@ sub ys_yp_timerelapsed()
         YO_DEBUG("Invoking callback")
         cb(m._data.scope)
     end if
+end sub
+
+sub ys_yp_destroy()
+    m.StopPolling()
+
+    m._data.callback = invalid
+    m._data.scope = invalid
 end sub

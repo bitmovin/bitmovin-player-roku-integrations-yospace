@@ -14,16 +14,16 @@
 '* @param   Function    cb_wd   Function to call if the watchdog timer expires
 '* @param   YSAdBreak   brk     Break which contains this advert
 function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
-    ' Class definition
+    ' Class definition    
     this = MakeClass("YSAdvert", {
         properties: {
-            '* Indicates whether the advert is currently "live" or not.
+            '* Indicates whether the advert is currently "live" or not. 
             '* This does not necessarily mean that the advert is also
             '* being played - check the paused property to see if the
             '* advert playback is currently paused. This simply means
             '* the the break is in the active rotation because it has
             '* not yet been viewed by the player.
-            '*
+            '* 
             '* @property    active
             '* @type        roBoolean
             '* @get         IsActive
@@ -32,7 +32,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             },
 
             '* The VAST Advert encapsulated by this instance.
-            '*
+            '* 
             '* @property    advert
             '* @type        VASTAd
             '* @get         GetAdvert
@@ -41,7 +41,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             },
 
             '* The duration of the linear advert (in seconds).
-            '*
+            '* 
             '* @property    duration
             '* @type        roDouble
             '* @get         GetDuration
@@ -52,9 +52,9 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* The callback function which gets invoked if the timer
             '* watchdog fires (indicating that the advert should have
             '* completed).
-            '*
+            '* 
             '* @property    callback
-            '* @type        roFunction
+            '* @type        roFunction 
             '* @get         GetCallback
             callback: {
                 "GetCallback": function() as Dynamic : return m._data.callback : end function
@@ -62,7 +62,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
 
             '* The handle of the setTimeout timer used for detecting
             '* the end of the advert (as a safety measure).
-            '*
+            '* 
             '* @property    watchdog
             '* @type        roDouble
             '* @get         GetWatchdog
@@ -73,7 +73,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* The start time of this playback period (either from initial
             '* activation, or since resuming following a pause). Value represents
             '* number of milliseconds.
-            '*
+            '* 
             '* @property    startpos
             '* @type        roDouble
             '* @get         GetStartPosition
@@ -85,7 +85,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* during previous playback sessions. Usually this will be
             '* zero, but if the advert was paused, any duration played
             '* back will be accumulated into this property.
-            '*
+            '* 
             '* @property    elapsed
             '* @type        roDouble
             '* @get         GetAlreadyElapsed
@@ -94,7 +94,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             },
 
             '* Determine if the advert playback is currently paused.
-            '*
+            '* 
             '* @property    paused
             '* @type        roBoolean
             '* @get         IsPaused
@@ -104,9 +104,9 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
 
             '* <p>This property represents the highest tracking point
             '* which was fired in the usual sequence order. It is used
-            '* in order to ensure that quartile tracking is fired and in
+            '* in order to ensure that quartile tracking is fired and in 
             '* the correct sequence.</p>
-            '*
+            '* 
             '* <p>The tracking points value is mapped as follows:
             '* <br>0 = No tracking has been made
             '* <br>1 = Impression/View has been fired
@@ -118,7 +118,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* So to check if the midpoint needs to be fired (for example),
             '* check to see if the trackingPoint is less than 3
             '* </p>
-            '*
+            '* 
             '* @property    trkpoint
             '* @type        roInt
             '* @get         GetTrackingPoint
@@ -127,10 +127,10 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             },
 
             '* A reference back to the underlying YSAdBreak instance which
-            '* contains this advert. This will return <code>null</code>
+            '* contains this advert. This will return <code>null</code> 
             '* for LIVE sessions as the start and end of a break cannot be
             '* determined ahead of time.
-            '*
+            '* 
             '* @property    adbrk
             '* @type        YSAdBreak
             '* @get         GetBreak
@@ -138,7 +138,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
                 "GetBreak": function() as Dynamic : return m._data.adbrk : end function
             }
         },
-
+    
         methods: {
             '* Helper method used for shutting down the instance cleanly
             '*
@@ -146,7 +146,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             "Destroy":              ys_ysa_destroy,
 
             '* Helper function for obtaining the advert's ID (without yospace suffix)
-            '*
+            '* 
             '* @method  GetAdvertID
             '* @return  roString    Advert ID of the suffix (without the _yo_miid suffix)
             "GetAdvertID":          ys_ysa_getadid,
@@ -158,13 +158,13 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             "GetCreativeId":        ys_ysa_getcreativeid,
 
             '* Helper function for obtaining the Media Item ID (MIID) from the contained advert.
-            '*
+            '* 
             '* @method  GetMediaID
             '* @return  roString    Media ID of the advert (or the ID if it isn't a Yospace Ad)
             "GetMediaID":           ys_ysa_getmiid,
 
             '* Determines whether this advert is "filler" or regular advert.
-            '*
+            '* 
             '* @method  IsFiller
             '* @return  roBoolean       true if this advert is filler, otherwise false
             "IsFiller":             ys_ysa_isfiller,
@@ -172,7 +172,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* Helper function which needs to be regularly called by the Session class. This resets the
             '* safety timer which detects the end of an advert (should the player miss a closing ID3 tag,
             '* for example). It is also responsible for the firing of position-based tracking (eg quartiles).
-            '*
+            '* 
             '* @method  PingWatchdog
             '* @return  roArray     Array of fired tracking points. Each item is an object which contains
             '*                      "track_id", "progress" and "asset"
@@ -182,14 +182,14 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* after its duration if an ID3 metadata tag is accidentally skipped over. If the watchdog
             '* is already running, this will <b>not</b> restart it - a call must first be made to
             '* <code>stopWatchdog()</code>.
-            '*
+            '* 
             '* @method  StartWatchdog
             '* @param   roDouble    timeout     Timeout duration in seconds
             "StartWatchdog":        ys_ysa_start,
 
             '* Stop the safety timer (watchdog) from running. The watchdog is <b>not</b> triggered
             '* provided that this method is called before the timer has elapsed.
-            '*
+            '* 
             '* @method stopWatchdog
             "StopWatchdog":         ys_ysa_stop,
 
@@ -201,7 +201,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             "SetActive":            ys_ysa_setactive,
 
             '* <p>Helper function used to trigger a tracking event in the advert.</p>
-            '*
+            '* 
             '* @method InvokeTracking
             '* @param roString what The name of the event to be fired
             '* @param roBoolean linearOnly Whether to fire events only in linears (true)
@@ -214,22 +214,22 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
             '* Determine the total number of seconds this advert has been playing. This
             '* includes any accumulated playback time prior to this playback session, as
             '* well as any playback time in this session.
-            '*
+            '* 
             '* @method      TimeElapsed
             '* @return      roDouble    Number of seconds of playback time elapsed in total
             "TimeElapsed":          ys_ysa_elapsed,
 
             '* Notify that the playback of this advert has been paused.
-            '*
+            '* 
             '* @method AdPaused
             "AdPaused":             ys_ysa_paused,
 
             '* Notify that the playback of this advert has been resumed following
             '* an earlier pause.
-            '*
+            '* 
             '* @method AdResumed
             "AdResumed":            ys_ysa_resumed,
-
+            
             '* Mark whether analytics should be suppressed in this advert
             '*
             '* @method  IsSuppressed
@@ -259,7 +259,7 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
     this._data.duration = ad.GetLinear().GetDuration()
     this._data.callback = cb_wd
     this._data.watchdog = invalid
-    this._data.startpos = invalid
+    this._data.startpos = invalid 
     this._data.elapsed  = 0.0
     this._data.paused   = false
     this._data.trkpoint = 0
@@ -267,14 +267,14 @@ function YSAdvert(ad as Dynamic, cb_wd as Dynamic, brk as Dynamic) as Object
 
     ' Bind the advert to this instance
     ad._data.container = this
-
+    
     return this
 end function
 
 '-----------------------------------------------------------------------------------------------------------
 ' LOCAL METHOD DEFINITIONS
 '-----------------------------------------------------------------------------------------------------------
-
+    
 ' Destroy()
 sub ys_ysa_destroy()
     m._data.adbrk = invalid
@@ -285,7 +285,7 @@ function ys_ysa_issuppressed(active as Boolean) as Dynamic
     rv = []
     lin = invalid
     nonlin = invalid
-
+    
     if (m.GetAdvert() <> invalid) then
         ad = m.GetAdvert()
         if (ad.GetLinear() <> invalid) then
@@ -296,7 +296,7 @@ function ys_ysa_issuppressed(active as Boolean) as Dynamic
             nonlin = ad.GetNonLinearTracking().SuppressAnalytics(active)
         end if
     end if
-
+    
     if (active = false) then
         ' Build suppressed list
         if (lin <> invalid) then
@@ -304,13 +304,13 @@ function ys_ysa_issuppressed(active as Boolean) as Dynamic
                 rv.Push(lin[i])
             end for
         end if
-
+        
         if (nonlin <> invalid) then
             for i = 0 to nonlin.Count() - 1
                 rv.Push(nonlin[i])
             end for
         end if
-
+        
         if (m.IsActive() = true) then
             m.StartWatchdog(m.GetDuration())
         end if
@@ -319,33 +319,33 @@ function ys_ysa_issuppressed(active as Boolean) as Dynamic
     else
         m.StopWatchdog()
     end if
-
+    
     return invalid
 end function
 
 ' GetAdvertID()
 function ys_ysa_getadid() as String
     rv = ""
-
+    
     if (m.GetAdvert() <> invalid) then
         treg    = CreateObject("roRegex", "([^_]*)_YO_([\s\S]*)", "i")
         id = treg.Match(m.GetAdvert().GetID())
         rv = id[1]
     end if
-
+    
     return rv
 end function
-
+    
 ' GetMediaID()
 function ys_ysa_getmiid() as String
     rv = ""
-
+    
     if (m.GetAdvert() <> invalid) then
         treg    = CreateObject("roRegex", "([^_]*)_YO_([\s\S]*)", "i")
         id = treg.Match(m.GetAdvert().GetID())
         rv = id[2]
     end if
-
+    
     return rv
 end function
 
@@ -367,10 +367,10 @@ function ys_ysa_isfiller() as Boolean
     if LCase(m.GetAdvert().GetAdTitle()) = "filler" then
         return true
     end if
-
+    
     return false
 end function
-
+      
 ' PingWatchdog()
 function ys_ysa_ping() as Dynamic
     triggers = []
@@ -378,15 +378,15 @@ function ys_ysa_ping() as Dynamic
     if (m.IsPaused() = true) then
         return triggers
     end if
-
+    
     ' If there is a watchdog already running, stop it
     if m.GetWatchdog() <> invalid then
         m.StopWatchdog()
     end if
-
+        
     ' Begin the new watchdog timer period
     m.StartWatchdog(m.GetDuration())
-
+    
     ' Check whether tracking needs to be fired
     if (m.GetDuration() > 0) then
         done    = m.TimeElapsed()
@@ -394,7 +394,7 @@ function ys_ysa_ping() as Dynamic
         assetn  = "dummyasset"
         brk     = m.GetBreak()
         brkdur  = ""
-
+        
         if (m.GetAdvert() <> invalid) then
             lin = m.GetAdvert().GetLinear()
             if (lin <> invalid) then
@@ -402,19 +402,18 @@ function ys_ysa_ping() as Dynamic
                 if (medias <> invalid) and (medias.Count() > 0) then
                     assetn = medias[0]["src"]
                 end if
-
+                
                 brkdur = yo_TimecodeToString(brk.GetDuration())
                 lin.TrackProgress(done, assetn, brkdur)
             end if
         end if
-
+        
         if (done > (dur / 4)) then
             if (m.GetTrackingPoint() < 2) then
                 YO_TRACE(" -=-> First Quartile")
                 triggers.Push({track_id: "firstQuartile", progress: done, asset: assetn})
                 m._data.advert.getLinear().Track("firstQuartile", done, assetn, brkdur)
                 m._data.trkpoint = 2
-                onAdQuartile(m._data.trkpoint)
             end if
         end if
 
@@ -424,38 +423,36 @@ function ys_ysa_ping() as Dynamic
                 triggers.Push({track_id: "midpoint", progress: done, asset: assetn})
                 m.GetAdvert().GetLinear().Track("midpoint", done, assetn, brkdur)
                 m._data.trkpoint = 3
-                onAdQuartile(m._data.trkpoint)
             end if
         end if
-
+        
         if (done > (3 * dur / 4)) then
             if (m.GetTrackingPoint() < 4) then
                 YO_TRACE(" -=-> Third Quartile")
                 triggers.Push({track_id: "thirdQuartile", progress: done, asset: assetn})
                 m.GetAdvert().GetLinear().Track("thirdQuartile", done, assetn, brkdur)
                 m._data.trkpoint = 4
-                onAdQuartile(m._data.trkpoint)
             end if
         end if
     end if
 
     return triggers
 end function
-
+    
 ' StartWatchdog()
 sub ys_ysa_start(timeout as integer)
     if m.GetWatchdog() <> invalid then
         ' Already running
         return
     end if
-
+    
     'var that = this;
     'this.watchdog = setTimeout(
     '    function() {
     '        if (typeof that.watchdogCallback === 'function') {
     '            that.watchdogCallback.call(this);
     '        }
-    '    },
+    '    }, 
     '    (timeout * 1000)
     ');
 end sub
@@ -474,7 +471,7 @@ sub ys_ysa_setactive(active as Boolean)
         ' Ignore a request to re-activate an old ad
         return
     end if
-
+    
     if (active = true) then
         m._data.active      = active
         m._data.startpos    = UpTime(0)
@@ -510,7 +507,7 @@ sub ys_ysa_invoke(what as String, linearOnly = invalid as Dynamic, _duration = i
     brk = m.GetBreak()
     brkdur = ""
     assetn  = "dummyasset"
-
+        
     ' First deal with Linears
     linear = m.GetAdvert().GetLinear()
     if (linear <> invalid) then
@@ -519,7 +516,7 @@ sub ys_ysa_invoke(what as String, linearOnly = invalid as Dynamic, _duration = i
         else
             elapsed = _duration
         end if
-
+        
         medias = linear.GetMediaFiles()
         if ((medias <> invalid) and (medias.Count() > 0)) then
             assetn = medias[0].src
@@ -528,27 +525,27 @@ sub ys_ysa_invoke(what as String, linearOnly = invalid as Dynamic, _duration = i
         brkdur = yo_TimecodeToString(brk.GetDuration())
         linear.Track(what, elapsed, assetn, brkdur)
     end if
-
+    
     if ((linearOnly <> invalid) and (linearOnly = false)) then
         ' Now handle Non-Linears
         YO_DEBUG("Tracking non-linears")
-
+        
         tracking = m.GetAdvert().GetNonLinearTracking()
         if tracking <> invalid then
             tracking.Track(what, invalid, assetn, brkdur)
         end if
     end if
 end sub
-
+    
 ' TimeElapsed()
 function ys_ysa_elapsed() as Double
     if m.IsPaused() then
         return m.GetAlreadyElapsed()
     end if
-
+    
     return (m.GetAlreadyElapsed() + (UpTime(0) - m.GetStartPosition()))
 end function
-
+    
 ' AdPaused()
 sub ys_ysa_paused()
     if not m.IsPaused() then
@@ -560,7 +557,7 @@ sub ys_ysa_paused()
         m._data.paused      = true
         m._data.startpos    = 0.0
     end if
-end sub
+end sub 
 
 ' AdResumed()
 sub ys_ysa_resumed()
@@ -568,7 +565,7 @@ sub ys_ysa_resumed()
         YO_DEBUG(" -=-> Resumed")
         m._data.startpos    = UpTime(0)
         m._data.paused      = false
-
+        
         m.PingWatchdog()
     end if
 end sub
@@ -582,12 +579,12 @@ sub ys_ysa_reportnonlinear(id as Integer, event as String)
     elapsed = 0
     brk = m.GetBreak()
     brkdur = ""
-
+        
     ' First deal with Linears
     linear = m.GetAdvert().GetLinear()
     if (linear <> invalid) then
         elapsed = m.TimeElapsed()
-
+        
         medias = linear.GetMediaFiles()
         if ((medias <> invalid) and (medias.Count() > 0)) then
             assetn = medias[0].src
@@ -595,7 +592,7 @@ sub ys_ysa_reportnonlinear(id as Integer, event as String)
 
         brkdur = yo_TimecodeToString(brk.GetDuration())
     end if
-
+    
     tracking = m.GetAdvert().GetNonLinearTracking()
     if tracking <> invalid then
         tracking.Track(what, elapsed, assetn, brkdur)

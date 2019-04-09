@@ -26,7 +26,7 @@
     <field id="timeShift" type="float" alwaysNotify="true" />
     <field id="timeShifted" type="float" alwaysNotify="true" />
     <field id="warning" type="assocarray" alwaysNotify="true" />
-    <!-- Bitmovin Fucntions -->
+    <!-- Bitmovin Functions -->
     <function name="availableAudio" />
     <function name="availableSubtitles" />
     <function name="captionMode" />

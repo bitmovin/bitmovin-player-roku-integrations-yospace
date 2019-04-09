@@ -1,7 +1,7 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
-  m.ADVERT$ = "ADVERT"
+  m.TIMELINE_ENTRY_TYPE_ADVERT = "ADVERT"
 
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.policyHelper_seekStartPosition = -1
@@ -222,7 +222,7 @@ function ad_list()
   if timeline <> invalid
     timelineElements = timeline.GetAllElements()
     for each tlElement in timelineElements
-      if tlElement.getType() = m.ADVERT$
+      if tlElement.getType() = m.TIMELINE_ENTRY_TYPE_ADVERT
         advertElements.push(tlElement)
       end if
     end for
@@ -338,7 +338,7 @@ end function
 function toMagicTime(playbackTime)
   mTime = playBackTime
   for each timelineElement in m.session.GetTimeline().GetAllElements()
-    if timelineElement.GetType() = m.ADVERT$
+    if timelineElement.GetType() = m.TIMELINE_ENTRY_TYPE_ADVERT
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))

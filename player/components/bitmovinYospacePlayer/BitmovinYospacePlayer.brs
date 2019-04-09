@@ -63,12 +63,12 @@ end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
-  m.policyHelper_seekStartPosition = getPlayerPosition()
+  m.policyHelper_seekStartPosition = m.BitmovinPlayer.currentTime
 end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
-  currentPlayerPosition = getPlayerPosition()
+  currentPlayerPosition = m.BitmovinPlayer.currentTime
   ' Since there is no way of stopping the default UI and its build in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
@@ -124,7 +124,7 @@ end sub
 sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params)
-    if seekDestination <> params then m.policyHelper_originalSeekDestination = getPlayerPosition()
+    if seekDestination <> params then m.policyHelper_originalSeekDestination = m.BitmovinPlayer.currentTime
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
 end sub
@@ -290,7 +290,7 @@ sub onVideoPlaybackState()
 end sub
 
 sub onVideoPosition()
-  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, getPlayerPosition())
+  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.BitmovinPlayer.currentTime)
 end sub
 
 sub onTimedMetaData()
@@ -327,10 +327,6 @@ sub requestYospaceURL(source)
 end sub
 
 ' ---------------------------- util functions ----------------------------
-function getPlayerPosition() as Float
-  return m.bitmovinPlayer.findNode("MainVideo").position
-end function
-
 function getCurrentAd()
   return m.session.GetSession().GetCurrentAdvert()
 end function

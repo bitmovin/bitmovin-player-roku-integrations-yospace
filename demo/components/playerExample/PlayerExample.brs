@@ -1,23 +1,10 @@
 sub init()
   m.playerConfig = getExamplePlayerConfig()
 
-  ' Creates a ComponentLibrary for the bitmovin yospace player
-  m.bitmovinYospacePlayerSDK = CreateObject("roSGNode", "ComponentLibrary")
-  m.bitmovinYospacePlayerSDK.id = "BitmovinYospacePlayerSDK"
-  ' NOTE: for dev purposes, a node server can be spun up that has the player library as a zip file
-  m.bitmovinYospacePlayerSDK.uri = "http://YOUR-IP-HERE:8080/roku/player.zip"
-  m.top.appendChild(m.bitmovinYospacePlayerSDK)
-  m.bitmovinYospacePlayerSDK.observeField("loadStatus", "onLoadStatusChanged")
-end sub
-
-' The ComponentLibrary loadStatus field can equal "none", "ready", "loading" or "failed"
-sub onLoadStatusChanged()
-  print "LOAD STATUS FOR YOSPACE PLAYER LIBRARY: "; m.bitmovinYospacePlayerSDK.loadStatus
-  if m.bitmovinYospacePlayerSDK.loadStatus="ready"
-    ' Once the player library is loaded and ready, we can use is to reference the BitmovinPlayer component
-    m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayerSDK:BitmovinYospacePlayer")
-    m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
-  end if
+  m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
+  m.bitmovinYospacePlayer.id = "BitmovinYospacePlayer"
+  m.top.appendChild(m.bitmovinYospacePlayer)
+  m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
 end sub
 
 function onPlayerReady()
@@ -35,7 +22,7 @@ function onPlayerReady()
     params = {
       config : m.playerConfig,
       yospaceConfig : {
-        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.TRACE
+        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.INFO
       }
     }
 

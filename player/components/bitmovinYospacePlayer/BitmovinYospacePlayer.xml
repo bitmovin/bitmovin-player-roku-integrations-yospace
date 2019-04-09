@@ -7,13 +7,7 @@
 
     <field id="isPlayerReady" type="boolean" value="false" />
     <field id="DebugVerbosityEnum" type="assocarray" />
-    <!-- Ad specific fields -->
-    <field id="adBreakStarted" type="string" alwaysNotify="true" />
-    <field id="adBreakFinished" type="string" alwaysNotify="true" />
-    <field id="adFinished" type="string" alwaysNotify="true" />
-    <field id="adQuartile" type="integer" alwaysNotify="true" />
-    <field id="adSkipped" type="string" alwaysNotify="true" />
-    <field id="adStarted" type="string" alwaysNotify="true" />
+
     <!-- Bitmovin Fields -->
     <field id="currentTime" type="float" alwaysNotify="true" />
     <field id="error" type="assocarray" alwaysNotify="true" />
@@ -26,6 +20,15 @@
     <field id="timeShift" type="float" alwaysNotify="true" />
     <field id="timeShifted" type="float" alwaysNotify="true" />
     <field id="warning" type="assocarray" alwaysNotify="true" />
+
+    <!-- Ad specific fields -->
+    <field id="adBreakStarted" type="string" alwaysNotify="true" />
+    <field id="adBreakFinished" type="string" alwaysNotify="true" />
+    <field id="adFinished" type="string" alwaysNotify="true" />
+    <field id="adQuartile" type="integer" alwaysNotify="true" />
+    <field id="adSkipped" type="string" alwaysNotify="true" />
+    <field id="adStarted" type="string" alwaysNotify="true" />
+
     <!-- Bitmovin Functions -->
     <function name="availableAudio" />
     <function name="availableSubtitles" />
@@ -51,6 +54,7 @@
     <function name="timeShift" />
     <function name="unload" />
     <function name="unmute" />
+
     <!-- Ad specific functions -->
     <function name="ad_getActiveAd" />
     <function name="ad_getActiveAdBreak" />
@@ -65,6 +69,7 @@
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/YospaceCallbacks.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
+
   <!-- Yospace - server-side-ad-insertion -->
   <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/AdBreak.brs" />
   <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/Extension.brs" />

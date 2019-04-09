@@ -49,6 +49,7 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFTED, "onTimeShifted")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_LOADED, "onSourceLoaded")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_UNLOADED, "onSourceUnloaded")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAY, "onPlay")
 
     m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
@@ -108,6 +109,10 @@ end sub
 
 sub onSourceUnloaded()
   m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
+end sub
+
+sub onPlay()
+  m.top.play = m.bitmovinPlayer.play
 end sub
 
 ' ---------------------------- bitmovin player api function ----------------------------

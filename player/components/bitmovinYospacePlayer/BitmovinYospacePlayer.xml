@@ -61,6 +61,7 @@
     <field id="timeShifted" type="float" alwaysNotify="true" />
     <field id="sourceLoaded" type="boolean" alwaysNotify="true" />
     <field id="sourceUnloaded" type="boolean" alwaysNotify="true" />
+    <field id="play" type="boolean" alwaysNotify="true" />
   </interface>
 
   <!-- Yospace - server-side-ad-insertion -->

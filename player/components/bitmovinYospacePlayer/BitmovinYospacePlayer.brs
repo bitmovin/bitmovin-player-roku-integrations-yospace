@@ -92,7 +92,7 @@ sub onPlayerStateChanged()
 end sub
 
 sub onCurrentTimeChanged()
-  m.top.currentTime = m.bitmovinPlayer.currentTime
+  m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
 end sub
 
 sub onTimeShift()

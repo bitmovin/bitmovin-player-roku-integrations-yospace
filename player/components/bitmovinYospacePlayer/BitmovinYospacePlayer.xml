@@ -33,6 +33,9 @@
     <function name="availableAudio" />
     <function name="getAudio" />
     <function name="setAudio" />
+    <function name="timeShift" />
+    <function name="getTimeShift" />
+    <function name="getMaxTimeShift" />
 
     <function name="ad_skip" />
     <function name="ad_list" />
@@ -54,6 +57,8 @@
     <field id="seek" type="boolean" alwaysNotify="true" />
     <field id="seeked" type="float" alwaysNotify="true" />
     <field id="currentTime" type="float" alwaysNotify="true" />
+    <field id="timeShift" type="float" alwaysNotify="true" />
+    <field id="timeShifted" type="float" alwaysNotify="true" />
   </interface>
 
   <!-- Yospace - server-side-ad-insertion -->

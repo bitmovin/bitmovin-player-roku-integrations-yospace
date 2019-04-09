@@ -45,6 +45,8 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFT, "onTimeShift")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFTED, "onTimeShifted")
 
     m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
@@ -88,6 +90,14 @@ end sub
 
 sub onCurrentTimeChanged()
   m.top.currentTime = m.bitmovinPlayer.currentTime
+end sub
+
+sub onTimeShift()
+  m.top.timeShift = m.bitmovinplayer.timeShift
+end sub
+
+sub onTimeShifted()
+  m.top.timeShifted = m.bitmovinplayer.timeShifted
 end sub
 
 ' ---------------------------- bitmovin player api function ----------------------------
@@ -207,6 +217,18 @@ end function
 sub setAudio(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
 end sub
+
+sub timeShift(offset)
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.TIME_SHIFT, offset)
+end sub
+
+function getTimeShift()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_TIME_SHIFT)
+end function
+
+function getMaxTimeShift()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_MAX_TIME_SHIFT)
+end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()

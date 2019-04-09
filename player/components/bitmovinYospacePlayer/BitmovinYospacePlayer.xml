@@ -36,6 +36,7 @@
     <function name="timeShift" />
     <function name="getTimeShift" />
     <function name="getMaxTimeShift" />
+    <function name="isLive" />
 
     <function name="ad_skip" />
     <function name="ad_list" />

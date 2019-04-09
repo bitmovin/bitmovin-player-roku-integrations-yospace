@@ -245,6 +245,10 @@ function getMaxTimeShift()
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_MAX_TIME_SHIFT)
 end function
 
+function isLive()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE)
+end function
+
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
   if isAdActive()

@@ -1,46 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="BitmovinYospacePlayer" extends="Group">
-  <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/DefaultBitmovinYospacePlayerPolicy.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/YospaceCallbacks.brs" />
   <interface>
-    <field id="BitmovinPlayerState" type="assocarray" />
-    <field id="BitmovinFunctions" type="assocarray" />
     <field id="BitmovinFields" type="assocarray" />
+    <field id="BitmovinFunctions" type="assocarray" />
+    <field id="BitmovinPlayerState" type="assocarray" />
 
-    <field id="isPlayerReady" type="boolean" value="false" />
     <field id="DebugVerbosityEnum" type="assocarray" />
+    <field id="isPlayerReady" type="boolean" value="false" />
 
-    <function name="setup" />
-    <function name="play" />
-    <function name="pause" />
-    <function name="unload" />
-    <function name="preload" />
-    <function name="seek" />
-    <function name="load" />
-    <function name="mute" />
-    <function name="unmute" />
-    <function name="isMuted" />
-    <function name="captionMode" />
-    <function name="isPlaying" />
-    <function name="isPaused" />
-    <function name="isStalled" />
-    <function name="availableSubtitles" />
-    <function name="getSubtitle" />
-    <function name="setSubtitle" />
-    <function name="availableAudio" />
-    <function name="getAudio" />
-    <function name="setAudio" />
+    <!-- Bitmovin Fields -->
+    <field id="currentTime" type="float" alwaysNotify="true" />
+    <field id="error" type="assocarray" alwaysNotify="true" />
+    <field id="play" type="boolean" alwaysNotify="true" />
+    <field id="playerState" type="string" value="" />
+    <field id="seek" type="boolean" alwaysNotify="true" />
+    <field id="seeked" type="float" alwaysNotify="true" />
+    <field id="sourceLoaded" type="boolean" alwaysNotify="true" />
+    <field id="sourceUnloaded" type="boolean" alwaysNotify="true" />
+    <field id="timeShift" type="float" alwaysNotify="true" />
+    <field id="timeShifted" type="float" alwaysNotify="true" />
+    <field id="warning" type="assocarray" alwaysNotify="true" />
 
-    <function name="ad_skip" />
-    <function name="ad_list" />
-    <function name="ad_getActiveAdBreak" />
-    <function name="ad_getActiveAd" />
-    <function name="setPolicy" />
-    <function name="isKeyPressValid" />
-
+    <!-- Ad specific fields -->
     <field id="adBreakStarted" type="string" alwaysNotify="true" />
     <field id="adBreakFinished" type="string" alwaysNotify="true" />
     <field id="adFinished" type="string" alwaysNotify="true" />
@@ -48,37 +29,73 @@
     <field id="adSkipped" type="string" alwaysNotify="true" />
     <field id="adStarted" type="string" alwaysNotify="true" />
 
-    <field id="playerState" type="string" value="" />
-    <field id="error" type="assocarray" alwaysNotify="true" />
-    <field id="warning" type="assocarray" alwaysNotify="true" />
-    <field id="seek" type="boolean" alwaysNotify="true" />
-    <field id="seeked" type="float" alwaysNotify="true" />
+    <!-- Bitmovin Functions -->
+    <function name="availableAudio" />
+    <function name="availableSubtitles" />
+    <function name="captionMode" />
+    <function name="getAudio" />
+    <function name="getConfig" />
+    <function name="getMaxTimeShift" />
+    <function name="getSubtitle" />
+    <function name="getTimeShift" />
+    <function name="isLive" />
+    <function name="isMuted" />
+    <function name="isPaused" />
+    <function name="isPlaying" />
+    <function name="isStalled" />
+    <function name="load" />
+    <function name="mute" />
+    <function name="pause" />
+    <function name="play" />
+    <function name="preload" />
+    <function name="seek" />
+    <function name="setAudio" />
+    <function name="setSubtitle" />
+    <function name="setup" />
+    <function name="timeShift" />
+    <function name="unload" />
+    <function name="unmute" />
+
+    <!-- Ad specific functions -->
+    <function name="ad_getActiveAd" />
+    <function name="ad_getActiveAdBreak" />
+    <function name="ad_list" />
+    <function name="ad_skip" />
+    <function name="setPolicy" />
+    <function name="isKeyPressValid" />
   </interface>
 
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/DefaultBitmovinYospacePlayerPolicy.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/YospaceCallbacks.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
+
   <!-- Yospace - server-side-ad-insertion -->
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YSDebugLog.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/rtGeneral.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YSTimer.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YSURL.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YORokuTasks.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/Tracking.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/Extension.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/VASTCreative.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/VASTLinear.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/VASTNonLinear.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/VastAd.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/VastAds.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Core/AdBreak.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Parsers/ParseVMAP.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Parsers/ParsePlaylist.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Parsers/ParseVAST.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Utils/YOPoller.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSSession.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSVoDSession.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSLiveSession.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSPlayerEvents.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSSessionmanager.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSAdBreak.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSAdvert.brs" />
-  <script type = "text/brightscript" uri = "pkg:/source/AdManagement/Public/YSTimeline.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/AdBreak.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/Extension.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/Tracking.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/VastAd.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/VastAds.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/VASTCreative.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/VASTLinear.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Core/VASTNonLinear.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Parsers/ParsePlaylist.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Parsers/ParseVAST.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Parsers/ParseVMAP.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSAdBreak.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSAdvert.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSLiveSession.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSPlayerEvents.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSSession.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSSessionmanager.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSTimeline.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Public/YSVoDSession.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Utils/rtGeneral.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Utils/YOPoller.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Utils/YORokuTasks.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Utils/YSDebugLog.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Utils/YSTimer.brs" />
+  <script type="text/brightscript" uri="pkg:/source/AdManagement/Utils/YSURL.brs" />
 </component>

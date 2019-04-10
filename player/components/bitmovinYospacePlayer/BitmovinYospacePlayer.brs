@@ -44,6 +44,12 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEK, "onSeek")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFT, "onTimeShift")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFTED, "onTimeShifted")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_LOADED, "onSourceLoaded")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_UNLOADED, "onSourceUnloaded")
+    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAY, "onPlay")
 
     m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
@@ -63,12 +69,12 @@ end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
-  m.policyHelper_seekStartPosition = getPlayerPosition()
+  m.policyHelper_seekStartPosition = m.BitmovinPlayer.currentTime
 end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
-  currentPlayerPosition = getPlayerPosition()
+  currentPlayerPosition = m.BitmovinPlayer.currentTime
   ' Since there is no way of stopping the default UI and its build in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
@@ -83,6 +89,30 @@ end sub
 
 sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
+end sub
+
+sub onCurrentTimeChanged()
+  m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
+end sub
+
+sub onTimeShift()
+  m.top.timeShift = m.bitmovinplayer.timeShift
+end sub
+
+sub onTimeShifted()
+  m.top.timeShifted = m.bitmovinplayer.timeShifted
+end sub
+
+sub onSourceLoaded()
+  m.top.sourceLoaded = m.bitmovinPlayer.sourceLoaded
+end sub
+
+sub onSourceUnloaded()
+  m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
+end sub
+
+sub onPlay()
+  m.top.play = m.bitmovinPlayer.play
 end sub
 
 ' ---------------------------- bitmovin player api function ----------------------------
@@ -124,7 +154,7 @@ end sub
 sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params)
-    if seekDestination <> params then m.policyHelper_originalSeekDestination = getPlayerPosition()
+    if seekDestination <> params then m.policyHelper_originalSeekDestination = m.BitmovinPlayer.currentTime
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
 end sub
@@ -202,6 +232,26 @@ end function
 sub setAudio(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_AUDIO, params)
 end sub
+
+sub timeShift(offset)
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.TIME_SHIFT, offset)
+end sub
+
+function getTimeShift()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_TIME_SHIFT)
+end function
+
+function getMaxTimeShift()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_MAX_TIME_SHIFT)
+end function
+
+function isLive()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE)
+end function
+
+function getConfig()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_CONFIG)
+end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
@@ -290,7 +340,7 @@ sub onVideoPlaybackState()
 end sub
 
 sub onVideoPosition()
-  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, getPlayerPosition())
+  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.BitmovinPlayer.currentTime)
 end sub
 
 sub onTimedMetaData()
@@ -315,10 +365,6 @@ sub requestYospaceURL(source)
 end sub
 
 ' ---------------------------- util functions ----------------------------
-function getPlayerPosition() as Float
-  return m.bitmovinPlayer.findNode("MainVideo").position
-end function
-
 function getCurrentAd()
   return m.session.GetSession().GetCurrentAdvert()
 end function

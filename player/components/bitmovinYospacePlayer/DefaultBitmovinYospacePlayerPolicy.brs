@@ -9,7 +9,7 @@ function getDefaultBitmovinYospacePlayerPolicy()
         return getCurrentAd() = invalid
       :end function,
 
-    canSeekTo: function(seekTarget as Float, currentTime = getPlayerPosition() as Float) as Float:
+    canSeekTo: function(seekTarget as Float, currentTime = m.BitmovinPlayer.currentTime as Float) as Float:
         adBreaks = ad_list()
         skippedAdBreaks = []
         for each adBrk in adBreaks
@@ -27,7 +27,7 @@ function getDefaultBitmovinYospacePlayerPolicy()
     canSkip: function() as Float:
         ad = getCurrentAd()
         if ad <> invalid
-          currentTime = getPlayerPosition()
+          currentTime = m.BitmovinPlayer.currentTime
           if ad.GetAdvert().GetLinear().GetSkipOffset() < 0
             return -1
           end if

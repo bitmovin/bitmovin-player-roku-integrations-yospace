@@ -6,11 +6,11 @@
 
 '* The YSSessionManager class represents a session within the CSM and provides
 '* an interface to the Ad Management SDK
-'*
+'* 
 '* @class YSSessionManager
 '* @constructor
 function YSSessionManager() as Object
-    ' Class definition
+    ' Class definition    
     this = MakeClass("YSSessionManager", {
         properties: {
             session: {
@@ -29,62 +29,62 @@ function YSSessionManager() as Object
                 "GetProperties": function() as Dynamic : return m._data.properties : end function
             }
         },
-
+    
         methods: {
             '* Read version string of SDK
-            '*
+            '* 
             '* @method  GetVersion
             '* @return  roString    Version details as a string
             "GetVersion":           ys_yssm_getversion,
-
+            
             '* Helper function to override default property values with supplied ones. Only
             '* existing keys in the default object will be overwritten.
-            '*
+            '* 
             '* @method  MergeProperties
             '* @param   roAssociativeArray  custom  New properties which override defaults
             '* @param   roAssociativeArray  dflt    Default properties (which will be overriden)
             "MergeProperties":      ys_yssm_mergeproperties,
-
+            
             '* <p>Creates a YSSessionManager object, providing a URL to play a NonLinear video stream.</p>
-            '*
-            '* <p>Starts to create and initialise the Session Manager, passing a stream URL, a
-            '* session-initialisation property object and a delegate to receive initialisation
-            '* callbacks. The client can also pass in an arbitrary set of parameters to be sent
+            '* 
+            '* <p>Starts to create and initialise the Session Manager, passing a stream URL, a 
+            '* session-initialisation property object and a delegate to receive initialisation 
+            '* callbacks. The client can also pass in an arbitrary set of parameters to be sent 
             '* in the request.</p>
-            '*
-            '* <p>When the YSSessionManager completes initialisation a delegate call is invoked to
+            '* 
+            '* <p>When the YSSessionManager completes initialisation a delegate call is invoked to 
             '* indicate that the session was constructed (and whether this was successfully or not).</p>
-            '*
+            '* 
             '* @method  CreateForNonLinear
             '* @param   roString            url     URL to the Yospace CSM
             '* @param   roAssociativeArray  props   An initialisation properties object
             "CreateForNonLinear":   ys_yssm_createnonlinear,
 
             '* <p>Creates a YSSessionManager object, providing a URL to play a VOD video stream.</p>
-            '*
-            '* <p>Starts to create and initialise the Session Manager, passing a stream URL, a
-            '* session-initialisation property object and a delegate to receive initialisation
-            '* callbacks. The client can also pass in an arbitrary set of parameters to be sent
+            '* 
+            '* <p>Starts to create and initialise the Session Manager, passing a stream URL, a 
+            '* session-initialisation property object and a delegate to receive initialisation 
+            '* callbacks. The client can also pass in an arbitrary set of parameters to be sent 
             '* in the request.</p>
-            '*
-            '* <p>When the YSSessionManager completes initialisation a delegate call is invoked to
+            '* 
+            '* <p>When the YSSessionManager completes initialisation a delegate call is invoked to 
             '* indicate that the session was constructed (and whether this was successfully or not).</p>
-            '*
+            '* 
             '* @method  CreateForVOD
             '* @param   roString            url     URL to the Yospace CSM
             '* @param   roAssociativeArray  props   An initialisation properties object
             "CreateForVOD":         ys_yssm_createvod,
-
+            
             '* <p>Creates a YSSessionManager object, providing a URL to play a Live video stream.</p>
-            '*
-            '* <p>Starts to create and initialise the Session Manager, passing a stream URL, a
-            '* session-initialisation property object and a delegate to receive initialisation
-            '* callbacks. The client can also pass in an arbitrary set of parameters to be sent
+            '* 
+            '* <p>Starts to create and initialise the Session Manager, passing a stream URL, a 
+            '* session-initialisation property object and a delegate to receive initialisation 
+            '* callbacks. The client can also pass in an arbitrary set of parameters to be sent 
             '* in the request.</p>
-            '*
-            '* <p>When the YSSessionManager completes initialisation a delegate call is invoked to
+            '* 
+            '* <p>When the YSSessionManager completes initialisation a delegate call is invoked to 
             '* indicate that the session was constructed (and whether this was successfully or not).</p>
-            '*
+            '* 
             '* @method  CreateForLive
             '* @param   roString            url     URL to the Yospace CSM
             '* @param   roAssociativeArray  props   An initialisation properties object
@@ -92,19 +92,19 @@ function YSSessionManager() as Object
 
             '* <p>Helper function which is called when the session has been started. This will notify
             '* the caller that everything is ready, and set up the analytics polling.</p>
-            '*
+            '* 
             '* @event sessionConstructed
             '* @param {Boolean} success Indicates whether the session was started successfully
             "SessionConstructed":   ys_yssm_sessionconstructed,
-
+            
             '* <p>A helper function used by the SessionManager to process the analytics responses
             '* delivered as a result of the poller triggering new requests to the CSM.</p>
-            '*
+            '* 
             '* @event onAnalytics
             '* @param {Boolean} success Indicates whether the analytics request was successful
             '* @param {Document|*} response Response from the request, or reason for failure
             "OnAnalytics":          ys_yssm_onanalytics,
-
+            
             '* @method  ReportPlayerEvent
             '* @param   roString            evt     Event identifier (see YSPlayerEvents constants)
             '* @param   roAssociativeArray  data    Data associated with the event. The content of this parameter
@@ -113,7 +113,7 @@ function YSSessionManager() as Object
 
             '* <p>Helper function used by the session manager to invoke tracking calls
             '* if the player is currently within an advert break.</p>
-            '*
+            '* 
             '* @method  InvokeTracking
             '* @param   roString    what        Identifier of tracking point to be fired
             '* @param   roBoolean   linearOnly  Whether the tracking applies only to linear adverts
@@ -124,7 +124,7 @@ function YSSessionManager() as Object
 
             '* Registers a player object which contains a set of standard callback functions
             '* which are invoked when the SessionManager wants to interact with the player.
-            '*
+            '* 
             '* @method registerPlayer
             '* @param {Object} cb_obj Callback object containing the required functions.
             '* @example
@@ -149,10 +149,10 @@ function YSSessionManager() as Object
             '*            var idx = 0; // This will hold the non-Linear Index
             '*            for (var i = 0; i < nonLinears.length; i++) {
             '*                var item = nonLinears[i];
-            '*
+            '*                 
             '*                // This item now needs to be added as a non-linear to the display.
             '*                var imgs = item.getAllResources()['images'];
-            '*
+            '*                   
             '*                // imgs will now contain an object whose properties are the mime type of
             '*                // available images and the values the urls of the images.
             '*                for (var j in imgs) {
@@ -189,7 +189,7 @@ function YSSessionManager() as Object
             "PingTimer":            ys_yssm_pingtimer,
 
             '* Obtain the master playlist URL from the session
-            '*
+            '* 
             '* @method  GetMasterPlaylist
             '* @return  roString    URL to the master playlist
             "GetMasterPlaylist":    ys_yssm_getmasterplaylist,
@@ -203,7 +203,7 @@ function YSSessionManager() as Object
             '* Obtain the playback timeline contained in the session. Once the session has
             '* been initialized, it will have a timeline. The timeline may be updated as new
             '* analytics information is fetched during playback.
-            '*
+            '* 
             '* @method  GetTimeline
             '* @return  YSTimeline      Instance of the Timeline object contained within the session
             "GetTimeline":          ys_yssm_gettimeline,
@@ -229,7 +229,7 @@ function YSSessionManager() as Object
     ' Construct Polling Timer and Internet Task Manager
     GetGlobalAA().timer = YSTimer()
     GetGlobalAA().taskman = YORokuTasks()
-
+        
     return this
 end function
 
@@ -262,7 +262,7 @@ end sub
 
 ' GetVersion
 function ys_yssm_getversion() as String
-    return "1.4-0 / ROKU"
+    return "1.4-3 / ROKU"
 end function
 
 ' MergeProperties
@@ -282,11 +282,11 @@ end sub
 ' CreateForNonLinear
 sub ys_yssm_createnonlinear(url as String, props = invalid as Dynamic, cb = invalid as Dynamic)
     YO_TRACE("Creating for NonLinear: {0}", url)
-
+        
     if (props <> invalid) then
         m.MergeProperties(props, m.GetProperties())
     end if
-
+    
     ' Build session
     m._data.listener = cb
 
@@ -300,11 +300,11 @@ end sub
 ' CreateForVOD
 sub ys_yssm_createvod(url as String, props = invalid as Dynamic, cb = invalid as Dynamic)
     YO_TRACE("Creating for VOD: {0}", url)
-
+        
     if (props <> invalid) then
         m.MergeProperties(props, m.GetProperties())
     end if
-
+    
     ' Build session
     m._data.listener = cb
 
@@ -318,11 +318,11 @@ end sub
 ' CreateForLive
 sub ys_yssm_createlive(url as String, props = invalid as Dynamic, cb = invalid as Dynamic)
     YO_TRACE("Creating for Live: {0}", url)
-
+        
     if (props <> invalid) then
         m.MergeProperties(props, m.GetProperties())
     end if
-
+    
     ' Build session
     m._data.listener = cb
 
@@ -336,7 +336,7 @@ end sub
 ' SessionConstructed
 sub ys_yssm_sessionconstructed(response as Dynamic)
     YO_TRACE("Session constructed. Result: {0}, Status: {1}, Code: {2}", response.result, response.status, response.code)
-
+    
     ' Sanity check first!
     if (m.GetSession() = invalid) then
         YO_WARN("Session was constructed, but has now gone away?")
@@ -348,11 +348,11 @@ sub ys_yssm_sessionconstructed(response as Dynamic)
         if (len(m.GetSession().GetAnalyticsURL()) > 0) then
             m._data.poller = YOPoller()
         end if
-
+        
         m._data._pingCB = function(what)
             what.GetSession().PingAnalytics(yo_Callback("OnAnalytics", what))
         end function
-
+    
         if (m.GetSession()._CLASSNAME <> "YSLivePauseSession") then
             YO_DEBUG("Initial ping analytics")
             m._data._pingCB(m)
@@ -368,7 +368,7 @@ sub ys_yssm_sessionconstructed(response as Dynamic)
         end if
     end if
 end sub
-
+ 
 ' OnAnalytics
 sub ys_yssm_onanalytics(response as Dynamic)
     ' Take the opportunity to ping the timer
@@ -382,7 +382,7 @@ sub ys_yssm_onanalytics(response as Dynamic)
 
     ' // TODO: Fix up the response handling to add success
     m.GetSession().ProcessAnalytics(response)
-
+    
     ' TODO: Should this start polling before receiving a start event callback?
     m.GetPoller().StartPolling(m, m._data._pingCB)
 end sub
@@ -397,14 +397,14 @@ sub ys_yssm_reportplayerevent(evt as String, data = invalid as Dynamic)
         YO_WARN("Ignoring reported event as there is no session: {0}", evt)
         return
     end if
-
+    
     stoppoll    = false
     startpoll   = false
-
+    
     if (evt <> YSPlayerEvents().POSITION) then
         YO_TRACE("Event reported: {0}", evt)
     end if
-
+    
     if (evt = YSPlayerEvents().FULLSCREEN) then
         if (box(data) = true) then
             m.InvokeTracking("fullscreen", false)
@@ -426,7 +426,7 @@ sub ys_yssm_reportplayerevent(evt as String, data = invalid as Dynamic)
             _targets = m.GetSession().GetCurrentAdvert().GetAdvert().GetNonLinears()
             if ((_targets <> invalid) and (_targets.Count() > data)) then
                 _target = _targets[data].GetClickThrough()
-
+                
                 YO_DEBUG(" <<>> Should open: {0}", _target)
                 m.GetSession().ReportNonLinearEvent(data, "click")
             end if
@@ -444,12 +444,12 @@ sub ys_yssm_reportplayerevent(evt as String, data = invalid as Dynamic)
 
             ' // TODO: Add YSLivePausePession handling
         end if
-
+        
         if (m.GetSession().IsInAnAdvert()) then
             m.GetSession().GetCurrentAdvert().AdPaused()
             m.GetSession().StopBreakEndTimer()
         end if
-
+        
         stoppoll = true
     else if (evt = YSPlayerEvents().END) then
         stoppoll = true
@@ -488,7 +488,7 @@ sub ys_yssm_reportplayerevent(evt as String, data = invalid as Dynamic)
             YO_WARN("Non-Linear event could not be fired as parameters 'which' or 'event' are missing")
         end if
     end if
-
+    
     if (stoppoll = true) then
         if (m.GetPoller() <> invalid) then
             YO_DEBUG("Stopping the poller")
@@ -497,8 +497,8 @@ sub ys_yssm_reportplayerevent(evt as String, data = invalid as Dynamic)
 
         m.GetSession().StopBreakEndTimer()
         m.GetSession()._data.isplaying = false
-    end if
-
+    end if    
+    
     if (startpoll = true) then
         if (m.GetPoller() <> invalid) then
             YO_DEBUG("Restarting the poller")
@@ -510,12 +510,12 @@ sub ys_yssm_reportplayerevent(evt as String, data = invalid as Dynamic)
 end sub
 
 ' InvokeTracking
-sub ys_yssm_invoketracking(what as String, linearOnly as Boolean, _duration = 0.0 as Double)
+sub ys_yssm_invoketracking(what as String, linearOnly as Boolean, _duration = 0.0 as Double) 
     ' We will use this opportunity to ping the timer
     tim = GetGlobalAA().timer
     tim.Ping()
 
-    ' Only need to track if we are actually in an advert!
+    ' Only need to track if we are actually in an advert!    
     if ((m.GetSession().IsInAnAdvert()) and (m.GetSession().GetCurrentAdvert().GetAdvert() <> invalid)) then
         m.GetSession().GetCurrentAdvert().InvokeTracking(what, linearOnly, _duration)
 

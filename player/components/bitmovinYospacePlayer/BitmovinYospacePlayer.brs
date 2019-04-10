@@ -1,7 +1,7 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
-  m.ADVERT$ = "ADVERT"
+  m.TIMELINE_ENTRY_TYPE_ADVERT = "ADVERT"
 
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.policyHelper_seekStartPosition = -1
@@ -92,7 +92,7 @@ sub onPlayerStateChanged()
 end sub
 
 sub onCurrentTimeChanged()
-  m.top.currentTime = m.bitmovinPlayer.currentTime
+  m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
 end sub
 
 sub onTimeShift()
@@ -249,6 +249,10 @@ function isLive()
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE)
 end function
 
+function getConfig()
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_CONFIG)
+end function
+
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
   if isAdActive()
@@ -268,7 +272,7 @@ function ad_list()
   if timeline <> invalid
     timelineElements = timeline.GetAllElements()
     for each tlElement in timelineElements
-      if tlElement.getType() = m.ADVERT$
+      if tlElement.getType() = m.TIMELINE_ENTRY_TYPE_ADVERT
         advertElements.push(tlElement)
       end if
     end for
@@ -340,25 +344,13 @@ sub onVideoPosition()
 end sub
 
 sub onTimedMetaData()
-  id3 = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
-  if (yo_IsNotNull(id3)) then
-    id3obj = {}
-    if (id3.Count() = 6) then
-      for each i in id3
-        if (len(i) = 4) then
-          hex = id3[i]
-          parsed = ""
-          for j = 3 to len(hex) step 2
-            pair = mid(hex, j, 2)
-            parsed = parsed + chr(val(pair, 16))
-          end for
-          YO_DEBUG("Decoded ID3 tag: {0} as {1}", i, parsed)
-          id3obj[i] = parsed
-        end if
-      end for
-      m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, id3obj)
-    end if
+  metaData = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
+  if metaData.Source = "emsg" then metaData = mapEmsgMetaData(metaData) else metaData = mapID3MetaData(metaData)
+  if metaData = invalid or metaData.Count() = 0
+    print "Recieved meta data was invalid, not reporting to Yospace"
+    return
   end if
+  m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, metaData)
 end sub
 
 ' ---------------------------- yospace api call ----------------------------
@@ -380,7 +372,7 @@ end function
 function toMagicTime(playbackTime)
   mTime = playBackTime
   for each timelineElement in m.session.GetTimeline().GetAllElements()
-    if timelineElement.GetType() = m.ADVERT$
+    if timelineElement.GetType() = m.TIMELINE_ENTRY_TYPE_ADVERT
       if (timelineElement.GetOffset() + timelineElement.GetDuration()) < playbackTime
         mTime -= timelineElement.GetDuration()
       else if (playBackTime > timelineElement.GetOffset()) and (playBackTime < (timelineElement.GetOffset() + timelineElement.GetDuration()))

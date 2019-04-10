@@ -325,7 +325,7 @@ function VASTAd(parent as Dynamic, elem as Dynamic) as object
         
         ' Extract Extensions
         this._data.extensions = []
-        exts = elem.GetNamedElements("Extensions")
+        exts = inline.GetNamedElements("Extensions")
         if exts.Count() > 0 then
             YO_DEBUG("VASTAd: Found Extensions. Count: {0}", exts.Count())
 
@@ -342,6 +342,7 @@ function VASTAd(parent as Dynamic, elem as Dynamic) as object
                             lineage = invalid
 
                             while ((nextNode <> invalid) and (nextNode.Count() > 0))
+                                nextNode = nextNode[0]
                                 if (nextNode.GetName() = "AdWrapper") then
                                     lin_id = nextNode.GetAttributes().id
                                     lin_cid = nextNode.GetAttributes().creativeId
@@ -350,7 +351,7 @@ function VASTAd(parent as Dynamic, elem as Dynamic) as object
                                     YO_DEBUG("VASTAd: Detected Hierarchy: {0} / {1} / {2}", lin_id, lin_cid, lin_adsys)
                                     lineNode = AdvertWrapper(lin_id, lin_cid, lin_adsys)
                                     if (lineage = invalid) then
-                                        m._data.advertlineage = lineNode
+                                        this._data.advertlineage = lineNode
                                     else
                                         lineage.SetChild(lineNode)
                                     end if
@@ -429,18 +430,18 @@ end function
 '*
 '* @class AdvertWrapper
 '* @constructor
-'* @param roString  id          ID attribute
-'* @param roString  creative    Creative ID attribute
-'* @param roString  system      AdSystem attribute
+'* @param Dynamic  id          ID attribute
+'* @param Dynamic  creative    Creative ID attribute
+'* @param Dynamic  system      AdSystem attribute
 '*
-function AdvertWrapper(id as String, creative as String, system as String) as object
+function AdvertWrapper(id as Dynamic, creative as Dynamic, system as Dynamic) as object
     ' Class definition   
     this = MakeClass("AdvertWrapper", {
         properties: {
             '* ID of this wrapper element
             '*
             '* @property    adid
-            '* @type        String
+            '* @type        Dynamic
             '* @get         GetAdId
             adid: {
                 "GetAdId": function() as Dynamic : return m._data.adid : end function
@@ -449,7 +450,7 @@ function AdvertWrapper(id as String, creative as String, system as String) as ob
             '* ID of the creative in the wrapper
             '*
             '* @property    creativeid
-            '* @type        String
+            '* @type        Dynamic
             '* @get         GetCreativeId
             creativeid: {
                 "GetCreativeId": function() as Dynamic : return m._data.creativeid : end function
@@ -458,7 +459,7 @@ function AdvertWrapper(id as String, creative as String, system as String) as ob
             '* AdSystem of this wrapper element
             '*
             '* @property    adsystem
-            '* @type        String
+            '* @type        Dynamic
             '* @get         GetAdSystem
             adsystem: {
                 "GetAdSystem": function() as Dynamic : return m._data.adsystem : end function

@@ -4,9 +4,9 @@
     <field id="BitmovinFields" type="assocarray" />
     <field id="BitmovinFunctions" type="assocarray" />
     <field id="BitmovinPlayerState" type="assocarray" />
-
-    <field id="isPlayerReady" type="boolean" value="false" />
+    
     <field id="DebugVerbosityEnum" type="assocarray" />
+    <field id="isPlayerReady" type="boolean" value="false" />
 
     <!-- Bitmovin Fields -->
     <field id="currentTime" type="float" alwaysNotify="true" />
@@ -34,6 +34,7 @@
     <function name="availableSubtitles" />
     <function name="captionMode" />
     <function name="getAudio" />
+    <function name="getConfig" />
     <function name="getMaxTimeShift" />
     <function name="getSubtitle" />
     <function name="getTimeShift" />
@@ -67,7 +68,8 @@
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/YospaceCallbacks.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />  
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
 
   <!-- Yospace - server-side-ad-insertion -->

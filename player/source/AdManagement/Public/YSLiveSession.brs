@@ -118,7 +118,9 @@ function YSLiveSession(mgr as Dynamic, source as Dynamic, cb = invalid as Dynami
             '* 
             '* @method  HaveMoreAds
             '* @return Boolean true if there are more ads, otherwise false
-            "HaveMoreAds":          ys_ysls_havemoreads
+            "HaveMoreAds":          ys_ysls_havemoreads,
+            
+            "ProcessCachedMetadata": ys_ysls_processcachedmeta
         }
     }, YSSession(invalid, invalid))
 
@@ -238,7 +240,7 @@ sub ys_ysls_processanalytics(response as Dynamic)
         end if
 
         if (m._data.deferred) then
-            ys_ysls_processcachedmeta()
+            m.ProcessCachedMetadata()
         end if
 
     else
@@ -285,7 +287,7 @@ sub ys_ysls_processanalytics(response as Dynamic)
         end if
 
         if (m._data.deferred) then
-            ys_ysls_processcachedmeta()
+            m.ProcessCachedMetadata()
         end if
     end if
 
@@ -443,9 +445,9 @@ sub ys_ysls_handlemetadata(data as Dynamic)
 
                     if (m._data.currentbreak = invalid) then
                         YO_WARN("Could not find break")
-                    else                    
-                        m.HandleBreakStart(m._data.currentbreak)
                     end if
+
+                    m.HandleBreakStart(m._data.currentbreak)
                 else
                     m.StopBreakEndTimer()
                     m.StartBreakEndTimer()

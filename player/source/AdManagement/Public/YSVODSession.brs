@@ -5,7 +5,7 @@
 '-----------------------------------------------------------------------------------------------------------
 
 '* The YSVoDSession class is the derived class type for
-'* a non-linear start-over or VoD Session type. The main identifying feature 
+'* a non-linear start-over or VoD Session type. The main identifying feature
 '* of this type of session is that the initial load is of a VMAP XML document
 '* with subsequent Analytics calls (where appropriate) made to a VMAP
 '* producing end-point.
@@ -21,11 +21,11 @@ function YSVODSession(mgr as Dynamic, source as String, cb = invalid as Dynamic,
     ' Hack to force parent to be created first
     'YSSession(invalid, invalid)
 
-    ' Class definition 
+    ' Class definition
     this = MakeSubClass("YSVODSession", {
         properties: {
             '* Loader class used for parsing VMAP
-            '* 
+            '*
             '* @property    loader
             '* @type        VMAPParser
             '* @get         GetLoader
@@ -33,31 +33,31 @@ function YSVODSession(mgr as Dynamic, source as String, cb = invalid as Dynamic,
                 "GetLoader": function() as Dynamic : return m._data.loader : end function
             }
         },
-    
+
         methods: {
             '* This is a helper method which is used to initiate the loading of the initial
             '* VMAP response from the server. Only once this has been done can the session
             '* be truly created.
-            '* 
+            '*
             '* @method grabVMAP
             "GrabVMAP":             ys_ysvs_grabvmap,
-            
+
             '* This helper is called once the VMAP response has been loaded and parsed
             '* and continues the initialization process by starting the session "proper".
-            '* 
+            '*
             '* @event   onVMAPSuccess
             '* @param   roArray of AdBreak  breaks  Array of advert breaks obtained from the VMAP
             "OnVMAPSuccess":        ys_ysvs_onvmapsuccess,
 
             '* This helper is called if the VMAP response failes to load/parse
-            '* 
+            '*
             '* @event   OnVMAPFailure
             '* @param   roString    Reason for failure
             "OnVMAPFailure":        ys_ysvs_onvmapfailure,
 
             '* <p>Helper function used for rebuilding the playback timeline structure following an analytics
             '* response. This allows new elements to be added when new adverts are received.</p>
-            '* 
+            '*
             '* @method  RebuildTimeline
             '* @param   roArray of AdBreak  breaks  Array of advert breaks
             "RebuildTimeline":      ys_ysvs_rebuildtimeline,
@@ -66,30 +66,30 @@ function YSVODSession(mgr as Dynamic, source as String, cb = invalid as Dynamic,
 
             '* <p>Called by the SessionManager when it receives a response to an analytics request.
             '* This causes the response to be parsed and handled accordingly.</p>
-            '* 
+            '*
             '* @method  ProcessAnalytics
             '* @param   {Document}  response    Analytics response (in VMAP format) which should be parsed
             '*                                  by the session in order to determine upcoming adverts
             '* @param   {Function}  complete    Function which should be called once the parsing has
-            '*                                  been completed. This function has 2 properties. The first is a Boolean indicating the 
+            '*                                  been completed. This function has 2 properties. The first is a Boolean indicating the
             '*                                  success of parsing, and the 2nd is either an array of adverts if successful, or the reason
             '*                                  for the failure if unsuccessful.
             "ProcessAnalytics":     ys_ysvs_processanalytics,
 
             '* <p>Helper function called when the currently displayed advert is presented for "too long". This
             '* may occur if ID3 metadata is not correctly supplied (or is missed from the playback).</p>
-            '* 
+            '*
             '* @event   OnAdTimeout
             '* @param   roString    miid    Media Item ID of the relevant advert
             "OnAdTimeout":          ys_ysvs_onadtimeout,
 
             '* <p>Called by the SessionManager when it is handed ID3 metadata from the video player.
             '* This causes the appropriate tracking calls to be made to the advertising server.</p>
-            '* 
+            '*
             '* <p>The format of the metadata object should be a decoded ID3 tag. An example description
             '* is shown below:</p>
-            '* 
-            '* 
+            '*
+            '*
             '* <pre class="code prettyprint">
             '*    // var sampleTag = {
             '*    //      'YMID': '117608140',
@@ -106,15 +106,34 @@ function YSVODSession(mgr as Dynamic, source as String, cb = invalid as Dynamic,
 
             '* <p>Called by the SessionManager when it is notified by the video player of a change
             '* to the playhead position.</p>
-            '* 
-            '* <p>ID3 data will be required in order to synchronize the advert data with the playing advert within 
+            '*
+            '* <p>ID3 data will be required in order to synchronize the advert data with the playing advert within
             '* the stream. Because of this case, setting the <code>useID3</code> property will have no effect.</p>
-            '* 
+            '*
             '* @method  UpdatePosition
             '* @param   roDouble    offset      New playback head position (in seconds)
             '* @param   roBoolean   [useID3]    [UNUSED] Whether analytics processing should be made on the basis
             '*                                  of received ID3 metadata (<code>true</code>) or based on playhead position.
             "UpdatePosition":       ys_ysvs_updateposition,
+
+            '* <p>For Non-Linear content only, convert the current playhead position to
+            '* an absolute position within the underlying content (in effect, ignoring any
+            '* inserted breaks).</p>
+            '*
+            '* @method  GetContentPositionForPlayhead
+            '* @param    Double  value   Playhead position to be converted
+            '* @return   Double  Offset into the original content represented by the supplied playhead position
+            "GetContentPositionForPlayhead":    ys_ysvs_contentplayhead,
+
+            '* <p>For Non-Linear content only, convert an offset position within the content
+            '* to a playhead position (after adjusting it to make allowance for any inserted
+            '* breaks).</p>
+            '*
+            '* @method  GetPlayheadPositionForContent
+            '* @param   Double  value   Offset into the original content
+            '* @return  Double  Playhead position determined by adding the supplied offset to the length of any included breaks
+            "GetPlayheadPositionForContent":    ys_ysvs_playheadcontent,
+
 
             ' Internal function to begin session init
             "BeginSession":         ys_ysvs_beginsession,
@@ -124,22 +143,22 @@ function YSVODSession(mgr as Dynamic, source as String, cb = invalid as Dynamic,
             '* @method  Destroy
             "Destroy":              ys_ysvs_destroy
         }
-    }, YSSession(invalid, invalid))   
+    }, YSSession(invalid, invalid))
 
     ' Setup and initialise members
     this._data.loader   = invalid
     this._data.isvlive  = isvlive
-    
+
     ' Call the constructor (in the superclass)
     this.construct(mgr, source, cb)
     YO_TRACE("Constructing YSVoDSession")
-        
+
     if (source <> "") then
         ' Start off by reading the VMAP
         this.GrabVMAP()
     end if
 
-    return this    
+    return this
 end function
 
 '-----------------------------------------------------------------------------------------------------------
@@ -166,7 +185,7 @@ sub ys_ysvs_grabvmap()
     m._data.loader = VMAPParser("", yo_Callback("OnVMAPSuccess", m), yo_Callback("OnVMAPFailure", m))
     m._data.loader.Load(m.GetSource().ToString())
 end sub
-    
+
 ' onVMAPSuccess()
 sub ys_ysvs_onvmapsuccess(doc as Dynamic)
     breaks = m.GetLoader().GetBreaks()
@@ -196,7 +215,7 @@ sub ys_ysvs_onvmapsuccess(doc as Dynamic)
         end if
     end if
 end sub
-    
+
 ' onVMAPFailure()
 sub ys_ysvs_onvmapfailure(reason as Dynamic)
     if (m._data.oncomplete <> invalid) then
@@ -212,7 +231,7 @@ end sub
 sub ys_ysvs_rebuildtimeline(breaks as Dynamic)
     YO_DEBUG("<<<<<<<<<<<<<< PARSE COMPLETE >>>>>>>>>>>>>>>>")
     YO_TRACE("Breaks returned. Length: {0}", breaks.Count())
-    
+
     ext = m.GetLoader().GetExtensions()
     strm = []
     if (ext <> invalid) then
@@ -220,8 +239,8 @@ sub ys_ysvs_rebuildtimeline(breaks as Dynamic)
     end if
 
     YO_DEBUG("Finding Stream. Count: ", strm.Count())
-    
-    ' Start by setting the Master URL based on the 
+
+    ' Start by setting the Master URL based on the
     ' stream data contained within the response
     if ((strm.Count() > 0) and (m.GetMasterURL() = invalid)) then
         murl = m.GetSource().GetScheme() + "://" + strm[0].GetUrlDomain() + strm[0].GetUrlSuffix()
@@ -231,7 +250,7 @@ sub ys_ysvs_rebuildtimeline(breaks as Dynamic)
     else
         YO_DEBUG("Skipping Stream URL")
     end if
-    
+
     ' Build initial Timeline object
     'this.timeline.clear();
     offset = 0
@@ -242,7 +261,7 @@ sub ys_ysvs_rebuildtimeline(breaks as Dynamic)
         adBrk.adBreakIdentifier     = brk.id
         adBrk.adBreakDescription    = brk.type
         adBrk._data.start           = offset
-        
+
         if (brk.GetVastAds() <> invalid) then
             ads = brk.GetVastAds().GetAds()
             for each adv in ads
@@ -262,12 +281,12 @@ sub ys_ysvs_rebuildtimeline(breaks as Dynamic)
             m.AddEmptyBreak(adBrk)
         end if
     end for
-    
+
     duration = offset
     if ((strm.Count() > 0) and (strm[0].IsValid()) and (len(strm[0].GetDuration()) > 0)) then
         duration = yo_TimecodeFromString(strm[0].GetDuration())
     end if
-    
+
     if duration > 0 then
         YO_DEBUG("Preparing to adjust timeline length to: {0}", duration)
         m.GetTimeline().AdjustContent(duration)
@@ -277,17 +296,17 @@ sub ys_ysvs_rebuildtimeline(breaks as Dynamic)
 
     if ((m.GetPlayer() <> invalid) and (m.GetPlayer().DoesExist("UpdateTimeline"))) then
         m.GetPlayer().UpdateTimeline.invoke(m.GetTimeline())
-    end if    
+    end if
 end sub
-    
+
 ' ReplaceOnTimeline()
 sub ys_ysvs_replaceontimeline(elem as Dynamic)
     if (m.GetTimeline() = invalid) then
         return
     end if
-    
+
     YO_DEBUG("Replacing on timeline. Type: {0} start: {1} dur: {2}", elem.GetType(), elem.GetOffset(), elem.GetDuration())
-    
+
     el = m.GetTimeline().GetElementAtTime(elem.GetOffset())
     if (el = invalid) then
         ' We dont have this element yet
@@ -296,7 +315,7 @@ sub ys_ysvs_replaceontimeline(elem as Dynamic)
         m.GetTimeline().AppendElement(elem)
         return
     end if
-    
+
     if ((el.GetOffset() <> elem.GetOffset()) or (el.GetDuration() <> elem.GetDuration()) or (el.GetType() <> elem.GetType())) then
         ' Element has changed position, duration or type
         eles = m.GetTimeline().GetAllElements()
@@ -316,15 +335,15 @@ end sub
 ' ProcessAnalytics()
 sub ys_ysvs_processanalytics(response as Dynamic)
     YO_TRACE("Processing VMAP Analytics Data (VOD)")
-    
+
     m.super_ProcessAnalytics(response)
-    
+
     ' We use null as the analytics have already been received
     m._data.loader = VMAPParser(invalid, yo_Callback("ProcessAnalytics", m), invalid)
 
     if yo_IsNotNull(response) then
         YO_DEBUG("Got VMAP Response")
-        
+
         doc = CreateObject("roXMLElement")
         success = doc.parse(response)
         if success then
@@ -332,7 +351,7 @@ sub ys_ysvs_processanalytics(response as Dynamic)
 
             m.GetLoader().parse(doc)
             m.RebuildTimeline(m.GetLoader().GetBreaks())
-            
+
             YO_DEBUG("Timeline Rebuilt")
         else
             YO_WARN("Response was not valid VMAP")
@@ -387,7 +406,7 @@ sub ys_ysvs_updateposition(offset as Double)
     end if
 
     m.super_UpdatePosition(offset)
-    
+
     if (m.IsInAnAdvert()) then
         ' Reset end of break safety timer
         'print "Advert running for ID: "; m.GetCurrentAdvert().GetMediaID()
@@ -413,7 +432,7 @@ sub ys_ysvs_updateposition(offset as Double)
 
     if (m.GetTimeline() <> invalid) then
         current = m.GetTimeline().GetElementAtTime(offset)
-        
+
         if (current = invalid) then
             YO_DEBUG("No timeline element was found at offset: {0}", offset)
             return
@@ -424,19 +443,19 @@ sub ys_ysvs_updateposition(offset as Double)
         if (current.GetType() = "ADVERT") then
             ' We are in an advert
             'print "We are in an ad"
-        
+
             ad = current.GetAdverts().GetAdvertForPosition(offset)
             if (ad = invalid) then
                 YO_DEBUG("Could not locate current advert!")
                 return
             end if
-            
+
             new_miid = ad.GetMediaID()
             miid = ""
-            if (m.GetCurrentAdvert() <> invalid) then 
+            if (m.GetCurrentAdvert() <> invalid) then
                 miid = m.GetCurrentAdvert().GetMediaID()
             end if
-            
+
             if (m.GetCurrentAdvert() <> invalid) and (m.GetCurrentAdvert()._instanceid = ad._instanceid) then
                 ' We're in the same ad, so just update tracking
                 'print "Check tracking for: "; miid
@@ -452,19 +471,19 @@ sub ys_ysvs_updateposition(offset as Double)
                     if ((m.GetPlayer() <> invalid) and (m.GetPlayer().DoesExist("AdvertEnd"))) then
                         m.GetPlayer().AdvertEnd.invoke(miid)
                     end if
-                    
+
                     m.GetCurrentAdvert().SetActive(false)
 
                     if ((m.GetPlayer() <> invalid) and (m.GetPlayer().DoesExist("UpdateTimeline"))) then
                         m.GetPlayer().UpdateTimeline.invoke(m.GetTimeline())
                     end if
-                    
+
                     m._data.currentad = invalid
                 else
                     ' This is a new break
                     m.HandleBreakStart(m.GetCurrentBreak())
                 end if
-                
+
                 ' Now start next one
                 YO_DEBUG("Advert starting with ID: {0} and duration: {1}", new_miid, ad.GetDuration())
 
@@ -479,7 +498,7 @@ sub ys_ysvs_updateposition(offset as Double)
         else
             ' We should not be in an advert
             'Debugger.print("Not in an advert");
-            
+
             if (m.IsInAnAdvert()) then
                 miid = m.GetCurrentAdvert().GetMediaID()
 
@@ -488,17 +507,17 @@ sub ys_ysvs_updateposition(offset as Double)
                 if ((m.GetPlayer() <> invalid) and (m.GetPlayer().DoesExist("AdvertEnd"))) then
                     m.GetPlayer().AdvertEnd.invoke(miid)
                 end if
-                
-                    
+
+
                 m.GetCurrentAdvert().SetActive(false)
 
                 if ((m.GetPlayer() <> invalid) and (m.GetPlayer().DoesExist("UpdateTimeline"))) then
                     m.GetPlayer().UpdateTimeline.invoke(m.GetTimeline())
                 end if
-                
+
                 endedBreak = m.GetCurrentAdvert().GetBreak()
                 m._data.currentad = invalid
-                
+
                 YO_DEBUG("BREAK ENDS!")
                 m.HandleBreakEnd(endedBreak)
             else if (m._data.breakendtimer <> invalid) then
@@ -507,3 +526,69 @@ sub ys_ysvs_updateposition(offset as Double)
         end if
     end if
 end sub
+
+' GetContentPositionForPlayhead()
+function ys_ysvs_contentplayhead(value as Double) as Double
+        remain = value
+        total = 0
+
+        if (m.GetTimeline() <> invalid) then
+            eles = m.GetTimeline().GetAllElements()
+            idx = 0
+            while ((idx < eles.Count()) and (remain > 0))
+                ele = eles[idx]
+
+                if (ele.GetType() = YSTimelineElement().ADVERT) then
+                    remain = remain - ele.GetDuration()
+                else
+                    if (remain > ele.GetDuration()) then
+                        total = total + ele.GetDuration()
+                    else
+                        total = total + remain
+                    end if
+
+                    remain = remain - ele.GetDuration()
+                end if
+
+                idx = idx + 1
+            end while
+
+            return total
+        end if
+
+        YO_WARN("Conversion from Playhead to Content failed")
+        return value
+end function
+
+' GetPlayheadPositionForContent()
+function ys_ysvs_playheadcontent(value as Double) as Double
+        remain = value
+        total = 0
+
+        if (m.GetTimeline() <> invalid) then
+            eles = m.GetTimeline().GetAllElements()
+            idx = 0
+            while ((idx < eles.Count()) and (remain > 0))
+                ele = eles[idx]
+
+                if (ele.GetType() = YSTimelineElement().ADVERT) then
+                    total = total + ele.GetDuration()
+                else
+                    if (remain > ele.GetDuration()) then
+                        total = total + ele.GetDuration()
+                    else
+                        total = total + remain
+                    end if
+
+                    remain = remain - ele.GetDuration()
+                end if
+
+                idx = idx + 1
+            end while
+
+            return total
+        end if
+
+        YO_WARN("Conversion from Content to Playhead failed")
+        return value
+end function

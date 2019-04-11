@@ -1,0 +1,26 @@
+{
+  "name": "bitmovin-player-integrations-yospace",
+  "description": "Bitmovin Player integration with the Yospace AdManagement SDK",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitmovin/bitmovin-player-roku-integrations-yospace.git"
+  },
+  "author": "Bitmovin",
+  "license": "MIT",
+  "watch": {
+    "build": {
+      "patterns": [
+        "./YospaceIntegration/**/*.*"
+      ],
+      "extensions": "brs,xml"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf ./demo/components/bitmovinYospacePlayer && rm -rf ./demo/source/yospace/ && rm -rf ./demo/source/bitmovinYospacePlayer/",
+    "serve": "npm run clean && npm run build && npm-watch build",
+    "build": "rsync -a ./YospaceIntegration/source/ ./demo/source/ && rsync -a ./YospaceIntegration/components/ ./demo/components/"
+  },
+  "devDependencies": {
+    "npm-watch": "^0.6.0"
+  }
+}

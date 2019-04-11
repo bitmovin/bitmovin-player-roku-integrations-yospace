@@ -14,5 +14,5 @@
 
   <!-- main handler -->
 	<script type = "text/brightscript" uri = "pkg:/source/yospace/Utils/YSDebugLog.brs" />
-  <script type="text/brightscript" uri="pkg:/components/helperTask/UrlLoader.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/helperTask/UrlLoader.brs" />
 </component>

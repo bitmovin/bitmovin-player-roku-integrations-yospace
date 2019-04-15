@@ -72,7 +72,7 @@
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
 
-  <!-- Yospace - server-side-ad-insertion -->
+  <!-- Yospace SDK -->
   <script type="text/brightscript" uri="pkg:/source/yospace/Core/AdBreak.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Core/Extension.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Core/Tracking.brs" />

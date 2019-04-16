@@ -159,7 +159,7 @@ end sub
 ' OVERRIDEN load method
 sub load(params)
   m.source.append(params)
-  m.bitmovinPlayer.observeField("metadata", "onMetadataReceived")
+  m.bitmovinPlayer.observeField("metadata", "onMetadata")
   requestYospaceURL(m.source)
 end sub
 
@@ -328,11 +328,11 @@ sub onCurrentTimeChanged()
   m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.top.currentTime)
 end sub
 
-sub onMetadataReceived()
+sub onMetadata()
   metadata = m.bitmovinPlayer.metadata
   if metadata.Source = "emsg" then metadata = mapEmsgMetaData(metadata) else metadata = mapID3MetaData(metadata)
   if metadata = invalid or metadata.Count() = 0
-    print "Recieved meta data was invalid, not reporting to Yospace"
+    print "Received meta data was invalid, not reporting to Yospace"
     return
   end if
   m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, metadata)

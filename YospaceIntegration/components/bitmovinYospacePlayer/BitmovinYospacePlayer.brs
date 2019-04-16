@@ -89,10 +89,7 @@ end sub
 
 sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
-end sub
-
-sub onCurrentTimeChanged()
-  m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
+  reportPlayerStateChanged(m.top.playerState)
 end sub
 
 sub onTimeShift()
@@ -162,18 +159,7 @@ end sub
 ' OVERRIDEN load method
 sub load(params)
   m.source.append(params)
-  video = m.bitmovinPlayer.findNode("MainVideo")
-  video.observeField("state", "onVideoPlaybackState")
-  video.observeField("position", "onVideoPosition")
-  video.observeField("timedMetaData", "onTimedMetaData")
-
-  video.timedMetaDataSelectionKeys = ["*"]
-
-  video.notificationInterval = 0.5
-
-  ' the player sets this to "true" regradless of the stream being live or VOD
-  ' video.enableTrickPlay = false
-
+  m.bitmovinPlayer.observeField("metadata", "onMetadata")
   requestYospaceURL(m.source)
 end sub
 
@@ -308,7 +294,7 @@ sub setPolicy(p)
 end sub
 
 function isKeyPressValid(key)
-  if key = "right" or key = "left"
+  if key = "right" or key = "left" or key = "fastforward" or key = "rewind"
     if m.policy.canSeek()
       return true
     end if
@@ -321,39 +307,37 @@ sub onAdQuartile(quartile)
   m.top.adQuartile = quartile
 end sub
 
-' ---------------------------- additional callbacks used by the yospace sdk ----------------------------
-sub onVideoPlaybackState()
-  videoState = m.bitmovinPlayer.findNode("MainVideo").state
-  if videoState = "finished"
+sub reportPlayerStateChanged(videoState)
+  if videoState = m.top.BitmovinPlayerState.FINISHED
     m.session.ReportPlayerEvent(YSPlayerEvents().END)
-  else if videoState = "buffering"
+  else if videoState = m.top.BitmovinPlayerState.STALLING
     m.session.ReportPlayerEvent(YSPlayerEvents().BUFFER)
-  else if videoState = "playing"
+  else if videoState = m.top.BitmovinPlayerState.PLAYING
     m.session.ReportPlayerEvent(YSPlayerEvents().RESUME)
-  else if videoState = "paused"
+  else if videoState = m.top.BitmovinPlayerState.PAUSED
     m.session.ReportPlayerEvent(YSPlayerEvents().PAUSE)
-  else if videoState = "stopped"
-    m.session.ReportPlayerEvent(YSPlayerEvents().STALL)
+  else if videoState = m.top.BitmovinPlayerState.ERROR
+    m.session.ReportPlayerEvent(YSPlayerEvents().ERROR)
   else
-    print "unhandled video state: "; videoState
+    print "Not reporting video state to Yospace: "; videoState
   end if
 end sub
 
-sub onVideoPosition()
-  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.BitmovinPlayer.currentTime)
+sub onCurrentTimeChanged()
+  m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
+  m.session.ReportPlayerEvent(YSPlayerEvents().POSITION, m.top.currentTime)
 end sub
 
-sub onTimedMetaData()
-  metaData = m.bitmovinPlayer.findNode("MainVideo").timedMetadata
-  if metaData.Source = "emsg" then metaData = mapEmsgMetaData(metaData) else metaData = mapID3MetaData(metaData)
-  if metaData = invalid or metaData.Count() = 0
-    print "Recieved meta data was invalid, not reporting to Yospace"
+sub onMetadata()
+  metadata = m.bitmovinPlayer.metadata
+  if metadata.Source = "emsg" then metadata = mapEmsgMetaData(metadata) else metadata = mapID3MetaData(metadata)
+  if metadata = invalid or metadata.Count() = 0
+    print "Received meta data was invalid, not reporting to Yospace"
     return
   end if
-  m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, metaData)
+  m.session.ReportPlayerEvent(YSPlayerEvents().METADATA, metadata)
 end sub
 
-' ---------------------------- yospace api call ----------------------------
 sub requestYospaceURL(source)
   if Lcase(source.assetType) = "live"
      m.session.CreateForLive(source.hls, { USE_ID3: true }, yo_Callback(cb_session_ready))

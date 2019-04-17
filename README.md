@@ -18,7 +18,7 @@ The recommended version of the Yospace SDK is 1.4-2.**
 3. Ensure that you are in the same network as the roku device
 4. Run `npm run serve`
   _(This will copy all needed files from ./YospaceIntegration to the ./demo folder)_
-5. Zip and deploy the demo folder contains to the roku device
+5. Zip the demo folder content (`components`, `source`, `manifest`) and deploy it to the roku device
 
 ## Usage
 

@@ -7,10 +7,9 @@ This integration completely encapsulates the usage of Yospace. After creating th
 The recommended version of the Yospace SDK is 1.4-2.**
 
 ## Getting Started
-1. Clone Git repository
+Clone Git repository
 
 ## Running the example
-
 1. Run `npm i` to install dependencies
 2. Fetch Yospace SDK
   - Download Yospace SDK
@@ -21,7 +20,6 @@ The recommended version of the Yospace SDK is 1.4-2.**
 5. Zip the demo folder content (`components`, `source`, `manifest`) and deploy it to the roku device
 
 ## Usage
-
 1. Fetch Yospace SDK
   - Download Yospace SDK
   - Create a folder in your source folder called `yospace`

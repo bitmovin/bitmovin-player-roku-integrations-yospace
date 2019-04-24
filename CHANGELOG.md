@@ -7,12 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Support for a custom Yospace ad policy as well as a default policy if none is set.
-  https://github.com/bitmovin/player-issues-roku/issues/22
 - Fire `adBreakStart`, `adStart`, `adBreakFinished` and `adBreakFinished` respectively
-  https://github.com/bitmovin/player-issues-roku/issues/23
 
 ### Internal
 - The BitmovinPlayer component is now being loaded inside the BitmovinYospacePlayer component
   and does not require a separate xml component.
-  https://github.com/bitmovin/player-issues-roku/issues/25
-

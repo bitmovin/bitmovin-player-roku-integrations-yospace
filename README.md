@@ -30,4 +30,4 @@ Clone Git repository
   m.bitmovinPlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
   ```
 
-  For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` inside the demo folder.
+  For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` inside the `demo/components/playerExample/` folder.

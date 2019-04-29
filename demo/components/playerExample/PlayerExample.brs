@@ -4,6 +4,8 @@ sub init()
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
   m.bitmovinYospacePlayer.id = "BitmovinYospacePlayer"
   m.top.appendChild(m.bitmovinYospacePlayer)
+
+  ' Observe the isPlayerReady field to be informed when the player has finished its inital setup up and is ready to be used
   m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
 end sub
 

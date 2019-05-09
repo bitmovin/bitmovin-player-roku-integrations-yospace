@@ -65,7 +65,6 @@
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/YospaceCallbacks.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />

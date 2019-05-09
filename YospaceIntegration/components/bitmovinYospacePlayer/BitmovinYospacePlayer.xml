@@ -61,12 +61,10 @@
     <function name="ad_getActiveAdBreak" />
     <function name="ad_list" />
     <function name="ad_skip" />
-    <function name="setPolicy" />
     <function name="isKeyPressValid" />
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/YospaceCallbacks.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />

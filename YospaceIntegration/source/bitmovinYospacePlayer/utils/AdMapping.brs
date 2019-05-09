@@ -12,7 +12,7 @@ end function
 ' Parameter name cannot be simply "adBreak" as it would interfere with an already existing "adBreak" from the yospaceSDK
 function mapAdBreak(myAdBreak)
   aBr = {
-    id: myAdBreak.GetIdentifier(),
+    id: myAdBreak._INSTANCEID,
     scheduleTime: myAdBreak.GetStart(),
     ads: []
   }

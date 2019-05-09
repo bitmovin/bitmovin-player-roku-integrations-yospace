@@ -1,0 +1,61 @@
+<component name="BitmovinYospacePlayerTask" extends="Task">
+	<interface>
+		<field id="bitmovinYospacePlayer" type="node" />
+
+	  <field id="AdBreakStart" type="String" alwaysNotify="true" />
+	  <field id="AdBreakEnd" type="String" alwaysNotify="true" />
+	  <field id="AdvertStart" type="String" alwaysNotify="true" />
+	  <field id="AdvertEnd" type="String" alwaysNotify="true" />
+	  <field id="Timeline" type="assocarray" alwaysNotify="true" />
+
+		<field id="taskReady" type="Boolean" alwaysNotify="true" />
+
+	  <field id="StreamContent" type="assocarray" />
+	  <field id="EventReport" type="assocarray" alwaysNotify="true" />
+
+	  <field id="PlaybackURL" type="String" />
+	  <field id="IsLive" type="Boolean" />
+	  <field id="IsAdvert" type="Boolean" />
+	  <field id="IsActiveAd" type="Boolean" />
+	  <field id="StreamType" type="String" />
+		<field id="canSeek" type="Boolean" />
+
+		<field id="adList" type="array" />
+		<field id="activeAdBreak" type="assocarray" />
+		<field id="activeAd" type="assocarray" />
+		<field id="callAdFunction" type="assocarray" alwaysNotify="true" />
+
+		<field id="adSkipped" type="Boolean" alwaysNotify="true" />
+	</interface>
+
+	<script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayerTask.brs" />
+	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
+	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
+
+	<script type="text/brightscript" uri="pkg:/source/yospace/Core/AdBreak.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/Extension.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/Tracking.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/VastAd.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/VastAds.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/VASTCreative.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/VASTLinear.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/VASTNonLinear.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Parsers/ParsePlaylist.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Parsers/ParseVAST.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Parsers/ParseVMAP.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSAdBreak.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSAdvert.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSLiveSession.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSPlayerEvents.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSSession.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSSessionmanager.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSTimeline.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Public/YSVoDSession.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Utils/rtGeneral.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YOPoller.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YORokuTasks.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YSDebugLog.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YSTimer.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YSURL.brs" />
+</component>

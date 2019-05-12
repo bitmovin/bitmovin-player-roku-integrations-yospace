@@ -37,13 +37,13 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
     m.top.appendChild(m.bitmovinPlayer)
-    m.yospace = CreateObject("roSGNode", "BitmovinYospacePlayerTask")
-    m.yospace.observeField("taskReady", "onTaskReady")
+    m.yospaceTask = CreateObject("roSGNode", "BitmovinYospacePlayerTask")
+    m.yospaceTask.observeField("taskReady", "onTaskReady")
   end if
 end sub
 
 sub onTaskReady()
-  m.yospace.bitmovinYospacePlayer = m.top
+  m.yospaceTask.bitmovinYospacePlayer = m.top
   setFieldObservers()
   m.top.isPlayerReady = true
 end sub
@@ -115,7 +115,7 @@ sub play(params)
 end sub
 
 sub pause(params)
-  m.yospace.callAdFunction = {id: "pause", arguments: params}
+  m.yospaceTask.callAdFunction = {id: "pause", arguments: params}
 end sub
 
 sub unload(params)
@@ -127,7 +127,7 @@ sub preload(params)
 end sub
 
 sub seek(params)
-  m.yospace.callAdFunction = {id: "seek", arguments: params}
+  m.yospaceTask.callAdFunction = {id: "seek", arguments: params}
 end sub
 
 ' OVERRIDEN load method
@@ -138,7 +138,7 @@ sub load(params)
 end sub
 
 sub mute(params)
-  m.yospace.callAdFunction = {id: "mute", arguments: params}
+  m.yospaceTask.callAdFunction = {id: "mute", arguments: params}
 end sub
 
 sub unmute(params)
@@ -213,26 +213,26 @@ end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  m.yospace.callAdFunction = {id: "ad_skip"}
+  m.yospaceTask.callAdFunction = {id: "ad_skip"}
 end sub
 
 function ad_list()
-  return m.yospace.adList
+  return m.yospaceTask.adList
 end function
 
 ' returns the ad break of the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAdBreak()
-  return m.yospace.activeAdBreak
+  return m.yospaceTask.activeAdBreak
 end function
 
 ' returns the currently active ad, returns invalid if no ad is currently active
 function ad_getActiveAd()
-  return m.yospace.activeAd
+  return m.yospaceTask.activeAd
 end function
 
 function isKeyPressValid(key)
   if key = "right" or key = "left" or key = "fastforward" or key = "rewind"
-    if m.yospace.canSeek
+    if m.yospaceTask.canSeek
       return true
     end if
     return false
@@ -246,15 +246,15 @@ end sub
 
 sub reportPlayerStateChanged(videoState)
   if videoState = m.top.BitmovinPlayerState.FINISHED
-    m.yospace.EventReport = {id: YSPlayerEvents().END}
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().END}
   else if videoState = m.top.BitmovinPlayerState.STALLING
-    m.yospace.EventReport = {id: YSPlayerEvents().BUFFER}
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().BUFFER}
   else if videoState = m.top.BitmovinPlayerState.PLAYING
-    m.yospace.EventReport = {id: YSPlayerEvents().RESUME}
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().RESUME}
   else if videoState = m.top.BitmovinPlayerState.PAUSED
-    m.yospace.EventReport = {id: YSPlayerEvents().PAUSE}
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().PAUSE}
   else if videoState = m.top.BitmovinPlayerState.ERROR
-    m.yospace.EventReport = {id: YSPlayerEvents().ERROR}
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().ERROR}
   else
     print "Not reporting video state to Yospace: "; videoState
   end if
@@ -262,7 +262,7 @@ end sub
 
 sub onCurrentTimeChanged()
   m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
-  m.yospace.EventReport = {id: YSPlayerEvents().POSITION, data: m.bitmovinPlayer.currentTime}
+  m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: m.bitmovinPlayer.currentTime}
 end sub
 
 sub onMetadata()
@@ -272,30 +272,30 @@ sub onMetadata()
     print "Received meta data was invalid, not reporting to Yospace"
     return
   end if
-  m.yospace.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+  m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
 end sub
 
 sub requestYospaceURL(source)
   if Lcase(source.assetType) = "live"
-     m.yospace.StreamContent = {type: "live", url: source.hls, options: {USE_ID3: true}}
-     m.yospace.observeField("PlaybackURL", "onUrlReceived")
+     m.yospaceTask.StreamContent = {type: "live", url: source.hls, options: {USE_ID3: true}}
+     m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
   else if Lcase(source.assetType) = "vod"
-    m.yospace.StreamContent = {type: "vod", url: source.hls, options: {USE_ID3: false}}
-    m.yospace.observeField("PlaybackURL", "onUrlReceived")
+    m.yospaceTask.StreamContent = {type: "vod", url: source.hls, options: {USE_ID3: false}}
+    m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
   else
     print "not supported asset type!"
   end if
 end sub
 
 sub onUrlReceived()
-  m.source.hls = m.yospace.PlaybackURL
+  m.source.hls = m.yospaceTask.PlaybackURL
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub
 
 function toMagicTime(playbackTime)
   mTime = playbackTime
   offset = 0
-  for each timelineElement in m.yospace.Timeline.elements
+  for each timelineElement in m.yospaceTask.Timeline.elements
     if timelineElement.mode = m.TIMELINE_ENTRY_TYPE_ADVERT
       if ((timelineElement.offset + offset) + timelineElement.size) < playbackTime
         mTime -= timelineElement.size
@@ -312,29 +312,29 @@ function toMagicTime(playbackTime)
 end function
 
 sub setFieldObservers()
-  m.yospace.observeField("AdBreakStart", "onAdBreakStart")
-  m.yospace.observeField("AdBreakEnd", "onAdBreakEnd")
-  m.yospace.observeField("AdvertStart", "onAdvertStart")
-  m.yospace.observeField("AdvertEnd", "onAdvertEnd")
-  m.yospace.observeField("adSkipped", "onAdSkipped")
+  m.yospaceTask.observeField("AdBreakStart", "onAdBreakStart")
+  m.yospaceTask.observeField("AdBreakEnd", "onAdBreakEnd")
+  m.yospaceTask.observeField("AdvertStart", "onAdvertStart")
+  m.yospaceTask.observeField("AdvertEnd", "onAdvertEnd")
+  m.yospaceTask.observeField("adSkipped", "onAdSkipped")
 end sub
 
 sub onAdBreakStart()
-  m.top.adBreakStarted = m.yospace.AdBreakStart
+  m.top.adBreakStarted = m.yospaceTask.AdBreakStart
 end sub
 
 sub onAdBreakEnd()
-  m.top.adBreakFinished = m.yospace.AdBreakEnd
+  m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 end sub
 
 sub onAdvertStart()
-  m.top.adStarted = m.yospace.AdvertStart
+  m.top.adStarted = m.yospaceTask.AdvertStart
 end sub
 
 sub onAdvertEnd()
-  m.top.adFinished = m.yospace.AdvertEnd
+  m.top.adFinished = m.yospaceTask.AdvertEnd
 end sub
 
 sub onAdSkipped()
-  m.top.adSkipped = m.yospace.adSkipped
+  m.top.adSkipped = m.yospaceTask.adSkipped
 end sub

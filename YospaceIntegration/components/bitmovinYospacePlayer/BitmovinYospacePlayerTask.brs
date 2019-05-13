@@ -13,7 +13,6 @@ sub init()
       VOD: "vod",
       V_LIVE: "vlive"
     }
-
   }
 
   YO_LOGLEVEL(YospaceVerbosity().INFO)

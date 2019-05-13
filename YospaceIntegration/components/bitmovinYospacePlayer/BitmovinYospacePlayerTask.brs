@@ -105,6 +105,7 @@ end sub
 ' Called whenever the player enters an advert break
 sub thd_cb_ad_break_start(dummy as Dynamic)
   YO_TRACE("(thread) AD BREAK START")
+
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak())
   m.top.AdBreakStart = "yes"
@@ -113,6 +114,8 @@ end sub
 ' Called whenever an individual advert starts
 sub thd_cb_advert_start(miid as String)
   YO_TRACE("(thread) ADVERT START for {0}", miid)
+
+  updateCanSeek()
 
   m.top.AdvertStart = miid
 
@@ -138,6 +141,8 @@ end sub
 ' Called whenever the player exits an advert break
 sub thd_cb_ad_break_end(dummy as Dynamic)
   YO_TRACE("(thread) AD BREAK END")
+
+  updateCanSeek()
 
   m.top.AdBreakEnd = "yes"
   m.top.IsActiveAd = false
@@ -271,9 +276,9 @@ sub seek(arguments)
 end sub
 
 sub onPlayerRegistered()
-  m.top.bitmovinYospacePlayer.observeField("onSeek", updatePolicyHelper_seekStartPosition)
-  m.top.bitmovinYospacePlayer.observeField("onSeeked", checkIfSeekWasAllowed)
-  m.top.canSeek = m.policy.canSeek()
+  m.top.bitmovinYospacePlayer.observeField("seek", updatePolicyHelper_seekStartPosition)
+  m.top.bitmovinYospacePlayer.observeField("seeked", checkIfSeekWasAllowed)
+  updateCanSeek()
 end sub
 
 sub updatePolicyHelper_seekStartPosition()
@@ -292,4 +297,9 @@ sub checkIfSeekWasAllowed()
     m.top.bitmovinYospacePlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1
+end sub
+
+sub updateCanSeek()
+  print "in update seek"; m.policy.canSeek()
+  m.top.canSeek = m.policy.canSeek()
 end sub

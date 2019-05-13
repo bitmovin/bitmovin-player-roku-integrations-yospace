@@ -157,11 +157,11 @@ sub thd_cb_update_timeline(tl as Dynamic)
 
     flatTimeline = []
     duration = 0.0
-    eles = tl.GetAllElements()
+    elements = tl.GetAllElements()
 
-    YO_DEBUG("Element count: {0}", eles.Count())
+    YO_DEBUG("Element count: {0}", elements.Count())
 
-    for each ele in eles
+    for each ele in elements
       if ele.GetType() = "VOD" then
         ' Add a simply VOD element
         flatTimeline.Push({mode:"VOD", size:ele.GetDuration(), offset:ele.GetOffset()})

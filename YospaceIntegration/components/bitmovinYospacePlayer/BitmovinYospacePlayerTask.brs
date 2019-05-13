@@ -156,7 +156,7 @@ sub thd_cb_update_timeline(tl as Dynamic)
   if (tl <> invalid) then
 
     flattl = []
-    dur = 0.0
+    duration = 0.0
     eles = tl.GetAllElements()
 
     YO_DEBUG("Element count: {0}", eles.Count())
@@ -181,14 +181,14 @@ sub thd_cb_update_timeline(tl as Dynamic)
       end if
 
       ' Record the duration into the total duration count
-      dur = dur + ele.GetDuration()
+      duration = duration + ele.GetDuration()
     end for
 
-    YO_DEBUG("Timeline is valid. Duration: {0}", dur)
+    YO_DEBUG("Timeline is valid. Duration: {0}", duration)
 
     tlreport = {}
     tlreport["elements"] = flattl
-    tlreport["duration"] = dur
+    tlreport["duration"] = duration
     tlreport["offset"] = tl.GetStartOffset()
     m.top.Timeline = tlreport
 

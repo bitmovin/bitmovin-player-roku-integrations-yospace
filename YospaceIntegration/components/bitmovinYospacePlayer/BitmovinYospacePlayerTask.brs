@@ -55,7 +55,7 @@ sub MonitorSDK()
         requestYospaceURL(data)
       else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT)
         reportPlayerEvent(data)
-      else if (field = (m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION)
+      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION)
         callAdFunction(data)
       end if
     else

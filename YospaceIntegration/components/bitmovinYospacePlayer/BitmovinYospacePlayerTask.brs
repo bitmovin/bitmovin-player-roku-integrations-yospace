@@ -38,37 +38,11 @@ sub MonitorSDK()
       data = msg.GetData()
 
       if (field = "StreamContent")
-        if (data.type = "live")
-          m.session.CreateForLive(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
-        else if (data.type = "vod")
-          m.session.CreateForVOD(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
-        else if (data.type = "vlive")
-          m.session.CreateForNonLinear(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
-        end if
+        requestYospaceURL(data)
       else if (field = "EventReport")
-        if (data.id = "suppress")
-          m.session.GetSession().SuppressAnalytics(true)
-        else if (data.id = "unsuppress")
-          missed = m.session.GetSession().SuppressAnalytics(false)
-          if (missed <> invalid)
-            for i = 0 to missed.Count() - 1
-              item = missed[i]
-              YO_DEBUG("Missed: {0} Event: {1} with URL: {2}", i, item.event, item.url)
-            end for
-          end if
-        else
-            m.session.ReportPlayerEvent(data.id, data.data)
-        end if
+        reportPlayerEvent(data)
       else if (field = "callAdFunction")
-        if data.id = "ad_skip"
-          ad_skip()
-        else if data.id = "seek"
-          seek(data.arguments)
-        else if data.id = "pause"
-          pause(data.arguments)
-        else if data.id = "mute"
-          mute(data.arguments)
-        end if
+        callAdFunction(data)
       end if
     else
       tasks = GetGlobalAA().taskman
@@ -300,6 +274,43 @@ sub checkIfSeekWasAllowed()
 end sub
 
 sub updateCanSeek()
-  print "in update seek"; m.policy.canSeek()
   m.top.canSeek = m.policy.canSeek()
+end sub
+
+sub requestYospaceURL(data)
+  if (data.type = "live")
+    m.session.CreateForLive(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
+  else if (data.type = "vod")
+    m.session.CreateForVOD(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
+  else if (data.type = "vlive")
+    m.session.CreateForNonLinear(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
+  end if
+end sub
+
+sub reportPlayerEvent(data)
+  if (data.id = "suppress")
+    m.session.GetSession().SuppressAnalytics(true)
+  else if (data.id = "unsuppress")
+    missed = m.session.GetSession().SuppressAnalytics(false)
+    if (missed <> invalid)
+      for i = 0 to missed.Count() - 1
+        item = missed[i]
+        YO_DEBUG("Missed: {0} Event: {1} with URL: {2}", i, item.event, item.url)
+      end for
+    end if
+  else
+      m.session.ReportPlayerEvent(data.id, data.data)
+  end if
+end sub
+
+sub callAdFunction(data)
+  if data.id = "ad_skip"
+    ad_skip()
+  else if data.id = "seek"
+    seek(data.arguments)
+  else if data.id = "pause"
+    pause(data.arguments)
+  else if data.id = "mute"
+    mute(data.arguments)
+  end if
 end sub

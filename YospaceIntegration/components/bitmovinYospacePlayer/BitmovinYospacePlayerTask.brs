@@ -2,6 +2,20 @@ sub init()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
+  m.BitmovinYospaceTaskEnums = {
+    ObservableFields: {
+      STREAM_CONTENT: "StreamContent",
+      EVENT_REPORT: "EventReport",
+      CALL_AD_FUNCTION: "callAdFunction"
+    },
+    StreamType: {
+      LIVE: "live",
+      VOD: "vod",
+      V_LIVE: "vlive"
+    }
+
+  }
+
   YO_LOGLEVEL(YospaceVerbosity().INFO)
   m.top.functionName  = "MonitorSDK"
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
@@ -25,9 +39,9 @@ end sub
 
 sub MonitorSDK()
   port = CreateObject("roMessagePort")
-  m.top.ObserveField("StreamContent", port)
-  m.top.ObserveField("EventReport", port)
-  m.top.ObserveField("callAdFunction", port)
+  m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT, port)
+  m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT, port)
+  m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION, port)
   m.top.taskReady = true
 
   while true
@@ -37,11 +51,11 @@ sub MonitorSDK()
       field = msg.GetField()
       data = msg.GetData()
 
-      if (field = "StreamContent")
+      if (field = m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT)
         requestYospaceURL(data)
-      else if (field = "EventReport")
+      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT)
         reportPlayerEvent(data)
-      else if (field = "callAdFunction")
+      else if (field = (m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION)
         callAdFunction(data)
       end if
     else
@@ -278,11 +292,11 @@ sub updateCanSeek()
 end sub
 
 sub requestYospaceURL(data)
-  if (data.type = "live")
+  if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE)
     m.session.CreateForLive(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
-  else if (data.type = "vod")
+  else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.VOD)
     m.session.CreateForVOD(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
-  else if (data.type = "vlive")
+  else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE)
     m.session.CreateForNonLinear(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
   end if
 end sub

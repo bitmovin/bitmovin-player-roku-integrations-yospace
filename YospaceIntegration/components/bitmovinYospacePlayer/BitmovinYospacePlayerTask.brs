@@ -155,7 +155,7 @@ end sub
 sub thd_cb_update_timeline(tl as Dynamic)
   if (tl <> invalid) then
 
-    flattl = []
+    flatTimeline = []
     duration = 0.0
     eles = tl.GetAllElements()
 
@@ -164,10 +164,10 @@ sub thd_cb_update_timeline(tl as Dynamic)
     for each ele in eles
       if ele.GetType() = "VOD" then
         ' Add a simply VOD element
-        flattl.Push({mode:"VOD", size:ele.GetDuration(), offset:ele.GetOffset()})
+        flatTimeline.Push({mode:"VOD", size:ele.GetDuration(), offset:ele.GetOffset()})
       else if ele.GetType() = "LIVE" then
         ' Add a piece of live content
-        flattl.Push({mode:"LIVE", size:ele.GetDuration(), offset:ele.GetOffset()})
+        flatTimeline.Push({mode:"LIVE", size:ele.GetDuration(), offset:ele.GetOffset()})
       else
         ' For advert breaks, we are given the entire break
         ads = ele.GetAdverts().GetAdverts()
@@ -176,7 +176,7 @@ sub thd_cb_update_timeline(tl as Dynamic)
         for each ad in ads
           ' Add a single advert item. Notionally, IsActive() means that the
           ' ad should be watched and should not be "skippable"
-          flattl.Push({mode:"ADVERT", size:ad.GetDuration(), offset:ele.GetOffset(), state:ad.IsActive()})
+          flatTimeline.Push({mode:"ADVERT", size:ad.GetDuration(), offset:ele.GetOffset(), state:ad.IsActive()})
         end for
       end if
 
@@ -187,7 +187,7 @@ sub thd_cb_update_timeline(tl as Dynamic)
     YO_DEBUG("Timeline is valid. Duration: {0}", duration)
 
     tlreport = {}
-    tlreport["elements"] = flattl
+    tlreport["elements"] = flatTimeline
     tlreport["duration"] = duration
     tlreport["offset"] = tl.GetStartOffset()
     m.top.Timeline = tlreport

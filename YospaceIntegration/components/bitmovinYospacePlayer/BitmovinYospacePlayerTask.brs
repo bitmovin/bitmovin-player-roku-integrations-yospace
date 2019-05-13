@@ -325,5 +325,14 @@ sub callAdFunction(data)
     pause(data.arguments)
   else if data.id = "mute"
     mute(data.arguments)
+  else if data.id = "setContentMetaData"
+    setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   end if
+end sub
+
+sub setContentMetaData(genre, id, length)
+  bridge = GetGlobalAA().taskman
+  bridge.SetContentGenre(genre)
+  bridge.SetContentId(id)
+  bridge.SetContentLength(length)
 end sub

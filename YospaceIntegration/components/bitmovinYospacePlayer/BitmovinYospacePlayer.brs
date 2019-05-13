@@ -338,3 +338,7 @@ end sub
 sub onAdSkipped()
   m.top.adSkipped = m.yospaceTask.adSkipped
 end sub
+
+sub setContentMetaData(genre, id, length)
+  m.yospaceTask.callAdFunction = {id: "setContentMetaData", arguments: [genre, id, length]}
+end sub

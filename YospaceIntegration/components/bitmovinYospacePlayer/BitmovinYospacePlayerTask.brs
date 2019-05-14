@@ -70,7 +70,6 @@ sub onSessionReady(data = invalid as Dynamic)
   else
     m.session.RegisterPlayer(m.player)
 
-    m.top.IsLive = (m.session.GetSession()._CLASSNAME = "YSLiveSession")
     m.top.StreamType = m.session.GetSession().GetStreamType()
     m.top.PlaybackURL = m.session.GetMasterPlaylist()
     tl = m.session.GetSession().GetTimeline()
@@ -242,8 +241,8 @@ sub seek(arguments)
 end sub
 
 sub onPlayerRegistered()
-  m.top.bitmovinYospacePlayer.observeField("seek", updatePolicyHelper_seekStartPosition)
-  m.top.bitmovinYospacePlayer.observeField("seeked", checkIfSeekWasAllowed)
+  m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEK, updatePolicyHelper_seekStartPosition)
+  m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEKED, checkIfSeekWasAllowed)
   updateCanSeek()
 end sub
 
@@ -253,7 +252,7 @@ end sub
 
 sub checkIfSeekWasAllowed()
   currentPlayerPosition = m.top.bitmovinYospacePlayer.currentTime
-  ' Since there is no way of stopping the default UI and its build-in key event handler
+  ' Since there is no way of stopping the default UI and its build in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
@@ -272,8 +271,10 @@ end sub
 sub requestYospaceURL(data)
   if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE)
     m.session.CreateForLive(data.url, data.options, yo_Callback(onSessionReady, m))
+    m.top.IsLive = true
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.VOD)
     m.session.CreateForVOD(data.url, data.options, yo_Callback(onSessionReady, m))
+    m.top.IsLive = false
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE)
     m.session.CreateForNonLinear(data.url, data.options, yo_Callback(onSessionReady, m))
   end if

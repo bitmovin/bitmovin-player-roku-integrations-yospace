@@ -213,7 +213,7 @@ end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  m.yospaceTask.callAdFunction = {id: "ad_skip"}
+  m.yospaceTask.callAdFunction = {id: "skipAd"}
 end sub
 
 function ad_list()

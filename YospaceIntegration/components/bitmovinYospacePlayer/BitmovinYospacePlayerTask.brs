@@ -312,7 +312,7 @@ sub reportPlayerEvent(data)
       end for
     end if
   else
-      m.session.ReportPlayerEvent(data.id, data.data)
+    m.session.ReportPlayerEvent(data.id, data.data)
   end if
 end sub
 

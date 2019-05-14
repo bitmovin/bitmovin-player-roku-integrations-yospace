@@ -1,4 +1,4 @@
-sub init()
+onAdBreakEndsub init()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
@@ -22,11 +22,11 @@ sub init()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
   m.player = {}
-  m.player["AdBreakStart"] = yo_Callback(thd_cb_ad_break_start)
-  m.player["AdvertStart"] = yo_Callback(thd_cb_advert_start)
-  m.player["AdvertEnd"] = yo_Callback(thd_cb_advert_end)
-  m.player["AdBreakEnd"] = yo_Callback(thd_cb_ad_break_end)
-  m.player["UpdateTimeline"] = yo_Callback(thd_cb_update_timeline)
+  m.player["AdBreakStart"] = yo_Callback(onAdBreakStart)
+  m.player["AdvertStart"] = yo_Callback(onAdStart)
+  m.player["AdvertEnd"] = yo_Callback(onAdEnd)
+  m.player["AdBreakEnd"] = yo_Callback(onAdBreakEnd)
+  m.player["UpdateTimeline"] = yo_Callback(updateTimeline)
 
   GetGlobalAA().timer = YSTimer()
   GetGlobalAA().taskman = YORokuTasks()
@@ -64,16 +64,10 @@ sub MonitorSDK()
   end while
 end sub
 
-sub thd_cb_session_ready(data = invalid as Dynamic)
-  YO_TRACE("Thread Session Ready. Status: {0}", data.result)
-  YO_TRACE("Result Code: {0}", data.status)
-
+sub onSessionReady(data = invalid as Dynamic)
   if (data.result <> YSSessionResult().INITIALISED) then
     YO_ERROR("Initialization failed: {0}", data.status)
   else
-    YO_DEBUG("Initialization succeeded (in thread)")
-
-    ' Register our observer object to bind callbacks
     m.session.RegisterPlayer(m.player)
 
     m.top.IsLive = (m.session.GetSession()._CLASSNAME = "YSLiveSession")
@@ -81,17 +75,13 @@ sub thd_cb_session_ready(data = invalid as Dynamic)
     m.top.PlaybackURL = m.session.GetMasterPlaylist()
     tl = m.session.GetSession().GetTimeline()
     if (tl <> invalid) then
-      YO_DEBUG("Initial timeline update")
-      thd_cb_update_timeline(tl)
-    else
-      YO_DEBUG("No initial timeline to update")
+      updateTimeline(tl)
     end if
   end if
 end sub
 
 ' Called whenever the player enters an advert break
-sub thd_cb_ad_break_start(dummy as Dynamic)
-  YO_TRACE("(thread) AD BREAK START")
+sub onAdBreakStart(dummy as Dynamic)
 
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak())
@@ -99,9 +89,7 @@ sub thd_cb_ad_break_start(dummy as Dynamic)
 end sub
 
 ' Called whenever an individual advert starts
-sub thd_cb_advert_start(miid as String)
-  YO_TRACE("(thread) ADVERT START for {0}", miid)
-
+sub onAdStart(miid as String)
   updateCanSeek()
 
   m.top.AdvertStart = miid
@@ -117,18 +105,14 @@ sub thd_cb_advert_start(miid as String)
 end sub
 
 ' Called whenever an individual advert completes
-sub thd_cb_advert_end(miid as String)
-  YO_TRACE("(thread) ADVERT END for {0}", miid)
-
+sub onAdEnd(miid as String)
   m.top.AdvertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid
 end sub
 
 ' Called whenever the player exits an advert break
-sub thd_cb_ad_break_end(dummy as Dynamic)
-  YO_TRACE("(thread) AD BREAK END")
-
+sub onAdBreakEnd(dummy as Dynamic
   updateCanSeek()
 
   m.top.AdBreakEnd = "yes"
@@ -144,7 +128,7 @@ sub thd_cb_ad_break_end(dummy as Dynamic)
   end if
 end sub
 
-sub thd_cb_update_timeline(tl as Dynamic)
+sub updateTimeline(tl as Dynamic)
   if (tl <> invalid) then
 
     flatTimeline = []
@@ -176,18 +160,13 @@ sub thd_cb_update_timeline(tl as Dynamic)
       duration = duration + ele.GetDuration()
     end for
 
-    YO_DEBUG("Timeline is valid. Duration: {0}", duration)
-
     tlreport = {}
     tlreport["elements"] = flatTimeline
     tlreport["duration"] = duration
     tlreport["offset"] = tl.GetStartOffset()
     m.top.Timeline = tlreport
 
-    YO_DEBUG("Timeline field updated")
     updateAdList()
-  else
-    YO_WARN("Timeline is invalid")
   end if
 end sub
 
@@ -292,11 +271,11 @@ end sub
 
 sub requestYospaceURL(data)
   if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE)
-    m.session.CreateForLive(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
+    m.session.CreateForLive(data.url, data.options, yo_Callback(onSessionReady, m))
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.VOD)
-    m.session.CreateForVOD(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
+    m.session.CreateForVOD(data.url, data.options, yo_Callback(onSessionReady, m))
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE)
-    m.session.CreateForNonLinear(data.url, data.options, yo_Callback(thd_cb_session_ready, m))
+    m.session.CreateForNonLinear(data.url, data.options, yo_Callback(onSessionReady, m))
   end if
 end sub
 

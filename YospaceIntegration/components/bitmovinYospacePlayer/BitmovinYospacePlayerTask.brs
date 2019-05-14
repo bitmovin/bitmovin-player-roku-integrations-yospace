@@ -1,4 +1,4 @@
-onAdBreakEndsub init()
+sub init()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
@@ -85,14 +85,14 @@ sub onAdBreakStart(dummy as Dynamic)
 
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak())
-  m.top.AdBreakStart = "yes"
+  m.top.adBreakStart = "yes"
 end sub
 
 ' Called whenever an individual advert starts
 sub onAdStart(miid as String)
   updateCanSeek()
 
-  m.top.AdvertStart = miid
+  m.top.advertStart = miid
 
   advert = getCurrentAd()
 
@@ -106,16 +106,16 @@ end sub
 
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as String)
-  m.top.AdvertEnd = miid
+  m.top.advertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid
 end sub
 
 ' Called whenever the player exits an advert break
-sub onAdBreakEnd(dummy as Dynamic
+sub onAdBreakEnd(dummy as Dynamic)
   updateCanSeek()
 
-  m.top.AdBreakEnd = "yes"
+  m.top.adBreakEnd = "yes"
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
 
@@ -137,34 +137,34 @@ sub updateTimeline(tl as Dynamic)
 
     YO_DEBUG("Element count: {0}", elements.Count())
 
-    for each ele in elements
-      if ele.GetType() = "VOD" then
+    for each element in elements
+      if element.GetType() = "VOD" then
         ' Add a simply VOD element
-        flatTimeline.Push({mode:"VOD", size:ele.GetDuration(), offset:ele.GetOffset()})
-      else if ele.GetType() = "LIVE" then
+        flatTimeline.Push({mode:"VOD", size:element.GetDuration(), offset:element.GetOffset()})
+      else if element.GetType() = "LIVE" then
         ' Add a piece of live content
-        flatTimeline.Push({mode:"LIVE", size:ele.GetDuration(), offset:ele.GetOffset()})
+        flatTimeline.Push({mode:"LIVE", size:element.GetDuration(), offset:element.GetOffset()})
       else
         ' For advert breaks, we are given the entire break
-        ads = ele.GetAdverts().GetAdverts()
+        ads = element.GetAdverts().GetAdverts()
 
         ' So we will iterate through the break to add individual ad pieces
         for each ad in ads
           ' Add a single advert item. Notionally, IsActive() means that the
           ' ad should be watched and should not be "skippable"
-          flatTimeline.Push({mode:"ADVERT", size:ad.GetDuration(), offset:ele.GetOffset(), state:ad.IsActive()})
+          flatTimeline.Push({mode:"ADVERT", size:ad.GetDuration(), offset:element.GetOffset(), state:ad.IsActive()})
         end for
       end if
 
       ' Record the duration into the total duration count
-      duration = duration + ele.GetDuration()
+      duration = duration + element.GetDuration()
     end for
 
     tlreport = {}
     tlreport["elements"] = flatTimeline
     tlreport["duration"] = duration
     tlreport["offset"] = tl.GetStartOffset()
-    m.top.Timeline = tlreport
+    m.top.timeline = tlreport
 
     updateAdList()
   end if
@@ -190,7 +190,7 @@ sub updateAdList()
   end if
 end sub
 
-sub ad_skip()
+sub skipAd()
   if isAdActive()
     if m.policy.canSkip() = 0
       ad = getCurrentAd()
@@ -296,8 +296,8 @@ sub reportPlayerEvent(data)
 end sub
 
 sub callAdFunction(data)
-  if data.id = "ad_skip"
-    ad_skip()
+  if data.id = "skipAd"
+    skipAd()
   else if data.id = "seek"
     seek(data.arguments)
   else if data.id = "pause"

@@ -2,11 +2,12 @@
 	<interface>
 		<field id="bitmovinYospacePlayer" type="node" />
 
-	  <field id="AdBreakStart" type="String" alwaysNotify="true" />
-	  <field id="AdBreakEnd" type="String" alwaysNotify="true" />
-	  <field id="AdvertStart" type="String" alwaysNotify="true" />
-	  <field id="AdvertEnd" type="String" alwaysNotify="true" />
-	  <field id="Timeline" type="assocarray" alwaysNotify="true" />
+	  <field id="adBreakStart" type="String" alwaysNotify="true" />
+	  <field id="adBreakEnd" type="String" alwaysNotify="true" />
+	  <field id="advertStart" type="String" alwaysNotify="true" />
+	  <field id="advertEnd" type="String" alwaysNotify="true" />
+	  <field id="timeline" type="assocarray" alwaysNotify="true" />
+		<field id="adSkipped" type="Boolean" alwaysNotify="true" />
 
 		<field id="taskReady" type="Boolean" alwaysNotify="true" />
 
@@ -24,8 +25,6 @@
 		<field id="activeAdBreak" type="assocarray" />
 		<field id="activeAd" type="assocarray" />
 		<field id="callAdFunction" type="assocarray" alwaysNotify="true" />
-
-		<field id="adSkipped" type="Boolean" alwaysNotify="true" />
 	</interface>
 
 	<script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayerTask.brs" />

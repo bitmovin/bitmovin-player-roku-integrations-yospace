@@ -12,6 +12,13 @@ sub init()
       LIVE: "live",
       VOD: "vod",
       V_LIVE: "vlive"
+    },
+    AdFunctions: {
+      AD_SKIP: "skipAd",
+      SEEK: "seek",
+      PAUSE: "pause",
+      MUTE: "mute",
+      SET_CONTENT_METADATA. "setContentMetadata"
     }
   }
 
@@ -297,20 +304,20 @@ sub reportPlayerEvent(data)
 end sub
 
 sub callAdFunction(data)
-  if data.id = "skipAd"
+  if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.AD_SKIP
     skipAd()
-  else if data.id = "seek"
+  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.SEEK
     seek(data.arguments)
-  else if data.id = "pause"
+  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.PAUSE
     pause(data.arguments)
-  else if data.id = "mute"
+  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.MUTE
     mute(data.arguments)
-  else if data.id = "setContentMetaData"
+  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   end if
 end sub
 
-sub setContentMetaData(genre, id, length)
+sub setContentMetadata(genre, id, length)
   bridge = GetGlobalAA().taskman
   bridge.SetContentGenre(genre)
   bridge.SetContentId(id)

@@ -2,25 +2,7 @@ sub init()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
-  m.BitmovinYospaceTaskEnums = {
-    ObservableFields: {
-      STREAM_CONTENT: "StreamContent",
-      EVENT_REPORT: "EventReport",
-      CALL_AD_FUNCTION: "callAdFunction"
-    },
-    StreamType: {
-      LIVE: "live",
-      VOD: "vod",
-      V_LIVE: "vlive"
-    },
-    Functions: {
-      AD_SKIP: "skipAd",
-      SEEK: "seek",
-      PAUSE: "pause",
-      MUTE: "mute",
-      SET_CONTENT_METADATA, "setContentMetadata"
-    }
-  }
+  m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
 
   YO_LOGLEVEL(YospaceVerbosity().INFO)
   m.top.functionName  = "MonitorSDK"
@@ -62,7 +44,7 @@ sub MonitorSDK()
       else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT)
         reportPlayerEvent(data)
       else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION)
-        callAdFunction(data)
+        callFunction(data)
       end if
     else
       tasks = GetGlobalAA().taskman
@@ -302,8 +284,8 @@ sub reportPlayerEvent(data)
   end if
 end sub
 
-sub callAdFunction(data)
-  if data.id = m.BitmovinYospaceTaskEnums.Functions.AD_SKIP
+sub callFunction(data)
+  if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
     skipAd()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEEK
     seek(data.arguments)

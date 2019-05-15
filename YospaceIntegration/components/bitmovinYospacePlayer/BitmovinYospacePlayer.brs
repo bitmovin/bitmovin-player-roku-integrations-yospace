@@ -1,6 +1,7 @@
 sub init()
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
+  m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
   m.TIMELINE_ENTRY_TYPE_ADVERT = "ADVERT"
 
   m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
@@ -115,7 +116,7 @@ sub play(params)
 end sub
 
 sub pause(params)
-  m.yospaceTask.callAdFunction = {id: "pause", arguments: params}
+  m.yospaceTask.callAdFunction = {id: m.BitmovinYospaceTaskEnums.Functions.PAUSE, arguments: params}
 end sub
 
 sub unload(params)
@@ -127,7 +128,7 @@ sub preload(params)
 end sub
 
 sub seek(params)
-  m.yospaceTask.callAdFunction = {id: "seek", arguments: params}
+  m.yospaceTask.callAdFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SEEK, arguments: params}
 end sub
 
 ' OVERRIDEN load method
@@ -138,7 +139,7 @@ sub load(params)
 end sub
 
 sub mute(params)
-  m.yospaceTask.callAdFunction = {id: "mute", arguments: params}
+  m.yospaceTask.callAdFunction = {id: m.BitmovinYospaceTaskEnums.Functions.MUTE, arguments: params}
 end sub
 
 sub unmute(params)
@@ -213,7 +214,7 @@ end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  m.yospaceTask.callAdFunction = {id: "skipAd"}
+  m.yospaceTask.callAdFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
 end sub
 
 function ad_list()

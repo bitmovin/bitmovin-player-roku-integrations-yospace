@@ -22,8 +22,8 @@
     <field id="warning" type="assocarray" alwaysNotify="true" />
 
     <!-- Ad specific fields -->
-    <field id="adBreakStarted" type="string" alwaysNotify="true" />
-    <field id="adBreakFinished" type="string" alwaysNotify="true" />
+    <field id="adBreakStarted" type="Boolean" alwaysNotify="true" />
+    <field id="adBreakFinished" type="Boolean" alwaysNotify="true" />
     <field id="adFinished" type="string" alwaysNotify="true" />
     <field id="adQuartile" type="integer" alwaysNotify="true" />
     <field id="adSkipped" type="string" alwaysNotify="true" />

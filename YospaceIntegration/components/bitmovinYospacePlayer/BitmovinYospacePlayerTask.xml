@@ -2,8 +2,8 @@
 	<interface>
 		<field id="bitmovinYospacePlayer" type="node" />
 
-	  <field id="adBreakStart" type="String" alwaysNotify="true" />
-	  <field id="adBreakEnd" type="String" alwaysNotify="true" />
+	  <field id="adBreakStart" type="Boolean" alwaysNotify="true" />
+	  <field id="adBreakEnd" type="Boolean" alwaysNotify="true" />
 	  <field id="advertStart" type="String" alwaysNotify="true" />
 	  <field id="advertEnd" type="String" alwaysNotify="true" />
 	  <field id="timeline" type="assocarray" alwaysNotify="true" />

@@ -91,7 +91,7 @@ sub onAdBreakStart(dummy as Dynamic)
 
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak())
-  m.top.adBreakStart = "yes"
+  m.top.adBreakStart = true
 end sub
 
 ' Called whenever an individual advert starts
@@ -121,7 +121,7 @@ end sub
 sub onAdBreakEnd(dummy as Dynamic)
   updateCanSeek()
 
-  m.top.adBreakEnd = "yes"
+  m.top.adBreakEnd = true
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
 

@@ -257,7 +257,7 @@ end sub
 
 sub checkIfSeekWasAllowed()
   currentPlayerPosition = m.top.bitmovinYospacePlayer.currentTime
-  ' Since there is no way of stopping the default UI and its build in key event handler
+  ' Since there is no way of stopping the default UI and its build-in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.

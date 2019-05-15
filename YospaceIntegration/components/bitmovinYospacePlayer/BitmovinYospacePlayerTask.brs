@@ -282,6 +282,7 @@ sub requestYospaceURL(data)
     m.top.IsLive = false
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE)
     m.session.CreateForNonLinear(data.url, data.options, yo_Callback(onSessionReady, m))
+    m.top.IsLive = true
   end if
 end sub
 

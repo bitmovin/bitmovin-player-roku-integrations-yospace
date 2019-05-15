@@ -202,8 +202,6 @@ sub skipAd()
       ad = getCurrentAd()
       m.top.bitmovinYospacePlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
       m.top.adSkipped = ad.GetMediaID()
-    else
-      print "Skip not allowed!"
     end if
   end if
 end sub

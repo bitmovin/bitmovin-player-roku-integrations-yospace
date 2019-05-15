@@ -13,12 +13,12 @@ sub init()
       VOD: "vod",
       V_LIVE: "vlive"
     },
-    AdFunctions: {
+    Functions: {
       AD_SKIP: "skipAd",
       SEEK: "seek",
       PAUSE: "pause",
       MUTE: "mute",
-      SET_CONTENT_METADATA. "setContentMetadata"
+      SET_CONTENT_METADATA, "setContentMetadata"
     }
   }
 
@@ -257,7 +257,7 @@ end sub
 
 sub checkIfSeekWasAllowed()
   currentPlayerPosition = m.top.bitmovinYospacePlayer.currentTime
-  ' Since there is no way of stopping the default UI and its build-in key event handler
+  ' Since there is no way of stopping the default UI and its built-in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
@@ -302,15 +302,15 @@ sub reportPlayerEvent(data)
 end sub
 
 sub callAdFunction(data)
-  if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.AD_SKIP
+  if data.id = m.BitmovinYospaceTaskEnums.Functions.AD_SKIP
     skipAd()
-  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.SEEK
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEEK
     seek(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.PAUSE
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.PAUSE
     pause(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.MUTE
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MUTE
     mute(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.AdFunctions.SET_CONTENT_METADATA
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   end if
 end sub

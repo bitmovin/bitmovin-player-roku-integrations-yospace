@@ -3,7 +3,7 @@ function getBitmovinYospaceTaskEnum()
     ObservableFields: {
       STREAM_CONTENT: "StreamContent",
       EVENT_REPORT: "EventReport",
-      CALL_AD_FUNCTION: "callAdFunction"
+      CALL_FUNCTION: "callFunction"
     },
     StreamType: {
       LIVE: "live",

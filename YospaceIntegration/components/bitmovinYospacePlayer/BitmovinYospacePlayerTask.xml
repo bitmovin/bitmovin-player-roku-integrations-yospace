@@ -24,7 +24,7 @@
 		<field id="adList" type="array" />
 		<field id="activeAdBreak" type="assocarray" />
 		<field id="activeAd" type="assocarray" />
-		<field id="callAdFunction" type="assocarray" alwaysNotify="true" />
+		<field id="callFunction" type="assocarray" alwaysNotify="true" />
 	</interface>
 
 	<script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayerTask.brs" />

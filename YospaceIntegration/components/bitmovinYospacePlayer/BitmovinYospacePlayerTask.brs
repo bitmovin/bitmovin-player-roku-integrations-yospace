@@ -29,7 +29,7 @@ sub MonitorSDK()
   port = CreateObject("roMessagePort")
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT, port)
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT, port)
-  m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION, port)
+  m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION, port)
   m.top.taskReady = true
 
   while true
@@ -43,7 +43,7 @@ sub MonitorSDK()
         requestYospaceURL(data)
       else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT)
         reportPlayerEvent(data)
-      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.CALL_AD_FUNCTION)
+      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION)
         callFunction(data)
       end if
     else

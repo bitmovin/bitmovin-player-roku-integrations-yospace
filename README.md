@@ -24,6 +24,7 @@ Clone Git repository
   - Download Yospace SDK
   - Create a folder in your source folder called `yospace`
   - Put the Yospace SDK into the newly created `./source/yospace` folder. _If you want to create a different folder structure you need to change the import of the `Yospace SDK` at the end of the `BitmovinYospacePlayer.xml` file_
+  - Set the flag `USE_LOADER_TASK` in `./source/yospace/Utils/YORokuTasks.brs` to `false`
 2. Copy the `bitmovinYospacePlayer` folders from the `components` and `source` folders to your `components` and `source` folders respectively.
 3. Create an instance of `BitmovinYospacePlayer`
   ```Brightscript

@@ -295,6 +295,8 @@ sub callFunction(data)
     mute(data.arguments)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
+    setDebugLevel(data.arguments.debugLevel)
   end if
 end sub
 
@@ -303,4 +305,8 @@ sub setContentMetadata(genre, id, length)
   bridge.SetContentGenre(genre)
   bridge.SetContentId(id)
   bridge.SetContentLength(length)
+end sub
+
+sub setDebugLevel(debugLevel)
+  YO_DEBUG(debugLevel)
 end sub

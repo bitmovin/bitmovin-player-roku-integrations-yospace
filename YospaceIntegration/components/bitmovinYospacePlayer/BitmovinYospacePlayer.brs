@@ -96,7 +96,7 @@ end sub
 sub setup(params)
   ' yospace config
   if params.yospaceConfig.debugVerbosity <> invalid
-    YO_LOGLEVEL(params.yospaceConfig.debugVerbosity)
+    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL, arguments: {debugLevel: params.yospaceConfig.debugVerbosity}}
   end if
   config = {}
   config.append(params.config)

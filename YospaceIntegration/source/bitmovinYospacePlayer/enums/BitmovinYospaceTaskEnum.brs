@@ -15,7 +15,8 @@ function getBitmovinYospaceTaskEnum()
       SEEK: "seek",
       PAUSE: "pause",
       MUTE: "mute",
-      SET_CONTENT_METADATA: "setContentMetadata"
+      SET_CONTENT_METADATA: "setContentMetadata",
+      SET_DEBUG_LEVEL: "setDebugLevel"
     }
   }
 end function

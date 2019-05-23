@@ -4,7 +4,6 @@ sub init()
 
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
 
-  YO_LOGLEVEL(YospaceVerbosity().INFO)
   m.top.functionName  = "MonitorSDK"
   m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.session   = YSSessionManager()
@@ -308,5 +307,5 @@ sub setContentMetadata(genre, id, length)
 end sub
 
 sub setDebugLevel(debugLevel)
-  YO_DEBUG(debugLevel)
+  YO_LOGLEVEL(debugLevel)
 end sub

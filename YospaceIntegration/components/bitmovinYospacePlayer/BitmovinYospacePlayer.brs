@@ -341,5 +341,5 @@ sub onAdSkipped()
 end sub
 
 sub setContentMetaData(genre, id, length)
-  m.yospaceTask.callFunction = {id: "setContentMetaData", arguments: [genre, id, length]}
+  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA, arguments: [genre, id, length]}
 end sub

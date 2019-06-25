@@ -1,6 +1,45 @@
 # Bitmovin Player Yospace Integration
 Bitmovin Player integration with the Yospace AdManagement SDK
 This integration completely encapsulates the usage of Yospace. After creating the player it can be used like a normal Bitmovin Player instance.
+The API reference for the Bitmovin Roku Player can be found here https://bitmovin.com/docs/player/api-reference/roku.
+Furthermore there are some ad-specific fields and functions exclusive to the yospace integration.
+
+Those exclusives are the following:
+  Fields:
+    - `adBreakStarted`: boolean
+      Is set to true once an ad break starts
+
+    - `adBreakFinished`: boolean
+      Is set to true once an ad break finishes
+
+    - `adFinished`: boolean
+      Is set to true once an ad finishes
+
+    - `adQuartile`: number
+      Changes based on the current ad quartile
+
+    - `adSkipped`: boolean
+      Is set to true if an ad has been skipped
+
+    - `adStarted`: boolean
+      Is set to true once an ad starts
+
+  Functions:  
+   - `ad_getActiveAd` ad_getActiveAd() as assocarray
+      Returns the currently active ad, if no ad is active returns `invalid`
+
+   - `ad_getActiveAdBreak`: ad_getActiveAdBreak() as assocarray
+      Returns the currently active ad break, if no ad break is active returns `invalid`
+
+   - `ad_list`: ad_list() as assocarray
+      Returns a list of all ads
+
+   - `ad_skip`: ad_skip() as void
+      Skips the currently active ad, has no effect if no ad is currently active
+
+   - `setContentMetaData`: setContentMetaData(genre, id, length) as void
+      Sets the demographic information required by RAF
+
 
 ## Compatibility
 **This version of the Yospace Integration works only with Bitmovin Player Version >= 1.4.x.

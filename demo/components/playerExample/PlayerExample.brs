@@ -15,20 +15,19 @@ function onPlayerReady()
     m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
 
     ' Set ad events listeners
-      m.bitmovinYospacePlayer.ObserveField("adBreakStart", "onAdBreakStart")
-      m.bitmovinYospacePlayer.ObserveField("adStart", "onAdStart")
-      m.bitmovinYospacePlayer.ObserveField("adFinished", "onAdFinished")
-      m.bitmovinYospacePlayer.ObserveField("adBreakFinished", "onAdBreakFinished")
+    m.bitmovinYospacePlayer.ObserveField("adBreakStart", "onAdBreakStart")
+    m.bitmovinYospacePlayer.ObserveField("adStart", "onAdStart")
+    m.bitmovinYospacePlayer.ObserveField("adFinished", "onAdFinished")
+    m.bitmovinYospacePlayer.ObserveField("adBreakFinished", "onAdBreakFinished")
 
-      ' Set time change events listeners
-      m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
-      m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEKED, "onSeeked")
-      m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
+    ' Set time change events listeners
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEKED, "onSeeked")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
 
-      ' Set error and warning event listeners
-      m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
-      m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
-
+    ' Set error and warning event listeners
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
 
     m.top.appendChild(m.bitmovinYospacePlayer)
 

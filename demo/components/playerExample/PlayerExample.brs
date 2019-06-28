@@ -39,8 +39,6 @@ function onPlayerReady()
     }
 
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
-
-    print m.bitmovinYospacePlayer
   end if
 end function
 
@@ -82,9 +80,4 @@ end sub
 
 sub catchVideoWarning()
   print "WARNING: "; m.bitmovinYospacePlayer.warning.code.toStr() + ": " + m.bitmovinYospacePlayer.warning.message
-end sub
-
-' Setting a policy
-sub setPolicy()
-
 end sub

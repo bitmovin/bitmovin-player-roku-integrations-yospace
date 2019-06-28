@@ -68,6 +68,8 @@
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/BitmovinYospaceFieldEnum.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/BitmovinYospaceFunctionEnum.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/BitmovinYospaceTaskEnum.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
 

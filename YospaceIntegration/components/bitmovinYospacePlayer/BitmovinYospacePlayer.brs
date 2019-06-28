@@ -19,8 +19,14 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
     m.bitmovinPlayer.id = "BitmovinPlayer"
 
-    m.top.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
-    m.top.BitmovinFields = m.bitmovinPlayer.BitmovinFields
+    m.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
+    m.BitmovinFunctions.Append(getYospaceRelatedFunctions())
+    m.top.BitmovinFunctions = m.BitmovinFunctions
+
+    m.BitmovinFields = m.bitmovinPlayer.BitmovinFields
+    m.BitmovinFields.Append(getYospaceRelatedFields())
+    m.top.BitmovinFields = m.BitmovinFields
+
     m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
 
     m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.ERROR, "catchVideoError")

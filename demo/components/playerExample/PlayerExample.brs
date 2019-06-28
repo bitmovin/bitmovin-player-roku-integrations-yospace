@@ -15,10 +15,10 @@ function onPlayerReady()
     m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
 
     ' Set ad events listeners
-    m.bitmovinYospacePlayer.ObserveField("adBreakStart", "onAdBreakStart")
-    m.bitmovinYospacePlayer.ObserveField("adStart", "onAdStart")
-    m.bitmovinYospacePlayer.ObserveField("adFinished", "onAdFinished")
-    m.bitmovinYospacePlayer.ObserveField("adBreakFinished", "onAdBreakFinished")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_STARTED, "onAdBreakStart")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_STARTED, "onAdStart")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_FINISHED, "onAdFinished")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_FINISHED, "onAdBreakFinished")
 
     ' Set time change events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")

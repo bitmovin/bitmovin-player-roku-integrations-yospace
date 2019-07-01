@@ -1,10 +1,14 @@
 function mapAd(ad)
+  mediaFiles = ad.GetAdvert().GetLinear().GetMediaFiles()
+  url = invalid
+  if mediaFiles.count() > 0 then url = ad.GetAdvert().GetLinear().GetMediaFiles()[0].src
+
   return {
     isLinear: true,
     duration: ad.GetDuration(),
     id: ad.GetAdvert().GetId(),
     clickThroughUrl: ad.GetAdvert().GetLinear().GetClickThrough(),
-    mediaFileUrl:  ad.GetAdvert().GetLinear().GetMediaFiles()[0].src,
+    mediaFileUrl: url,
     skippableAfter: ad.GetAdvert().GetLinear().GetSkipOffset()
   }
 end function

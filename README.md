@@ -1,7 +1,7 @@
 # Bitmovin Player Yospace Integration
 Bitmovin Player integration with the Yospace AdManagement SDK
 This integration completely encapsulates the usage of Yospace. After creating the player it can be used like a normal Bitmovin Player instance.
-The API reference for the Bitmovin Roku Player can be found here https://bitmovin.com/docs/player/api-reference/roku.
+The API reference for the Bitmovin Roku Player can be found [here](https://bitmovin.com/docs/player/api-reference/roku).
 Furthermore there are some ad-specific fields and functions exclusive to the Yospace integration.
 
 Those exclusives are the following:

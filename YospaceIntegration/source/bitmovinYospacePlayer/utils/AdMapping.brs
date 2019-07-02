@@ -1,7 +1,7 @@
 function mapAd(ad)
   mediaFiles = ad.GetAdvert().GetLinear().GetMediaFiles()
   url = invalid
-  if mediaFiles.count() > 0 then url = ad.GetAdvert().GetLinear().GetMediaFiles()[0].src
+  if mediaFiles.count() > 0 then url = mediaFiles[0].src
 
   return {
     isLinear: true,

@@ -32,7 +32,7 @@ function getExamplePlayerConfigLive()
   }
 end function
 
-function getExamplePlayerConfigEncrypted()
+function getExamplePlayerConfigWidevineVod()
   return {
     playback: {
       autoplay: true,
@@ -42,16 +42,35 @@ function getExamplePlayerConfigEncrypted()
       preload: false
     },
     source: {
-      hls: "http://csm-e.cds1.yospace.com/access/d/400/u/0/1/130782300?f=0000130753172&format=vmap",
+      hls: "http://example.com/vod.m3u8",
       title: "Test video"
       assetType: "vod"
     },
     drm: {
       Widevine: {
-        LA_URL: "https://proxy.uat.widevine.com/proxy?video_id=HDCP_V1&provider=widevine_test"
-      },
-      PlayReady: {
-        LA_URL: "http://playready.directtaps.net/pr/svc/rightsmanager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1"
+        LA_URL: "https://example.com/widevine/license" '
+      }
+    }
+  }
+end function
+
+function getExamplePlayerConfigPlayreadyVod()
+  return {
+    playback: {
+      autoplay: true,
+      muted: true
+    },
+    adaptation: {
+      preload: false
+    },
+    source: {
+      hls: "http://example.com/vod.m3u8",
+      title: "Test video"
+      assetType: "vod"
+    },
+    drm: {
+      Widevine: {
+        LA_URL: "https://example.com/widevine/license" '
       }
     }
   }

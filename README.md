@@ -1,6 +1,50 @@
 # Bitmovin Player Yospace Integration
 Bitmovin Player integration with the Yospace AdManagement SDK
 This integration completely encapsulates the usage of Yospace. After creating the player it can be used like a normal Bitmovin Player instance.
+The API reference for the Bitmovin Roku Player can be found [here](https://bitmovin.com/docs/player/api-reference/roku).
+Furthermore, there are some ad-specific fields and functions exclusive to the Yospace integration:
+
+**Fields:**
+
+- `adBreakStarted`: boolean  
+  Is set to true once an ad break starts
+
+- `adBreakFinished`: boolean  
+  Is set to true once an ad break finishes
+
+- `adFinished`: boolean  
+  Is set to true once an ad finishes
+
+- `adQuartile`: number  
+  Changes based on the current ad quartile
+
+- `adSkipped`: boolean  
+  Is set to true if an ad has been skipped
+
+- `adStarted`: boolean  
+  Is set to true once an ad starts  
+
+**Functions:**  
+
+- `ad_getActiveAd` ad_getActiveAd() as assocarray  
+  Returns the currently active ad, if no ad is active returns `invalid`
+
+- `ad_getActiveAdBreak`: ad_getActiveAdBreak() as assocarray  
+  Returns the currently active ad break, if no ad break is active returns `invalid`
+
+- `ad_list`: ad_list() as assocarray  
+  Returns a list of all ads
+
+- `ad_skip`: ad_skip() as void  
+  Skips the currently active ad, has no effect if no ad is currently active
+
+- `setContentMetaData`: setContentMetaData(genre, id, length) as void  
+  Sets the demographic information required by RAF
+
+
+## Ad policy
+The ad policy can be found and edited in `./source/BitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs`.
+_If you want to create your own file containing the policy or want to rename the existing one make sure to also rename the script import in `BitmovinPlayerTask.xml`. Naturally, if the function `getDefaultBitmovinYospacePlayerPolicy()` is renamed the function call in `BitmovinPlayerTask.xml` also has to be renamed._
 
 ## Compatibility
 **This version of the Yospace Integration works only with Bitmovin Player Version >= 1.4.x.
@@ -31,4 +75,4 @@ Clone Git repository
   m.bitmovinPlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
   ```
 
-  For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` inside the `demo/components/playerExample/` folder.
+**For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` as well as `playerExampleConfig.brs` inside the `demo/components/playerExample/` folder.**

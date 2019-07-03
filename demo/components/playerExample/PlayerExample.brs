@@ -25,6 +25,10 @@ function onPlayerReady()
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEKED, "onSeeked")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
 
+    ' Set playing events listeners
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.PLAY, "onPLay")
+
     ' Set error and warning event listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
@@ -71,6 +75,15 @@ end sub
 
 sub onSeeked()
   print "SEEKED: "; m.bitmovinYospacePlayer.seeked
+end sub
+
+' Listening to playing events
+sub onPlayerStateChanged()
+  print "CHANGED TO PLAYER STATE: "; m.bitmovinYospacePlayer.playerState
+end sub
+
+sub onPlay()
+  print "PLAY"
 end sub
 
 ' Listening to error and warning events

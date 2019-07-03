@@ -27,7 +27,7 @@ function onPlayerReady()
 
     ' Set playing events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
-    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.PLAY, "onPLay")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.PLAY, "onPlay")
 
     ' Set error and warning event listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")

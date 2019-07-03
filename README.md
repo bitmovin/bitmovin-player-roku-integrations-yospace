@@ -41,9 +41,10 @@ Furthermore, there are some ad-specific fields and functions exclusive to the Yo
 - `setContentMetaData`: setContentMetaData(genre, id, length) as void  
   Sets the demographic information required by RAF
 
+
+## Ad policy
 The ad policy can be found and edited in `./source/BitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs`.
-Due to BrightScripts limitations it is not possible to pass functions to components.  
-_If you want to create your own file containing the policy or want to rename the existing one make sure to also rename the script import in `BitmovinPlayerTask.xml`_
+_If you want to create your own file containing the policy or want to rename the existing one make sure to also rename the script import in `BitmovinPlayerTask.xml`. Naturally, if the function `getDefaultBitmovinYospacePlayerPolicy()` is renamed the function call in `BitmovinPlayerTask.xml` also has to be renamed._
 
 ## Compatibility
 **This version of the Yospace Integration works only with Bitmovin Player Version >= 1.4.x.

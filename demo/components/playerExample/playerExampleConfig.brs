@@ -48,7 +48,7 @@ function getExamplePlayerConfigWidevineVod()
     },
     drm: {
       Widevine: {
-        LA_URL: "https://example.com/widevine/license" '
+        LA_URL: "https://example.com/widevine/license"
       }
     }
   }
@@ -70,7 +70,7 @@ function getExamplePlayerConfigPlayreadyVod()
     },
     drm: {
       Widevine: {
-        LA_URL: "https://example.com/widevine/license" '
+        LA_URL: "https://example.com/playready/license"
       }
     }
   }

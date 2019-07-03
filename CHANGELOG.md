@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Support for a custom Yospace ad policy as well as a default policy if none is set.
 - Fire `adBreakStart`, `adStart`, `adBreakFinished` and `adBreakFinished` respectively
 
+### Fixed
+- A Crash when ads with no source are received.
+
 ### Internal
 - The BitmovinPlayer component is now being loaded inside the BitmovinYospacePlayer component
   and does not require a separate xml component.

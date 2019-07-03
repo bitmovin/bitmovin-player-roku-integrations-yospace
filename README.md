@@ -2,43 +2,44 @@
 Bitmovin Player integration with the Yospace AdManagement SDK
 This integration completely encapsulates the usage of Yospace. After creating the player it can be used like a normal Bitmovin Player instance.
 The API reference for the Bitmovin Roku Player can be found [here](https://bitmovin.com/docs/player/api-reference/roku).
-Furthermore there are some ad-specific fields and functions exclusive to the Yospace integration.
+Furthermore, there are some ad-specific fields and functions exclusive to the Yospace integration:
 
-Those exclusives are the following:
-  Fields:
-    - `adBreakStarted`: boolean
-      Is set to true once an ad break starts
+**Fields:**
 
-    - `adBreakFinished`: boolean
-      Is set to true once an ad break finishes
+- `adBreakStarted`: boolean  
+  Is set to true once an ad break starts
 
-    - `adFinished`: boolean
-      Is set to true once an ad finishes
+- `adBreakFinished`: boolean  
+  Is set to true once an ad break finishes
 
-    - `adQuartile`: number
-      Changes based on the current ad quartile
+- `adFinished`: boolean  
+  Is set to true once an ad finishes
 
-    - `adSkipped`: boolean
-      Is set to true if an ad has been skipped
+- `adQuartile`: number  
+  Changes based on the current ad quartile
 
-    - `adStarted`: boolean
-      Is set to true once an ad starts
+- `adSkipped`: boolean  
+  Is set to true if an ad has been skipped
 
-  Functions:  
-   - `ad_getActiveAd` ad_getActiveAd() as assocarray
-      Returns the currently active ad, if no ad is active returns `invalid`
+- `adStarted`: boolean  
+  Is set to true once an ad starts  
 
-   - `ad_getActiveAdBreak`: ad_getActiveAdBreak() as assocarray
-      Returns the currently active ad break, if no ad break is active returns `invalid`
+**Functions:**  
 
-   - `ad_list`: ad_list() as assocarray
-      Returns a list of all ads
+- `ad_getActiveAd` ad_getActiveAd() as assocarray  
+  Returns the currently active ad, if no ad is active returns `invalid`
 
-   - `ad_skip`: ad_skip() as void
-      Skips the currently active ad, has no effect if no ad is currently active
+- `ad_getActiveAdBreak`: ad_getActiveAdBreak() as assocarray  
+  Returns the currently active ad break, if no ad break is active returns `invalid`
 
-   - `setContentMetaData`: setContentMetaData(genre, id, length) as void
-      Sets the demographic information required by RAF
+- `ad_list`: ad_list() as assocarray  
+  Returns a list of all ads
+
+- `ad_skip`: ad_skip() as void  
+  Skips the currently active ad, has no effect if no ad is currently active
+
+- `setContentMetaData`: setContentMetaData(genre, id, length) as void  
+  Sets the demographic information required by RAF
 
 
 ## Compatibility
@@ -70,4 +71,4 @@ Clone Git repository
   m.bitmovinPlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
   ```
 
-  For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` inside the `demo/components/playerExample/` folder.
+**For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` as well as `playerExampleConfig.brs` inside the `demo/components/playerExample/` folder.**

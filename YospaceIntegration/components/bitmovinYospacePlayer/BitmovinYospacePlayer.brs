@@ -165,9 +165,7 @@ function isPlaying(params)
 end function
 
 function isPaused(params)
-  if m.policy.canPause()
-    return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
-  end if
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
 end function
 
 function isStalled(params)

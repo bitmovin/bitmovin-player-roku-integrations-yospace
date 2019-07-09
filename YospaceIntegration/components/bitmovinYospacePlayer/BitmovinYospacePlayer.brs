@@ -230,7 +230,7 @@ end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  if m.policy.canSkip()
+  if m.policy.canSkip() = 0
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
   end if
 end sub
@@ -345,13 +345,13 @@ end sub
 sub onAdBreakEnd()
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
-  currentElement = m.session.GetTimeline().GetElementAtTime(m.top.bitmovinYospacePlayer.currentTime)
-  if m.policyHelper_originalSeekDestination > -1
-    if (currentElement.GetOffset() + currentElement.GetDuration()) > m.policyHelper_originalSeekDestination
-      seek(m.policyHelper_originalSeekDestination)
-      m.policyHelper_originalSeekDestination = -1
-    end if
-  end if
+  ' currentElement = m.session.GetTimeline().GetElementAtTime(m.top.bitmovinYospacePlayer.currentTime)
+  ' if m.policyHelper_originalSeekDestination > -1
+  '   if (currentElement.GetOffset() + currentElement.GetDuration()) > m.policyHelper_originalSeekDestination
+  '     seek(m.policyHelper_originalSeekDestination)
+  '     m.policyHelper_originalSeekDestination = -1
+  '   end if
+  ' end if
 end sub
 
 sub onAdvertStart()

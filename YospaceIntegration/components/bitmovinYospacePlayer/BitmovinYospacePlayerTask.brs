@@ -24,6 +24,8 @@ sub MonitorSDK()
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION, port)
   m.top.taskReady = true
 
+  m.bitmovinPlayer = m.top.bitmovinYospacePlayer.findNode("BitmovinPlayer")
+
   while true
     msg = wait(500, port)
 
@@ -160,7 +162,7 @@ end sub
 sub skipAd()
   if isAdActive()
     ad = getCurrentAd()
-    m.top.bitmovinYospacePlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
+    m.bitmovinPlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
     m.top.adSkipped = ad.GetMediaID()
   end if
 end sub
@@ -183,10 +185,6 @@ function getAdStartTime(ad)
     end if
   end for
 end function
-
-sub seek(arguments)
-  m.top.bitmovinYospacePlayer.callFunc("seek", seekDestination)
-end sub
 
 sub requestYospaceURL(data)
   if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE)
@@ -220,8 +218,6 @@ end sub
 sub callFunction(data)
   if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
     skipAd()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEEK
-    seek(data.arguments)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL

@@ -77,8 +77,6 @@ end sub
 
 ' Called whenever an individual advert starts
 sub onAdStart(miid as String)
-  updateCanSeek()
-
   m.top.advertStart = miid
 
   advert = getCurrentAd()
@@ -100,8 +98,6 @@ end sub
 
 ' Called whenever the player exits an advert break
 sub onAdBreakEnd(dummy as Dynamic)
-  updateCanSeek()
-
   m.top.adBreakEnd = true
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
@@ -229,7 +225,6 @@ end sub
 sub onPlayerRegistered()
   m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEK, updatePolicyHelper_seekStartPosition)
   m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEKED, checkIfSeekWasAllowed)
-  updateCanSeek()
 end sub
 
 sub updatePolicyHelper_seekStartPosition()
@@ -248,10 +243,6 @@ sub checkIfSeekWasAllowed()
     m.top.bitmovinYospacePlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1
-end sub
-
-sub updateCanSeek()
-  m.top.canSeek = m.policy.canSeek()
 end sub
 
 sub requestYospaceURL(data)

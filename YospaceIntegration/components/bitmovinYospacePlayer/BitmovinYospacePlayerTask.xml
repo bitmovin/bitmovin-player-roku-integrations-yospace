@@ -19,7 +19,6 @@
 	  <field id="IsAdvert" type="Boolean" />
 	  <field id="IsActiveAd" type="Boolean" />
 	  <field id="StreamType" type="String" />
-		<field id="canSeek" type="Boolean" />
 
 		<field id="adList" type="array" />
 		<field id="activeAdBreak" type="assocarray" />

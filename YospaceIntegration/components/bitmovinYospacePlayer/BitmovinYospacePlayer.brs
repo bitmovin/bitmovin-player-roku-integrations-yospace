@@ -127,7 +127,7 @@ end sub
 
 sub pause(params)
   if m.policy.canPause()
-    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.PAUSE, arguments: params}
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.PAUSE, params)
   end if
 end sub
 

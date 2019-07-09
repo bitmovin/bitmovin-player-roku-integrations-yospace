@@ -184,10 +184,6 @@ function getAdStartTime(ad)
   end for
 end function
 
-sub pause(arguments)
-  m.top.bitmovinYospacePlayer.callFunc("pause", arguments)
-end sub
-
 sub seek(arguments)
   m.top.bitmovinYospacePlayer.callFunc("seek", seekDestination)
 end sub
@@ -226,8 +222,6 @@ sub callFunction(data)
     skipAd()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEEK
     seek(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.PAUSE
-    pause(data.arguments)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL

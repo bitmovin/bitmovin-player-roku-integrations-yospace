@@ -123,7 +123,9 @@ sub play(params)
 end sub
 
 sub pause(params)
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.PAUSE, arguments: params}
+  if m.policy.canPause()
+    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.PAUSE, arguments: params}
+  end if
 end sub
 
 sub unload(params)
@@ -135,7 +137,9 @@ sub preload(params)
 end sub
 
 sub seek(params)
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SEEK, arguments: params}
+  if m.policy.canSeek()
+    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SEEK, arguments: params}
+  end if
 end sub
 
 ' OVERRIDEN load method
@@ -146,7 +150,9 @@ sub load(params)
 end sub
 
 sub mute(params)
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.MUTE, arguments: params}
+  if m.policy.canMute()
+    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.MUTE, arguments: params}
+  end if
 end sub
 
 sub unmute(params)
@@ -219,7 +225,9 @@ end function
 
 ' ---------------------------- ad api ----------------------------
 sub ad_skip()
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
+  if m.policy.canSkip()
+    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
+  end if
 end sub
 
 function ad_list()

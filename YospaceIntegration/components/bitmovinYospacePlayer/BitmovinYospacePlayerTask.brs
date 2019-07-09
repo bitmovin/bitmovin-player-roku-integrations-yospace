@@ -5,7 +5,6 @@ sub init()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
 
   m.top.functionName  = "MonitorSDK"
-  m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
@@ -175,11 +174,9 @@ end sub
 
 sub skipAd()
   if isAdActive()
-    if m.policy.canSkip() = 0
-      ad = getCurrentAd()
-      m.top.bitmovinYospacePlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
-      m.top.adSkipped = ad.GetMediaID()
-    end if
+    ad = getCurrentAd()
+    m.top.bitmovinYospacePlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
+    m.top.adSkipped = ad.GetMediaID()
   end if
 end sub
 
@@ -203,23 +200,17 @@ function getAdStartTime(ad)
 end function
 
 sub mute(arguments)
-  if m.policy.canMute()
-    m.top.bitmovinYospacePlayer.callFunc("mute", arguments)
-  end if
+  m.top.bitmovinYospacePlayer.callFunc("mute", arguments)
 end sub
 
 sub pause(arguments)
-  if m.policy.canPause()
-    m.top.bitmovinYospacePlayer.callFunc("pause", arguments)
-  end if
+  m.top.bitmovinYospacePlayer.callFunc("pause", arguments)
 end sub
 
 sub seek(arguments)
-  if m.policy.canSeek()
-    seekDestination = m.policy.canSeekTo(arguments)
-    if seekDestination <> arguments then m.policyHelper_originalSeekDestination = m.top.bitmovinYospacePlayer.currentTime
-    m.top.bitmovinYospacePlayer.callFunc("seek", seekDestination)
-  end if
+  seekDestination = m.policy.canSeekTo(arguments)
+  if seekDestination <> arguments then m.policyHelper_originalSeekDestination = m.top.bitmovinYospacePlayer.currentTime
+  m.top.bitmovinYospacePlayer.callFunc("seek", seekDestination)
 end sub
 
 sub onPlayerRegistered()

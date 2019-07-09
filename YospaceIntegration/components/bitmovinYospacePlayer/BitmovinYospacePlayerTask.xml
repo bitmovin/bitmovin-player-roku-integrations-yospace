@@ -28,7 +28,6 @@
 
 	<script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayerTask.brs" />
 	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
-	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
 	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/BitmovinYospaceTaskEnum.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
 

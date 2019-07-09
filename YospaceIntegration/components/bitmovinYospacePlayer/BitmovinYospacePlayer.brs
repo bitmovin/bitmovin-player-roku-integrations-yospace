@@ -156,7 +156,7 @@ end sub
 
 sub mute(params)
   if m.policy.canMute()
-    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.MUTE, arguments: params}
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.MUTE, params)
   end if
 end sub
 

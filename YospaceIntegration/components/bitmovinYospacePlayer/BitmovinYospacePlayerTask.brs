@@ -14,9 +14,6 @@ sub init()
 
   GetGlobalAA().timer = YSTimer()
   GetGlobalAA().taskman = YORokuTasks()
-
-  m.top.observeField("bitmovinYospacePlayer", onPlayerRegistered)
-
   m.top.control = "RUN"
 end sub
 
@@ -187,10 +184,6 @@ function getAdStartTime(ad)
   end for
 end function
 
-sub mute(arguments)
-  m.top.bitmovinYospacePlayer.callFunc("mute", arguments)
-end sub
-
 sub pause(arguments)
   m.top.bitmovinYospacePlayer.callFunc("pause", arguments)
 end sub
@@ -235,8 +228,6 @@ sub callFunction(data)
     seek(data.arguments)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.PAUSE
     pause(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MUTE
-    mute(data.arguments)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL

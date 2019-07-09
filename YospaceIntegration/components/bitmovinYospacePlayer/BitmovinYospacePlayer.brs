@@ -3,6 +3,7 @@ sub init()
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
   m.TIMELINE_ENTRY_TYPE_ADVERT = "ADVERT"
+  m.policy = getDefaultBitmovinYospacePlayerPolicy()
 
   m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
   m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"

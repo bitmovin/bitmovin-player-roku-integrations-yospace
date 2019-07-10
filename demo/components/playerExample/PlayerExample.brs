@@ -19,6 +19,7 @@ function onPlayerReady()
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_STARTED, "onAdStart")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_FINISHED, "onAdFinished")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_FINISHED, "onAdBreakFinished")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_SKIPPED, "onAdSkipped")
 
     ' Set time change events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
@@ -40,7 +41,7 @@ function onPlayerReady()
     params = {
       config : m.playerConfig,
       yospaceConfig : {
-        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.TRACE
+        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.INFO
       }
     }
 
@@ -64,6 +65,10 @@ end sub
 
 sub onAdBreakFinished()
   print "Ad Break finished"
+end sub
+
+sub onAdSkipped()
+  print "Ad Skipped: "; m.BitmovinYospacePlayer.adSkipped
 end sub
 
 ' Listening to time change events

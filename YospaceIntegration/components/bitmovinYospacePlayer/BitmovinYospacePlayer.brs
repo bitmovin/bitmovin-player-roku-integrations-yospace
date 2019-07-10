@@ -1,4 +1,7 @@
 sub init()
+  m.top.id = CreateObject("roDeviceInfo").getRandomUuid()
+  m.top.observeFieldScoped("focusedChild", "onFocusChanged")
+
   m.source = {}
   m.top.DebugVerbosityEnum = getDebugVerbosityEnums()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
@@ -144,7 +147,7 @@ end sub
 
 sub seek(params)
   if m.policy.canSeek()
-    seekDestination = m.policy.canSeekTo(params)
+    seekDestination = m.policy.canSeekTo(params, m.bitmovinPlayer.currentTime)
     if seekDestination <> params then m.policyHelper_originalSeekDestination = m.top.currentTime
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
@@ -389,4 +392,10 @@ sub checkIfSeekWasAllowed()
     m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1
+end sub
+
+sub onFocusChanged(event)
+  if event.getNode() = m.top.id
+    m.bitmovinPlayer.setFocus(true)
+  end if
 end sub

@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - A Crash when ads with no source are received.
-- An endless loop when calling functions that involve policy checks
+- Endless loops when calling functions that involve policy checks
 
 ### Internal
 - The BitmovinPlayer component is now being loaded inside the BitmovinYospacePlayer component

@@ -35,6 +35,8 @@ function onPlayerReady()
 
     m.top.appendChild(m.bitmovinYospacePlayer)
 
+    m.bitmovinYospacePlayer.setFocus(true)
+
     params = {
       config : m.playerConfig,
       yospaceConfig : {

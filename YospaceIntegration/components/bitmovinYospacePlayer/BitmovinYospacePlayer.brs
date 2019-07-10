@@ -399,3 +399,7 @@ sub onFocusChanged(event)
     m.bitmovinPlayer.setFocus(true)
   end if
 end sub
+
+function getCurrentTime()
+  return m.top.currentTime
+end function

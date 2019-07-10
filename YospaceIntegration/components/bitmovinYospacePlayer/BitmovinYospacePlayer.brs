@@ -48,6 +48,7 @@ sub onBitmovinPlayerSDKLoaded()
     m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
     m.top.appendChild(m.bitmovinPlayer)
+
     m.yospaceTask = CreateObject("roSGNode", "BitmovinYospacePlayerTask")
     m.yospaceTask.observeField("taskReady", "onTaskReady")
   end if
@@ -144,8 +145,8 @@ end sub
 sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params)
-    if seekDestination <> arguments then m.policyHelper_originalSeekDestination = m.top.currentTime
-    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SEEK, arguments: params}
+    if seekDestination <> params then m.policyHelper_originalSeekDestination = m.top.currentTime
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
 end sub
 
@@ -347,7 +348,7 @@ end sub
 sub onAdBreakEnd()
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
-  ' currentElement = m.session.GetTimeline().GetElementAtTime(m.top.bitmovinYospacePlayer.currentTime)
+  ' currentElement = m.yospaceTask.timeline.GetElementAtTime(m.bitmovinPlayer.currentTime)
   ' if m.policyHelper_originalSeekDestination > -1
   '   if (currentElement.GetOffset() + currentElement.GetDuration()) > m.policyHelper_originalSeekDestination
   '     seek(m.policyHelper_originalSeekDestination)
@@ -373,11 +374,11 @@ sub setContentMetaData(genre, id, length)
 end sub
 
 sub updatePolicyHelper_seekStartPosition()
-  m.policyHelper_seekStartPosition = m.top.bitmovinYospacePlayer.currentTime
+  m.policyHelper_seekStartPosition = m.bitmovinPlayer.currentTime
 end sub
 
 sub checkIfSeekWasAllowed()
-  currentPlayerPosition = m.top.bitmovinYospacePlayer.currentTime
+  currentPlayerPosition = m.bitmovinPlayer.currentTime
   ' Since there is no way of stopping the default UI and its built-in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened
@@ -385,7 +386,7 @@ sub checkIfSeekWasAllowed()
   allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
   if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
     m.policyHelper_originalSeekDestination = currentPlayerPosition
-    m.top.bitmovinYospacePlayer.callFunc("seek", allowedSeek)
+    m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1
 end sub

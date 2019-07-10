@@ -71,16 +71,15 @@ end sub
 
 ' Called whenever an individual advert starts
 sub onAdStart(miid as String)
-  m.top.advertStart = miid
-
   advert = getCurrentAd()
-
   if (advert <> invalid) then
     m.top.IsAdvert = true
     m.top.activeAd = mapAd(advert)
   else
     m.top.IsAdvert = false
   end if
+
+  m.top.advertStart = miid
 end sub
 
 ' Called whenever an individual advert completes

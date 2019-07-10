@@ -41,7 +41,7 @@ function onPlayerReady()
     params = {
       config : m.playerConfig,
       yospaceConfig : {
-        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.INFO
+        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.DEBUG
       }
     }
 

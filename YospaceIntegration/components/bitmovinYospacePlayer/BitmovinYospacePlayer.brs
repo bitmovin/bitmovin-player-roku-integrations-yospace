@@ -70,10 +70,12 @@ end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
+  updatePolicyHelper_seekStartPosition()
 end sub
 
 sub onSeeked()
   m.top.seeked = m.bitmovinPlayer.seeked
+  checkIfSeekWasAllowed()
 end sub
 
 sub onPlayerStateChanged()
@@ -368,11 +370,6 @@ end sub
 
 sub setContentMetaData(genre, id, length)
   m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA, arguments: [genre, id, length]}
-end sub
-
-sub onPlayerRegistered()
-  m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEK, updatePolicyHelper_seekStartPosition)
-  m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEKED, checkIfSeekWasAllowed)
 end sub
 
 sub updatePolicyHelper_seekStartPosition()

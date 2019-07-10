@@ -148,7 +148,7 @@ end sub
 sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params, m.bitmovinPlayer.currentTime)
-    if seekDestination <> params then m.policyHelper_originalSeekDestination = m.top.currentTime
+    if seekDestination <> params then m.policyHelper_originalSeekDestination = params
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
 end sub
@@ -351,13 +351,13 @@ end sub
 sub onAdBreakEnd()
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
-  ' currentElement = m.yospaceTask.timeline.GetElementAtTime(m.bitmovinPlayer.currentTime)
-  ' if m.policyHelper_originalSeekDestination > -1
-  '   if (currentElement.GetOffset() + currentElement.GetDuration()) > m.policyHelper_originalSeekDestination
-  '     seek(m.policyHelper_originalSeekDestination)
-  '     m.policyHelper_originalSeekDestination = -1
-  '   end if
-  ' end if
+  currentElement = getCurrentElement(m.bitmovinPlayer.currentTime)
+  if m.policyHelper_originalSeekDestination > -1
+    if (currentElement.offset + currentElement.size) > m.policyHelper_originalSeekDestination
+      seek(m.policyHelper_originalSeekDestination)
+      m.policyHelper_originalSeekDestination = -1
+    end if
+  end if
 end sub
 
 sub onAdvertStart()
@@ -387,7 +387,7 @@ sub checkIfSeekWasAllowed()
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
   allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
-  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
+  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1) and (m.policyHelper_originalSeekDestination = -1)
     m.policyHelper_originalSeekDestination = currentPlayerPosition
     m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
@@ -401,5 +401,14 @@ sub onFocusChanged(event)
 end sub
 
 function getCurrentTime()
-  return m.top.currentTime
+  return m.bitmovinPlayer.currentTime
+end function
+
+function getCurrentElement(currentTime)
+  allElements = m.yospaceTask.timeline.elements
+  time = 0
+  for each element in allElements
+    time += element.size
+    if currentTime < time then return element
+  end for
 end function

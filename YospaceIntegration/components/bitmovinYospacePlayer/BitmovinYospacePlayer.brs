@@ -147,7 +147,7 @@ end sub
 
 sub seek(params)
   if m.policy.canSeek()
-    seekDestination = m.policy.canSeekTo(params, m.bitmovinPlayer.currentTime)
+    seekDestination = m.policy.canSeekTo(params, getCurrentTime())
     if seekDestination <> params then m.policyHelper_originalSeekDestination = params
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
@@ -291,8 +291,8 @@ sub reportPlayerStateChanged(videoState)
 end sub
 
 sub onCurrentTimeChanged()
-  m.top.currentTime = toMagicTime(m.bitmovinPlayer.currentTime)
-  m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: m.bitmovinPlayer.currentTime}
+  m.top.currentTime = toMagicTime(getCurrentTime())
+  m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: getCurrentTime()}
 end sub
 
 sub onMetadata()
@@ -356,7 +356,7 @@ end sub
 sub onAdBreakEnd()
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
-  currentElement = getCurrentElement(m.bitmovinPlayer.currentTime)
+  currentElement = getCurrentElement(getCurrentTime())
   if m.policyHelper_originalSeekDestination > -1
     if (currentElement.offset + currentElement.size) > m.policyHelper_originalSeekDestination
       seek(m.policyHelper_originalSeekDestination)
@@ -382,11 +382,11 @@ sub setContentMetaData(genre, id, length)
 end sub
 
 sub updatePolicyHelper_seekStartPosition()
-  m.policyHelper_seekStartPosition = m.bitmovinPlayer.currentTime
+  m.policyHelper_seekStartPosition = getCurrentTime()
 end sub
 
 sub checkIfSeekWasAllowed()
-  currentPlayerPosition = m.bitmovinPlayer.currentTime
+  currentPlayerPosition = getCurrentTime()
   ' Since there is no way of stopping the default UI and its built-in key event handler
   ' from seeking to any point in the video,
   ' the check if seeking is allowed has to be made after seeking has happened

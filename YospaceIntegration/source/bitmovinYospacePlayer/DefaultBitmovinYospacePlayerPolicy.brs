@@ -6,10 +6,10 @@ function getDefaultBitmovinYospacePlayerPolicy()
 
     canSeek: function() as Boolean:
         ' allow seeking only if no add is playing
-        return getCurrentAd() = invalid
+        return ad_getActiveAdBreak() = invalid
       :end function,
 
-    canSeekTo: function(seekTarget as Float, currentTime = m.BitmovinPlayer.currentTime as Float) as Float:
+    canSeekTo: function(seekTarget as Float, currentTime = getCurrentTime() as Float) as Float:
         adBreaks = ad_list()
         skippedAdBreaks = []
         for each adBrk in adBreaks
@@ -25,16 +25,16 @@ function getDefaultBitmovinYospacePlayerPolicy()
       :end function,
 
     canSkip: function() as Float:
-        ad = getCurrentAd()
+        ad = ad_getActiveAd()
         if ad <> invalid
-          currentTime = m.BitmovinPlayer.currentTime
-          if ad.GetAdvert().GetLinear().GetSkipOffset() < 0
+          currentTime = getCurrentTime()
+          if ad.skippableAfter < 0
             return -1
           end if
-          if currentTime >= ad.GetAdvert().GetLinear().GetSkipOffset()
+          if currentTime >= ad.skippableAfter
             return 0
           else
-            return (ad.GetAdvert().GetLinear().GetSkipOffset() - currentTime)
+            return (ad.skippableAfter - currentTime)
           end if
         else
           return -1
@@ -46,7 +46,7 @@ function getDefaultBitmovinYospacePlayerPolicy()
       :end function,
 
     canChangePlaybackSpeed: function() as Boolean:
-        if getCurrentAd() = invalid
+        if ad_getActiveAd() = invalid
           return true
         else
           return false

@@ -1,11 +1,7 @@
 sub init()
-  m.policyHelper_seekStartPosition = -1
-  m.policyHelper_originalSeekDestination = -1
-
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
 
   m.top.functionName  = "MonitorSDK"
-  m.policy = getDefaultBitmovinYospacePlayerPolicy()
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
@@ -18,9 +14,6 @@ sub init()
 
   GetGlobalAA().timer = YSTimer()
   GetGlobalAA().taskman = YORokuTasks()
-
-  m.top.observeField("bitmovinYospacePlayer", onPlayerRegistered)
-
   m.top.control = "RUN"
 end sub
 
@@ -30,6 +23,8 @@ sub MonitorSDK()
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT, port)
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION, port)
   m.top.taskReady = true
+
+  m.bitmovinPlayer = m.top.bitmovinYospacePlayer.findNode("BitmovinPlayer")
 
   while true
     msg = wait(500, port)
@@ -69,7 +64,6 @@ end sub
 
 ' Called whenever the player enters an advert break
 sub onAdBreakStart(dummy as Dynamic)
-
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak())
   m.top.adBreakStart = true
@@ -77,18 +71,15 @@ end sub
 
 ' Called whenever an individual advert starts
 sub onAdStart(miid as String)
-  updateCanSeek()
-
-  m.top.advertStart = miid
-
   advert = getCurrentAd()
-
   if (advert <> invalid) then
     m.top.IsAdvert = true
     m.top.activeAd = mapAd(advert)
   else
     m.top.IsAdvert = false
   end if
+
+  m.top.advertStart = miid
 end sub
 
 ' Called whenever an individual advert completes
@@ -100,19 +91,9 @@ end sub
 
 ' Called whenever the player exits an advert break
 sub onAdBreakEnd(dummy as Dynamic)
-  updateCanSeek()
-
   m.top.adBreakEnd = true
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
-
-  currentElement = m.session.GetTimeline().GetElementAtTime(m.top.bitmovinYospacePlayer.currentTime)
-  if m.policyHelper_originalSeekDestination > -1
-    if (currentElement.GetOffset() + currentElement.GetDuration()) > m.policyHelper_originalSeekDestination
-      seek(m.policyHelper_originalSeekDestination)
-      m.policyHelper_originalSeekDestination = -1
-    end if
-  end if
 end sub
 
 sub updateTimeline(tl as Dynamic)
@@ -179,11 +160,9 @@ end sub
 
 sub skipAd()
   if isAdActive()
-    if m.policy.canSkip() = 0
-      ad = getCurrentAd()
-      m.top.bitmovinYospacePlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
-      m.top.adSkipped = ad.GetMediaID()
-    end if
+    ad = getCurrentAd()
+    m.bitmovinPlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
+    m.top.adSkipped = ad.GetMediaID()
   end if
 end sub
 
@@ -205,54 +184,6 @@ function getAdStartTime(ad)
     end if
   end for
 end function
-
-sub mute(arguments)
-  if m.policy.canMute()
-    m.top.bitmovinYospacePlayer.callFunc("mute", arguments)
-  end if
-end sub
-
-sub pause(arguments)
-  if m.policy.canPause()
-    m.top.bitmovinYospacePlayer.callFunc("pause", arguments)
-  end if
-end sub
-
-sub seek(arguments)
-  if m.policy.canSeek()
-    seekDestination = m.policy.canSeekTo(arguments)
-    if seekDestination <> arguments then m.policyHelper_originalSeekDestination = m.top.bitmovinYospacePlayer.currentTime
-    m.top.bitmovinYospacePlayer.callFunc("seek", seekDestination)
-  end if
-end sub
-
-sub onPlayerRegistered()
-  m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEK, updatePolicyHelper_seekStartPosition)
-  m.top.bitmovinYospacePlayer.observeField(m.top.bitmovinYospacePlayer.BitmovinFields.SEEKED, checkIfSeekWasAllowed)
-  updateCanSeek()
-end sub
-
-sub updatePolicyHelper_seekStartPosition()
-  m.policyHelper_seekStartPosition = m.top.bitmovinYospacePlayer.currentTime
-end sub
-
-sub checkIfSeekWasAllowed()
-  currentPlayerPosition = m.top.bitmovinYospacePlayer.currentTime
-  ' Since there is no way of stopping the default UI and its built-in key event handler
-  ' from seeking to any point in the video,
-  ' the check if seeking is allowed has to be made after seeking has happened
-  ' and, if necessary, has to be corrected.
-  allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
-  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
-    m.policyHelper_originalSeekDestination = currentPlayerPosition
-    m.top.bitmovinYospacePlayer.callFunc("seek", allowedSeek)
-  end if
-  m.policyHelper_seekStartPosition = -1
-end sub
-
-sub updateCanSeek()
-  m.top.canSeek = m.policy.canSeek()
-end sub
 
 sub requestYospaceURL(data)
   if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE)
@@ -286,12 +217,6 @@ end sub
 sub callFunction(data)
   if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
     skipAd()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEEK
-    seek(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.PAUSE
-    pause(data.arguments)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MUTE
-    mute(data.arguments)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL

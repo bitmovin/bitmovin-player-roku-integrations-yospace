@@ -261,6 +261,11 @@ function isKeyPressValid(key)
       return true
     end if
     return false
+  else if key = "play"
+    if m.policy.canPause()
+      return true
+    end if
+    return false
   end if
   return true
 end function

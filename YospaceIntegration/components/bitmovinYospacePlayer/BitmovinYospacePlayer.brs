@@ -154,10 +154,21 @@ sub seek(params)
 end sub
 
 ' OVERRIDEN load method
-sub load(params)
-  m.source.append(params)
+sub load(source)
+  m.source = source
   m.bitmovinPlayer.observeField("metadata", "onMetadata")
-  requestYospaceURL(m.source)
+  url = ""
+  assetType = "vod"
+
+  if type(source) = "roAssociativeArray"
+    url = source.hls
+    assetType = source.assetType
+  else if type(source) = "roSGNode" and source.isSubtype("ContentNode")
+    url = source.url
+    if source.live then assetType = "live"
+  end if
+
+  requestYospaceURL(url, assetType)
 end sub
 
 sub mute(params)
@@ -305,12 +316,12 @@ sub onMetadata()
   m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
 end sub
 
-sub requestYospaceURL(source)
-  if Lcase(source.assetType) = "live"
-     m.yospaceTask.StreamContent = {type: "live", url: source.hls, options: {USE_ID3: true}}
+sub requestYospaceURL(url, assetType)
+  if Lcase(assetType) = "live"
+     m.yospaceTask.StreamContent = {type: "live", url: url, options: {USE_ID3: true}}
      m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
-  else if Lcase(source.assetType) = "vod"
-    m.yospaceTask.StreamContent = {type: "vod", url: source.hls, options: {USE_ID3: false}}
+  else if Lcase(assetType) = "vod"
+    m.yospaceTask.StreamContent = {type: "vod", url: url, options: {USE_ID3: false}}
     m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
   else
     print "not supported asset type!"
@@ -318,7 +329,11 @@ sub requestYospaceURL(source)
 end sub
 
 sub onUrlReceived()
-  m.source.hls = m.yospaceTask.PlaybackURL
+  if type(m.source) = "roAssociativeArray"
+    m.source.hls = m.yospaceTask.PlaybackURL
+  else if type(m.source) = "roSGNode" and m.source.isSubtype("ContentNode")
+    m.source.url = m.yospaceTask.PlaybackURL
+  end if
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub
 

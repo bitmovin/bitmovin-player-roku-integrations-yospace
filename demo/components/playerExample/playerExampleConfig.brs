@@ -15,6 +15,25 @@ function getExamplePlayerConfig()
   }
 end function
 
+function getExamplePlayerConfigWithContentNode()
+  content = CreateObject("roSGNode", "ContentNode")
+  content.streamFormat = "hls"
+  content.url = "http://csm-e.cds1.yospace.com/access/d/400/u/0/1/130782300?f=0000130753172&format=vmap"
+  content.title = "Test video"
+  content.live = false
+
+  return {
+    playback: {
+      autoplay: true,
+      muted: true
+    },
+    adaptation: {
+      preload: false
+    },
+    source: content
+  }
+end function
+
 function getExamplePlayerConfigLive()
   return {
     playback: {

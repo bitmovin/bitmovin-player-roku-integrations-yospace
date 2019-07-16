@@ -155,7 +155,6 @@ end sub
 
 ' OVERRIDEN load method
 sub load(source)
-  m.source = source
   m.bitmovinPlayer.observeField("metadata", "onMetadata")
   url = ""
   assetType = "vod"
@@ -175,6 +174,7 @@ sub load(source)
     return
   end if
 
+  m.source = source
   requestYospaceURL(url, assetType)
 end sub
 

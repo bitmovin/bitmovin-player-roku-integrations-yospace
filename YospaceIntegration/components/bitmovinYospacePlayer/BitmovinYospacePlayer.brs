@@ -330,7 +330,7 @@ function toMagicTime(playbackTime)
   mTime = playbackTime
   offset = 0
 
-  if m.yospaceTask.Timeline = invalid then
+  if m.yospaceTask.Timeline = invalid
     return mTime
   end if
 

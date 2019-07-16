@@ -306,7 +306,9 @@ sub onMetadata()
 end sub
 
 sub requestYospaceURL(source)
-  if Lcase(source.assetType) = "live"
+  if source.assetType = invalid or Lcase(source.assetType) = "none"
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
+  else if Lcase(source.assetType) = "live"
      m.yospaceTask.StreamContent = {type: "live", url: source.hls, options: {USE_ID3: true}}
      m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
   else if Lcase(source.assetType) = "vod"
@@ -325,6 +327,11 @@ end sub
 function toMagicTime(playbackTime)
   mTime = playbackTime
   offset = 0
+
+  if m.yospaceTask.Timeline = invalid
+    return mTime
+  end if
+
   for each timelineElement in m.yospaceTask.Timeline.elements
     if timelineElement.mode = m.TIMELINE_ENTRY_TYPE_ADVERT
       if ((timelineElement.offset + offset) + timelineElement.size) < playbackTime

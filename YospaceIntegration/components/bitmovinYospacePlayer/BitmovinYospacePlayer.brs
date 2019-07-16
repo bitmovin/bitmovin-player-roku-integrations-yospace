@@ -169,7 +169,7 @@ sub load(source)
 
   if url = invalid or url = ""
     ' If the source is invalid we purposly call load on the Bitmovin Player with an invalid source to let the player handle the error
-    ' That way we do not have to expose the error handleing or import it into the Yospace integration
+    ' That way we do not have to expose the error handling or import it into the Yospace integration
     m.bitmovinPlayer.callFunc("load", {})
     return
   end if

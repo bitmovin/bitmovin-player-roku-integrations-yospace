@@ -306,7 +306,9 @@ sub onMetadata()
 end sub
 
 sub requestYospaceURL(source)
-  if Lcase(source.assetType) = "live"
+  if source.assetType = invalid
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
+  else if Lcase(source.assetType) = "live"
      m.yospaceTask.StreamContent = {type: "live", url: source.hls, options: {USE_ID3: true}}
      m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
   else if Lcase(source.assetType) = "vod"

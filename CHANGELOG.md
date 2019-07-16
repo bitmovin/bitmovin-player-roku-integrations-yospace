@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Support for a custom Yospace ad policy as well as a default policy if none is set.
 - Fire `adBreakStart`, `adStart`, `adBreakFinished` and `adBreakFinished` respectively
 - Sample configurations on how to play VoD, live and DRM protected streams
+- Support for non Yospace URLs by passing in `assetType` of `none`
 
 ### Changed
 - Improved documentation in README.md

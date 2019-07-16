@@ -312,6 +312,8 @@ sub requestYospaceURL(source)
   else if Lcase(source.assetType) = "vod"
     m.yospaceTask.StreamContent = {type: "vod", url: source.hls, options: {USE_ID3: false}}
     m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
+  else if Lcase(source.assetType) = "none"
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
   else
     print "not supported asset type!"
   end if
@@ -325,6 +327,11 @@ end sub
 function toMagicTime(playbackTime)
   mTime = playbackTime
   offset = 0
+
+  if m.yospaceTask.Timeline = invalid then
+    return mTime
+  end if
+
   for each timelineElement in m.yospaceTask.Timeline.elements
     if timelineElement.mode = m.TIMELINE_ENTRY_TYPE_ADVERT
       if ((timelineElement.offset + offset) + timelineElement.size) < playbackTime

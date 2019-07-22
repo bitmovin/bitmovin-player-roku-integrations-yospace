@@ -1,5 +1,6 @@
 sub init()
   m.playerConfig = getExamplePlayerConfig()
+  m.playerConfigWithContentNode = getExamplePlayerConfigWithContentNode()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
   m.bitmovinYospacePlayer.id = "BitmovinYospacePlayer"
@@ -40,6 +41,7 @@ function onPlayerReady()
 
     params = {
       config : m.playerConfig,
+      ' config : m.playerConfigWithContentNode,
       yospaceConfig : {
         debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.DEBUG
       }

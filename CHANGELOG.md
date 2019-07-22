@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Fire `adBreakStart`, `adStart`, `adBreakFinished` and `adBreakFinished` respectively
 - Sample configurations on how to play VoD, live and DRM protected streams
 - Support for `ContentNode`s as an alternative to the player source configuration. `ContentNode`s can now be set as the `source` in a player configuration and can be passed to the `load` API call
+- Support for non Yospace URLs by passing in `assetType` of `none`
 
 ### Changed
 - Improved documentation in README.md

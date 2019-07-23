@@ -23,3 +23,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Internal
 - The BitmovinPlayer component is now being loaded inside the BitmovinYospacePlayer component
   and does not require a separate xml component.
+- The BitmovinPlayer is now pinned to a version - 1.11.0

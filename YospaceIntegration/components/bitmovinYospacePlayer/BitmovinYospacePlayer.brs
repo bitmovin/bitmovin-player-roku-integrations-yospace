@@ -13,7 +13,7 @@ sub init()
 
   m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
   m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"
-  m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1/bitmovinplayer.zip"
+  m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1.11.0/bitmovinplayer.zip"
   m.BitmovinPlayerSDK.observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
 
   m.BitmovinPlayerSDKLoaderTask = CreateObject("roSgNode", "Task")

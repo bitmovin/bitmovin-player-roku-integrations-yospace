@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="ErrorView" extends="Group">
+    <children>
+      <Rectangle id="errorWrapper" color="#000000" width="1920" height="1080" translation="[0,0]">
+        <Label 
+          id="errorLabel" 
+          color="#ffffff" 
+          width="1920" 
+          height="1080" 
+          horizAlign="center" 
+          vertAlign="center" 
+          font="font:LargeSystemFont"
+        />
+      </Rectangle>
+    </children>
+    <interface>
+      <field id="error" type="assocarray" alwaysNotify="true" />
+    </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/ErrorView.brs" />
+</component>

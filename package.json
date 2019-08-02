@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "clean": "rm -rf ./demo/components/bitmovinYospacePlayer && rm -rf ./demo/source/yospace/ && rm -rf ./demo/source/bitmovinYospacePlayer/",
+    "clean": "rm -rf ./demo/components/bitmovinYospacePlayer && rm -rf ./demo/source/yospace/ && rm -rf ./demo/source/bitmovinYospacePlayer/ && rm -rf ./demo/source/bitmovinPlayer/ && rm -rf ./demo/components/bitmovinPlayer/",
     "serve": "npm run clean && npm run build && npm-watch build",
     "build": "rsync -a ./YospaceIntegration/source/ ./demo/source/ && rsync -a ./YospaceIntegration/components/ ./demo/components/"
   },

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BitmovinPlayerTask" extends="Task">
+    <interface>
+        <field id="config" type="assocarray" />
+        <field id="playerState" type="string" alwaysNotify="true" />
+        <field id="fireImpression" type="boolean" />
+        <field id="error" type="assocarray" alwaysNotify="true" />
+    </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/BitmovinPlayerTask.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/deficiency/DeficiencyFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinStateEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/requestUtil.brs" />
+</component>

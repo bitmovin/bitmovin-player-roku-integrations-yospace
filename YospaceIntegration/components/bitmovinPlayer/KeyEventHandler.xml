@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="KeyEventHandler" extends="Group">
+  <interface>
+    <field id="playerState" type="string" />
+    <field id="seeking" type="boolean" value="false" />
+    <function name="setup" />
+    <function name="setKeyPressValidationCallback" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/KeyEventHandler.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinStateEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFunctionEnums.brs" />
+</component>

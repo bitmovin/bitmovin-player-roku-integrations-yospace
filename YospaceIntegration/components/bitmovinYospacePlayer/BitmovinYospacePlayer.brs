@@ -11,50 +11,37 @@ sub init()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
-  m.BitmovinPlayerSDK = CreateObject("roSgNode", "componentLibrary")
-  m.BitmovinPlayerSDK.id = "BitmovinPlayerSDK"
-  m.BitmovinPlayerSDK.uri = "https://cdn.bitmovin.com/player/roku/1.11.0/bitmovinplayer.zip"
-  m.BitmovinPlayerSDK.observeField("loadStatus", "onBitmovinPlayerSDKLoaded")
+  m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayer")
+  m.bitmovinPlayer.id = "BitmovinPlayer"
 
-  m.BitmovinPlayerSDKLoaderTask = CreateObject("roSgNode", "Task")
-  m.BitmovinPlayerSDKLoaderTask.appendChild(m.BitmovinPlayerSDK)
-  m.top.appendChild(m.BitmovinPlayerSDKLoaderTask)
-end sub
+  m.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
+  m.BitmovinFunctions.Append(getYospaceRelatedFunctions())
+  m.top.BitmovinFunctions = m.BitmovinFunctions
 
-sub onBitmovinPlayerSDKLoaded()
-  if m.BitmovinPlayerSDK.loadStatus = "ready"
-    m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayerSDK:BitmovinPlayer")
-    m.bitmovinPlayer.id = "BitmovinPlayer"
+  m.BitmovinFields = m.bitmovinPlayer.BitmovinFields
+  m.BitmovinFields.Append(getYospaceRelatedFields())
+  m.top.BitmovinFields = m.BitmovinFields
 
-    m.BitmovinFunctions = m.bitmovinPlayer.BitmovinFunctions
-    m.BitmovinFunctions.Append(getYospaceRelatedFunctions())
-    m.top.BitmovinFunctions = m.BitmovinFunctions
+  m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
 
-    m.BitmovinFields = m.bitmovinPlayer.BitmovinFields
-    m.BitmovinFields.Append(getYospaceRelatedFields())
-    m.top.BitmovinFields = m.BitmovinFields
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.ERROR, "catchVideoError")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.WARNING, "catchVideoWarning")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEK, "onSeek")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFT, "onTimeShift")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFTED, "onTimeShifted")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_LOADED, "onSourceLoaded")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_UNLOADED, "onSourceUnloaded")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAY, "onPlay")
 
-    m.top.BitmovinPlayerState = m.bitmovinPlayer.BitmovinPlayerState
+  m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.ERROR, "catchVideoError")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.WARNING, "catchVideoWarning")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEK, "onSeek")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFT, "onTimeShift")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFTED, "onTimeShifted")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_LOADED, "onSourceLoaded")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_UNLOADED, "onSourceUnloaded")
-    m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAY, "onPlay")
+  m.top.appendChild(m.bitmovinPlayer)
 
-    m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
-
-    m.top.appendChild(m.bitmovinPlayer)
-
-    m.yospaceTask = CreateObject("roSGNode", "BitmovinYospacePlayerTask")
-    m.yospaceTask.observeField("taskReady", "onTaskReady")
-  end if
+  m.yospaceTask = CreateObject("roSGNode", "BitmovinYospacePlayerTask")
+  m.yospaceTask.observeField("taskReady", "onTaskReady")
 end sub
 
 sub onTaskReady()

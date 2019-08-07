@@ -4,41 +4,43 @@ This integration completely encapsulates the usage of Yospace. After creating th
 The API reference for the Bitmovin Roku Player can be found [here](https://bitmovin.com/docs/player/api-reference/roku).
 Furthermore, there are some ad-specific fields and functions exclusive to the Yospace integration:
 
+Current Bitmovin Player SDK - 1.12.0
+
 **Fields:**
 
-- `adBreakStarted`: boolean  
+- `adBreakStarted`: boolean
   Is set to true once an ad break starts
 
-- `adBreakFinished`: boolean  
+- `adBreakFinished`: boolean
   Is set to true once an ad break finishes
 
-- `adFinished`: boolean  
+- `adFinished`: boolean
   Is set to true once an ad finishes
 
-- `adQuartile`: number  
+- `adQuartile`: number
   Changes based on the current ad quartile
 
-- `adSkipped`: boolean  
+- `adSkipped`: boolean
   Is set to true if an ad has been skipped
 
-- `adStarted`: boolean  
-  Is set to true once an ad starts  
+- `adStarted`: boolean
+  Is set to true once an ad starts
 
-**Functions:**  
+**Functions:**
 
-- `ad_getActiveAd` ad_getActiveAd() as assocarray  
+- `ad_getActiveAd` ad_getActiveAd() as assocarray
   Returns the currently active ad, if no ad is active returns `invalid`
 
-- `ad_getActiveAdBreak`: ad_getActiveAdBreak() as assocarray  
+- `ad_getActiveAdBreak`: ad_getActiveAdBreak() as assocarray
   Returns the currently active ad break, if no ad break is active returns `invalid`
 
-- `ad_list`: ad_list() as assocarray  
+- `ad_list`: ad_list() as assocarray
   Returns a list of all ads
 
-- `ad_skip`: ad_skip() as void  
+- `ad_skip`: ad_skip() as void
   Skips the currently active ad, has no effect if no ad is currently active
 
-- `setContentMetaData`: setContentMetaData(genre, id, length) as void  
+- `setContentMetaData`: setContentMetaData(genre, id, length) as void
   Sets the demographic information required by RAF
 
 

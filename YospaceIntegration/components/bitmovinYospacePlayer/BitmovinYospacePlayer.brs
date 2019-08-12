@@ -223,40 +223,40 @@ sub timeShift(offset)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.TIME_SHIFT, offset)
 end sub
 
-function getTimeShift()
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_TIME_SHIFT)
+function getTimeShift(params = invalid)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_TIME_SHIFT, params)
 end function
 
-function getMaxTimeShift()
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_MAX_TIME_SHIFT)
+function getMaxTimeShift(params = invalid)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_MAX_TIME_SHIFT, params)
 end function
 
-function isLive()
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE)
+function isLive(params = invalid)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE, params)
 end function
 
-function getConfig()
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_CONFIG)
+function getConfig(params = invalid)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_CONFIG, params)
 end function
 
 ' ---------------------------- ad api ----------------------------
-sub ad_skip()
+sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
   end if
 end sub
 
-function ad_list()
+function ad_list(params = invalid)
   return m.yospaceTask.adList
 end function
 
 ' returns the ad break of the currently active ad, returns invalid if no ad is currently active
-function ad_getActiveAdBreak()
+function ad_getActiveAdBreak(params = invalid)
   return m.yospaceTask.activeAdBreak
 end function
 
 ' returns the currently active ad, returns invalid if no ad is currently active
-function ad_getActiveAd()
+function ad_getActiveAd(params = invalid)
   return m.yospaceTask.activeAd
 end function
 

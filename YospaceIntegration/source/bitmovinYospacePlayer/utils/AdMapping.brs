@@ -6,7 +6,7 @@ function mapAd(ad)
   return {
     isLinear: true,
     duration: ad.GetDuration(),
-    id: ad.GetAdvert().GetId(),
+    id: ad.getMediaID(),
     clickThroughUrl: ad.GetAdvert().GetLinear().GetClickThrough(),
     mediaFileUrl: url,
     skippableAfter: ad.GetAdvert().GetLinear().GetSkipOffset()

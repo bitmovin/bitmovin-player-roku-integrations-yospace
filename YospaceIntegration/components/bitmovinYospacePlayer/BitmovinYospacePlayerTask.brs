@@ -31,7 +31,8 @@ sub MonitorSDK()
   while true
     msg = wait(500, port)
 
-    if m.lastAd <> invalid then checkCurrentTime()
+    ' If our Conviva Integration is used together with our Yospace Integration we have to make sure that post roll ad events are fired before the playback finished events.
+    if m.lastAd <> invalid then checkLastAdFinishedWorkaround()
 
     if type(msg) = "roSGNodeEvent"
       field = msg.GetField()
@@ -251,19 +252,15 @@ function isLastAd(miid)
   return lastAd.id = miid
 end function
 
-function checkCurrentTime()
+function checkLastAdFinishedWorkaround()
   video = m.top.bitmovinYospacePlayer.findNode("MainVideo")
   if video.position >= (video.duration) then firePostRollFinishedEvents()
 end function
 
 function firePostRollFinishedEvents()
-  m.top.advertEnd = m.lastAd
-  m.top.IsAdvert = false
-  m.top.activeAd = invalid
-
-  m.top.adBreakEnd = true
-  m.top.IsActiveAd = false
-  m.top.activeAdBreak = invalid
-
+  lastAdMediaId = m.lastAd
   m.lastAd = invalid
+
+  onAdEnd(lastAdMediaId)
+  onAdBreakEnd(invalid)
 end function

@@ -1,6 +1,8 @@
 sub init()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
 
+  m.lastAd = invalid
+
   m.top.functionName  = "MonitorSDK"
   m.session   = YSSessionManager()
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
@@ -28,6 +30,9 @@ sub MonitorSDK()
 
   while true
     msg = wait(500, port)
+
+    ' For the last ad it could happen that the playback finished event is fired before the actual adFinished / adBreakFinished event
+    if m.lastAd <> invalid then checkLastAdFinishedWorkaround()
 
     if type(msg) = "roSGNodeEvent"
       field = msg.GetField()
@@ -71,6 +76,8 @@ end sub
 
 ' Called whenever an individual advert starts
 sub onAdStart(miid as String)
+  if isLastAd(miid) then m.lastAd = miid
+
   advert = getCurrentAd()
   if (advert <> invalid) then
     m.top.IsAdvert = true
@@ -79,11 +86,12 @@ sub onAdStart(miid as String)
     m.top.IsAdvert = false
   end if
 
-  m.top.advertStart = miid
+  m.top.advertStart = m.top.activeAd.id
 end sub
 
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as String)
+  if m.lastAd <> invalid then return
   m.top.advertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid
@@ -91,6 +99,7 @@ end sub
 
 ' Called whenever the player exits an advert break
 sub onAdBreakEnd(dummy as Dynamic)
+  if m.lastAd <> invalid then return
   m.top.adBreakEnd = true
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
@@ -234,3 +243,24 @@ end sub
 sub setDebugLevel(debugLevel)
   YO_LOGLEVEL(debugLevel)
 end sub
+
+function isLastAd(miid)
+  adList = m.top.adList
+  lastAdBreak = adList[adList.Count() - 1].ads
+  lastAd = lastAdBreak[lastAdBreak.Count() - 1]
+
+  return lastAd.id = miid
+end function
+
+function checkLastAdFinishedWorkaround()
+  video = m.top.bitmovinYospacePlayer.findNode("MainVideo")
+  if video.position >= (video.duration) then firePostRollFinishedEvents()
+end function
+
+function firePostRollFinishedEvents()
+  lastAdMediaId = m.lastAd
+  m.lastAd = invalid
+
+  onAdEnd(lastAdMediaId)
+  onAdBreakEnd(invalid)
+end function

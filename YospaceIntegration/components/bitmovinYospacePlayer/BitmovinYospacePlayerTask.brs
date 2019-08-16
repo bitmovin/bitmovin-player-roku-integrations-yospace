@@ -31,7 +31,7 @@ sub MonitorSDK()
   while true
     msg = wait(500, port)
 
-    ' If our Conviva Integration is used together with our Yospace Integration we have to make sure that post roll ad events are fired before the playback finished events.
+    ' For the last ad it could happen that the playback finished event is fired before the actual adFinished / adBreakFinished event
     if m.lastAd <> invalid then checkLastAdFinishedWorkaround()
 
     if type(msg) = "roSGNodeEvent"

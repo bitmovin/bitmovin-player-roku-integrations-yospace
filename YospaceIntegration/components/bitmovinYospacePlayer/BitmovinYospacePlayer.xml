@@ -55,6 +55,7 @@
     <function name="timeShift" />
     <function name="unload" />
     <function name="unmute" />
+    <function name="getDuration" />
 
     <!-- Ad specific functions -->
     <function name="ad_getActiveAd" />

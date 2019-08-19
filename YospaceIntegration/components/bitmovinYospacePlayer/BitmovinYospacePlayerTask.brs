@@ -55,6 +55,7 @@ end sub
 sub onSessionReady(data = invalid as Dynamic)
   if (data.result <> YSSessionResult().INITIALISED) then
     YO_ERROR("Initialization failed: {0}", data.status)
+    m.top.InitializationFailure = data.status
   else
     m.session.RegisterPlayer(m.player)
 

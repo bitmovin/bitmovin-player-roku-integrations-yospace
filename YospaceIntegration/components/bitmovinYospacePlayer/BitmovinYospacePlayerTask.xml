@@ -19,6 +19,7 @@
 	  <field id="IsAdvert" type="Boolean" />
 	  <field id="IsActiveAd" type="Boolean" />
 	  <field id="StreamType" type="String" />
+	  <field id="InitializationFailure" type="String" />
 
 		<field id="adList" type="array" />
 		<field id="activeAdBreak" type="assocarray" />

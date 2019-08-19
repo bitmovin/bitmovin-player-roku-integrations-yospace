@@ -239,6 +239,10 @@ function getConfig(params = invalid)
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_CONFIG, params)
 end function
 
+function getDuration(params = invalid)
+  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_DURATION, params)
+end function
+
 ' ---------------------------- ad api ----------------------------
 sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0

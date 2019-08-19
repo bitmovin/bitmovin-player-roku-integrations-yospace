@@ -1,4 +1,4 @@
-function _10I_OI__1_11()
-AssetTypes={LIVE:(Chr(108)+Chr(105)+Chr(118)+Chr(101)),VOD:(Chr(&H76)+Chr(111)+Chr(&H64))}
+function _00I110_I1_0O()
+AssetTypes={LIVE:(Chr(108)+Chr(105)+Chr(&H76)+Chr(101)),VOD:(Chr(118)+Chr(111)+Chr(100))}
 return AssetTypes 
 end function

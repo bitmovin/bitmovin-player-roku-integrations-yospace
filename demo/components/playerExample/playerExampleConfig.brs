@@ -51,6 +51,24 @@ function getExamplePlayerConfigLive()
   }
 end function
 
+function getExamplePlayerConfigLiveRetry()
+  return {
+    playback: {
+      autoplay: true,
+      muted: true
+    },
+    adaptation: {
+      preload: false
+    },
+    source: {
+      hls: "http://csm-e.cds1.yospace.com/csm/extlive/yospace02,sampledroid.m3u8?yo.br=false&yo.ac=false",
+      title: "Test video",
+      assetType: "live",
+      retryExcludingYospace: true
+    }
+  }
+end function
+
 function getExamplePlayerConfigWidevineVod()
   return {
     playback: {

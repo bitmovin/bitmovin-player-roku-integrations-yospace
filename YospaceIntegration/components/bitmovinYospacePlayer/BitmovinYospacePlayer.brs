@@ -143,6 +143,7 @@ end sub
 ' OVERRIDEN load method
 sub load(source)
   m.bitmovinPlayer.observeField("metadata", "onMetadata")
+  m.retryExcludingYospace = source.retryExcludingYospace
   url = ""
   assetType = "vod"
 
@@ -316,11 +317,22 @@ sub requestYospaceURL(url, assetType)
   else if Lcase(assetType) = "live"
      m.yospaceTask.StreamContent = {type: "live", url: url, options: {USE_ID3: true}}
      m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
+     m.yospaceTask.observeField("InitializationFailure", "onInitializationFailure")
   else if Lcase(assetType) = "vod"
     m.yospaceTask.StreamContent = {type: "vod", url: url, options: {USE_ID3: false}}
     m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
+    m.yospaceTask.observeField("InitializationFailure", "onInitializationFailure")
   else
     print "not supported asset type!"
+  end if
+end sub
+
+sub onInitializationFailure()
+  print "Initialization failed; ", m.yospaceTask.InitializationFailure
+  if m.retryExcludingYospace = true
+    print "Retrying excluding Yospace"
+    m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
+    return
   end if
 end sub
 

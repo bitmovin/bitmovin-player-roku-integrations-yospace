@@ -332,7 +332,6 @@ sub onInitializationFailure()
   if m.retryExcludingYospace = true
     print "Retrying excluding Yospace"
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
-    return
   end if
 end sub
 

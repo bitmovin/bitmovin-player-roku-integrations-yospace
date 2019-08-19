@@ -245,11 +245,9 @@ sub setDebugLevel(debugLevel)
 end sub
 
 function isLastAd(miid)
+  if m.top.bitmovinYospacePlayer.callFunc("isLive", invalid) then return true
+
   adList = m.top.adList
-
-  if (adList = invalid) then return true
-  if (adList.Count() < 2) then return true
-
   lastAdBreak = adList[adList.Count() - 1].ads
   lastAd = lastAdBreak[lastAdBreak.Count() - 1]
   return lastAd.id = miid

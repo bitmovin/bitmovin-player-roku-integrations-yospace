@@ -56,6 +56,7 @@
     <function name="unload" />
     <function name="unmute" />
     <function name="getDuration" />
+    <function name="setHttpHeaders" />
 
     <!-- Ad specific functions -->
     <function name="ad_getActiveAd" />

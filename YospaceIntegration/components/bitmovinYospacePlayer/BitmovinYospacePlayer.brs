@@ -244,6 +244,10 @@ function getDuration(params = invalid)
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_DURATION, params)
 end function
 
+sub setHttpHeaders(headers)
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_HTTP_HEADERS, headers)
+end sub
+
 ' ---------------------------- ad api ----------------------------
 sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0

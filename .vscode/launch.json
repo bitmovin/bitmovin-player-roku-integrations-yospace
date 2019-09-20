@@ -18,7 +18,6 @@
       ],
       "enableDebuggerAutoRecovery": true,
       "stopDebuggerOnAppExit": false,
-      "enableLookupVariableNodeChildren": true,
       "preLaunchTask": "build-roku",
       "postDebugTask": "clean-roku",
       "outDir": "${workspaceFolder}/out",

@@ -366,13 +366,14 @@ function toMagicTime(playbackTime)
         mTime -= timelineElement.size
         offset += timelineElement.size
       else if (playbackTime > (timelineElement.offset + offset)) and (playbackTime < ((timelineElement.offset + offset) + timelineElement.size))
-        mTime -= (playbackTime - (timelineElement.offset + offset))
+        mTime = (playbackTime - (timelineElement.offset + offset))
         offset += timelineElement.size
       end if
     else
       offset = 0
     end if
   end for
+
   return mTime
 end function
 

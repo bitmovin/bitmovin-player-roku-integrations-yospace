@@ -369,7 +369,7 @@ function toMagicTime(playbackTime)
         mTime -= timelineElement.size
         offset += timelineElement.size
       else if (playbackTime > (timelineElement.offset + offset)) and (playbackTime < ((timelineElement.offset + offset) + timelineElement.size))
-        mTime = (playbackTime - (timelineElement.offset + offset)) ' Substract the time elasped from content start to ad start
+        mTime = (playbackTime - (timelineElement.offset + offset)) ' Subtract the time elapsed from content start to ad start
         exit for ' No need to check the rest of the elemnts when we are currently in an ad
       end if
     else

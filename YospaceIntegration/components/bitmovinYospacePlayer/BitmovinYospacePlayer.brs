@@ -354,6 +354,9 @@ end sub
 
 function toMagicTime(playbackTime)
   mTime = playbackTime
+
+  ' This additional offset contains the duration of ads already elapsed during an ad break
+  ' Multiple ads in an adbreak will have the same start offset, the offset of the ad break
   offset = 0
 
   if m.yospaceTask.Timeline = invalid
@@ -366,13 +369,15 @@ function toMagicTime(playbackTime)
         mTime -= timelineElement.size
         offset += timelineElement.size
       else if (playbackTime > (timelineElement.offset + offset)) and (playbackTime < ((timelineElement.offset + offset) + timelineElement.size))
-        mTime -= (playbackTime - (timelineElement.offset + offset))
-        offset += timelineElement.size
+        mTime = (playbackTime - (timelineElement.offset + offset)) ' Subtract the time elapsed from content start to ad start
+        exit for ' No need to check the rest of the elements when we are currently in an ad
       end if
     else
+      ' Set offset to 0 since timeline entry is not an ad
       offset = 0
     end if
   end for
+
   return mTime
 end function
 

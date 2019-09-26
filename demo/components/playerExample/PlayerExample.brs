@@ -43,7 +43,8 @@ function onPlayerReady()
       config : m.playerConfig,
       ' config : m.playerConfigWithContentNode,
       yospaceConfig : {
-        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.DEBUG
+        debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.DEBUG,
+        enableRAF: false
       }
     }
 

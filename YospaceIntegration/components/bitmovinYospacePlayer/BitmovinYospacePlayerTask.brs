@@ -231,7 +231,15 @@ sub callFunction(data)
     setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
     setDebugLevel(data.arguments.debugLevel)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
+    print "Enable RAF: "; data.arguments.enableRAF
+    setUseRAF(data.arguments.enableRAF)
   end if
+end sub
+
+sub setUseRAF(enableRAF)
+  task = GetGlobalAA().taskman
+  task.SetUseRAF(enableRAF)
 end sub
 
 sub setContentMetadata(genre, id, length)

@@ -233,11 +233,11 @@ sub callFunction(data)
     setDebugLevel(data.arguments.debugLevel)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
     print "Enable RAF: "; data.arguments.enableRAF
-    setUseRAF(data.arguments.enableRAF)
+    setEnableRAF(data.arguments.enableRAF)
   end if
 end sub
 
-sub setUseRAF(enableRAF)
+sub setEnableRAF(enableRAF)
   task = GetGlobalAA().taskman
   task.SetUseRAF(enableRAF)
 end sub

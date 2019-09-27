@@ -35,6 +35,8 @@ sub init()
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_LOADED, "onSourceLoaded")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_UNLOADED, "onSourceUnloaded")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAY, "onPlay")
+  m.bitmovinPlayer.observeField(m.top.BitmovinFields.METADATA, "onMetadata")
+
 
   m.bitmovinPlayer.findNode("KeyEventHandler").callFunc("setKeyPressValidationCallback", "isKeyPressValid", m.top)
 
@@ -130,6 +132,7 @@ sub pause(params)
 end sub
 
 sub unload(params)
+  reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.UNLOAD, params)
 end sub
 
@@ -147,7 +150,6 @@ end sub
 
 ' OVERRIDEN load method
 sub load(source)
-  m.bitmovinPlayer.observeField("metadata", "onMetadata")
   m.retryExcludingYospace = source.retryExcludingYospace
   url = ""
   assetType = "vod"
@@ -329,12 +331,8 @@ sub requestYospaceURL(url, assetType)
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
   else if Lcase(assetType) = "live"
      m.yospaceTask.StreamContent = {type: "live", url: url, options: {USE_ID3: true}}
-     m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
-     m.yospaceTask.observeField("InitializationFailure", "onInitializationFailure")
   else if Lcase(assetType) = "vod"
     m.yospaceTask.StreamContent = {type: "vod", url: url, options: {USE_ID3: false}}
-    m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
-    m.yospaceTask.observeField("InitializationFailure", "onInitializationFailure")
   else
     print "not supported asset type!"
   end if
@@ -392,6 +390,8 @@ sub setFieldObservers()
   m.yospaceTask.observeField("AdvertStart", "onAdvertStart")
   m.yospaceTask.observeField("AdvertEnd", "onAdvertEnd")
   m.yospaceTask.observeField("adSkipped", "onAdSkipped")
+  m.yospaceTask.observeField("PlaybackURL", "onUrlReceived")
+  m.yospaceTask.observeField("InitializationFailure", "onInitializationFailure")
 end sub
 
 sub onAdBreakStart()

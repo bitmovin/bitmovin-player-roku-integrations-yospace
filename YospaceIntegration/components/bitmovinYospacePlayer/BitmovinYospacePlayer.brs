@@ -89,6 +89,7 @@ sub onSourceLoaded()
 end sub
 
 sub onSourceUnloaded()
+  reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
   m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
 end sub
 
@@ -132,7 +133,6 @@ sub pause(params)
 end sub
 
 sub unload(params)
-  reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.UNLOAD, params)
 end sub
 

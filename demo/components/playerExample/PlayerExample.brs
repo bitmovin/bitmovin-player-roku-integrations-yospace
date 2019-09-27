@@ -44,6 +44,7 @@ function onPlayerReady()
       ' config : m.playerConfigWithContentNode,
       yospaceConfig : {
         debugVerbosity : m.bitmovinYospacePlayer.DebugVerbosityEnum.DEBUG
+        enableRAF: true
       }
     }
 

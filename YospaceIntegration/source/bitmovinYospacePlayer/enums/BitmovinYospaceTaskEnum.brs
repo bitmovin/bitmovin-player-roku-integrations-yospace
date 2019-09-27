@@ -16,7 +16,8 @@ function getBitmovinYospaceTaskEnum()
       PAUSE: "pause",
       MUTE: "mute",
       SET_CONTENT_METADATA: "setContentMetadata",
-      SET_DEBUG_LEVEL: "setDebugLevel"
+      SET_DEBUG_LEVEL: "setDebugLevel",
+      SET_ENABLE_RAF: "setEnableRAF"
     }
   }
 end function

@@ -101,6 +101,11 @@ sub setup(params)
   if params.yospaceConfig.debugVerbosity <> invalid
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL, arguments: {debugLevel: params.yospaceConfig.debugVerbosity}}
   end if
+
+  if params.yospaceConfig.enableRAF <> invalid
+    m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF, arguments: {enableRAF: params.yospaceConfig.enableRAF}}
+  end if
+
   config = {}
   config.append(params.config)
   if (config.source <> invalid)

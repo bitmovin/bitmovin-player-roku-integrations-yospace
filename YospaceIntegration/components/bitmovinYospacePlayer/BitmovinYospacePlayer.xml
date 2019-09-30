@@ -57,6 +57,7 @@
     <function name="unmute" />
     <function name="getDuration" />
     <function name="setHttpHeaders" />
+    <function name="instantReplay" />
 
     <!-- Ad specific functions -->
     <function name="ad_getActiveAd" />

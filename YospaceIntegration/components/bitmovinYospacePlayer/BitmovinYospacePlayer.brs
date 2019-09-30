@@ -90,6 +90,7 @@ end sub
 
 sub onSourceUnloaded()
   reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
+  m.yospaceTask.adList = []
   m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
 end sub
 

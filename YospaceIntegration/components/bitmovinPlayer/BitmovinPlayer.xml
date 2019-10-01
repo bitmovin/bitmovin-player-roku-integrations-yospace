@@ -16,6 +16,7 @@
 
     <function name="setup" />
     <function name="play" />
+    <function name="instantReplay" />
     <function name="pause" />
     <function name="unload" />
     <function name="preload" />
@@ -43,6 +44,7 @@
     <function name="isLive" />
     <function name="getConfig" />
     <function name="setHttpHeaders" />
+    <function name="getThumbnail" />
 
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />
@@ -56,6 +58,10 @@
     <field id="sourceUnloaded" type="boolean" alwaysNotify="true" />
     <field id="play" type="boolean" alwaysNotify="true" />
     <field id="metadata" type="assocarray" alwaysNotify="true" />
+    <field id="audioChanged" type="assocarray" alwaysNotify="true" />
+    <field id="muted" type="boolean" alwaysNotify="true" />
+    <field id="unmuted" type="boolean" alwaysNotify="true" />
+    <field id="downloadFinished" type="assocarray" alwaysNotify="true" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/BitmovinPlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/deficiency/DeficiencyFactory.brs" />
@@ -65,6 +71,7 @@
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinStateEnums.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinControlEnums.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinConfigEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/HttpRequestTypes.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/metadataHandler.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

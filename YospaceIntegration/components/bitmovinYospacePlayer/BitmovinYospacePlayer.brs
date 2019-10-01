@@ -90,6 +90,7 @@ end sub
 
 sub onSourceUnloaded()
   reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
+  m.yospaceTask.adList = []
   m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
 end sub
 
@@ -253,6 +254,10 @@ end function
 
 sub setHttpHeaders(headers)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SET_HTTP_HEADERS, headers)
+end sub
+
+sub instantReplay(params = invalid)
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.INSTANT_REPLAY, param)
 end sub
 
 ' ---------------------------- ad api ----------------------------

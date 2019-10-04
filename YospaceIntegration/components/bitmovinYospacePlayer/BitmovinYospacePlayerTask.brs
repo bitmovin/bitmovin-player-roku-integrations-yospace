@@ -228,7 +228,11 @@ sub callFunction(data)
   if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
     skipAd()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
-    setContentMetaData(data.arguments.genre, data.arguments.id, data.arguments.length)
+    genre = data.arguments[0]
+    kidsContent = data.arguments[1]
+    id = data.arguments[2]
+    length = data.arguments[3]
+    setContentMetaData(genre, kidsContent, id, length)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
     setDebugLevel(data.arguments.debugLevel)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
@@ -242,9 +246,9 @@ sub setEnableRAF(enableRAF)
   task.SetUseRAF(enableRAF)
 end sub
 
-sub setContentMetadata(genre, id, length)
+sub setContentMetadata(genre, kidsContent, id, length)
   bridge = GetGlobalAA().taskman
-  bridge.SetContentGenre(genre)
+  bridge.SetContentGenre(genre, kidsContent)
   bridge.SetContentId(id)
   bridge.SetContentLength(length)
 end sub

@@ -249,7 +249,7 @@ function getConfig(params = invalid)
 end function
 
 function getDuration(params = invalid)
-  return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_DURATION, params)
+  return toMagicTime(m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_DURATION, params),m.yospaceTask.Timeline)
 end function
 
 sub setHttpHeaders(headers)
@@ -317,7 +317,7 @@ sub reportPlayerStateChanged(videoState)
 end sub
 
 sub onCurrentTimeChanged()
-  m.top.currentTime = toMagicTime(getCurrentTime())
+  m.top.currentTime = toMagicTime(getCurrentTime(), m.yospaceTask.Timeline)
   m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: getCurrentTime()}
 end sub
 
@@ -359,35 +359,6 @@ sub onUrlReceived()
   end if
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub
-
-function toMagicTime(playbackTime)
-  mTime = playbackTime
-
-  ' This additional offset contains the duration of ads already elapsed during an ad break
-  ' Multiple ads in an adbreak will have the same start offset, the offset of the ad break
-  offset = 0
-
-  if m.yospaceTask.Timeline = invalid
-    return mTime
-  end if
-
-  for each timelineElement in m.yospaceTask.Timeline.elements
-    if timelineElement.mode = m.TIMELINE_ENTRY_TYPE_ADVERT
-      if ((timelineElement.offset + offset) + timelineElement.size) < playbackTime
-        mTime -= timelineElement.size
-        offset += timelineElement.size
-      else if (playbackTime > (timelineElement.offset + offset)) and (playbackTime < ((timelineElement.offset + offset) + timelineElement.size))
-        mTime = (playbackTime - (timelineElement.offset + offset)) ' Subtract the time elapsed from content start to ad start
-        exit for ' No need to check the rest of the elements when we are currently in an ad
-      end if
-    else
-      ' Set offset to 0 since timeline entry is not an ad
-      offset = 0
-    end if
-  end for
-
-  return mTime
-end function
 
 sub setFieldObservers()
   m.yospaceTask.observeField("AdBreakStart", "onAdBreakStart")

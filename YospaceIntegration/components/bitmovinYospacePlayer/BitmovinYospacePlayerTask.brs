@@ -71,7 +71,7 @@ end sub
 ' Called whenever the player enters an advert break
 sub onAdBreakStart(dummy as Dynamic)
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
-  m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak())
+  m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(),m.top.Timeline)
   m.top.adBreakStart = true
 end sub
 
@@ -160,7 +160,7 @@ sub updateAdList()
     end for
     adList = []
     for each adElement in advertElements
-      adList.Push(mapAdBreak(adElement.GetAdverts())) ' GetAdverts() returns the adBreak contained in the advert timeline element
+      adList.Push(mapAdBreak(adElement.GetAdverts(),m.top.Timeline)) ' GetAdverts() returns the adBreak contained in the advert timeline element
     end for
     m.top.adList = adList
   else

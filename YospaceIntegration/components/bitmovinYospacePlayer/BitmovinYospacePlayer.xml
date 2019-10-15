@@ -66,6 +66,8 @@
     <function name="ad_skip" />
     <function name="isKeyPressValid" />
     <function name="setContentMetaData" />
+    <function name="ad_setPolicy" />
+
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />

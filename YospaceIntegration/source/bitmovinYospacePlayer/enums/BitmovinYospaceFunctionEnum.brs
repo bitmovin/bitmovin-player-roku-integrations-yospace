@@ -5,5 +5,6 @@ function getYospaceRelatedFunctions()
     AD_LIST: "ad_list",
     AD_SKIP: "ad_skip",
     SET_CONTENT_METADATA: "setContentMetaData"
+    AD_SET_POLICY: "ad_setPolicy"
   }
 end function

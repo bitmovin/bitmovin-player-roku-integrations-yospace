@@ -264,6 +264,10 @@ sub instantReplay(params = invalid)
 end sub
 
 ' ---------------------------- ad api ----------------------------
+sub ad_setPolicy(params)
+  m.policy = params
+end sub
+
 sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}

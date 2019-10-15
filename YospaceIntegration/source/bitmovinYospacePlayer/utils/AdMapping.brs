@@ -26,6 +26,31 @@ function mapAdBreak(myAdBreak, timeline)
   return aBr
 end function
 
+function toAbsoluteTime(relativeTime, list)
+   mTime = relativeTime
+
+  ' This additional offset contains the duration of ads already elapsed during an ad break
+  ' Multiple ads in an adbreak will have the same start offset, the offset of the ad break
+  offset = 0
+
+  if list = invalid
+    return mTime
+  end if
+
+  for each br in list
+    print br
+    print relativeTime
+    if br.scheduleTime < relativeTime
+      for each ad in br.ads
+        mTime += ad.duration
+      end for
+    end if
+  end for
+
+  return mTime
+
+end function
+
 function toMagicTime(playbackTime, timeline)
   mTime = playbackTime
 

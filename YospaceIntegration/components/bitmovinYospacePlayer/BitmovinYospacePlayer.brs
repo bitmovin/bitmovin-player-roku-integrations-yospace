@@ -7,7 +7,7 @@ sub init()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
   m.TIMELINE_ENTRY_TYPE_ADVERT = "ADVERT"
 
-  m.policy = getDefaultBitmovinYospacePlayerPolicy()
+  m.policy = initBitmovinYospacePlayerPolicy()
   m.policyHelper_seekStartPosition = -1
   m.policyHelper_originalSeekDestination = -1
 
@@ -264,10 +264,6 @@ sub instantReplay(params = invalid)
 end sub
 
 ' ---------------------------- ad api ----------------------------
-sub ad_setPolicy(params)
-  m.policy = params
-end sub
-
 sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}

@@ -246,10 +246,12 @@ sub setEnableRAF(enableRAF)
   task.SetUseRAF(enableRAF)
 end sub
 
-sub setContentMetadata(genre, kidsContent, id, length)
+sub setContentMetadata(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
   bridge = GetGlobalAA().taskman
   bridge.SetContentGenre(genre, kidsContent)
   bridge.SetContentId(id)
+  bridge.SetContentLength(length)
+  bridge.SetContentLength(length)
   bridge.SetContentLength(length)
 end sub
 

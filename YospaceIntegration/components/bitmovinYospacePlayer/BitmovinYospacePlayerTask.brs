@@ -251,8 +251,8 @@ sub setContentMetadata(genre, kidsContent, id, length, nielsenGenre, nielsenAppI
   bridge.SetContentGenre(genre, kidsContent)
   bridge.SetContentId(id)
   bridge.SetContentLength(length)
-  bridge.SetContentLength(length)
-  bridge.SetContentLength(length)
+  bridge.SetNielsenGenre(nielsenGenre)
+  bridge.SetNielsenAppId(nielsenAppId)
 end sub
 
 sub setDebugLevel(debugLevel)

@@ -9,6 +9,10 @@ function initBitmovinYospacePlayerPolicy()
     print "Watched Ad Breaks: "; m._watchedAdBreaks
   end function
 
+  this["resetWatchedAdBreaks"] = function()
+    m._watchedAdBreaks = []
+  end function
+
   this["canMute"] = function()
         return true
   end function

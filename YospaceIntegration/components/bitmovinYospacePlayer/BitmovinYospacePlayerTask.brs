@@ -92,7 +92,6 @@ end sub
 
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as String)
-  if m.lastAd <> invalid then return
   m.top.advertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid
@@ -102,7 +101,6 @@ end sub
 sub onAdBreakEnd(dummy as Dynamic)
   print "OnAdBreakEnd: "; m.lastAd
   print m.top.activeAdBreak
-  if m.lastAd <> invalid then return
   m.top.adBreakEnd = m.top.activeAdBreak
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid

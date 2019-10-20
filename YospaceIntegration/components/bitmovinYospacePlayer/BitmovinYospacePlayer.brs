@@ -9,7 +9,6 @@ sub init()
 
   m.policy = initBitmovinYospacePlayerPolicy()
   m.policyHelper_seekStartPosition = -1
-  m.policyHelper_originalSeekDestination = -1
 
   m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayer")
   m.bitmovinPlayer.id = "BitmovinPlayer"
@@ -68,7 +67,6 @@ end sub
 
 sub onSeeked()
   m.top.seeked = toMagicTime(m.bitmovinPlayer.seeked,m.yospaceTask.Timeline)
-  checkIfSeekWasAllowed()
 end sub
 
 sub onPlayerStateChanged()
@@ -90,7 +88,8 @@ end sub
 
 sub onSourceUnloaded()
   reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
-  m.yospaceTask.adList = []
+  resetYospaceTask()
+  m.policy.resetWatchedAdBreaks()
   m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
 end sub
 
@@ -144,7 +143,6 @@ end sub
 sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params, getCurrentTime())
-    if seekDestination <> params then m.policyHelper_originalSeekDestination = params
     list = m.yospaceTask.adList
     seekDestination = toAbsoluteTime(seekDestination, list) - 1
     print "Seeking to destination: "; seekDestination
@@ -329,7 +327,6 @@ end sub
 
 sub onCurrentTimeChanged()
   m.top.currentTime = toMagicTime(getCurrentTime(), m.yospaceTask.Timeline)
-  print "Reporting Time: "; getCurrentTime()
   m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: getCurrentTime()}
 end sub
 
@@ -394,12 +391,6 @@ sub onAdBreakEnd()
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
   currentElement = getCurrentElement(getCurrentTime())
-  if m.policyHelper_originalSeekDestination > -1
-    if (currentElement.offset + currentElement.size) > m.policyHelper_originalSeekDestination
-      seek(m.policyHelper_originalSeekDestination)
-      m.policyHelper_originalSeekDestination = -1
-    end if
-  end if
 end sub
 
 sub onAdvertStart()
@@ -429,9 +420,8 @@ sub checkIfSeekWasAllowed()
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
   allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
-  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1) and (m.policyHelper_originalSeekDestination = -1)
-    m.policyHelper_originalSeekDestination = currentPlayerPosition
-    print "Seeking again because seek wasnt allowed: " + Str(m.policyHelper_originalSeekDestination) + " -> " + Str(allowedSeek)
+  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
+    print "Seeking again because seek wasnt allowed: " + Str(allowedSeek)
     m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1
@@ -455,3 +445,11 @@ function getCurrentElement(currentTime)
     if currentTime < time then return element
   end for
 end function
+
+sub resetYospaceTask()
+  m.yospaceTask.adList = []
+  m.yospaceTask.lastAd = invalid
+  m.yospaceTask.activeAdBreak = invalid
+  m.yospaceTask.activeAd = invalid
+end sub
+

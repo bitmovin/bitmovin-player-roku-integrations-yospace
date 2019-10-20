@@ -67,7 +67,7 @@ sub onSeek()
 end sub
 
 sub onSeeked()
-  m.top.seeked = m.bitmovinPlayer.seeked
+  m.top.seeked = toMagicTime(m.bitmovinPlayer.seeked,m.yospaceTask.Timeline)
   checkIfSeekWasAllowed()
 end sub
 
@@ -145,6 +145,9 @@ sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params, getCurrentTime())
     if seekDestination <> params then m.policyHelper_originalSeekDestination = params
+    list = m.yospaceTask.adList
+    seekDestination = toAbsoluteTime(seekDestination, list) - 1
+    print "Seeking to destination: "; seekDestination
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.SEEK, seekDestination)
   end if
 end sub
@@ -415,6 +418,7 @@ sub checkIfSeekWasAllowed()
   allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
   if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1) and (m.policyHelper_originalSeekDestination = -1)
     m.policyHelper_originalSeekDestination = currentPlayerPosition
+    print "Seeking again because seek wasnt allowed: " + Str(m.policyHelper_originalSeekDestination) + " -> " + Str(allowedSeek)
     m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1

@@ -264,6 +264,14 @@ sub instantReplay(params = invalid)
 end sub
 
 ' ---------------------------- ad api ----------------------------
+sub setTrapDuration(params)
+  m.policy.trapDuration = params
+end sub
+
+sub setSkipWatchedAdBreaks(params)
+  m.policy.skipWatchedAds = params
+end sub
+
 sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
@@ -321,6 +329,7 @@ end sub
 
 sub onCurrentTimeChanged()
   m.top.currentTime = toMagicTime(getCurrentTime(), m.yospaceTask.Timeline)
+  print "Reporting Time: "; getCurrentTime()
   m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: getCurrentTime()}
 end sub
 
@@ -331,7 +340,9 @@ sub onMetadata()
     print "Received meta data was invalid, not reporting to Yospace"
     return
   end if
-  m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+  if isLive() = true
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+  end if
 end sub
 
 sub requestYospaceURL(url, assetType)
@@ -378,6 +389,8 @@ sub onAdBreakStart()
 end sub
 
 sub onAdBreakEnd()
+  print "BitmovinYospacePlayer::onAdBreakEnd "; m.yospaceTask.AdBreakEnd
+  m.policy.markAdBreakWatched(m.yospaceTask.AdBreakEnd)
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
   currentElement = getCurrentElement(getCurrentTime())

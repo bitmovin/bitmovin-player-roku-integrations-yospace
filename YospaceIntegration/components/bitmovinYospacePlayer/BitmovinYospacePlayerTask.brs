@@ -72,7 +72,7 @@ end sub
 sub onAdBreakStart(dummy as Dynamic)
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(),m.top.Timeline)
-  m.top.adBreakStart = true
+  m.top.adBreakStart = m.top.activeAdBreak
 end sub
 
 ' Called whenever an individual advert starts
@@ -100,8 +100,10 @@ end sub
 
 ' Called whenever the player exits an advert break
 sub onAdBreakEnd(dummy as Dynamic)
+  print "OnAdBreakEnd: "; m.lastAd
+  print m.top.activeAdBreak
   if m.lastAd <> invalid then return
-  m.top.adBreakEnd = true
+  m.top.adBreakEnd = m.top.activeAdBreak
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
 end sub

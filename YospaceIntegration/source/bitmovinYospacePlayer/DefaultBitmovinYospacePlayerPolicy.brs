@@ -1,6 +1,14 @@
 function initBitmovinYospacePlayerPolicy()
   this = {}
 
+  this["_watchedAdBreaks"] = []
+
+  this["markAdBreakWatched"] = function(br)
+    print "Marking ad break as watched: "; br
+    m._watchedAdBreaks.Push(br.scheduleTime)
+    print "Watched Ad Breaks: "; m._watchedAdBreaks
+  end function
+
   this["canMute"] = function()
         return true
   end function
@@ -15,7 +23,13 @@ function initBitmovinYospacePlayerPolicy()
     skippedAdBreaks = []
     for each adBrk in adBreaks
       if (adBrk.scheduleTime > currentTime) and (adBrk.scheduleTime < seekTarget)
-        skippedAdBreaks.Push(adBrk)
+        if m.skipWatchedAds = false
+          print "Skipped watched ads is false. Adding break"; adBrk
+          skippedAdBreaks.Push(adBrk)
+        else if ((m.skipWatchedAds = true) and (m.hasBreakBeenWatched(adBrk.scheduleTime) = false))
+          print "Skipped watched ads is true, but we have not seek this break"; adBrk
+          skippedAdBreaks.Push(adBrk)
+        end if
       end if
     end for
     if skippedAdBreaks.Count() > 0
@@ -52,6 +66,17 @@ function initBitmovinYospacePlayerPolicy()
     else
       return false
     end if
+  end function
+
+  this["trapDuration"] = invalid
+  this["skipWatchedAds"] = false
+  this["hasBreakBeenWatched"] = function (time as Float)
+    for each adBrk in m._watchedAdBreaks
+        if adBrk = time
+            return true
+        end if
+    end for
+    return false
   end function
 
   return this

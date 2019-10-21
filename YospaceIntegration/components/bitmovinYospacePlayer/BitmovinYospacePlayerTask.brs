@@ -232,7 +232,9 @@ sub callFunction(data)
     kidsContent = data.arguments[1]
     id = data.arguments[2]
     length = data.arguments[3]
-    setContentMetaData(genre, kidsContent, id, length)
+    nielsenGenre = data.arguments[4]
+    nielsenAppId = data.arguments[5]
+    setContentMetaData(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
     setDebugLevel(data.arguments.debugLevel)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
@@ -247,6 +249,7 @@ sub setEnableRAF(enableRAF)
 end sub
 
 sub setContentMetadata(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
+  print "TaskContentMetadata"
   bridge = GetGlobalAA().taskman
   bridge.SetContentGenre(genre, kidsContent)
   bridge.SetContentId(id)

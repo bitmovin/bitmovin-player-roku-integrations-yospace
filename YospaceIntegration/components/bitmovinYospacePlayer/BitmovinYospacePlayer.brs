@@ -405,8 +405,8 @@ sub onAdSkipped()
   m.top.adSkipped = m.yospaceTask.adSkipped
 end sub
 
-sub setContentMetaData(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA, arguments: [genre, kidsContent, id, length, nielsenGenre, nielsenAppId]}
+sub setContentMetaData(params)
+  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA, arguments: params}
 end sub
 
 sub updatePolicyHelper_seekStartPosition()

@@ -23,24 +23,16 @@ function initBitmovinYospacePlayerPolicy()
   end function
 
   this["canSeekTo"] = function(seekTarget as Float, currentTime = getCurrentTime() as Float)
-    adBreaks = ad_list()
-    skippedAdBreaks = []
-    for each adBrk in adBreaks
-      if (adBrk.scheduleTime > currentTime) and (adBrk.scheduleTime < seekTarget)
-        if m.skipWatchedAds = false
-          print "Skipped watched ads is false. Adding break"; adBrk
-          skippedAdBreaks.Push(adBrk)
-        else if ((m.skipWatchedAds = true) and (m.hasBreakBeenWatched(adBrk.scheduleTime) = false))
-          print "Skipped watched ads is true, but we have not seek this break"; adBrk
-          skippedAdBreaks.Push(adBrk)
-        end if
+    adBrk = m._closestAdBreak(seekTarget)
+    if adBrk <> invalid
+      if m.trapDuration <> invalid and ((adBrk.scheduleTime + m.trapDuration) > seekTarget)
+        return adBrk.scheduleTime
+      else
+        return seekTarget
       end if
-    end for
-    if skippedAdBreaks.Count() > 0
-      adBreakToPlay = skippedAdBreaks[skippedAdBreaks.Count() - 1]
-      seekTarget = adBreakToPlay.scheduleTime
+    else
+      return seekTarget
     end if
-    return seekTarget
   end function
 
   this["canSkip"] = function()
@@ -70,6 +62,29 @@ function initBitmovinYospacePlayerPolicy()
     else
       return false
     end if
+  end function
+
+  this["_closestAdBreak"] = function (seekTarget)
+    adBreaks = ad_list()
+    skippedAdBreaks = []
+    for each adBrk in adBreaks
+      if (adBrk.scheduleTime < seekTarget)
+        if m.skipWatchedAds = false
+          print "Skipped watched ads is false. Adding break"; adBrk
+          skippedAdBreaks.Push(adBrk)
+        else if ((m.skipWatchedAds = true) and (m.hasBreakBeenWatched(adBrk.scheduleTime) = false))
+          print "Skipped watched ads is true, but we have not seek this break"; adBrk
+          skippedAdBreaks.Push(adBrk)
+        end if
+      end if
+    end for
+
+    if skippedAdBreaks.Count() > 0
+      adBreakToPlay = skippedAdBreaks[skippedAdBreaks.Count() - 1]
+      return adBreakToPlay
+    end if
+
+    return invalid
   end function
 
   this["trapDuration"] = invalid

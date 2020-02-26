@@ -7,9 +7,8 @@ sub init()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
   m.TIMELINE_ENTRY_TYPE_ADVERT = "ADVERT"
 
-  m.policy = getDefaultBitmovinYospacePlayerPolicy()
+  m.policy = initBitmovinYospacePlayerPolicy()
   m.policyHelper_seekStartPosition = -1
-  m.policyHelper_originalSeekDestination = -1
 
   m.bitmovinPlayer = createObject("roSGNode", "BitmovinPlayer")
   m.bitmovinPlayer.id = "BitmovinPlayer"
@@ -68,7 +67,6 @@ end sub
 
 sub onSeeked()
   m.top.seeked = toMagicTime(m.bitmovinPlayer.seeked,m.yospaceTask.Timeline)
-  checkIfSeekWasAllowed()
 end sub
 
 sub onPlayerStateChanged()
@@ -90,7 +88,8 @@ end sub
 
 sub onSourceUnloaded()
   reportPlayerStateChanged(m.top.BitmovinPlayerState.FINISHED)
-  m.yospaceTask.adList = []
+  resetYospaceTask()
+  m.policy.resetWatchedAdBreaks()
   m.top.sourceUnloaded = m.bitmovinPlayer.sourceUnloaded
 end sub
 
@@ -144,7 +143,6 @@ end sub
 sub seek(params)
   if m.policy.canSeek()
     seekDestination = m.policy.canSeekTo(params, getCurrentTime())
-    if seekDestination <> params then m.policyHelper_originalSeekDestination = params
     list = m.yospaceTask.adList
     seekDestination = toAbsoluteTime(seekDestination, list) - 1
     print "Seeking to destination: "; seekDestination
@@ -264,6 +262,14 @@ sub instantReplay(params = invalid)
 end sub
 
 ' ---------------------------- ad api ----------------------------
+sub setTrapDuration(params)
+  m.policy.trapDuration = params
+end sub
+
+sub setSkipWatchedAdBreaks(params)
+  m.policy.skipWatchedAds = params
+end sub
+
 sub ad_skip(params = invalid)
   if m.policy.canSkip() = 0
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
@@ -331,7 +337,9 @@ sub onMetadata()
     print "Received meta data was invalid, not reporting to Yospace"
     return
   end if
-  m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+  if isLive() = true
+    m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+  end if
 end sub
 
 sub requestYospaceURL(url, assetType)
@@ -378,15 +386,11 @@ sub onAdBreakStart()
 end sub
 
 sub onAdBreakEnd()
+  print "BitmovinYospacePlayer::onAdBreakEnd "; m.yospaceTask.AdBreakEnd
+  m.policy.markAdBreakWatched(m.yospaceTask.AdBreakEnd)
   m.top.adBreakFinished = m.yospaceTask.AdBreakEnd
 
   currentElement = getCurrentElement(getCurrentTime())
-  if m.policyHelper_originalSeekDestination > -1
-    if (currentElement.offset + currentElement.size) > m.policyHelper_originalSeekDestination
-      seek(m.policyHelper_originalSeekDestination)
-      m.policyHelper_originalSeekDestination = -1
-    end if
-  end if
 end sub
 
 sub onAdvertStart()
@@ -401,8 +405,8 @@ sub onAdSkipped()
   m.top.adSkipped = m.yospaceTask.adSkipped
 end sub
 
-sub setContentMetaData(genre, kidsContent, id, length)
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA, arguments: [genre, kidsContent, id, length]}
+sub setContentMetaData(params)
+  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA, arguments: params}
 end sub
 
 sub updatePolicyHelper_seekStartPosition()
@@ -416,9 +420,8 @@ sub checkIfSeekWasAllowed()
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
   allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
-  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1) and (m.policyHelper_originalSeekDestination = -1)
-    m.policyHelper_originalSeekDestination = currentPlayerPosition
-    print "Seeking again because seek wasnt allowed: " + Str(m.policyHelper_originalSeekDestination) + " -> " + Str(allowedSeek)
+  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
+    print "Seeking again because seek wasnt allowed: " + Str(allowedSeek)
     m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
   m.policyHelper_seekStartPosition = -1
@@ -442,3 +445,11 @@ function getCurrentElement(currentTime)
     if currentTime < time then return element
   end for
 end function
+
+sub resetYospaceTask()
+  m.yospaceTask.adList = []
+  m.yospaceTask.lastAd = invalid
+  m.yospaceTask.activeAdBreak = invalid
+  m.yospaceTask.activeAd = invalid
+end sub
+

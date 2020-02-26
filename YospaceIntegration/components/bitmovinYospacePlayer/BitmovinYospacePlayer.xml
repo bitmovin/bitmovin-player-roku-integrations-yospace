@@ -22,8 +22,8 @@
     <field id="warning" type="assocarray" alwaysNotify="true" />
 
     <!-- Ad specific fields -->
-    <field id="adBreakStarted" type="Boolean" alwaysNotify="true" />
-    <field id="adBreakFinished" type="Boolean" alwaysNotify="true" />
+    <field id="adBreakStarted" type="assocarray" alwaysNotify="true" />
+    <field id="adBreakFinished" type="assocarray" alwaysNotify="true" />
     <field id="adFinished" type="string" alwaysNotify="true" />
     <field id="adQuartile" type="integer" alwaysNotify="true" />
     <field id="adSkipped" type="string" alwaysNotify="true" />
@@ -66,6 +66,9 @@
     <function name="ad_skip" />
     <function name="isKeyPressValid" />
     <function name="setContentMetaData" />
+    <function name="setTrapDuration" />
+    <function name="setSkipWatchedAdBreaks" />
+
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />

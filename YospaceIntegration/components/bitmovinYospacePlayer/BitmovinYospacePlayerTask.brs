@@ -72,7 +72,7 @@ end sub
 sub onAdBreakStart(dummy as Dynamic)
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(),m.top.Timeline)
-  m.top.adBreakStart = true
+  m.top.adBreakStart = m.top.activeAdBreak
 end sub
 
 ' Called whenever an individual advert starts
@@ -92,7 +92,6 @@ end sub
 
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as String)
-  if m.lastAd <> invalid then return
   m.top.advertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid
@@ -100,8 +99,9 @@ end sub
 
 ' Called whenever the player exits an advert break
 sub onAdBreakEnd(dummy as Dynamic)
-  if m.lastAd <> invalid then return
-  m.top.adBreakEnd = true
+  print "OnAdBreakEnd: "; m.lastAd
+  print m.top.activeAdBreak
+  m.top.adBreakEnd = m.top.activeAdBreak
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
 end sub
@@ -232,7 +232,9 @@ sub callFunction(data)
     kidsContent = data.arguments[1]
     id = data.arguments[2]
     length = data.arguments[3]
-    setContentMetaData(genre, kidsContent, id, length)
+    nielsenGenre = data.arguments[4]
+    nielsenAppId = data.arguments[5]
+    setContentMetaData(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
     setDebugLevel(data.arguments.debugLevel)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
@@ -246,11 +248,14 @@ sub setEnableRAF(enableRAF)
   task.SetUseRAF(enableRAF)
 end sub
 
-sub setContentMetadata(genre, kidsContent, id, length)
+sub setContentMetadata(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
+  print "TaskContentMetadata"
   bridge = GetGlobalAA().taskman
   bridge.SetContentGenre(genre, kidsContent)
   bridge.SetContentId(id)
   bridge.SetContentLength(length)
+  bridge.SetNielsenGenre(nielsenGenre)
+  bridge.SetNielsenAppId(nielsenAppId)
 end sub
 
 sub setDebugLevel(debugLevel)

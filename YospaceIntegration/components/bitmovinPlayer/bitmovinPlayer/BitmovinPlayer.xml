@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BitmovinPlayer" extends="Group">
+  <interface>
+    <field id="BitmovinPlayerState" type="assocarray" />
+    <field id="BitmovinFunctions" type="assocarray" />
+    <field id="BitmovinFields" type="assocarray" />
+
+    <function name="setup" />
+    <function name="play" />
+    <function name="instantReplay" />
+    <function name="pause" />
+    <function name="unload" />
+    <function name="preload" />
+    <function name="seek" />
+    <function name="load" />
+    <function name="getDuration" />
+    <function name="mute" />
+    <function name="unmute" />
+    <function name="isMuted" />
+    <function name="captionMode" />
+    <function name="setCaptionMode" />
+    <function name="isPlaying" />
+    <function name="isPaused" />
+    <function name="isStalled" />
+    <function name="availableSubtitles" />
+    <function name="getSubtitle" />
+    <function name="setSubtitle" />
+    <function name="setSubtitleStyles" />
+    <function name="getSubtitleStyles" />
+    <function name="availableAudio" />
+    <function name="getAudio" />
+    <function name="setAudio" />
+    <function name="timeShift" />
+    <function name="getTimeShift" />
+    <function name="getMaxTimeShift" />
+    <function name="isLive" />
+    <function name="getConfig" />
+    <function name="setHttpHeaders" />
+    <function name="getThumbnail" />
+    <function name="ad_list" />
+    <function name="ad_schedule" />
+    <function name="ad_getActiveAdBreak" />
+    <function name="ad_discardAdBreak" />
+    <function name="getVersion" />
+    <function name="destroy" />
+
+    <field id="playerState" type="string" value="" />
+    <field id="error" type="assocarray" alwaysNotify="true" />
+    <field id="warning" type="assocarray" alwaysNotify="true" />
+    <field id="seek" type="boolean" alwaysNotify="true" />
+    <field id="seeked" type="float" alwaysNotify="true" />
+    <field id="timeShift" type="float" alwaysNotify="true" />
+    <field id="timeShifted" type="float" alwaysNotify="true" />
+    <field id="currentTime" type="float" alwaysNotify="true" />
+    <field id="sourceLoaded" type="boolean" alwaysNotify="true" />
+    <field id="sourceUnloaded" type="boolean" alwaysNotify="true" />
+    <field id="play" type="boolean" alwaysNotify="true" />
+    <field id="metadata" type="assocarray" alwaysNotify="true" />
+    <field id="audioChanged" type="assocarray" alwaysNotify="true" />
+    <field id="muted" type="boolean" alwaysNotify="true" />
+    <field id="unmuted" type="boolean" alwaysNotify="true" />
+    <field id="downloadFinished" type="assocarray" alwaysNotify="true" />
+    <field id="adBreakFinished" type="assocarray" alwaysNotify="true" />
+    <field id="adBreakStarted" type="assocarray" alwaysNotify="true" />
+    <field id="adInteraction" type="assocarray" alwaysNotify="true" />
+    <field id="adError" type="assocarray" alwaysNotify="true" />
+    <field id="adFinished" type="assocarray" alwaysNotify="true" />
+    <field id="adQuartile" type="assocarray" alwaysNotify="true" />
+    <field id="adStarted" type="assocarray" alwaysNotify="true" />
+    <field id="adSkipped" type="assocarray" alwaysNotify="true" />
+    <field id="destroy" type="assocarray" alwaysNotify="true" />
+    <field id="videoDownloadQualityChanged" type="assocarray" alwaysNotify="true" />
+    <field id="audioDownloadQualityChanged" type="assocarray" alwaysNotify="true" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/bitmovinPlayer/BitmovinPlayer.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFunctionNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinConfigAssetTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/bitmovinPlayer/ServiceEndpoints.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/HttpRequestTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/TimelineReferencePoints.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
+</component>

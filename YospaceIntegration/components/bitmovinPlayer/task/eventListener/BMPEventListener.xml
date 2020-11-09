@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPEventListener" extends="Node">
+  <interface>
+    <function name="subscribe" />
+    <field id="eventOccurred" type="assocarray" value="" alwaysNotify="true" />
+    <field id="type" type="String" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/BMPEventListener.brs" />
+</component>

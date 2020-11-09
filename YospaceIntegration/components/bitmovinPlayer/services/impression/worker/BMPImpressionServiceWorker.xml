@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPImpressionServiceWorker" extends="BMPBaseServiceWorker">
+  <interface>
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/impression/worker/BMPImpressionServiceWorker.brs" />
+</component>

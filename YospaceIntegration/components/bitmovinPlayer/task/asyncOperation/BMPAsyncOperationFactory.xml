@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPAsyncOperationFactory" extends="Node">
+  <interface>
+    <function name="createAsyncOperation" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BMPAsyncOperationFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationWorkerTypes.brs" />
+</component>

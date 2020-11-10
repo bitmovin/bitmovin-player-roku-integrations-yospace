@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPBitmovinPlayerTask" extends="Task">
+    <interface>
+        <function name="runTask" />
+        <function name="stopTask" />
+        <function name="isTaskRunning" />
+        <function name="removeVideoNodeObservers" />
+        <function name="resetState" />
+
+         <!-- Video field to be used together with setVideoNodeObservers in order to prevent observing directly interface of type node-->
+        <field id="video" type="node" alwaysNotify="true" />
+         <!-- Used observer pattern instead of function to avoid problems with accessing m.port object in function execution -->
+        <field id="setVideoNodeObservers" type="boolean" alwaysNotify="true" />
+        <field id="handleOperation" type="node" alwaysNotify="true" />
+        <field id="subscribe" type="node" alwaysNotify="true" />
+    </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/BMPBitmovinPlayerTask.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/BitmovinPlayerTaskFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerTaskControlValues.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/VideoNodeControlValues.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/RokuAdEvents.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationWorkerTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
+</component>

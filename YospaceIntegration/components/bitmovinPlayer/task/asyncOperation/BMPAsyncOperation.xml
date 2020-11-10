@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPAsyncOperation" extends="Node">
+  <interface>
+    <function name="execute" />
+    <function name="setResult" />
+    <!--
+      Data field can contain:
+      {String} url - request url, required
+      {Object} headers - request headers, optional
+      {Object} options - POST data, optional
+     -->
+    <field id="data" type="assocarray" value="" />
+    <field id="type" type="String" value="" />
+    <field id="workerType" type="String" value="" />
+    <field id="result" type="assocarray" value="" alwaysNotify="true" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BMPAsyncOperation.brs" />
+</component>

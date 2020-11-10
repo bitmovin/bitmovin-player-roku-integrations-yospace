@@ -1,0 +1,10 @@
+/demo/out/
+node_modules
+/demo/source/yospace
+/demo/source/bitmovinYospacePlayer
+/demo/source/bitmovinPlayer/
+/demo/components/bitmovinYospacePlayer/
+/demo/components/bitmovinPlayer/
+/YospaceIntegration/source/yospace
+/YospaceIntegration/out/
+/out/

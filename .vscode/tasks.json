@@ -1,0 +1,37 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-roku",
+      "type": "shell",
+      "presentation": {
+        "clear": true,
+        "reveal": "silent"
+      },
+      "problemMatcher": [],
+      "command": "npm run build"
+    },
+    {
+      "label": "clean-roku",
+      "type": "shell",
+      "presentation": {
+        "clear": true,
+        "reveal": "silent"
+      },
+      "problemMatcher": [],
+      "command": "npm run clean"
+    },
+    {
+      "label": "serve-roku",
+      "type": "shell",
+      "presentation": {
+        "clear": true,
+        "reveal": "silent"
+      },
+      "problemMatcher": [],
+      "command": "npm run serve"
+    }
+  ]
+}

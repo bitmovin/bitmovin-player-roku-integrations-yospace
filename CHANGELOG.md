@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Improved documentation in README.md
 - Updated sample app to show how to listen to different kinds of events
+- Allow retryExcludingYospace to fire more than once per app session
 
 ### Fixed
 - A Crash when ads with no source are received.

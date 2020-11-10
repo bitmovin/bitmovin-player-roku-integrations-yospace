@@ -1,4 +1,0 @@
-function __1_1_I__O000()
-BitmovinPlayerState={PLAYING:(Chr(&H70)+Chr(&H6c)+Chr(97)+Chr(&H79)+Chr(105)+Chr(&H6e)+Chr(103)),STALLING:(Chr(115)+Chr(&H74)+Chr(&H61)+Chr(&H6c)+Chr(&H6c)+Chr(&H69)+Chr(&H6e)+Chr(103)),PAUSED:(Chr(112)+Chr(&H61)+Chr(&H75)+Chr(&H73)+Chr(&H65)+Chr(&H64)),FINISHED:(Chr(&H66)+Chr(&H69)+Chr(110)+Chr(&H69)+Chr(&H73)+Chr(104)+Chr(101)+Chr(&H64)),ERROR:(Chr(101)+Chr(114)+Chr(114)+Chr(&H6f)+Chr(114)),NONE:(Chr(&H6e)+Chr(111)+Chr(&H6e)+Chr(&H65)),SETUP:(Chr(&H73)+Chr(&H65)+Chr(116)+Chr(117)+Chr(&H70)),READY:(Chr(&H72)+Chr(101)+Chr(&H61)+Chr(100)+Chr(121))}
-return BitmovinPlayerState 
-end function

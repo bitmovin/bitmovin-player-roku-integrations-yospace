@@ -1,0 +1,3 @@
+function _00I10OOO01OO()
+return{MAIN_VIDEO:(Chr(77)+Chr(97)+Chr(105)+Chr(110)+Chr(&H56)+Chr(105)+Chr(&H64)+Chr(101)+Chr(&H6f)),KEY_EVENT_HANDLER:(Chr(&H4b)+Chr(101)+Chr(121)+Chr(&H45)+Chr(&H76)+Chr(101)+Chr(110)+Chr(116)+Chr(&H48)+Chr(97)+Chr(&H6e)+Chr(&H64)+Chr(&H6c)+Chr(&H65)+Chr(114)),BITMOVIN_PLAYER_TASK:(Chr(&H42)+Chr(&H69)+Chr(&H74)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(105)+Chr(&H6e)+Chr(80)+Chr(108)+Chr(&H61)+Chr(&H79)+Chr(&H65)+Chr(114)+Chr(84)+Chr(97)+Chr(&H73)+Chr(107)),ERROR_WRAPPER:(Chr(69)+Chr(&H72)+Chr(114)+Chr(111)+Chr(&H72)+Chr(&H57)+Chr(&H72)+Chr(97)+Chr(112)+Chr(&H70)+Chr(101)+Chr(&H72)),ERROR_LABEL:(Chr(69)+Chr(&H72)+Chr(114)+Chr(111)+Chr(&H72)+Chr(&H4c)+Chr(&H61)+Chr(&H62)+Chr(101)+Chr(&H6c))} 
+end function

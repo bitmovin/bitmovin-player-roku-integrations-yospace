@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPKeyEventHandler" extends="Group">
+  <interface>
+    <field id="playerState" type="string" />
+    <field id="seeking" type="boolean" value="false" />
+    <function name="setup" />
+    <function name="setKeyPressValidationCallback" />
+    <function name="destroy" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/ui/keyEventHandler/BMPKeyEventHandler.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFunctionNames.brs" />
+</component>

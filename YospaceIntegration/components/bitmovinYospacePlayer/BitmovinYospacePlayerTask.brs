@@ -92,6 +92,10 @@ end sub
 
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as String)
+  if miid = m.lastAd
+    YO_INFO("onAdEnd - miid {0} matches m.lastAd {1}; setting m.lastAd back to invalid", miid, m.lastAd)
+    m.lastAd = invalid
+  end if
   m.top.advertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid

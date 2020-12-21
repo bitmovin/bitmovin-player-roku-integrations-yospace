@@ -29,9 +29,7 @@ function mapCompanion(companion)
     clickThrough: companion.GetClickThrough(),
     creativeId: companion.GetCreativeId(),
     resources: companion.GetAllResources(),
-    tracking: companion.GetTracking(),
-    ' This is not working as expected, returns invalid `
-    track: FindMemberFunction(companion, "Track")
+    tracking: companion.GetTracking()
   }
 end function
 

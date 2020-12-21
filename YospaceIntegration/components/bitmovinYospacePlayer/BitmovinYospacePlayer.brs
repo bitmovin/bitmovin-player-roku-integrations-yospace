@@ -290,6 +290,11 @@ function ad_getActiveAd(params = invalid)
   return m.yospaceTask.activeAd
 end function
 
+sub companionRendered(companionId = invalid)
+  print "bm ysplayer companionRendered"
+  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT, arguments: {companionId: companionId, event: "creativeView"}}.
+end sub
+
 function isKeyPressValid(key)
   if key = "right" or key = "left" or key = "fastforward" or key = "rewind"
     if m.policy.canSeek()

@@ -22,7 +22,6 @@ function mapAd(ad)
 end function
 
 function mapCompanion(companion)
-  print companion
   return {
     adId: companion.GetAdId(),
     attributes: companion.GetAttributes(),

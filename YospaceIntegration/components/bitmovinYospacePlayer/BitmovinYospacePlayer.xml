@@ -68,6 +68,7 @@
     <function name="setContentMetaData" />
     <function name="setTrapDuration" />
     <function name="setSkipWatchedAdBreaks" />
+    <function name="companionRendered" />
 
   </interface>
 

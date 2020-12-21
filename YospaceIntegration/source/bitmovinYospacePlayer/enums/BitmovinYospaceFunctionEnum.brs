@@ -7,6 +7,7 @@ function getYospaceRelatedFunctions()
     SET_CONTENT_METADATA: "setContentMetaData"
     AD_SET_POLICY: "ad_setPolicy"
     SET_TRAP_DURATION: "setTrapDuration"
-    SET_SKIP_WATCHED_AD_BREAKS: "setSkipWatchedAdBreaks"
+    SET_SKIP_WATCHED_AD_BREAKS: "setSkipWatchedAdBreaks",
+    COMPANION_RENDERED: "companionRendered"
   }
 end function

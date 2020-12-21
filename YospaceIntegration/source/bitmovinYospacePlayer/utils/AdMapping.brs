@@ -28,8 +28,7 @@ function mapCompanion(companion)
     attributes: companion.GetAttributes(),
     clickThrough: companion.GetClickThrough(),
     creativeId: companion.GetCreativeId(),
-    resources: companion.GetAllResources(),
-    tracking: companion.GetTracking()
+    resources: companion.GetAllResources()
   }
 end function
 

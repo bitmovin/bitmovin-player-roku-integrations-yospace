@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPMetadataService" extends="Node">
+  <interface>
+    <function name="initializeService" />
+    <function name="startService" />
+    <function name="stopService" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/metadata/BMPMetadataService.brs" />
+</component>

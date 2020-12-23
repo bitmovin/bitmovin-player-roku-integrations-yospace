@@ -290,6 +290,11 @@ function ad_getActiveAd(params = invalid)
   return m.yospaceTask.activeAd
 end function
 
+' returns the yoSpaceTask
+function ad_getYoSpacePlayerTask()
+  return m.yospaceTask
+end function
+
 function isKeyPressValid(key)
   if key = "right" or key = "left" or key = "fastforward" or key = "rewind"
     if m.policy.canSeek()
@@ -368,6 +373,7 @@ sub onUrlReceived()
   else if type(m.source) = "roSGNode" and m.source.isSubtype("ContentNode")
     m.source.url = m.yospaceTask.PlaybackURL
   end if
+  m.top.playbackUrl = m.yospaceTask.PlaybackURL
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
 end sub
 

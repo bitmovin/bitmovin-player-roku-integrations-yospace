@@ -1,5 +1,5 @@
 sub init()
-  m.playerConfig = getExamplePlayerConfig()
+  m.playerConfig = getExamplePlayerConfigLive()
   m.playerConfigWithContentNode = getExamplePlayerConfigWithContentNode()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
@@ -21,6 +21,7 @@ function onPlayerReady()
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_FINISHED, "onAdFinished")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_FINISHED, "onAdBreakFinished")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_SKIPPED, "onAdSkipped")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_PLAYBACK_URL, "onPlaybackUrlReceived")
 
     ' Set time change events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
@@ -72,6 +73,11 @@ end sub
 
 sub onAdSkipped()
   print "Ad Skipped: "; m.BitmovinYospacePlayer.adSkipped
+end sub
+
+sub onPlaybackUrlReceived()
+  print "Ad PlayBack Url: "; m.BitmovinYospacePlayer.playbackUrl
+  m.yoSession=m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.AD_GET_YOSPACE_PLAYER_TASK)
 end sub
 
 ' Listening to time change events

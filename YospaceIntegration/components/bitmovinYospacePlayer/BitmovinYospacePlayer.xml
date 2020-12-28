@@ -68,6 +68,7 @@
     <function name="setContentMetaData" />
     <function name="setTrapDuration" />
     <function name="setSkipWatchedAdBreaks" />
+    <function name="companionRendered" />
 
   </interface>
 
@@ -89,6 +90,7 @@
   <script type="text/brightscript" uri="pkg:/source/yospace/Core/VASTCreative.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Core/VASTLinear.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Core/VASTNonLinear.brs" />
+  <script type="text/brightscript" uri="pkg:/source/yospace/Core/VastCompanion.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Parsers/ParsePlaylist.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Parsers/ParseVAST.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Parsers/ParseVMAP.brs" />

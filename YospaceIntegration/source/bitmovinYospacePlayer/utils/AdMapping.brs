@@ -3,13 +3,31 @@ function mapAd(ad)
   url = invalid
   if mediaFiles.count() > 0 then url = mediaFiles[0].src
 
-  return {
+  result = {
     isLinear: true,
     duration: ad.GetDuration(),
     id: ad.getMediaID(),
     clickThroughUrl: ad.GetAdvert().GetLinear().GetClickThrough(),
     mediaFileUrl: url,
-    skippableAfter: ad.GetAdvert().GetLinear().GetSkipOffset()
+    skippableAfter: ad.GetAdvert().GetLinear().GetSkipOffset(),
+    companions: []
+  }
+
+  companions = ad.GetAdvert().GetCompanions()
+  for each companion in companions
+    result.companions.push(mapCompanion(companion))
+  end for
+
+  return result
+end function
+
+function mapCompanion(companion)
+  return {
+    adId: companion.GetAdId(),
+    attributes: companion.GetAttributes(),
+    clickThrough: companion.GetClickThrough(),
+    creativeId: companion.GetCreativeId(),
+    resources: companion.GetAllResources()
   }
 end function
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPThumbnailServiceWorker" extends="BMPBaseServiceWorker">
+  <interface>
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/worker/BMPThumbnailServiceWorker.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/VttParser.brs" />
+</component>

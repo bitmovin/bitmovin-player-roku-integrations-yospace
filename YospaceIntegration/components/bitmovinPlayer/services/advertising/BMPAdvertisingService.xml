@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPAdvertisingService" extends="Node">
+  <interface>
+    <function name="initializeService" />
+    <function name="startService" />
+    <function name="stopService" />
+    <function name="getAdList" />
+    <function name="scheduleAds" />
+    <function name="getActiveAdBreak" />
+    <function name="discardAdBreak" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/BMPAdvertisingService.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerFactory.brs" />
+</component>

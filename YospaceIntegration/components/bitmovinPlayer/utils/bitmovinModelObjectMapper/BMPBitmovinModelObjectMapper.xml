@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPBitmovinModelObjectMapper" extends="Node">
+  <interface>
+    <function name="createBitmovinAdFromRokuAd" />
+    <function name="createBitmovinAdBreakFromRokuAdBreak" />
+    <function name="createBitmovinSegmentFromRokuSegment" />
+    <function name="getAdQuartile" />
+    <function name="rokuEventTypeToBitmovinEventField" />
+    <function name="rokuSegmentInformationToDownloadFinishedEvent" />
+    <function name="rokuVideoErrorCodeToBitmovinErrorCode" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/utils/bitmovinModelObjectMapper/BMPBitmovinModelObjectMapper.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/HttpRequestTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/RokuAdEvents.brs" />
+</component>

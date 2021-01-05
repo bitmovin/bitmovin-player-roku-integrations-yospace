@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPLicenseServiceWorker" extends="BMPBaseServiceWorker">
+  <interface>
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/license/worker/BMPLicenseServiceWorker.brs" />
+</component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPDeficiencyFactory" extends="Node">
+  <interface>
+    <function name="getErrors" />
+    <function name="createErrorEvent" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/deficiency/BMPDeficiencyFactory.brs" />
+</component>

@@ -5,7 +5,9 @@ function initBitmovinYospacePlayerPolicy()
 
   this["markAdBreakWatched"] = function(br)
     print "Marking ad break as watched: "; br
-    m._watchedAdBreaks.Push(br.scheduleTime)
+    if br <> invalid
+      m._watchedAdBreaks.Push(br.scheduleTime)
+    end if
     print "Watched Ad Breaks: "; m._watchedAdBreaks
   end function
 

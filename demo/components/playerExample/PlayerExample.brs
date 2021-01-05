@@ -3,6 +3,10 @@ sub init()
   m.playerConfigWithContentNode = getExamplePlayerConfigWithContentNode()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
+
+  ' Use BitmovinYospaceConvivaPlayer for integrating Conviva with Yospace. For enabling conviva refer to the Readme file
+  'm.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospaceConvivaPlayer")
+
   m.bitmovinYospacePlayer.id = "BitmovinYospacePlayer"
   m.top.appendChild(m.bitmovinYospacePlayer)
 
@@ -48,6 +52,7 @@ function onPlayerReady()
         enableRAF: true
       }
     }
+    'InitializeConviva if conviva is enabled. Refer to the Readme file
     initializeConviva()
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
   end if
@@ -94,7 +99,8 @@ end sub
 
 sub onPlaybackUrlReceived()
   print "Ad PlayBack Url: "; m.BitmovinYospacePlayer.playbackUrl
-  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_YOSPACE_SDK)
+  'Call monitorYoSpaceSDK if conviva is enabled
+  'm.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_YOSPACE_SDK)
 end sub
 
 ' Listening to time change events

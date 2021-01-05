@@ -4,6 +4,7 @@ node_modules
 /demo/source/bitmovinYospacePlayer
 /demo/source/bitmovinPlayer/
 /demo/components/bitmovinYospacePlayer/
+/demo/components/bitmovinYospaceConvivaPlayer/
 /demo/components/bitmovinConviva/
 /demo/components/conviva/
 /demo/components/bitmovinPlayer/

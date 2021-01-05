@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="UrlLoader" extends="Task">
+	<interface>
+	  <field id="targeturl" type="String" alwaysNotify="true" />
+	  <field id="response" type="String" alwaysNotify="true" />
+	  <field id="result" type="int" alwaysNotify="true" />
+	</interface>
+
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospaceConvivaPlayer/helperTask/UrlLoader.brs" />
+</component>

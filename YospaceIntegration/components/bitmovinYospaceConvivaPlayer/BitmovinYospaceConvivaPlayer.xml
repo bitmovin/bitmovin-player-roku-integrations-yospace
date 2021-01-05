@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BitmovinYospacePlayer" extends="Group">
+<component name="BitmovinYospaceConvivaPlayer" extends="Group">
   <interface>
     <field id="BitmovinFields" type="assocarray" />
     <field id="BitmovinFunctions" type="assocarray" />
@@ -70,9 +70,21 @@
     <function name="setTrapDuration" />
     <function name="setSkipWatchedAdBreaks" />
 
+       <!-- Conviva specific functions -->
+    <function name="setupConvivaAnalytics" />
+    <function name="endSession" />
+    <function name="updateContentMetadata" />
+    <function name="monitorVideo" />
+    <function name="monitorYoSpaceSDK" />
+    <function name="reportPlaybackDeficiency" />
+    <function name="sendCustomApplicationEvent" />
+    <function name="sendCustomPlaybackEvent" />
+
+
+
   </interface>
 
-  <script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayer.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospaceConvivaPlayer/BitmovinYospaceConvivaPlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/DefaultBitmovinYospacePlayerPolicy.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/MetaDataMapping.brs" />

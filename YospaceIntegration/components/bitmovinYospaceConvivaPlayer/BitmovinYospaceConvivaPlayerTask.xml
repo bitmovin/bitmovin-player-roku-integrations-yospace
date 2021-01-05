@@ -1,4 +1,4 @@
-<component name="BitmovinYospacePlayerTask" extends="Task">
+<component name="BitmovinYospaceConvivaPlayerTask" extends="Task">
 	<interface>
 		<field id="bitmovinYospacePlayer" type="node" />
 
@@ -14,6 +14,14 @@
 	  <field id="StreamContent" type="assocarray" />
 	  <field id="EventReport" type="assocarray" alwaysNotify="true" />
 
+   <!-- Conviva Fields -->
+    <field id="enableConviva" type="boolean" />
+    <field id="config" type="assocarray" />
+    <field id="customerKey" type="string" />
+    <field id="player" type="node" />
+    <field id="adNode" type="node" />
+    <field id="cSession" type="boolean" alwaysNotify="true"/>
+
 	  <field id="PlaybackURL" type="String" />
 	  <field id="IsLive" type="Boolean" />
 	  <field id="IsAdvert" type="Boolean" />
@@ -21,13 +29,15 @@
 	  <field id="StreamType" type="String" />
 	  <field id="InitializationFailure" type="String" alwaysNotify="true" />
 
+
 		<field id="adList" type="array" />
 		<field id="activeAdBreak" type="assocarray" />
 		<field id="activeAd" type="assocarray" />
 		<field id="callFunction" type="assocarray" alwaysNotify="true" />
+
 	</interface>
 
-	<script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayerTask.brs" />
+	<script type="text/brightscript" uri="pkg:/components/bitmovinYospaceConvivaPlayer/BitmovinYospaceConvivaPlayerTask.brs" />
 	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/utils/AdMapping.brs" />
 	<script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/BitmovinYospaceTaskEnum.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinYospacePlayer/enums/yospaceDebugVerbosity.brs" />
@@ -57,4 +67,7 @@
   <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YSDebugLog.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YSTimer.brs" />
   <script type="text/brightscript" uri="pkg:/source/yospace/Utils/YSURL.brs" />
+  <script type="text/brightscript" uri="pkg:/components/conviva/ConvivaClient.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinConviva/helper/ToString.brs" />
+
 </component>

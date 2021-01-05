@@ -4,21 +4,22 @@ sub init()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
 
-  ' Use BitmovinYospaceConvivaPlayer for integrating Conviva with Yospace. For enabling conviva refer to the Readme file
+  ' Use BitmovinYospaceConvivaPlayer for integrating Conviva with Yospace. For enabling conviva refer to the Readme
   'm.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospaceConvivaPlayer")
 
   m.bitmovinYospacePlayer.id = "BitmovinYospacePlayer"
   m.top.appendChild(m.bitmovinYospacePlayer)
 
+  m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
+  m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
+
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.INITIALIZE_YOSPACE)
   ' Observe the isPlayerReady field to be informed when the player has finished its inital setup up and is ready to be used
   m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
 end sub
 
 function onPlayerReady()
   if m.bitmovinYospacePlayer.isPlayerReady = true
-    m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
-    m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
-
     ' Set ad events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_STARTED, "onAdBreakStart")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_STARTED, "onAdStart")
@@ -53,7 +54,7 @@ function onPlayerReady()
       }
     }
     'InitializeConviva if conviva is enabled. Refer to the Readme file
-    initializeConviva()
+    'initializeConviva()
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
   end if
 end function

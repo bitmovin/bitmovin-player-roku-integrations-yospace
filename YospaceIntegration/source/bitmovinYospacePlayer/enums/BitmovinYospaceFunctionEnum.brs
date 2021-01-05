@@ -15,6 +15,7 @@ function getYospaceRelatedFunctions()
     END_SESSION: "endSession",
     REPORT_PLAYBACK_DEFICIENCY: "reportPlaybackDeficiency",
     SEND_CUSTOM_APPLICATION_EVENT: "sendCustomApplicationEvent",
-    SEND_CUSTOM_PLAYBACK_EVENT: "sendCustomPlaybackEvent"
+    SEND_CUSTOM_PLAYBACK_EVENT: "sendCustomPlaybackEvent",
+    INITIALIZE_YOSPACE: "initializeYoSpace",
   }
 end function

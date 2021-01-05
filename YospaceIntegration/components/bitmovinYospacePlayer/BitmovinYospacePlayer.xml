@@ -30,6 +30,8 @@
     <field id="adStarted" type="string" alwaysNotify="true" />
     <field id="playbackUrl" type="string" alwaysNotify="true" />
 
+    <!-- Common Functions -->
+    <function name="initializeYoSpace" />
     <!-- Bitmovin Functions -->
     <function name="availableAudio" />
     <function name="availableSubtitles" />
@@ -69,6 +71,16 @@
     <function name="setContentMetaData" />
     <function name="setTrapDuration" />
     <function name="setSkipWatchedAdBreaks" />
+
+    <!-- Conviva specific functions -->
+    <function name="setupConvivaAnalytics" />
+    <function name="endSession" />
+    <function name="updateContentMetadata" />
+    <function name="monitorVideo" />
+    <function name="monitorYoSpaceSDK" />
+    <function name="reportPlaybackDeficiency" />
+    <function name="sendCustomApplicationEvent" />
+    <function name="sendCustomPlaybackEvent" />
 
   </interface>
 

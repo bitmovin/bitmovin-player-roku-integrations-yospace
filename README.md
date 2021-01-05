@@ -77,4 +77,19 @@ Clone Git repository
   m.bitmovinPlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
   ```
 
+## Conviva Integration
+
+1. Create a new folder called `BitmovinConviva` under the root project folder
+2. Clone https://github.com/bitmovin/bitmovin-player-roku-analytics-conviva.git inside `BitmovinConviva` folder using `git clone https://github.com/bitmovin/bitmovin-player-roku-analytics-conviva.git .`
+
+3. Run `npm run serve`
+  _(This will copy all needed files from ./YospaceIntegration and ConvivaIntegration to the ./demo folder)_
+4. In `PlayerExample.brs` uncomment `m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospaceConvivaPlayer")` and use it instead of `BitmovinYospacePlayer`
+
+5. In `PlayerExample.brs` uncomment `initializeConviva` inside method and add your customer key & gatewayUrl
+
+6. In `PlayerExample.brs` go to In `onPlaybackUrlReceived()` callback and uncomment ` m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_YOSPACE_SDK)`
+
+7. Finally zip the demo folder and run the application as mentioned before.
+
 **For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` as well as `playerExampleConfig.brs` inside the `demo/components/playerExample/` folder.**

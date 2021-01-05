@@ -10,8 +10,8 @@
       "name": "BrightScript Debug: Roku Build and Side Load",
       "stopOnEntry": false,
       "host": "<your_roku_ip>",
-      "password": "Mostafafeci1992",
-      "rootDir": "<your_roku_device_password>",
+      "password": "<your_roku_device_password>",
+      "rootDir": "${workspaceFolder}/demo/",
       "sourceDirs": [
         "${workspaceFolder}/demo",
         "${workspaceFolder}/YospaceIntegration/"

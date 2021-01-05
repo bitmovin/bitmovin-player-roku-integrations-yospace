@@ -55,7 +55,7 @@ end sub
 sub catchVideoError()
   m.top.error = m.bitmovinPlayer.error
   if m.yospaceTask.enableConviva
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR}
+    m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR }
   end if
 end sub
 
@@ -77,7 +77,7 @@ end sub
 
 sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
-  if m.top.playerState = "finished" or m.top.playerState = "stopped"
+  if m.top.playerState = m.top.BitmovinPlayerState.FINISHED or m.top.playerState = m.top.BitmovinPlayerState.ERROR
     if m.yospaceTask.enableConviva
       m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.END_SESSION }
     end if
@@ -219,7 +219,6 @@ function isPaused(params)
 end function
 
 function isStalled(params)
-  print "YoSpaceeisStalled:"
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_STALLED, params)
 end function
 
@@ -310,12 +309,12 @@ end function
 
 
 ' ---------------------------- bitmovin conviva api function ----------------------------
-function setupConvivaAnalytics(player,customerKey, config)
-  m.yospaceTask.player=player
-  m.yospaceTask.customerKey=customerKey
-  m.yospaceTask.config=config
-  m.yospaceTask.enableConviva=true
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA}
+function setupConvivaAnalytics(player, customerKey, config)
+  m.yospaceTask.player = player
+  m.yospaceTask.customerKey = customerKey
+  m.yospaceTask.config = config
+  m.yospaceTask.enableConviva = true
+  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA }
 end function
 
 function updateContentMetadata(contentMetadataOverrides)

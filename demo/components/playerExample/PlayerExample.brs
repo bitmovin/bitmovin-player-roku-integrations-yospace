@@ -56,10 +56,10 @@ end function
 
 sub initializeConviva()
   player = m.bitmovinYospacePlayer.findNode("BitmovinPlayer")
-  customerKey = "8a941d3b161c486d426c0a359d9d39bae51186b5"
+  customerKey = "YOUR_CUSTOMER_KEY"
   config = {
     debuggingEnabled: true,
-    gatewayUrl: "https://turner-test.testonly.conviva.com" ' TOUCHSTONE_SERVICE_URL for testing
+    gatewayUrl: "YOUR_GATEWAY_URL" ' TOUCHSTONE_SERVICE_URL for testing
   }
   m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP_CONVIVA_ANALYTICS, player, customerKey, config)
   contentMetadataOverrides = {

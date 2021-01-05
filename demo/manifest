@@ -16,6 +16,6 @@ requires_widevine_drm=1
 requires_widevine_version=1.0
 
 # License key
-bitmovin_player_license_key=INSERT_LICENSE_KEY_HERE
+bitmovin_player_license_key=f93c1f8d-bcac-419f-b38a-8edb39517f19
 
 bs_libs_required=roku_ads_lib

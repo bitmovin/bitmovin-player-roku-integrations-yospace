@@ -2,12 +2,19 @@ function getYospaceRelatedFunctions()
   return {
     AD_GET_ACTIVE_AD: "ad_getActiveAd",
     AD_GET_ACTIVE_AD_BREAK: "ad_getActiveAdBreak",
-    AD_GET_YOSPACE_PLAYER_TASK: "ad_getYoSpacePlayerTask",
     AD_LIST: "ad_list",
     AD_SKIP: "ad_skip",
-    SET_CONTENT_METADATA: "setContentMetaData"
-    AD_SET_POLICY: "ad_setPolicy"
-    SET_TRAP_DURATION: "setTrapDuration"
-    SET_SKIP_WATCHED_AD_BREAKS: "setSkipWatchedAdBreaks"
+    SET_CONTENT_METADATA: "setContentMetaData",
+    AD_SET_POLICY: "ad_setPolicy",
+    SET_TRAP_DURATION: "setTrapDuration",
+    SET_SKIP_WATCHED_AD_BREAKS: "setSkipWatchedAdBreaks",
+    SETUP_CONVIVA_ANALYTICS: "setupConvivaAnalytics",
+    MONITOR_VIDEO: "monitorVideo",
+    MONITOR_YOSPACE_SDK: "monitorYoSpaceSDK",
+    UPDATE_CONTENT_METADATA: "updateContentMetadata",
+    END_SESSION: "endSession",
+    REPORT_PLAYBACK_DEFICIENCY: "reportPlaybackDeficiency",
+    SEND_CUSTOM_APPLICATION_EVENT: "sendCustomApplicationEvent",
+    SEND_CUSTOM_PLAYBACK_EVENT: "sendCustomPlaybackEvent"
   }
 end function

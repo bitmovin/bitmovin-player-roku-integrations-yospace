@@ -48,12 +48,29 @@ function onPlayerReady()
         enableRAF: true
       }
     }
-
+    initializeConviva()
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
   end if
 end function
 
 
+sub initializeConviva()
+  player = m.bitmovinYospacePlayer.findNode("BitmovinPlayer")
+  customerKey = "8a941d3b161c486d426c0a359d9d39bae51186b5"
+  config = {
+    debuggingEnabled: true,
+    gatewayUrl: "https://turner-test.testonly.conviva.com" ' TOUCHSTONE_SERVICE_URL for testing
+  }
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP_CONVIVA_ANALYTICS, player, customerKey, config)
+  contentMetadataOverrides = {
+    playerName: "Conviva Integration Test Channel",
+    viewerId: "MyAwesomeViewerId",
+    tags: {
+      CustomKey: "CustomValue"
+    }
+  }
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_VIDEO, contentMetadataOverrides)
+end sub
 ' Listening to ad events
 sub onAdBreakStart()
   print "Ad Break started"
@@ -77,7 +94,7 @@ end sub
 
 sub onPlaybackUrlReceived()
   print "Ad PlayBack Url: "; m.BitmovinYospacePlayer.playbackUrl
-  m.yoSession=m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.AD_GET_YOSPACE_PLAYER_TASK)
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_YOSPACE_SDK)
 end sub
 
 ' Listening to time change events

@@ -9,8 +9,8 @@
       "request": "launch",
       "name": "BrightScript Debug: Roku Build and Side Load",
       "stopOnEntry": false,
-      "host": "${promptForHost}",
-      "password": "bytemovin",
+      "host": "192.168.100.53",
+      "password": "Mostafafeci1992",
       "rootDir": "${workspaceFolder}/demo/",
       "sourceDirs": [
         "${workspaceFolder}/demo",

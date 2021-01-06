@@ -1,26 +1,32 @@
 sub init()
-  m.playerConfig = getExamplePlayerConfig()
+  m.playerConfig = getExamplePlayerConfigLive()
   m.playerConfigWithContentNode = getExamplePlayerConfigWithContentNode()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
+
+  ' Use BitmovinYospaceConvivaPlayer for integrating Conviva with Yospace. For enabling conviva refer to the Readme
+  'm.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospaceConvivaPlayer")
+
   m.bitmovinYospacePlayer.id = "BitmovinYospacePlayer"
   m.top.appendChild(m.bitmovinYospacePlayer)
 
+  m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
+  m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
+
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.INITIALIZE_YOSPACE)
   ' Observe the isPlayerReady field to be informed when the player has finished its inital setup up and is ready to be used
   m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
 end sub
 
 function onPlayerReady()
   if m.bitmovinYospacePlayer.isPlayerReady = true
-    m.BitmovinFunctions = m.bitmovinYospacePlayer.BitmovinFunctions
-    m.BitmovinFields = m.bitmovinYospacePlayer.BitmovinFields
-
     ' Set ad events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_STARTED, "onAdBreakStart")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_STARTED, "onAdStart")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_FINISHED, "onAdFinished")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_FINISHED, "onAdBreakFinished")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_SKIPPED, "onAdSkipped")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_PLAYBACK_URL, "onPlaybackUrlReceived")
 
     ' Set time change events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.SEEK, "onSeek")
@@ -47,12 +53,30 @@ function onPlayerReady()
         enableRAF: true
       }
     }
-
+    'InitializeConviva if conviva is enabled. Refer to the Readme file
+    'initializeConviva()
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
   end if
 end function
 
 
+sub initializeConviva()
+  player = m.bitmovinYospacePlayer.findNode("BitmovinPlayer")
+  customerKey = "YOUR_CUSTOMER_KEY"
+  config = {
+    debuggingEnabled: true,
+    gatewayUrl: "YOUR_GATEWAY_URL" ' TOUCHSTONE_SERVICE_URL for testing
+  }
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP_CONVIVA_ANALYTICS, player, customerKey, config)
+  contentMetadataOverrides = {
+    playerName: "Conviva Integration Test Channel",
+    viewerId: "MyAwesomeViewerId",
+    tags: {
+      CustomKey: "CustomValue"
+    }
+  }
+  m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_VIDEO, contentMetadataOverrides)
+end sub
 ' Listening to ad events
 sub onAdBreakStart()
   print "Ad Break started"
@@ -72,6 +96,12 @@ end sub
 
 sub onAdSkipped()
   print "Ad Skipped: "; m.BitmovinYospacePlayer.adSkipped
+end sub
+
+sub onPlaybackUrlReceived()
+  print "Ad PlayBack Url: "; m.BitmovinYospacePlayer.playbackUrl
+  'Call monitorYoSpaceSDK if conviva is enabled
+  'm.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_YOSPACE_SDK)
 end sub
 
 ' Listening to time change events

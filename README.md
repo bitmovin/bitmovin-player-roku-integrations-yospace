@@ -82,7 +82,7 @@ Clone Git repository
 1. Create a new folder called `BitmovinConviva` under the root project folder
 2. Clone https://github.com/bitmovin/bitmovin-player-roku-analytics-conviva.git inside `BitmovinConviva` folder using `git clone https://github.com/bitmovin/bitmovin-player-roku-analytics-conviva.git .`
 
-3. Run `npm run serve`
+3. Run `npm run serve-conviva`
   _(This will copy all needed files from ./YospaceIntegration and ConvivaIntegration to the ./demo folder)_
 4. In `PlayerExample.brs` uncomment `m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospaceConvivaPlayer")` and use it instead of `BitmovinYospacePlayer`
 
@@ -92,4 +92,89 @@ Clone Git repository
 
 7. Finally zip the demo folder and run the application as mentioned before.
 
+
+### Conviva Setup
+
+1. Setting up the instance of `conviva`
+
+  _Ensure that the bitmovinPlayer exists here as well_
+  
+  ```Brightscript
+  customerKey = "YOUR_CUSTOMER_KEY"
+  config = {
+    debuggingEnabled : true
+    gatewayUrl : "YOUR_GATEWAY_URL" ' optional and only for testing
+  }
+ m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP_CONVIVA_ANALYTICS, player, customerKey, config)
+  ' Initialize Conviva before calling setup or load on the bitmovinPlayer
+  m.bitmovinPlayer.callFunc(m.BitmovinFunctions.SETUP, m.playerConfig)
+  ```
+
+### Advanced Usage
+
+#### Custom Deficiency Reporting (VPF)
+
+If you want to track custom VPF (Video Playback Failures) events when no actual player error happens (e.g.
+endless stalling due to network condition) you can use following API to track those deficiencies:
+
+```Brightscript
+ m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.REPORT_PLAYBACK_DEFICIENCY, "MY_ERROR_MESSAGE", true, true)
+```
+
+#### Custom Events
+
+If you want to track custom events you can do so by adding the following:
+
+For an event not bound to a session, use:
+
+```Brightscript
+m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SEND_CUSTOM_APPLICATION_EVENT, "MY_EVENT_NAME", {
+  eventAttributeKey: "eventAttributeValue"
+})
+```
+
+For an event bound to a session, use:
+
+```Brightscript
+m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SEND_CUSTOM_PLAYBACK_EVENT, "MY_EVENT_NAME", {
+  eventAttributeKey: "eventAttributeValue"
+})
+```
+
+
+#### Content Metadata Handling
+
+If you want to monitor video session you can do so by adding the following:
+
+```Brightscript
+contentMetadataOverrides = {
+  playerName: "Conviva Integration Test Channel",
+  viewerId: "MyAwesomeViewerId",
+  tags: {
+    "CustomKey": "CustomValue"
+  }
+}
+m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_VIDEO, contentMetadataOverrides)
+```
+
+If you want to override some content metadata attributes during current session you can do so by adding the following:
+
+```Brightscript
+contentMetadataOverrides = {
+  playerName: "Conviva Integration Test Channel",
+  viewerId: "MyAwesomeViewerId",
+  tags: {
+    "CustomKey": "CustomValue"
+  }
+}
+m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.UPDATE_CONTENT_METADATA, contentMetadataOverrides)
+```
+
+#### End a Session
+
+If you want to end a session manually you can do so by adding the following:
+
+```Brightscript
+m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.END_SESSION)
+```
 **For a more in depth example on how to use the Bitmovin Yospace Player please refer to the `PlayerExample.brs` as well as `playerExampleConfig.brs` inside the `demo/components/playerExample/` folder.**

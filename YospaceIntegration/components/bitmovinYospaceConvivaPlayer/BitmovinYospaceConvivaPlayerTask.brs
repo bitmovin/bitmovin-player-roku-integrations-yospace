@@ -156,3 +156,41 @@ end sub
 sub debugLog(message as string)
   if m.DEBUG then ? message
 end sub
+
+' ---------------------------- Overridden methods ----------------------------
+sub callFunction(data)
+  if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
+    skipAd()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
+    genre = data.arguments[0]
+    kidsContent = data.arguments[1]
+    id = data.arguments[2]
+    length = data.arguments[3]
+    nielsenGenre = data.arguments[4]
+    nielsenAppId = data.arguments[5]
+    setContentMetaData(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
+    setDebugLevel(data.arguments.debugLevel)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
+    print "Enable RAF: "; data.arguments.enableRAF
+    setEnableRAF(data.arguments.enableRAF)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA
+    initializeConviva()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR
+    onVideoError()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_VIDEO
+    monitorVideo(data.arguments.contentMetaData)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_YOSPACE_SDK
+    monitorYoSpaceSDK()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.UPDATE_CONTENT_METADATA
+    updateContentMetadata()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED
+    reportSeekStarted()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_PLAYBACK_DEFICIENCY
+    reportPlaybackDeficiency(data.arguments.message, data.arguments.isFatal, data.arguments.endSession)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_APPLICATION_EVENT
+    sendCustomApplicationEvent(data.arguments.name, data.arguments.attributes)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_PLAYBACK_EVENT
+    sendCustomPlaybackEvent(data.arguments.name, data.arguments.attributes)
+  end if
+end sub

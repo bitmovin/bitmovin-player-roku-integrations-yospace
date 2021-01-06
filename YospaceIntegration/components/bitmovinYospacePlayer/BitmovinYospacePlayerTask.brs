@@ -1,13 +1,5 @@
 sub init()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
-
-  m.conviva = invalid
-  m.top.cSession = false
-  m.DEBUG = false
-  m.video = invalid
-  m.PodIndex = 0
-  m.adTracking = invalid
-
   m.lastAd = invalid
 
   m.top.functionName  = "MonitorSDK"

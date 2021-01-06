@@ -9,48 +9,37 @@ end sub
 
 sub onSourceLoaded()
   m.top.sourceLoaded = m.bitmovinPlayer.sourceLoaded
-  if m.yospaceTask.enableConviva
-    m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.CREATE_CONVIVA_SESSION }
-  end if
+  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.CREATE_CONVIVA_SESSION }
 end sub
 
 sub onTimeShift()
   m.top.timeShift = m.bitmovinplayer.timeShift
-  if m.yospaceTask.enableConviva
-    m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED }
-  end if
+  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED }
 end sub
 
 sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
   if m.top.playerState = m.top.BitmovinPlayerState.FINISHED or m.top.playerState = m.top.BitmovinPlayerState.ERROR
-    if m.yospaceTask.enableConviva
-      m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.END_SESSION }
-    end if
+    m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.END_SESSION }
   end if
   reportPlayerStateChanged(m.top.playerState)
 end sub
 
 sub catchVideoError()
   m.top.error = m.bitmovinPlayer.error
-  if m.yospaceTask.enableConviva
-    m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR }
-  end if
+  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR }
 end sub
 
 sub onSeek()
   m.top.seek = m.bitmovinPlayer.seek
   updatePolicyHelper_seekStartPosition()
-  if m.yospaceTask.enableConviva
-    m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED }
-  end if
+  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED }
 end sub
 ' ---------------------------- bitmovin conviva api function ----------------------------
 function setupConvivaAnalytics(player, customerKey, config)
   m.yospaceTask.player = player
   m.yospaceTask.customerKey = customerKey
   m.yospaceTask.config = config
-  m.yospaceTask.enableConviva = true
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA }
 end function
 

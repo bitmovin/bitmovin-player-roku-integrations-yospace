@@ -1,5 +1,5 @@
 sub init()
-
+  m.DEBUG = false
 end sub
 
 ' ---------------------------- Conviva Analytics ----------------------------

@@ -14,14 +14,6 @@
 	  <field id="StreamContent" type="assocarray" />
 	  <field id="EventReport" type="assocarray" alwaysNotify="true" />
 
-   <!-- Conviva Fields -->
-    <field id="enableConviva" type="boolean" />
-    <field id="config" type="assocarray" />
-    <field id="customerKey" type="string" />
-    <field id="player" type="node" />
-    <field id="adNode" type="node" />
-    <field id="cSession" type="boolean" alwaysNotify="true"/>
-
 	  <field id="PlaybackURL" type="String" />
 	  <field id="IsLive" type="Boolean" />
 	  <field id="IsAdvert" type="Boolean" />

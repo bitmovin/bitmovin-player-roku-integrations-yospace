@@ -1,7 +1,7 @@
 sub init()
 end sub
 
-' ---------------------------- Overwridden methods ----------------------------
+' ---------------------------- Overridden methods ----------------------------
 sub initializeYoSpace()
   m.yospaceTask = CreateObject("roSGNode", "BitmovinYospaceConvivaPlayerTask")
   m.yospaceTask.observeField("taskReady", "onTaskReady")

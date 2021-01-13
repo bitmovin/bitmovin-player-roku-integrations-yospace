@@ -17,5 +17,6 @@ function getYospaceRelatedFunctions()
     SEND_CUSTOM_APPLICATION_EVENT: "sendCustomApplicationEvent",
     SEND_CUSTOM_PLAYBACK_EVENT: "sendCustomPlaybackEvent",
     INITIALIZE_YOSPACE: "initializeYoSpace",
+    COMPANION_RENDERED: "companionRendered",
   }
 end function

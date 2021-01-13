@@ -244,6 +244,8 @@ sub callFunction(data)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
     print "Enable RAF: "; data.arguments.enableRAF
     setEnableRAF(data.arguments.enableRAF)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT
+    reportCompanionEvent(data.arguments.companionId, data.arguments.event)
   end if
 end sub
 
@@ -264,6 +266,11 @@ end sub
 
 sub setDebugLevel(debugLevel)
   YO_LOGLEVEL(debugLevel)
+end sub
+
+sub reportCompanionEvent(companionId, event)
+  print "Sending companion event "; companionId; event
+  m.session.GetSession().ReportCompanionEvent(companionId, event)
 end sub
 
 function isLastAd(miid)

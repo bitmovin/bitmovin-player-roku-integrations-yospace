@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Conviva integration with YoSpace
 - BitmovinYoSpaceConvivaPlayer & BitmovinYoSpaceConvivaPlayerTask which contain conviva code
+
+## [1.1.0]
+### Added
+- `position` property to `AdBreak`
+- Companion ads
+
+### Changed
+- Yospace SDK to `1.8-6`
+
 ## [1.0.1]
 ### Fixed
 - Crash at end of VOD playback due to extra forced call to onAdEnd and onAdBreakEnd Yospace callbacks with type param of `invalid`

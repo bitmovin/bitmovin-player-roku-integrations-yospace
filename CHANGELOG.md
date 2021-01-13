@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0]
+### Added
+- `position` property to `AdBreak`
+- Companion ads
+
+### Changed
+- Yospace SDK to `1.8-6`
+
 ## [1.0.1]
 ### Fixed
 - Crash at end of VOD playback due to extra forced call to onAdEnd and onAdBreakEnd Yospace callbacks with type param of `invalid`

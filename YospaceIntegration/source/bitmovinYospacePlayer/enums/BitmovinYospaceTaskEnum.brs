@@ -15,6 +15,7 @@ function getBitmovinYospaceTaskEnum()
       SEEK: "seek",
       PAUSE: "pause",
       MUTE: "mute",
+      REPORT_COMPANION_EVENT: "reportCompanionEvent",
       SET_CONTENT_METADATA: "setContentMetadata",
       SET_DEBUG_LEVEL: "setDebugLevel",
       SET_ENABLE_RAF: "setEnableRAF"

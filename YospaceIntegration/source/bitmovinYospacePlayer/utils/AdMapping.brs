@@ -36,6 +36,7 @@ function mapAdBreak(myAdBreak, timeline)
   aBr = {
     id: myAdBreak._INSTANCEID,
     scheduleTime: toMagicTime(myAdBreak.GetStart(),timeline),
+    position: myAdBreak.GetPosition(),
     ads: []
   }
   for each ad in myAdBreak.GetAdverts()

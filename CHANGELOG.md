@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.3] - 2021-01-19
+### Added
+- Fix custom tags issue
+
 ## [1.1.2] - 2021-01-06
 ### Added
 - Conviva integration with YoSpace

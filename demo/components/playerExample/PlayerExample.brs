@@ -71,10 +71,11 @@ sub initializeConviva()
   contentMetadataOverrides = {
     playerName: "Conviva Integration Test Channel",
     viewerId: "MyAwesomeViewerId",
-    tags: {
-      CustomKey: "CustomValue"
-    }
   }
+  contentMetadataOverrides.SetModeCaseSensitive()
+  contentMetadataOverrides.customMetadata = {}
+  contentMetadataOverrides.customMetadata.SetModeCaseSensitive()
+  contentMetadataOverrides.customMetadata["CustomKey"] = "Custom Value"
   m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.MONITOR_VIDEO, contentMetadataOverrides)
 end sub
 ' Listening to ad events

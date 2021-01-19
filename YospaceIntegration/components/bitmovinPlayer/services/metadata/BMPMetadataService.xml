@@ -6,4 +6,10 @@
     <function name="stopService" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/metadata/BMPMetadataService.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/HttpRequestTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinMetadataEventTypes.brs" />
 </component>

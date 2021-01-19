@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPMetadataServiceWorker" extends="BMPBaseServiceWorker">
+  <interface>
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/metadata/worker/BMPMetadataServiceWorker.brs" />
+</component>

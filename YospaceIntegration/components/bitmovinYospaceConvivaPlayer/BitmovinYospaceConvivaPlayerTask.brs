@@ -209,8 +209,6 @@ sub onAdBreakStart(dummy as dynamic)
 end sub
 
 sub onAdBreakEnd(dummy as dynamic)
-  print "OnAdBreakEnd: "; m.lastAd
-  print m.top.activeAdBreak
   m.top.adBreakEnd = m.top.activeAdBreak
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid

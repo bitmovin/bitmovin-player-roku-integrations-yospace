@@ -22,7 +22,6 @@ function getBitmovinYospaceTaskEnum()
       INITIALIZE_CONVIVA: "initializeConviva",
       MONITOR_VIDEO: "monitorVideo",
       MONITOR_YOSPACE_SDK: "monitorYoSpaceSDK",
-      CREATE_CONVIVA_SESSION: "createConvivaSession",
       VIDEO_ERROR: "videoError",
       UPDATE_CONTENT_METADATA: "updateContentMetadata",
       END_SESSION: "endSession",

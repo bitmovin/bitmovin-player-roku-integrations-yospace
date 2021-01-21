@@ -7,9 +7,10 @@ sub initializeYoSpace()
   m.yospaceTask.observeField("taskReady", "onTaskReady")
 end sub
 
+
 sub onSourceLoaded()
+  updateContentMetadata(invalid)
   m.top.sourceLoaded = m.bitmovinPlayer.sourceLoaded
-  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.CREATE_CONVIVA_SESSION }
 end sub
 
 sub onTimeShift()
@@ -43,7 +44,7 @@ function setupConvivaAnalytics(player, customerKey, config)
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA }
 end function
 
-function updateContentMetadata(contentMetadataOverrides)
+function updateContentMetadata(contentMetadataOverrides = invalid)
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.UPDATE_CONTENT_METADATA, arguments: { contentMetaData: contentMetadataOverrides } }
 end function
 

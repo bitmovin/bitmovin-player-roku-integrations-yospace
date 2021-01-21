@@ -183,7 +183,7 @@ sub callFunction(data)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_YOSPACE_SDK
     monitorYoSpaceSDK()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.UPDATE_CONTENT_METADATA
-    updateContentMetadata()
+    updateContentMetadata(data.arguments.contentMetaData)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED
     reportSeekStarted()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_PLAYBACK_DEFICIENCY

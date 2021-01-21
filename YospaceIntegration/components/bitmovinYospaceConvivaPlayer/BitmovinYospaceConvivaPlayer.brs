@@ -9,7 +9,7 @@ end sub
 
 
 sub onSourceLoaded()
-  updateContentMetadata(invalid)
+  updateContentMetadata()
   m.top.sourceLoaded = m.bitmovinPlayer.sourceLoaded
 end sub
 

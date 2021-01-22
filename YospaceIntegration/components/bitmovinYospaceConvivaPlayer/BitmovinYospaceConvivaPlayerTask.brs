@@ -53,8 +53,14 @@ function monitorVideo(metadataOverrides)
 end function
 
 sub monitorYoSpaceSDK()
-  m.video = m.top.player.findNode("MainVideo")
-  m.conviva.monitorYoSpaceSDK(m.video, m.session)
+  if m.conviva.getConvivaTask(m.video) = invalid
+    return
+  end if
+  m.conviva.convivaYoSpaceVideoNode = m.video
+  m.conviva.convivaYoSpaceSession = m.session
+  ' The code above should be removed once Conviva supports multiple listeners for YoSpace. Because for this Conviva version it overrides YoSpace callbacks
+  ' Once Conviva is not overriding YoSpace callbacks any more . We can remove this code and call the below method
+  ' m.conviva.monitorYoSpaceSDK(m.video, m.session)
 end sub
 
 sub setContentPauseMonitoring()
@@ -201,10 +207,12 @@ sub callFunction(data)
   end if
 end sub
 
+' The below methods should be removed once Conviva supports multiple listeners for YoSpace. Because for this Conviva version it overrides YoSpace callbacks
 sub onAdBreakStart(dummy as dynamic)
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(), m.top.Timeline)
   m.top.adBreakStart = m.top.activeAdBreak
+  m.conviva.OnYoSpaceAdBreakStart(m.session.GetSession().GetCurrentBreak())
   setContentPauseMonitoring()
 end sub
 
@@ -212,5 +220,33 @@ sub onAdBreakEnd(dummy as dynamic)
   m.top.adBreakEnd = m.top.activeAdBreak
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
+  m.conviva.OnYoSpaceAdBreakEnd(m.session.GetSession().GetCurrentBreak())
   setContentResumeMonitoring()
+end sub
+
+' Called whenever an individual advert starts
+sub onAdStart(miid as string)
+  if isLastAd(miid) then m.lastAd = miid
+
+  advert = getCurrentAd()
+  if (advert <> invalid) then
+    m.top.IsAdvert = true
+    m.top.activeAd = mapAd(advert)
+  else
+    m.top.IsAdvert = false
+  end if
+
+  m.top.advertStart = m.top.activeAd.id
+  m.conviva.OnYoSpaceAdStart() ' We call OnYoSpaceAdStart() in order to create an independent advert session in Conviva
+end sub
+' Called whenever an individual advert completes
+sub onAdEnd(miid as string)
+  if miid = m.lastAd
+    YO_INFO("onAdEnd - miid {0} matches m.lastAd {1}; setting m.lastAd back to invalid", miid, m.lastAd)
+    m.lastAd = invalid
+  end if
+  m.top.advertEnd = miid
+  m.top.IsAdvert = false
+  m.top.activeAd = invalid
+  m.conviva.OnYoSpaceAdEnd() ' We call OnYoSpaceAdEnd() in order to end the monitoring session of the ad
 end sub

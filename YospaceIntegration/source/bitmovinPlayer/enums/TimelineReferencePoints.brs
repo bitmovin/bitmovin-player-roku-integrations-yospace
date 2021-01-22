@@ -1,3 +1,3 @@
-function ___O__01O_00O()
-return{START:(Chr(&H73)+Chr(&H74)+Chr(&H61)+Chr(&H72)+Chr(&H74)),end:(Chr(101)+Chr(&H6e)+Chr(100))} 
+function _I10III1IIIII()
+return{START:(Chr(&H73)+Chr(&H74)+Chr(97)+Chr(114)+Chr(116)),end:(Chr(&H65)+Chr(&H6e)+Chr(&H64))} 
 end function

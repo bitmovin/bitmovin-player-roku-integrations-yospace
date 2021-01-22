@@ -1,5 +1,6 @@
 sub init()
   m.DEBUG = false
+  m.isConvivaYoSpace = false
 end sub
 
 ' ---------------------------- Conviva Analytics ----------------------------
@@ -58,6 +59,7 @@ sub monitorYoSpaceSDK()
   end if
   m.conviva.convivaYoSpaceVideoNode = m.video
   m.conviva.convivaYoSpaceSession = m.session
+  m.isConvivaYoSpace = true
   ' The code above should be removed once Conviva supports multiple listeners for YoSpace. Because for this Conviva version it overrides YoSpace callbacks
   ' Once Conviva is not overriding YoSpace callbacks any more . We can remove this code and call the below method
   ' m.conviva.monitorYoSpaceSDK(m.video, m.session)
@@ -212,7 +214,9 @@ sub onAdBreakStart(dummy as dynamic)
   m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
   m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(), m.top.Timeline)
   m.top.adBreakStart = m.top.activeAdBreak
-  m.conviva.OnYoSpaceAdBreakStart(m.session.GetSession().GetCurrentBreak())
+  ' We call OnYoSpaceAdBreakStart() in order to report that an ad break has been started
+  ' Remove this once conviva allows multiple listeners for YoSpace callbacks
+  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdBreakStart(m.session.GetSession().GetCurrentBreak())
   setContentPauseMonitoring()
 end sub
 
@@ -220,7 +224,9 @@ sub onAdBreakEnd(dummy as dynamic)
   m.top.adBreakEnd = m.top.activeAdBreak
   m.top.IsActiveAd = false
   m.top.activeAdBreak = invalid
-  m.conviva.OnYoSpaceAdBreakEnd(m.session.GetSession().GetCurrentBreak())
+  ' We call OnYoSpaceAdBreakEnd() in order to report that an ad break has ended
+  ' Remove this once conviva allows multiple listeners for YoSpace callbacks
+  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdBreakEnd(m.session.GetSession().GetCurrentBreak())
   setContentResumeMonitoring()
 end sub
 
@@ -237,7 +243,9 @@ sub onAdStart(miid as string)
   end if
 
   m.top.advertStart = m.top.activeAd.id
-  m.conviva.OnYoSpaceAdStart() ' We call OnYoSpaceAdStart() in order to create an independent advert session in Conviva
+  ' We call OnYoSpaceAdStart() in order to create an independent advert session in Conviva.
+  ' Remove this once conviva allows multiple listeners for YoSpace callbacks
+  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdStart()
 end sub
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as string)
@@ -248,5 +256,7 @@ sub onAdEnd(miid as string)
   m.top.advertEnd = miid
   m.top.IsAdvert = false
   m.top.activeAd = invalid
-  m.conviva.OnYoSpaceAdEnd() ' We call OnYoSpaceAdEnd() in order to end the monitoring session of the ad
+  ' We call OnYoSpaceAdEnd() in order to end the monitoring session of the ad
+  ' Remove this once conviva allows multiple listeners for YoSpace callbacks
+  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdEnd()
 end sub

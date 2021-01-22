@@ -32,8 +32,10 @@ sub sendCustomPlaybackEvent(eventName, attributes)
   m.conviva.reportContentPlayerEvent(m.video, eventName, attributes)
 end sub
 
-sub updateContentMetadata(metadataOverrides)
-  m.contentMetadataBuilder.callFunc("setOverrides", metadataOverrides)
+sub updateContentMetadata(metadataOverrides = invalid)
+  if metadataOverrides <> invalid
+    m.contentMetadataBuilder.callFunc("setOverrides", metadataOverrides)
+  end if
   if isSessionActive()
     buildContentMetadata()
     updateSession()
@@ -52,13 +54,19 @@ end function
 
 sub monitorYoSpaceSDK()
   m.video = m.top.player.findNode("MainVideo")
-  config = m.bitmovinPlayer.callFunc("getConfig")
-  ' Update content metadata in case that there is a missing info
-  if isSessionActive()
-    buildContentMetadata()
-    updateSession()
-  end if
   m.conviva.monitorYoSpaceSDK(m.video, m.session)
+end sub
+
+sub setContentPauseMonitoring()
+  if isSessionActive()
+    m.conviva.setContentPauseMonitoring(m.video)
+  end if
+end sub
+
+sub setContentResumeMonitoring()
+  if isSessionActive()
+    m.conviva.setContentResumeMonitoring(m.video)
+  end if
 end sub
 
 sub reportSeekStarted()
@@ -130,7 +138,6 @@ sub buildContentMetadata()
   end if
 
   m.contentMetadataBuilder.callFunc("setCustom", internalCustomTags)
-
   source = config.source
   if source <> invalid
     buildSourceRelatedMetadata(source)
@@ -143,9 +150,8 @@ sub buildSourceRelatedMetadata(source)
   else
     m.contentMetadataBuilder.callFunc("setAssetName", "Untitled (no source.title set)")
   end if
-
   m.contentMetadataBuilder.callFunc("setViewerId", m.contentMetadataBuilder.callFunc("getViewerId"))
-  m.contentMetadataBuilder.callFunc("setStreamUrl", m.video.content.url)
+  m.contentMetadataBuilder.callFunc("setStreamUrl", m.top.PlaybackURL)
 end sub
 
 sub updateSession()
@@ -193,4 +199,18 @@ sub callFunction(data)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_PLAYBACK_EVENT
     sendCustomPlaybackEvent(data.arguments.name, data.arguments.attributes)
   end if
+end sub
+
+sub onAdBreakStart(dummy as dynamic)
+  m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
+  m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(), m.top.Timeline)
+  m.top.adBreakStart = m.top.activeAdBreak
+  setContentPauseMonitoring()
+end sub
+
+sub onAdBreakEnd(dummy as dynamic)
+  m.top.adBreakEnd = m.top.activeAdBreak
+  m.top.IsActiveAd = false
+  m.top.activeAdBreak = invalid
+  setContentResumeMonitoring()
 end sub

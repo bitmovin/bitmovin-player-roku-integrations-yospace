@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Bitmovin Player to `1.36.1`
+
 ## [1.2.1]
 ### Fixed
 - Missing Bitmovin Player Source Files

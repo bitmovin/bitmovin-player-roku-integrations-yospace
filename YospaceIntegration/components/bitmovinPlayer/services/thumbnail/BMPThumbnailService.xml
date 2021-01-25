@@ -8,6 +8,5 @@
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/BMPThumbnailService.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
-  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/ThumbnailTilesHandler.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="BMPImpressionService" extends="Node">
   <interface>
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
-
     <function name="initializeService" />
     <function name="startService" />
     <function name="stopService" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/impression/BMPImpressionService.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFunctionNames.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/bitmovinPlayer/ServiceEndpoints.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

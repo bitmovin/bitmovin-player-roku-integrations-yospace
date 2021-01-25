@@ -4,7 +4,7 @@ This integration completely encapsulates the usage of Yospace. After creating th
 The API reference for the Bitmovin Roku Player can be found [here](https://bitmovin.com/docs/player/api-reference/roku).
 Furthermore, there are some ad-specific fields and functions exclusive to the Yospace integration:
 
-Current Bitmovin Player SDK - 1.39.0
+Current Bitmovin Player SDK - 1.36.1
 
 **Fields:**
 

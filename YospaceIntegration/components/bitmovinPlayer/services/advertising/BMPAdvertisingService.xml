@@ -8,6 +8,8 @@
     <function name="scheduleAds" />
     <function name="getActiveAdBreak" />
     <function name="discardAdBreak" />
+
+    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/BMPAdvertisingService.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />

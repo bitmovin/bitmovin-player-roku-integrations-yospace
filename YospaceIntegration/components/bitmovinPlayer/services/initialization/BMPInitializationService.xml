@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPInitializationService" extends="Node">
+  <interface>
+    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
+
+    <function name="initializeService" />
+    <function name="setup" />
+    <function name="load" />
+    <function name="unload" />
+    <function name="setHttpHeaders" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/initialization/BMPInitializationService.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinConfigAssetTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/TimelineReferencePoints.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
+</component>

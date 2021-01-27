@@ -1,37 +1,37 @@
 sub init()
-m.BitmovinPlayerStates=_O__1___O1OI1()
+m.BitmovinPlayerStates=_II0_0_O__10O()
 m.keyPressValidationCallback=invalid
 m.keyPressValidationCallbackContext=invalid
 m.isDestroyed=(1=2)
 end sub
-sub setup(_110IOO__IO0O)
+sub setup(___01O000II_1)
 m.player=m.top.getParent().getParent()
-m.BitmovinFunctions=_O0I0O_1_1_1_()
+m.BitmovinFunctions=_0O0O1O00I__1()
 end sub
-function setKeyPressValidationCallback(_0IIIOOI_10O_,__11__1_I11OI)
-m.keyPressValidationCallback=_0IIIOOI_10O_
-m.keyPressValidationCallbackContext=__11__1_I11OI
+function setKeyPressValidationCallback(__0100_01IOI0,_OO10O1OO01OO)
+m.keyPressValidationCallback=__0100_01IOI0
+m.keyPressValidationCallbackContext=_OO10O1OO01OO
 end function
-function onKeyEvent(_111_010_IO11,__I0_1I101OOI)
+function onKeyEvent(__I1II0O0_I0I,_IIO__10OI0O1)
 if m.isDestroyed return(1=1) 
-if m.keyPressValidationCallback<>invalid and m.keyPressValidationCallbackContext<>invalid and __I0_1I101OOI
-if m.keyPressValidationCallbackContext.callFunc(m.keyPressValidationCallback,_111_010_IO11)=(1=2)
+if m.keyPressValidationCallback<>invalid and m.keyPressValidationCallbackContext<>invalid and _IIO__10OI0O1
+if m.keyPressValidationCallbackContext.callFunc(m.keyPressValidationCallback,__I1II0O0_I0I)=(1=2)
 return(1=1) 
 end if
 end if
-if(_111_010_IO11=(Chr(114)+Chr(&H69)+Chr(103)+Chr(104)+Chr(116))or _111_010_IO11=(Chr(108)+Chr(&H65)+Chr(&H66)+Chr(116))or _111_010_IO11=(Chr(&H66)+Chr(&H61)+Chr(115)+Chr(116)+Chr(&H66)+Chr(&H6f)+Chr(114)+Chr(119)+Chr(&H61)+Chr(&H72)+Chr(100))or _111_010_IO11=(Chr(&H72)+Chr(&H65)+Chr(119)+Chr(105)+Chr(&H6e)+Chr(&H64))) and __I0_1I101OOI and not m.top.seeking
+if(__I1II0O0_I0I=(Chr(&H72)+Chr(105)+Chr(103)+Chr(104)+Chr(116))or __I1II0O0_I0I=(Chr(&H6c)+Chr(101)+Chr(&H66)+Chr(&H74))or __I1II0O0_I0I=(Chr(102)+Chr(&H61)+Chr(115)+Chr(&H74)+Chr(102)+Chr(&H6f)+Chr(114)+Chr(119)+Chr(97)+Chr(&H72)+Chr(100))or __I1II0O0_I0I=(Chr(114)+Chr(&H65)+Chr(&H77)+Chr(&H69)+Chr(110)+Chr(&H64))) and _IIO__10OI0O1 and not m.top.seeking
 if m.player.callFunc(m.BitmovinFunctions.IS_LIVE)
 m.player.timeShift=1
 else 
 m.player.seek=(1=1)
 end if
 m.top.seeking=(1=1)
-else if m.top.playerState=m.BitmovinPlayerStates.FINISHED and _111_010_IO11=(Chr(112)+Chr(108)+Chr(&H61)+Chr(&H79)) and __I0_1I101OOI
+else if m.top.playerState=m.BitmovinPlayerStates.FINISHED and __I1II0O0_I0I=(Chr(112)+Chr(108)+Chr(&H61)+Chr(&H79)) and _IIO__10OI0O1
 m.player.callFunc(m.BitmovinFunctions.PLAY,invalid)
 return(1=1) 
-else if m.top.playerState=m.BitmovinPlayerStates.PAUSED and _111_010_IO11=(Chr(&H70)+Chr(108)+Chr(&H61)+Chr(121)) and __I0_1I101OOI
+else if m.top.playerState=m.BitmovinPlayerStates.PAUSED and __I1II0O0_I0I=(Chr(&H70)+Chr(&H6c)+Chr(97)+Chr(&H79)) and _IIO__10OI0O1
 m.player.play=(1=1)
-else if m.top.playerState=m.BitmovinPlayerStates.READY and _111_010_IO11=(Chr(&H70)+Chr(&H6c)+Chr(&H61)+Chr(121)) and __I0_1I101OOI
+else if m.top.playerState=m.BitmovinPlayerStates.READY and __I1II0O0_I0I=(Chr(112)+Chr(&H6c)+Chr(97)+Chr(121)) and _IIO__10OI0O1
 m.player.callFunc(m.BitmovinFunctions.PLAY,invalid)
 return(1=1) 
 end if

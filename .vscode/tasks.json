@@ -14,6 +14,16 @@
       "command": "npm run build"
     },
     {
+      "label": "build-conviva-roku",
+      "type": "shell",
+      "presentation": {
+        "clear": true,
+        "reveal": "silent"
+      },
+      "problemMatcher": [],
+      "command": "npm run build-conviva"
+    },
+    {
       "label": "clean-roku",
       "type": "shell",
       "presentation": {

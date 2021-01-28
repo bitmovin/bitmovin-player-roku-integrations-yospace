@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BitmovinYospaceConvivaPlayer" extends="BitmovinYospacePlayer">
+  <interface>
+     <!-- Conviva specific functions -->
+    <function name="setupConvivaAnalytics" />
+    <function name="endSession" />
+    <function name="updateContentMetadata" />
+    <function name="monitorVideo" />
+    <function name="monitorYoSpaceSDK" />
+    <function name="reportPlaybackDeficiency" />
+    <function name="sendCustomApplicationEvent" />
+    <function name="sendCustomPlaybackEvent" />
+  </interface>
+
+  <script type="text/brightscript" uri="pkg:/components/bitmovinYospaceConvivaPlayer/BitmovinYospaceConvivaPlayer.brs" />
+</component>

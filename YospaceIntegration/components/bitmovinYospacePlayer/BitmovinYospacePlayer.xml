@@ -28,7 +28,10 @@
     <field id="adQuartile" type="integer" alwaysNotify="true" />
     <field id="adSkipped" type="string" alwaysNotify="true" />
     <field id="adStarted" type="string" alwaysNotify="true" />
+    <field id="playbackUrl" type="string" alwaysNotify="true" />
 
+    <!-- Common Functions -->
+    <function name="initializeYoSpace" />
     <!-- Bitmovin Functions -->
     <function name="availableAudio" />
     <function name="availableSubtitles" />

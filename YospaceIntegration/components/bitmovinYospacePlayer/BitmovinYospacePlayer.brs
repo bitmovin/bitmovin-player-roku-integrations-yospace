@@ -41,6 +41,9 @@ sub init()
 
   m.top.appendChild(m.bitmovinPlayer)
 
+end sub
+
+sub initializeYoSpace()
   m.yospaceTask = CreateObject("roSGNode", "BitmovinYospacePlayerTask")
   m.yospaceTask.observeField("taskReady", "onTaskReady")
 end sub
@@ -374,6 +377,7 @@ sub onUrlReceived()
     m.source.url = m.yospaceTask.PlaybackURL
   end if
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
+  m.top.playbackUrl = m.yospaceTask.PlaybackURL
 end sub
 
 sub setFieldObservers()

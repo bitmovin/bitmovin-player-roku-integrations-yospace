@@ -21,10 +21,12 @@
 	  <field id="StreamType" type="String" />
 	  <field id="InitializationFailure" type="String" alwaysNotify="true" />
 
+
 		<field id="adList" type="array" />
 		<field id="activeAdBreak" type="assocarray" />
 		<field id="activeAd" type="assocarray" />
 		<field id="callFunction" type="assocarray" alwaysNotify="true" />
+
 	</interface>
 
 	<script type="text/brightscript" uri="pkg:/components/bitmovinYospacePlayer/BitmovinYospacePlayerTask.brs" />

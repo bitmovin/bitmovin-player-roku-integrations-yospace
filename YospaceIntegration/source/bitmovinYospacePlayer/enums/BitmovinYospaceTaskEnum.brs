@@ -18,7 +18,18 @@ function getBitmovinYospaceTaskEnum()
       REPORT_COMPANION_EVENT: "reportCompanionEvent",
       SET_CONTENT_METADATA: "setContentMetadata",
       SET_DEBUG_LEVEL: "setDebugLevel",
-      SET_ENABLE_RAF: "setEnableRAF"
+      SET_ENABLE_RAF: "setEnableRAF",
+      INITIALIZE_CONVIVA: "initializeConviva",
+      MONITOR_VIDEO: "monitorVideo",
+      MONITOR_YOSPACE_SDK: "monitorYoSpaceSDK",
+      VIDEO_ERROR: "videoError",
+      UPDATE_CONTENT_METADATA: "updateContentMetadata",
+      END_SESSION: "endSession",
+      REPORT_PLAYBACK_DEFICIENCY: "reportPlaybackDeficiency",
+      REPORT_SEEK_STARTED: "reportSeekStarted",
+      SEND_CUSTOM_APPLICATION_EVENT: "sendCustomApplicationEvent",
+      SEND_CUSTOM_PLAYBACK_EVENT: "sendCustomPlaybackEvent"
+
     }
   }
 end function

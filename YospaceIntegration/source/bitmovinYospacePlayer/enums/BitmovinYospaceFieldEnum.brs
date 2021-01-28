@@ -5,6 +5,7 @@ function getYospaceRelatedFields()
     AD_FINISHED: "adFinished",
     AD_SKIPPED: "adSkipped",
     AD_QUARTILE: "adQuartile",
+    AD_PLAYBACK_URL: "playbackUrl"
     AD_STARTED: "adStarted"
   }
 end function

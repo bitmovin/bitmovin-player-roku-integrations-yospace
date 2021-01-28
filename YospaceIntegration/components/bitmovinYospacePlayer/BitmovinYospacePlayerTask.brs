@@ -1,12 +1,11 @@
 sub init()
   m.BitmovinYospaceTaskEnums = getBitmovinYospaceTaskEnum()
-
   m.lastAd = invalid
 
   m.top.functionName  = "MonitorSDK"
   m.session   = YSSessionManager()
-  YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
 
+  YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
   m.player = {}
   m.player["AdBreakStart"] = yo_Callback(onAdBreakStart)
   m.player["AdvertStart"] = yo_Callback(onAdStart)
@@ -15,22 +14,21 @@ sub init()
   m.player["UpdateTimeline"] = yo_Callback(updateTimeline)
 
   GetGlobalAA().timer = YSTimer()
-  GetGlobalAA().taskman = YORokuTasks()
+  GetGlobalAA().taskman = YORokuTasks(false)
   m.top.control = "RUN"
 end sub
 
+' ---------------------------- Bitmovin YO Space ----------------------------
 sub MonitorSDK()
   port = CreateObject("roMessagePort")
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT, port)
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT, port)
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION, port)
   m.top.taskReady = true
-
   m.bitmovinPlayer = m.top.bitmovinYospacePlayer.findNode("BitmovinPlayer")
 
   while true
     msg = wait(500, port)
-
     ' For the last ad it could happen that the playback finished event is fired before the actual adFinished / adBreakFinished event
     if m.lastAd <> invalid then checkLastAdFinishedWorkaround()
 
@@ -50,6 +48,8 @@ sub MonitorSDK()
       tasks.CheckJobs()
     end if
   end while
+
+
 end sub
 
 sub onSessionReady(data = invalid as Dynamic)
@@ -58,13 +58,13 @@ sub onSessionReady(data = invalid as Dynamic)
     m.top.InitializationFailure = data.status
   else
     m.session.RegisterPlayer(m.player)
-
     m.top.StreamType = m.session.GetSession().GetStreamType()
     m.top.PlaybackURL = m.session.GetMasterPlaylist()
     tl = m.session.GetSession().GetTimeline()
     if (tl <> invalid) then
       updateTimeline(tl)
     end if
+
   end if
 end sub
 

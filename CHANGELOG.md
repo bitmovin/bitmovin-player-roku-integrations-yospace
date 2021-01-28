@@ -4,14 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.3] - 2021-01-19
-### Added
-- Fix custom tags issue
+## [Unreleased] - 2021-01-19
+### Fixed
+- Custom tags issue
 
-## [1.1.2] - 2021-01-06
 ### Added
 - Conviva integration with YoSpace
 - BitmovinYoSpaceConvivaPlayer & BitmovinYoSpaceConvivaPlayerTask which contain conviva code
+
+## [1.2.3]
+### Changed
+- Bitmovin Player to `1.39.1`
+
+## [1.2.2]
+### Changed
+- Bitmovin Player to `1.36.1`
+
+## [1.2.1]
+### Fixed
+- Missing Bitmovin Player Source Files
+
+## [1.2.0]
+### Changed
+- Bitmovin Player to `1.39.0`
 
 ## [1.1.0]
 ### Added

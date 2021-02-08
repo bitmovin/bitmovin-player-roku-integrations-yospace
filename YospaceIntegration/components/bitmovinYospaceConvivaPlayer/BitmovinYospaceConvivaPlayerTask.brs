@@ -192,6 +192,8 @@ sub callFunction(data)
     initializeConviva()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR
     onVideoError()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.END_SESSION
+    endSession()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_VIDEO
     monitorVideo(data.arguments.contentMetaData)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_YOSPACE_SDK

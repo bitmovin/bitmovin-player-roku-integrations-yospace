@@ -20,7 +20,7 @@ end sub
 
 sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
-  if m.top.playerState = m.top.BitmovinPlayerState.FINISHED or m.top.playerState = m.top.BitmovinPlayerState.ERROR
+  if m.top.playerState = m.top.BitmovinPlayerState.FINISHED or m.top.playerState = m.top.BitmovinPlayerState.ERROR or m.top.playerState = "stopped"
     m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.END_SESSION }
   end if
   reportPlayerStateChanged(m.top.playerState)

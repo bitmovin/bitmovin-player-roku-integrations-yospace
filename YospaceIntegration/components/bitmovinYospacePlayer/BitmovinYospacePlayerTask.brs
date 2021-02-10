@@ -284,7 +284,7 @@ end function
 
 function checkLastAdFinishedWorkaround()
   video = m.top.bitmovinYospacePlayer.findNode("MainVideo")
-  if video.position >= (video.duration) then firePostRollFinishedEvents()
+  if Invalid <> video AND video.position >= (video.duration) then firePostRollFinishedEvents()
 end function
 
 function firePostRollFinishedEvents()

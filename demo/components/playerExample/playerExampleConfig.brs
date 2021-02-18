@@ -51,6 +51,31 @@ function getExamplePlayerConfigLive()
   }
 end function
 
+function getConfigLiveMontageScte35NonYs()
+return {
+  playback: {
+    autoplay: true,
+    muted: true
+  },
+  tweaks: {
+    nativeHlsParsingEnabled: true
+  },
+  adaptation: {
+    preload: false
+  },
+  source: {
+    hls: "https://live-media-montage-qa.warnermediacdn.com/int/manifest/me-drm-cenc/master_de.m3u8",
+    assetType: "none",
+    title: "Live Montage Stream - Turner",
+    drm: {
+      widevine: {
+        LA_URL: "https://widevine.license.istreamplanet.com/widevine/api/license/a229afbf-e1d3-499e-8127-c33cd7231e58"
+      },
+    }
+  }
+}
+end function
+
 function getExamplePlayerConfigLiveRetry()
   return {
     playback: {

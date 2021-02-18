@@ -1,5 +1,5 @@
 sub init()
-  m.playerConfig = getExamplePlayerConfigLive()
+  m.playerConfig = getConfigLiveMontageScte35NonYs()
   m.playerConfigWithContentNode = getExamplePlayerConfigWithContentNode()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")
@@ -40,6 +40,7 @@ function onPlayerReady()
     ' Set error and warning event listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.ERROR, "catchVideoError")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.WARNING, "catchVideoWarning")
+    m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.METADATA, "onMetadata")
 
     m.top.appendChild(m.bitmovinYospacePlayer)
 
@@ -125,6 +126,10 @@ end sub
 
 sub onPlay()
   print "PLAY"
+end sub
+
+sub onMetadata()
+  print "METADATA: "; m.bitmovinYospacePlayer.metadata
 end sub
 
 ' Listening to error and warning events

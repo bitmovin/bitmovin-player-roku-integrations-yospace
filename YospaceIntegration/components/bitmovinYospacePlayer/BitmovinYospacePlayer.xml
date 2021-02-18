@@ -20,6 +20,7 @@
     <field id="timeShift" type="float" alwaysNotify="true" />
     <field id="timeShifted" type="float" alwaysNotify="true" />
     <field id="warning" type="assocarray" alwaysNotify="true" />
+    <field id="metadata" type="assocarray" alwaysNotify="true" />
 
     <!-- Ad specific fields -->
     <field id="adBreakStarted" type="assocarray" alwaysNotify="true" />

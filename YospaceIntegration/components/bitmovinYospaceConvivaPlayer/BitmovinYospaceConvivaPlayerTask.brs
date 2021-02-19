@@ -107,10 +107,12 @@ sub createConvivaSession()
 end sub
 
 sub endSession()
-  debugLog("[ConvivaAnalytics] closing session")
-  m.conviva.endMonitoring(m.video)
-  m.top.cSession = false
-  m.contentMetadataBuilder.callFunc("reset")
+  if m.conviva <> invalid then
+    debugLog("[ConvivaAnalytics] closing session")
+    m.conviva.endMonitoring(m.video)
+    m.top.cSession = false
+    m.contentMetadataBuilder.callFunc("reset")
+  end if
 end sub
 
 sub reportPlaybackDeficiency(message, isFatal, closeSession = true)

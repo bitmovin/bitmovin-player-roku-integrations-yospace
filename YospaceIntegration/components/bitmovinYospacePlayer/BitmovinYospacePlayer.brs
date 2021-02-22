@@ -340,11 +340,14 @@ end sub
 
 sub onMetadata()
   metadata = m.bitmovinPlayer.metadata
-  if metadata.Source = "emsg" then
-    metadata = mapEmsgMetaData(metadata)
-  elseif metadata.DoesExist("_decodeInfo_pts")
-    metadata = mapID3MetaData(metadata)
+  if metadata.metadatatype <> "scte" then
+    if metadata.Source = "emsg" then
+      metadata = mapEmsgMetaData(metadata)
+    else
+      metadata = mapID3MetaData(metadata)
+    end if
   end if
+
   if metadata = invalid or metadata.Count() = 0
     print "Received meta data was invalid, not reporting to Yospace"
     return

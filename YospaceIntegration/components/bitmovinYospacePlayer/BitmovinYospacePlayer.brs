@@ -340,9 +340,9 @@ end sub
 
 sub onMetadata()
   metadata = m.bitmovinPlayer.metadata
-  if metadata.metadatatype = "scte"
+  if metadata.metadatatype = "scte" then
     metadata = m.bitmovinPlayer.metadata.metadata
-  else if metadata.Source = "emsg" then
+  elseif metadata.Source = "emsg" then
     metadata = mapEmsgMetaData(metadata)
   else
     metadata = mapID3MetaData(metadata)

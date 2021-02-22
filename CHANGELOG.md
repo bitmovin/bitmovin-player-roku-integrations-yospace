@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Callback for BitmovinFields.METADATA
+- Missing reportCompanionEvent in BitmovinYospaceConvivaPlayer module
+### Fixed
+- Crash in AdBreak handlers if no current break
+- Firing of Post Roll events when video element is not yet created
+
 ## [1.3.1]
 ### Fixed
 - Sessions not being ended when the video is stopped or finished

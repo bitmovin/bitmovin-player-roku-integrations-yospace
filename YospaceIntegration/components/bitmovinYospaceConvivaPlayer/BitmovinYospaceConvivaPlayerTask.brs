@@ -210,6 +210,8 @@ sub callFunction(data)
     sendCustomApplicationEvent(data.arguments.name, data.arguments.attributes)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_PLAYBACK_EVENT
     sendCustomPlaybackEvent(data.arguments.name, data.arguments.attributes)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT
+    reportCompanionEvent(data.arguments.companionId, data.arguments.event)
   end if
 end sub
 

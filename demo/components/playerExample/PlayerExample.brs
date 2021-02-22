@@ -1,5 +1,5 @@
 sub init()
-  m.playerConfig = getConfigLiveMontageScte35NonYs()
+  m.playerConfig = getExamplePlayerConfigLive()
   m.playerConfigWithContentNode = getExamplePlayerConfigWithContentNode()
 
   m.bitmovinYospacePlayer = CreateObject("roSGNode", "BitmovinYospacePlayer")

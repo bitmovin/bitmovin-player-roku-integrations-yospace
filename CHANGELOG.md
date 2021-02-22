@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Callback for BitmovinFields.METADATA
+- Missing reportCompanionEvent in BitmovinYospaceConvivaPlayer module
 ### Fixed
 - Crash in AdBreak handlers if no current break
 - Firing of Post Roll events when video element is not yet created

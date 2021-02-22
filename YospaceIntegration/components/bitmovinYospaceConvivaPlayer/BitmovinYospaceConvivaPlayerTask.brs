@@ -107,10 +107,12 @@ sub createConvivaSession()
 end sub
 
 sub endSession()
-  debugLog("[ConvivaAnalytics] closing session")
-  m.conviva.endMonitoring(m.video)
-  m.top.cSession = false
-  m.contentMetadataBuilder.callFunc("reset")
+  if m.conviva <> invalid then
+    debugLog("[ConvivaAnalytics] closing session")
+    m.conviva.endMonitoring(m.video)
+    m.top.cSession = false
+    m.contentMetadataBuilder.callFunc("reset")
+  end if
 end sub
 
 sub reportPlaybackDeficiency(message, isFatal, closeSession = true)
@@ -208,18 +210,22 @@ sub callFunction(data)
     sendCustomApplicationEvent(data.arguments.name, data.arguments.attributes)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_PLAYBACK_EVENT
     sendCustomPlaybackEvent(data.arguments.name, data.arguments.attributes)
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT
+    reportCompanionEvent(data.arguments.companionId, data.arguments.event)
   end if
 end sub
 
 ' The below methods should be removed once Conviva supports multiple listeners for YoSpace. Because for this Conviva version it overrides YoSpace callbacks
-sub onAdBreakStart(dummy as dynamic)
-  m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
-  m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(), m.top.Timeline)
-  m.top.adBreakStart = m.top.activeAdBreak
-  ' We call OnYoSpaceAdBreakStart() in order to report that an ad break has been started
-  ' Remove this once conviva allows multiple listeners for YoSpace callbacks
-  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdBreakStart(m.session.GetSession().GetCurrentBreak())
-  setContentPauseMonitoring()
+sub onAdBreakStart(dummy as Dynamic)
+  if (getCurrentAdBreak() <> invalid) then
+    m.top.IsActiveAd = getCurrentAdBreak().IsActive()
+    m.top.activeAdBreak = mapAdBreak(getCurrentAdBreak(), m.top.Timeline)
+    m.top.adBreakStart = m.top.activeAdBreak
+    ' We call OnYoSpaceAdBreakStart() in order to report that an ad break has been started
+    ' Remove this once conviva allows multiple listeners for YoSpace callbacks
+    if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdBreakStart(getCurrentAdBreak())
+    setContentPauseMonitoring()
+  end if
 end sub
 
 sub onAdBreakEnd(dummy as dynamic)
@@ -228,7 +234,7 @@ sub onAdBreakEnd(dummy as dynamic)
   m.top.activeAdBreak = invalid
   ' We call OnYoSpaceAdBreakEnd() in order to report that an ad break has ended
   ' Remove this once conviva allows multiple listeners for YoSpace callbacks
-  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdBreakEnd(m.session.GetSession().GetCurrentBreak())
+  if m.isConvivaYoSpace then m.conviva.OnYoSpaceAdBreakEnd(getCurrentAdBreak())
   setContentResumeMonitoring()
 end sub
 

@@ -70,10 +70,16 @@ end sub
 
 ' Called whenever the player enters an advert break
 sub onAdBreakStart(dummy as Dynamic)
-  m.top.IsActiveAd = m.session.GetSession().GetCurrentBreak().IsActive()
-  m.top.activeAdBreak = mapAdBreak(m.session.GetSession().GetCurrentBreak(),m.top.Timeline)
-  m.top.adBreakStart = m.top.activeAdBreak
+  if (getCurrentAdBreak() <> invalid) then
+    m.top.IsActiveAd = getCurrentAdBreak().IsActive()
+    m.top.activeAdBreak = mapAdBreak(getCurrentAdBreak(),m.top.Timeline)
+    m.top.adBreakStart = m.top.activeAdBreak
+  end if
 end sub
+
+function getCurrentAdBreak()
+  return m.session.GetSession().GetCurrentBreak()
+end function
 
 ' Called whenever an individual advert starts
 sub onAdStart(miid as String)
@@ -284,7 +290,7 @@ end function
 
 function checkLastAdFinishedWorkaround()
   video = m.top.bitmovinYospacePlayer.findNode("MainVideo")
-  if video.position >= (video.duration) then firePostRollFinishedEvents()
+  if Invalid <> video AND video.position >= (video.duration) then firePostRollFinishedEvents()
 end function
 
 function firePostRollFinishedEvents()

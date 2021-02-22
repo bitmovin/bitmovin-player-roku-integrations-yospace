@@ -340,14 +340,22 @@ end sub
 
 sub onMetadata()
   metadata = m.bitmovinPlayer.metadata
-  if metadata.Source = "emsg" then metadata = mapEmsgMetaData(metadata) else metadata = mapID3MetaData(metadata)
-  if metadata = invalid or metadata.Count() = 0
-    print "Received meta data was invalid, not reporting to Yospace"
-    return
+  if metadata.metadatatype <> "scte" then
+    if metadata.Source = "emsg" then
+      metadata = mapEmsgMetaData(metadata)
+    else
+      metadata = mapID3MetaData(metadata)
+    end if
+
+    if metadata = invalid or metadata.Count() = 0
+      print "Received meta data was invalid, not reporting to Yospace"
+      return
+    end if
+    if isLive() = true
+      m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+    end if
   end if
-  if isLive() = true
-    m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
-  end if
+  m.top.metadata = m.bitmovinPlayer.metadata
 end sub
 
 sub requestYospaceURL(url, assetType)

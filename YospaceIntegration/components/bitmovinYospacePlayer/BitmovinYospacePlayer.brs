@@ -346,14 +346,14 @@ sub onMetadata()
     else
       metadata = mapID3MetaData(metadata)
     end if
-  end if
 
-  if metadata = invalid or metadata.Count() = 0
-    print "Received meta data was invalid, not reporting to Yospace"
-    return
-  end if
-  if isLive() = true
-    m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+    if metadata = invalid or metadata.Count() = 0
+      print "Received meta data was invalid, not reporting to Yospace"
+      return
+    end if
+    if isLive() = true
+      m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
+    end if
   end if
   m.top.metadata = m.bitmovinPlayer.metadata
 end sub

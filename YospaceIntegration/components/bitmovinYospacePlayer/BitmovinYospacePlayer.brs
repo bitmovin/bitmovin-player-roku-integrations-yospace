@@ -340,11 +340,9 @@ end sub
 
 sub onMetadata()
   metadata = m.bitmovinPlayer.metadata
-  if metadata.metadatatype = "scte" then
-    metadata = m.bitmovinPlayer.metadata.metadata
-  elseif metadata.Source = "emsg" then
+  if metadata.Source = "emsg" then
     metadata = mapEmsgMetaData(metadata)
-  else
+  elseif metadata.DoesExist("_decodeInfo_pts")
     metadata = mapID3MetaData(metadata)
   end if
   if metadata = invalid or metadata.Count() = 0

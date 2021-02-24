@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPAudioService" extends="Node">
+<component name="BMPAudioService" extends="BMPBaseService">
   <interface>
-    <function name="initializeService" />
-    <function name="startService" />
-    <function name="stopService" />
     <function name="availableAudio" />
     <function name="getAudio" />
     <function name="setAudio" />
-
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
   </interface>
-
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/audio/BMPAudioService.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />

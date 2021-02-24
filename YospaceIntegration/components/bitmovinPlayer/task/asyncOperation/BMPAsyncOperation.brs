@@ -1,10 +1,10 @@
 sub init()
 end sub
-sub execute(__O01O1I_OO_O)
-if __O01O1I_OO_O=invalid return 
-__O01O1I_OO_O.handleOperation=m.top
+sub execute(_O_1OO_O_0___)
+if _O_1OO_O_0___=invalid return 
+_O_1OO_O_0___.handleOperation=m.top
 end sub
-sub setResult(_O10OI0_I_O0O,_0III_O0_0_O1=invalid,_IOO0_0OIO_I0=invalid,_O10__0O0OI0O=invalid)
-result={"successful":_O10OI0_I_O0O,"response":_0III_O0_0_O1,"responseCode":_IOO0_0OIO_I0,"error":_O10__0O0OI0O}
+sub setResult(_I_0_11_00_OI,_I1_1I10_I___=invalid,_10__IIO__OOI=invalid,_IOI00IO1_I00=invalid)
+result={"successful":_I_0_11_00_OI,"response":_I1_1I10_I___,"responseCode":_10__IIO__OOI,"error":_IOI00IO1_I00}
 m.top.result=result
 end sub

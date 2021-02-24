@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPConfigurationService" extends="Node">
+<component name="BMPConfigurationService" extends="BMPBaseService">
   <interface>
-    <function name="initializeService" />
     <function name="setConfig" />
     <function name="getConfig" />
     <function name="updateSource" />

@@ -1,92 +1,92 @@
 sub init()
 m.NewLine=Chr(10)
 end sub
-function _11OOIO001OII(_I_IO_10_II01)
-if __IOII_0O01_0(_I_IO_10_II01)
+function _0O0_O0_IO1_I(_I1__11IOOI_O)
+if _OOOOO0_III1_(_I1__11IOOI_O)
 return(1=1) 
-else if _0_0OI011__1_(_I_IO_10_II01)
+else if _I_I0_11I01I0(_I1__11IOOI_O)
 return(1=1) 
 else 
 return(1=2) 
 end if
 end function
-function __0I10_0_I01I(_0_O0_0___O00,_0I__OOOOI1II)
-baseUrlProtocol=_0_O0_0___O00.Left(_0I__OOOOI1II.Instr((Chr(47)+Chr(&H2f)))+2)
-return baseUrlProtocol+_0I__OOOOI1II 
+function _IO_1O_O_0I_O(__IIO_100_IOO,_O1IIOO0_0I10)
+baseUrlProtocol=__IIO_100_IOO.Left(_O1IIOO0_0I10.Instr((Chr(&H2f)+Chr(47)))+2)
+return baseUrlProtocol+_O1IIOO0_0I10 
 end function
-function __IOII_0O01_0(_IIII111_0010)
-splitUrl=_IIII111_0010.split((Chr(47)+Chr(47)))
+function _OOOOO0_III1_(___10OI_I_10I)
+splitUrl=___10OI_I_10I.split((Chr(47)+Chr(&H2f)))
 return splitUrl.count()>1 and Len(splitUrl[0])>0 
 end function
-function _1IOI01OO_IIO(_O_I__O1__OO_)
-if _O_I__O1__OO_.instr(0,(Chr(&H2f)))=0
-return _O_I__O1__OO_ 
+function _I0I_0_II0__O(_0OII__IO_I_O)
+if _0OII__IO_I_O.instr(0,(Chr(&H2f)))=0
+return _0OII__IO_I_O 
 else 
-return(Chr(&H2f))+_O_I__O1__OO_ 
+return(Chr(47))+_0OII__IO_I_O 
 end if
 end function
-function _I0OIO0_01010(_IIO001_0_O_0,___1__00OO0O_)
-if __IOII_0O01_0(___1__00OO0O_)
-return ___1__00OO0O_ 
-else if _0_0OI011__1_(___1__00OO0O_)
-return __0I10_0_I01I(_IIO001_0_O_0,___1__00OO0O_) 
+function _O_111O0O1OO0(_0_0I1OOI_I_1,_1O0OOI_0_OIO)
+if _OOOOO0_III1_(_1O0OOI_0_OIO)
+return _1O0OOI_0_OIO 
+else if _I_I0_11I01I0(_1O0OOI_0_OIO)
+return _IO_1O_O_0I_O(_0_0I1OOI_I_1,_1O0OOI_0_OIO) 
 else 
-return _O0_100_0IOOO(_IIO001_0_O_0,___1__00OO0O_) 
+return _II01_O0IO0_O(_0_0I1OOI_I_1,_1O0OOI_0_OIO) 
 end if
 end function
-function _0_0OI011__1_(_I0O_I_1O1IOO)
-return _I0O_I_1O1IOO.Instr((Chr(119)+Chr(&H77)+Chr(119)))=0 
+function _I_I0_11I01I0(_0OOOI10_0O0I)
+return _0OOOI10_0O0I.Instr((Chr(119)+Chr(119)+Chr(119)))=0 
 end function
-function _O0_100_0IOOO(__000O0I11O0I,_I0I1OO0101IO)
-if _I0I1OO0101IO.Left(1)=(Chr(&H2f))
-host=__001OOI1OO1I(__000O0I11O0I)
-return host+_I0I1OO0101IO 
+function _II01_O0IO0_O(_1__1_0I_1_1_,___I_01O01OII)
+if ___I_01O01OII.Left(1)=(Chr(47))
+host=_1100101_1I0_(_1__1_0I_1_1_)
+return host+___I_01O01OII 
 else 
-return _0II_OI00I_10(__000O0I11O0I,_I0I1OO0101IO) 
+return _0O0II0I_00IO(_1__1_0I_1_1_,___I_01O01OII) 
 end if
 end function
-function __001OOI1OO1I(__00II_0_101O)
+function _1100101_1I0_(_1_10_I_O_O_O)
 host=Chr(0)
-defaultProtocol=(Chr(104)+Chr(&H74)+Chr(116)+Chr(&H70)+Chr(115)+Chr(58)+Chr(&H2f)+Chr(47))
-if __IOII_0O01_0(__00II_0_101O)
-protocol=__00II_0_101O.Left(__00II_0_101O.Instr((Chr(47)+Chr(&H2f)))+2)
-hostname=__00II_0_101O.Split(protocol)[1].Split((Chr(&H2f)))[0]
+defaultProtocol=(Chr(104)+Chr(116)+Chr(116)+Chr(&H70)+Chr(115)+Chr(58)+Chr(&H2f)+Chr(&H2f))
+if _OOOOO0_III1_(_1_10_I_O_O_O)
+protocol=_1_10_I_O_O_O.Left(_1_10_I_O_O_O.Instr((Chr(47)+Chr(47)))+2)
+hostname=_1_10_I_O_O_O.Split(protocol)[1].Split((Chr(47)))[0]
 return protocol+hostname 
 else 
-hostname=__00II_0_101O.Split((Chr(&H2f)))[0]
+hostname=_1_10_I_O_O_O.Split((Chr(47)))[0]
 return defaultProtocol+hostname 
 end if
 end function
-function _0II_OI00I_10(_IO0I1O110III,_IOII1IO_O__O)
-absoluteUrlArray=_IO0I1O110III.Split((Chr(&H2f)))
+function _0O0II0I_00IO(_O__I0_OOO1_1,__IO___0O1OIO)
+absoluteUrlArray=_O__I0_OOO1_1.Split((Chr(&H2f)))
 parentFolderIndex=absoluteUrlArray.Count()-1
 replacePath=(Chr(47))+absoluteUrlArray[parentFolderIndex]
-baseUrl=_IO0I1O110III.Replace(replacePath,Chr(0)).Trim()
-return baseUrl+_1IOI01OO_IIO(_IOII1IO_O__O) 
+baseUrl=_O__I0_OOO1_1.Replace(replacePath,Chr(0)).Trim()
+return baseUrl+_I0I_0_II0__O(__IO___0O1OIO) 
 end function
-function _1IO1I11111_O(_01O_OIOO1O00)
-return _01O_OIOO1O00.Instr((Chr(&H2e)+Chr(46)+Chr(&H2f)))=0 
+function __O00O1100OIO(_O10IOI0_O0II)
+return _O10IOI0_O0II.Instr((Chr(46)+Chr(&H2e)+Chr(47)))=0 
 end function
-function _0O_I_0I_1_1I(__0OI11O_1I00,_0OO01__01OO0)
-if ___0O_II_00I_(__0OI11O_1I00)or ___0O_II_00I_(_0OO01__01OO0)return invalid 
-relativeUrlArray=__0OI11O_1I00.Split((Chr(&H2e)+Chr(&H2e)+Chr(47)))
+function _I0O_I1_00OI_(__II1I0001I_1,_1_1__0OI_OO_)
+if __OOI0OI11_O0(__II1I0001I_1)or __OOI0OI11_O0(_1_1__0OI_OO_)return invalid 
+relativeUrlArray=__II1I0001I_1.Split((Chr(&H2e)+Chr(46)+Chr(&H2f)))
 relativeUrlWithoutPath=relativeUrlArray[relativeUrlArray.Count()-1]
 numberOfFoldersToReachParent=relativeUrlArray.Count()
-mainUrlFoldersArray=_0OO01__01OO0.Split((Chr(47)))
+mainUrlFoldersArray=_1_1__0OI_OO_.Split((Chr(&H2f)))
 numberOfFoldersInMainUrl=mainUrlFoldersArray.Count()
 numberOfFoldersToRemove=numberOfFoldersInMainUrl-numberOfFoldersToReachParent
-parentFolderUrl=_0OO01__01OO0
+parentFolderUrl=_1_1__0OI_OO_
 for i=numberOfFoldersInMainUrl-1 to numberOfFoldersToRemove step -1
 folder=mainUrlFoldersArray[i]
-if not ___0O_II_00I_(folder)parentFolderUrl=parentFolderUrl.Replace(_1IOI01OO_IIO(folder),Chr(0)).Trim()
+if not __OOI0OI11_O0(folder)parentFolderUrl=parentFolderUrl.Replace(_I0I_0_II0__O(folder),Chr(0)).Trim()
 end for
-return parentFolderUrl+_1IOI01OO_IIO(relativeUrlWithoutPath) 
+return parentFolderUrl+_I0I_0_II0__O(relativeUrlWithoutPath) 
 end function
-function _O1IIO01O0_0_(_OIII0_01O000)
-if ___0O_II_00I_(_OIII0_01O000)return invalid 
-if _OIII0_01O000.Instr(m.NewLine)
-return _OIII0_01O000.Split(m.NewLine)[0] 
+function _0_O0II00I0__(_100II0I0_IO1)
+if __OOI0OI11_O0(_100II0I0_IO1)return invalid 
+if _100II0I0_IO1.Instr(m.NewLine)
+return _100II0I0_IO1.Split(m.NewLine)[0] 
 else 
-return _OIII0_01O000 
+return _100II0I0_IO1 
 end if
 end function

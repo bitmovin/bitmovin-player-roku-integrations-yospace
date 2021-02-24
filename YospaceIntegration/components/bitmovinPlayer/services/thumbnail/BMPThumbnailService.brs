@@ -1,73 +1,73 @@
 sub init()
-m.asyncOperationFactory=createObject((Chr(&H72)+Chr(&H6f)+Chr(83)+Chr(&H47)+Chr(78)+Chr(111)+Chr(100)+Chr(101)),(Chr(66)+Chr(77)+Chr(&H50)+Chr(65)+Chr(115)+Chr(&H79)+Chr(&H6e)+Chr(99)+Chr(79)+Chr(112)+Chr(&H65)+Chr(114)+Chr(&H61)+Chr(116)+Chr(&H69)+Chr(111)+Chr(&H6e)+Chr(&H46)+Chr(&H61)+Chr(99)+Chr(&H74)+Chr(111)+Chr(114)+Chr(&H79)))
-m.bitmovinModelObjectMapper=createObject((Chr(114)+Chr(&H6f)+Chr(83)+Chr(&H47)+Chr(&H4e)+Chr(&H6f)+Chr(100)+Chr(101)),(Chr(66)+Chr(77)+Chr(80)+Chr(&H42)+Chr(&H69)+Chr(116)+Chr(&H6d)+Chr(&H6f)+Chr(&H76)+Chr(105)+Chr(110)+Chr(77)+Chr(&H6f)+Chr(&H64)+Chr(&H65)+Chr(&H6c)+Chr(79)+Chr(&H62)+Chr(&H6a)+Chr(&H65)+Chr(99)+Chr(116)+Chr(&H4d)+Chr(97)+Chr(&H70)+Chr(112)+Chr(101)+Chr(114)))
-m.BitmovinAsyncOperationTypes=_1IO1O1I_1001()
-m.thumbnailTilesHandler=__110I_I100II()
+m.asyncOperationFactory=createObject((Chr(114)+Chr(&H6f)+Chr(83)+Chr(71)+Chr(&H4e)+Chr(&H6f)+Chr(100)+Chr(101)),(Chr(66)+Chr(&H4d)+Chr(80)+Chr(65)+Chr(115)+Chr(&H79)+Chr(&H6e)+Chr(&H63)+Chr(79)+Chr(&H70)+Chr(&H65)+Chr(&H72)+Chr(97)+Chr(&H74)+Chr(105)+Chr(111)+Chr(110)+Chr(&H46)+Chr(&H61)+Chr(99)+Chr(&H74)+Chr(111)+Chr(114)+Chr(121)))
+m.bitmovinModelObjectMapper=createObject((Chr(114)+Chr(111)+Chr(&H53)+Chr(&H47)+Chr(&H4e)+Chr(111)+Chr(100)+Chr(&H65)),(Chr(66)+Chr(77)+Chr(80)+Chr(66)+Chr(&H69)+Chr(&H74)+Chr(&H6d)+Chr(111)+Chr(118)+Chr(105)+Chr(&H6e)+Chr(&H4d)+Chr(111)+Chr(100)+Chr(&H65)+Chr(108)+Chr(79)+Chr(&H62)+Chr(&H6a)+Chr(101)+Chr(99)+Chr(&H74)+Chr(77)+Chr(&H61)+Chr(112)+Chr(&H70)+Chr(&H65)+Chr(&H72)))
+m.BitmovinAsyncOperationTypes=___IO10I10001()
+m.thumbnailTilesHandler=_01I1I0I_1O1_()
 end sub
-sub initializeService(_I_0__0IO0O0O)
+sub initializeService(___O1__I_0I_0)
 m.thumbnails=[]
-m.video=_I_0__0IO0O0O
+m.video=___O1__I_0I_0
 end sub
-sub startService(_00_O0II_O0OO,_1000_01_OOO1,_O10OI1I_0_O_)
-if ___0O_II_00I_(_1000_01_OOO1)or ___0O_II_00I_(_O10OI1I_0_O_)return 
-if _IO0__O111III(_00_O0II_O0OO)
-__OOI_O1_00O_(_00_O0II_O0OO,_1000_01_OOO1)
-else if _OI_11IIOII1_(_00_O0II_O0OO)
-__0_I_00_O_1I(_00_O0II_O0OO,_O10OI1I_0_O_)
+sub startService(_00___00II00_,_OIO01OO0_1IO,_11_0OO__I1_O)
+if __OOI0OI11_O0(_OIO01OO0_1IO)or __OOI0OI11_O0(_11_0OO__I1_O)return 
+if __I00___1_IO_(_00___00II00_)
+_O11I1_1O1_OI(_00___00II00_,_OIO01OO0_1IO)
+else if _001IOOI__O0O(_00___00II00_)
+_OI0OIO0IOO0I(_00___00II00_,_11_0OO__I1_O)
 else 
-m.video.observeFieldScoped((Chr(&H73)+Chr(&H74)+Chr(&H61)+Chr(&H74)+Chr(&H65)),(Chr(95)+Chr(49)+Chr(73)+Chr(49)+Chr(79)+Chr(79)+Chr(79)+Chr(&H5f)+Chr(&H4f)+Chr(&H4f)+Chr(&H49)+Chr(&H5f)+Chr(48)))
+m.video.observeFieldScoped((Chr(&H73)+Chr(&H74)+Chr(97)+Chr(116)+Chr(101)),(Chr(95)+Chr(&H49)+Chr(48)+Chr(&H49)+Chr(&H4f)+Chr(73)+Chr(73)+Chr(&H30)+Chr(&H31)+Chr(73)+Chr(48)+Chr(48)+Chr(73)))
 end if
 end sub
-function _IO0__O111III(__0____O_1_1_)
-return __I_O0I_0_O_O(__0____O_1_1_) and Len(__0____O_1_1_)>0 
+function __I00___1_IO_(_O1IO_011I01O)
+return __01_1IOO0_OI(_O1IO_011I01O) and Len(_O1IO_011I01O)>0 
 end function
-function _OI_11IIOII1_(_11O1001_1I0O)
-return _O__00IO1IOOI(_11O1001_1I0O) 
+function _001IOOI__O0O(__OI11__1I1_O)
+return _0_I_0IOO00_I(__OI11__1I1_O) 
 end function
-sub stopService(__0I0OO10I_1I=invalid)
+sub stopService(_I___O1O0_II1=invalid)
 m.thumbnails=[]
-m.video.unobserveFieldScoped((Chr(&H73)+Chr(&H74)+Chr(&H61)+Chr(&H74)+Chr(101)))
-if not ___0O_II_00I_(m.getVttDataOperation)
-m.getVttDataOperation.unobserveFieldScoped((Chr(&H72)+Chr(&H65)+Chr(&H73)+Chr(117)+Chr(108)+Chr(&H74)))
+m.video.unobserveFieldScoped((Chr(115)+Chr(116)+Chr(97)+Chr(116)+Chr(&H65)))
+if not __OOI0OI11_O0(m.getVttDataOperation)
+m.getVttDataOperation.unobserveFieldScoped((Chr(114)+Chr(101)+Chr(&H73)+Chr(&H75)+Chr(&H6c)+Chr(116)))
 end if
 end sub
-sub __OOI_O1_00O_(_01I__10O_001,_101IOI_IIO_I)
-m.getVttDataOperation=m.asyncOperationFactory.callFunc((Chr(&H63)+Chr(114)+Chr(&H65)+Chr(&H61)+Chr(&H74)+Chr(101)+Chr(&H41)+Chr(115)+Chr(&H79)+Chr(110)+Chr(&H63)+Chr(&H4f)+Chr(112)+Chr(101)+Chr(114)+Chr(&H61)+Chr(116)+Chr(&H69)+Chr(&H6f)+Chr(&H6e)),m.BitmovinAsyncOperationTypes.GET_THUMBNAILS_VTT_FILE,_01I__10O_001)
-m.getVttDataOperation.observeFieldScoped((Chr(&H72)+Chr(101)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(&H74)),(Chr(&H5f)+Chr(&H5f)+Chr(73)+Chr(79)+Chr(&H30)+Chr(&H30)+Chr(73)+Chr(73)+Chr(&H4f)+Chr(&H5f)+Chr(49)+Chr(&H30)+Chr(&H30)))
-m.getVttDataOperation.callFunc((Chr(101)+Chr(120)+Chr(&H65)+Chr(&H63)+Chr(117)+Chr(116)+Chr(101)),_101IOI_IIO_I)
+sub _O11I1_1O1_OI(_II_00001011O,_0O_011II_IOI)
+m.getVttDataOperation=m.asyncOperationFactory.callFunc((Chr(&H63)+Chr(&H72)+Chr(101)+Chr(&H61)+Chr(116)+Chr(101)+Chr(65)+Chr(&H73)+Chr(&H79)+Chr(110)+Chr(99)+Chr(&H4f)+Chr(&H70)+Chr(101)+Chr(114)+Chr(97)+Chr(116)+Chr(105)+Chr(111)+Chr(&H6e)),m.BitmovinAsyncOperationTypes.GET_THUMBNAILS_VTT_FILE,_II_00001011O)
+m.getVttDataOperation.observeFieldScoped((Chr(&H72)+Chr(&H65)+Chr(&H73)+Chr(117)+Chr(108)+Chr(&H74)),(Chr(95)+Chr(&H4f)+Chr(49)+Chr(&H31)+Chr(&H5f)+Chr(&H30)+Chr(&H49)+Chr(48)+Chr(&H30)+Chr(79)+Chr(73)+Chr(&H31)+Chr(&H31)))
+m.getVttDataOperation.callFunc((Chr(101)+Chr(&H78)+Chr(&H65)+Chr(99)+Chr(117)+Chr(116)+Chr(&H65)),_0O_011II_IOI)
 end sub
-sub __0_I_00_O_1I(_0I1_I_0_1__I,__O_I0I_II__O)
-if _0I1_I_0_1__I.fhd<>invalid __O_I0I_II__O.FHDBifUrl=_0I1_I_0_1__I.fhd
-if _0I1_I_0_1__I.hd<>invalid __O_I0I_II__O.HDBifUrl=_0I1_I_0_1__I.hd
-if _0I1_I_0_1__I.sd<>invalid __O_I0I_II__O.SDBifUrl=_0I1_I_0_1__I.sd
+sub _OI0OIO0IOO0I(_I010OOI0_I01,_1_O1O01_OI01)
+if _I010OOI0_I01.fhd<>invalid _1_O1O01_OI01.FHDBifUrl=_I010OOI0_I01.fhd
+if _I010OOI0_I01.hd<>invalid _1_O1O01_OI01.HDBifUrl=_I010OOI0_I01.hd
+if _I010OOI0_I01.sd<>invalid _1_O1O01_OI01.SDBifUrl=_I010OOI0_I01.sd
 end sub
-sub __IO00IIO_100(_OI_1IOOO0O1I)
-result=_OI_1IOOO0O1I.getData()
+sub _O11_0I00OI11(_IO1_O_I__111)
+result=_IO1_O_I__111.getData()
 if not result.successful
-?(Chr(86)+Chr(&H74)+Chr(116)+Chr(&H20)+Chr(&H50)+Chr(&H61)+Chr(114)+Chr(115)+Chr(&H65)+Chr(114)+Chr(32)+Chr(70)+Chr(&H61)+Chr(105)+Chr(108)+Chr(&H65)+Chr(100)+Chr(33)+Chr(&H20));result.error
+?(Chr(86)+Chr(&H74)+Chr(&H74)+Chr(&H20)+Chr(80)+Chr(&H61)+Chr(114)+Chr(115)+Chr(&H65)+Chr(&H72)+Chr(32)+Chr(&H46)+Chr(&H61)+Chr(105)+Chr(&H6c)+Chr(&H65)+Chr(&H64)+Chr(&H21)+Chr(&H20));result.error
 else 
 m.thumbnails=result.response.thumbnails
 end if
 end sub
-sub _1I1OOO_OOI_0(___11100I_11O)
-state=___11100I_11O.getData()
-if not state=(Chr(112)+Chr(108)+Chr(97)+Chr(121)+Chr(105)+Chr(110)+Chr(&H67))return 
-___00O0O110_0(m.video)
+sub _I0IOII01I00I(_1O1I0011_0O_)
+state=_1O1I0011_0O_.getData()
+if not state=(Chr(&H70)+Chr(108)+Chr(97)+Chr(121)+Chr(105)+Chr(&H6e)+Chr(&H67))return 
+_1_11_II00O_0(m.video)
 end sub
-sub ___00O0O110_0(__0IO101O1_1_)
-thumbnailTiles=__0IO101O1_1_.thumbnailTiles
-if not ___0O_II_00I_(thumbnailTiles) and m.thumbnailTilesHandler.isThumbnailTileOfSupportedType(thumbnailTiles)
+sub _1_11_II00O_0(_I___1101O0II)
+thumbnailTiles=_I___1101O0II.thumbnailTiles
+if not __OOI0OI11_O0(thumbnailTiles) and m.thumbnailTilesHandler.isThumbnailTileOfSupportedType(thumbnailTiles)
 m.thumbnails=m.thumbnailTilesHandler.extractThumbnails(thumbnailTiles)
 end if
-__0IO101O1_1_.unobserveFieldScoped((Chr(115)+Chr(116)+Chr(97)+Chr(&H74)+Chr(101)))
+_I___1101O0II.unobserveFieldScoped((Chr(115)+Chr(116)+Chr(&H61)+Chr(116)+Chr(&H65)))
 end sub
-function getThumbnail(__011_IIO10I1)
-if ___0O_II_00I_(__011_IIO10I1)or m.thumbnails.count()=0
+function getThumbnail(_OOIII_I0O_0I)
+if __OOI0OI11_O0(_OOIII_I0O_0I)or m.thumbnails.count()=0
 return invalid 
 end if
 for i=0 to m.thumbnails.Count()-1
 thumbnail=m.thumbnails[i]
-if _OOI1_1OO1I_I(__011_IIO10I1,thumbnail.start,thumbnail.end)
+if _I11OO1IO_OI1(_OOIII_I0O_0I,thumbnail.start,thumbnail.end)
 return thumbnail 
 end if
 end for

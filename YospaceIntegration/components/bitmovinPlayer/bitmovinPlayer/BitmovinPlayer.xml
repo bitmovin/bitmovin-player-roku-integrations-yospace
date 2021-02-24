@@ -43,6 +43,8 @@
     <function name="ad_discardAdBreak" />
     <function name="getVersion" />
     <function name="destroy" />
+    <function name="getCurrentTime" />
+    <function name="ad_isAd" />
 
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />
@@ -73,6 +75,7 @@
     <field id="audioDownloadQualityChanged" type="assocarray" alwaysNotify="true" />
     <field id="impression" type="assocarray" alwaysNotify="true" />
     <field id="licenseValidated" type="assocarray" alwaysNotify="true" />
+    <field id="timeChanged" type="assocarray" alwaysNotify="true" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/bitmovinPlayer/BitmovinPlayer.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />

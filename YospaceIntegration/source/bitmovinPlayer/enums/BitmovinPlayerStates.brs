@@ -1,3 +1,3 @@
-function _II0_0_O__10O()
-return{PLAYING:(Chr(112)+Chr(&H6c)+Chr(97)+Chr(121)+Chr(105)+Chr(110)+Chr(&H67)),STALLING:(Chr(&H73)+Chr(116)+Chr(&H61)+Chr(108)+Chr(108)+Chr(105)+Chr(&H6e)+Chr(&H67)),PAUSED:(Chr(112)+Chr(97)+Chr(&H75)+Chr(&H73)+Chr(&H65)+Chr(100)),FINISHED:(Chr(102)+Chr(&H69)+Chr(110)+Chr(105)+Chr(115)+Chr(&H68)+Chr(101)+Chr(100)),ERROR:(Chr(101)+Chr(114)+Chr(114)+Chr(111)+Chr(&H72)),NONE:(Chr(110)+Chr(&H6f)+Chr(110)+Chr(101)),SETUP:(Chr(&H73)+Chr(&H65)+Chr(&H74)+Chr(117)+Chr(&H70)),READY:(Chr(114)+Chr(101)+Chr(&H61)+Chr(100)+Chr(&H79))} 
+function _0_1_OI101_0I()
+return{PLAYING:(Chr(112)+Chr(&H6c)+Chr(97)+Chr(121)+Chr(105)+Chr(110)+Chr(&H67)),STALLING:(Chr(115)+Chr(&H74)+Chr(&H61)+Chr(&H6c)+Chr(108)+Chr(&H69)+Chr(110)+Chr(103)),PAUSED:(Chr(112)+Chr(97)+Chr(&H75)+Chr(&H73)+Chr(101)+Chr(&H64)),FINISHED:(Chr(102)+Chr(105)+Chr(110)+Chr(&H69)+Chr(115)+Chr(&H68)+Chr(101)+Chr(&H64)),ERROR:(Chr(&H65)+Chr(&H72)+Chr(114)+Chr(111)+Chr(&H72)),NONE:(Chr(110)+Chr(&H6f)+Chr(110)+Chr(101)),SETUP:(Chr(&H73)+Chr(&H65)+Chr(116)+Chr(117)+Chr(&H70)),READY:(Chr(114)+Chr(101)+Chr(97)+Chr(&H64)+Chr(121))} 
 end function

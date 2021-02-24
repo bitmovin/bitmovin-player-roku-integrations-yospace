@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BMPBaseService" extends="Node">
+  <interface>
+    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
+
+    <function name="startService" />
+    <function name="stopService" />
+    <function name="initializeService" />
+  </interface>
+</component>

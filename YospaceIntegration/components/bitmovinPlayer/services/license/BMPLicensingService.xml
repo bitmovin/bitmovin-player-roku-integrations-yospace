@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPLicensingService" extends="Node">
+<component name="BMPLicensingService" extends="BMPBaseService">
   <interface>
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
-
-    <function name="initializeService" />
-
     <function name="updateConfig" />
     <function name="doPlayerLicenseCheck" />
     <function name="getLicenseKey" />

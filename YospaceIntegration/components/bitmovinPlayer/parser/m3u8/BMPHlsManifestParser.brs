@@ -2,115 +2,114 @@ sub init()
 m.NewLine=Chr(10)
 m.QuotationMark=Chr(34)
 m.Hashtag=Chr(35)
-m.EXTM3U8=(Chr(&H23)+Chr(69)+Chr(88)+Chr(84)+Chr(77)+Chr(51)+Chr(&H55))
-m.EXT_X_STREAM_INF=(Chr(69)+Chr(&H58)+Chr(&H54)+Chr(45)+Chr(&H58)+Chr(45)+Chr(83)+Chr(84)+Chr(&H52)+Chr(69)+Chr(65)+Chr(&H4d)+Chr(&H2d)+Chr(&H49)+Chr(78)+Chr(70))
-m.EXT_X_SCTE=(Chr(&H45)+Chr(88)+Chr(&H54)+Chr(&H2d)+Chr(&H58)+Chr(&H2d)+Chr(83)+Chr(67)+Chr(84)+Chr(&H45)+Chr(&H33)+Chr(&H35))
-m.EXTINF=(Chr(&H45)+Chr(88)+Chr(&H54)+Chr(73)+Chr(78)+Chr(&H46))
+m.EXTM3U8=(Chr(&H23)+Chr(&H45)+Chr(88)+Chr(&H54)+Chr(&H4d)+Chr(&H33)+Chr(&H55))
+m.EXT_X_STREAM_INF=(Chr(&H45)+Chr(88)+Chr(&H54)+Chr(45)+Chr(88)+Chr(45)+Chr(83)+Chr(84)+Chr(&H52)+Chr(&H45)+Chr(&H41)+Chr(&H4d)+Chr(45)+Chr(73)+Chr(&H4e)+Chr(&H46))
+m.EXT_X_SCTE=(Chr(69)+Chr(&H58)+Chr(84)+Chr(45)+Chr(&H58)+Chr(&H2d)+Chr(&H53)+Chr(67)+Chr(&H54)+Chr(&H45)+Chr(51)+Chr(53))
+m.EXTINF=(Chr(&H45)+Chr(88)+Chr(84)+Chr(&H49)+Chr(78)+Chr(70))
 end sub
-function parseMasterPlaylist(_I10OII0_O1II,_00O0011__1OI)
-if _I10OII0_O1II=invalid return invalid 
-if not __IIIOI1IOO0O(_I10OII0_O1II)return invalid 
+function parseMasterPlaylist(_O11I0OO11_OO,_I0_1OI1OO_10)
+if _O11I0OO11_OO=invalid return invalid 
+if not _0O0_I_0OI1_0(_O11I0OO11_OO)return invalid 
 parsedManifest={}
-hlsTagStringsArray=_1__II0III011(_I10OII0_O1II)
-parsedManifest.ext_x_stream_inf=_0IO0I_O_OII0(hlsTagStringsArray,_00O0011__1OI)
+hlsTagStringsArray=_1_I__I11I110(_O11I0OO11_OO)
+parsedManifest.ext_x_stream_inf=_O_0__I1OIO00(hlsTagStringsArray,_I0_1OI1OO_10)
 return parsedManifest 
 end function
-function __IIIOI1IOO0O(_OOO0IOOO0101)
-if _OOO0IOOO0101=invalid return(1=2) 
-return _0_1_I____1OO(_OOO0IOOO0101,m.EXTM3U8) 
+function _0O0_I_0OI1_0(_I10IOO1O11O_)
+if _I10IOO1O11O_=invalid return(1=2) 
+return __OO_O0II0O0_(_I10IOO1O11O_,m.EXTM3U8) 
 end function
-function _0_1_I____1OO(_O0OIO0I0I0OI,_OI_1II0I101_)
-return _O0OIO0I0I0OI.Instr(_OI_1II0I101_)=0 
+function __OO_O0II0O0_(_10_00O__0__O,_I_1O0O0__01_)
+return _10_00O__0__O.Instr(_I_1O0O0__01_)=0 
 end function
-function _1__II0III011(_IOO1OIO10_00)
-if ___0O_II_00I_(_IOO1OIO10_00)return invalid 
-return _IOO1OIO10_00.Split(m.Hashtag) 
+function _1_I__I11I110(_0IOO001OI_00)
+if __OOI0OI11_O0(_0IOO001OI_00)return invalid 
+return _0IOO001OI_00.Split(m.Hashtag) 
 end function
-function _0IO0I_O_OII0(_OI_OOO_OI1OO,_II1010O11I_1)
-if ___0O_II_00I_(_OI_OOO_OI1OO)return invalid 
+function _O_0__I1OIO00(_0_I0O_O_0O01,_I__0IO__01O0)
+if __OOI0OI11_O0(_0_I0O_O_0O01)return invalid 
 playlistVariants=[]
-for each tagString in _OI_OOO_OI1OO
-if _0_1_I____1OO(tagString,m.EXT_X_STREAM_INF)
+for each tagString in _0_I0O_O_0O01
+if __OO_O0II0O0_(tagString,m.EXT_X_STREAM_INF)
 playlistVariant={}
-playlistVariant.bandwidth=_I110011IOI1O(tagString,(Chr(66)+Chr(65)+Chr(&H4e)+Chr(&H44)+Chr(&H57)+Chr(73)+Chr(&H44)+Chr(84)+Chr(&H48)))
-playlistVariant.url=_00OOOOI__1II(tagString,_II1010O11I_1)
+playlistVariant.bandwidth=_0O1_0_00111I(tagString,(Chr(66)+Chr(&H41)+Chr(78)+Chr(68)+Chr(&H57)+Chr(&H49)+Chr(68)+Chr(84)+Chr(&H48)))
+playlistVariant.url=__O1I1OI0OI1I(tagString,_I__0IO__01O0)
 playlistVariants.Push(playlistVariant)
 end if
 end for
 return playlistVariants 
 end function
-function _00OOOOI__1II(_OIOI_O11__1_,_O0I0III10OOO=invalid)
-if ___0O_II_00I_(_OIOI_O11__1_)return invalid 
+function __O1I1OI0OI1I(__010OO1O001_,_OO0011I0I0_0)
+if __OOI0OI11_O0(__010OO1O001_)return invalid 
 url=Chr(0)
 uriIndex=1
-extractedUrl=_OIOI_O11__1_.split(m.NewLine)[uriIndex]
-if ___0O_II_00I_(extractedUrl)or extractedUrl.Len()=0 return invalid 
-if _1IO1I11111_O(extractedUrl)
-return _0O_I_0I_1_1I(extractedUrl,_O0I0III10OOO) 
-else if _11OOIO001OII(extractedUrl)
+extractedUrl=__010OO1O001_.split(m.NewLine)[uriIndex]
+if __OOI0OI11_O0(extractedUrl)or extractedUrl.Len()=0 return invalid 
+if __O00O1100OIO(extractedUrl)
+return _I0O_I1_00OI_(extractedUrl,_OO0011I0I0_0) 
+else if _0O0_O0_IO1_I(extractedUrl)
 return extractedUrl 
 else 
-return _I0OIO0_01010(_O0I0III10OOO,extractedUrl) 
+return _O_111O0O1OO0(_OO0011I0I0_0,extractedUrl) 
 end if
 end function
-function parsePlaylistVariant(_O10_0I_IO1IO)
-if ___0O_II_00I_(_O10_0I_IO1IO)return invalid 
-if not __IIIOI1IOO0O(_O10_0I_IO1IO)return invalid 
+function parsePlaylistVariant(_OIII0IOO1OI_,__1_00010O1_1)
+if __OOI0OI11_O0(_OIII0IOO1OI_)return invalid 
+if not _0O0_I_0OI1_0(_OIII0IOO1OI_)return invalid 
 parsedPlaylistVariantManifest={}
-hlsTagStringsArray=_1__II0III011(_O10_0I_IO1IO)
-parsedPlaylistVariantManifest.scte=_OOO00IO1O1_1(hlsTagStringsArray)
-parsedPlaylistVariantManifest.ext_inf=_1O___O00I1OI(hlsTagStringsArray)
+hlsTagStringsArray=_1_I__I11I110(_OIII0IOO1OI_)
+parsedPlaylistVariantManifest.scte=__O0I0101II11(hlsTagStringsArray,__1_00010O1_1)
+parsedPlaylistVariantManifest.ext_inf=_0_II00_II1OI(hlsTagStringsArray,__1_00010O1_1)
 return parsedPlaylistVariantManifest 
 end function
-function _OOO00IO1O1_1(_I0011_1O_100)
-if ___0O_II_00I_(_I0011_1O_100)return invalid 
+function __O0I0101II11(_0I0I1III1O_1,_IOI111O1__I1)
+if __OOI0OI11_O0(_0I0I1III1O_1)return invalid 
 scteArray=[]
-for i=0 to _I0011_1O_100.Count()-1
-tagString=_I0011_1O_100[i]
-if _0_1_I____1OO(tagString,m.EXT_X_SCTE)
+for i=0 to _0I0I1III1O_1.Count()-1
+tagString=_0I0I1III1O_1[i]
+if __OO_O0II0O0_(tagString,m.EXT_X_SCTE)
 scteEvent={}
-scteFollowingSegment=_I0_O11OO_1O1(i,_I0011_1O_100)
-scteEvent.cue=_I110011IOI1O(tagString,(Chr(&H43)+Chr(85)+Chr(&H45)))
-scteEvent.id=_I110011IOI1O(tagString,(Chr(&H49)+Chr(68)))
+scteFollowingSegment=_III_IIOII1_0(i,_0I0I1III1O_1,_IOI111O1__I1)
+scteEvent.cue=_0O1_0_00111I(tagString,(Chr(67)+Chr(&H55)+Chr(69)))
+scteEvent.id=_0O1_0_00111I(tagString,(Chr(&H49)+Chr(68)))
 scteEvent.segmentUrl=scteFollowingSegment.url
-scteEvent.duration=scteFollowingSegment.duration
 scteArray.Push(scteEvent)
 end if
 end for
 return scteArray 
 end function
-function _I0_O11OO_1O1(_I_IOII100_I_,_1_1OO10IO__I)
-if ___0O_II_00I_(_I_IOII100_I_)or ___0O_II_00I_(_1_1OO10IO__I)return invalid 
+function _III_IIOII1_0(_01O_10OO0II0,__OIII01_OOI_,_O1II001O0I0_)
+if __OOI0OI11_O0(_01O_10OO0II0)or __OOI0OI11_O0(__OIII01_OOI_)return invalid 
 segment={}
-for i=_I_IOII100_I_ to _1_1OO10IO__I.Count()-1
-tagString=_1_1OO10IO__I[i]
-if _0_1_I____1OO(tagString,m.EXTINF)
-segmentTagString=_1_1OO10IO__I[i]
-segment.url=_00OOOOI__1II(segmentTagString)
+for i=_01O_10OO0II0 to __OIII01_OOI_.Count()-1
+tagString=__OIII01_OOI_[i]
+if __OO_O0II0O0_(tagString,m.EXTINF)
+segmentTagString=__OIII01_OOI_[i]
+segment.url=__O1I1OI0OI1I(segmentTagString,_O1II001O0I0_)
 exit for
 end if
 end for
 return segment 
 end function
-function _I110011IOI1O(_001_OI1I00_I,_1___IO_O10__)
-if ___0O_II_00I_(_001_OI1I00_I)or ___0O_II_00I_(_1___IO_O10__)return invalid 
-params=_001_OI1I00_I.Split((Chr(44)))
+function _0O1_0_00111I(_11O000OIIO1O,__0_1000IOIIO)
+if __OOI0OI11_O0(_11O000OIIO1O)or __OOI0OI11_O0(__0_1000IOIIO)return invalid 
+params=_11O000OIIO1O.Split((Chr(44)))
 valueIndex=1
 value=Chr(0)
 for each param in params
-if param.Instr(_1___IO_O10__)>=0
-value=param.split((Chr(&H3d)))[valueIndex].Replace(m.QuotationMark,Chr(0)).Trim()
+if param.Instr(__0_1000IOIIO)>=0
+value=param.split(__0_1000IOIIO+(Chr(&H3d)))[valueIndex].Replace(m.QuotationMark,Chr(0)).Trim()
 exit for
 end if
 end for
-return _O1IIO01O0_0_(value) 
+return _0_O0II00I0__(value) 
 end function
-function _1O___O00I1OI(__010_O001II1)
+function _0_II00_II1OI(_10_0_OI_IOII,_1__IOI0OI1_1)
 extInfArray=[]
-for each tag in __010_O001II1
-if _0_1_I____1OO(tag,m.EXTINF)
+for each tag in _10_0_OI_IOII
+if __OO_O0II0O0_(tag,m.EXTINF)
 extInf={}
-extInf.url=_00OOOOI__1II(tag)
+extInf.url=__O1I1OI0OI1I(tag,_1__IOI0OI1_1)
 extInfArray.Push(extInf)
 end if
 end for

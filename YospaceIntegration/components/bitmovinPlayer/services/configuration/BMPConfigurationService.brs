@@ -1,15 +1,15 @@
 sub init()
 end sub
-function initializeService(_OI_1_1_0I1O1=invalid)
+function initializeService(__1O100_1OI10=invalid)
 m.config=invalid
 end function
-sub setConfig(__I01O10O10OI)
-if ___0O_II_00I_(__I01O10O10OI)return 
-m.config=__I01O10O10OI
+sub setConfig(__1IIO1_I01O1)
+if _OO_O1_O1O0O_(__1IIO1_I01O1)return 
+m.config=__1IIO1_I01O1
 end sub
-function getConfig(_110__OO1_I0I=invalid)
+function getConfig(_1I0_0IOIO_OO=invalid)
 return m.config 
 end function
-function updateSource(_10_O11__OOO_)
-m.config.source=_10_O11__OOO_
+function updateSource(__00_I_OII1I0)
+m.config.source=__00_I_OII1I0
 end function

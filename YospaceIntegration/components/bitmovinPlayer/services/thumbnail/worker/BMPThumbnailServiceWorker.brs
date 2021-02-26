@@ -1,26 +1,26 @@
 sub init()
-m.BitmovinAsyncOperationTypes=_1IO1O1I_1001()
+m.BitmovinAsyncOperationTypes=__OI0_00O_00_()
 end sub
-sub executeOperation(_I100_1O_0IOO)
-if ___0O_II_00I_(_I100_1O_0IOO.data)or ___0O_II_00I_(_I100_1O_0IOO.data.url)return 
-if _I100_1O_0IOO.type=m.BitmovinAsyncOperationTypes.GET_THUMBNAILS_VTT_FILE _1IO_0_0000I0(_I100_1O_0IOO)
+sub executeOperation(_OIOOO__1O011)
+if _OO_O1_O1O0O_(_OIOOO__1O011.data)or _OO_O1_O1O0O_(_OIOOO__1O011.data.url)return 
+if _OIOOO__1O011.type=m.BitmovinAsyncOperationTypes.GET_THUMBNAILS_VTT_FILE _0101IOIO_I_O(_OIOOO__1O011)
 end sub
-sub _1IO_0_0000I0(_01OI010O0111)
-getVttRequest=_I01O11000O0_(_01OI010O0111.data.url)
-onSuccess=function(_010I0OI0I1I0,_O00O1IO01OI1,_10O_0O010111)
-vttParser=_1_101OI0II__()
-parsedData=vttParser.parseVtt(_10O_0O010111.data.url,_010I0OI0I1I0)
+sub _0101IOIO_I_O(_010_1IO1_0_0)
+getVttRequest=_11I00IO1OI10(_010_1IO1_0_0.data.url)
+onSuccess=function(__0II1I0_IO1I,_1O10I_0OI11_,__0OIO101_0O0)
+vttParser=CreateObject((Chr(114)+Chr(111)+Chr(&H53)+Chr(71)+Chr(&H4e)+Chr(&H6f)+Chr(&H64)+Chr(&H65)),(Chr(&H42)+Chr(&H4d)+Chr(&H50)+Chr(&H56)+Chr(84)+Chr(&H54)+Chr(&H50)+Chr(&H61)+Chr(&H72)+Chr(115)+Chr(&H65)+Chr(&H72)))
+parsedData=vttParser.callfunc((Chr(&H70)+Chr(&H61)+Chr(&H72)+Chr(&H73)+Chr(&H65)+Chr(&H56)+Chr(&H74)+Chr(&H74)),__0OIO101_0O0.data.url,__0II1I0_IO1I)
 error=vttParser.error
-if ___0O_II_00I_(error)
-contentNode=CreateObject((Chr(&H72)+Chr(111)+Chr(&H53)+Chr(71)+Chr(&H4e)+Chr(&H6f)+Chr(&H64)+Chr(101)),(Chr(&H43)+Chr(&H6f)+Chr(110)+Chr(&H74)+Chr(101)+Chr(110)+Chr(&H74)+Chr(78)+Chr(111)+Chr(100)+Chr(&H65)))
-contentNode.update({id:(Chr(&H61)+Chr(&H6c)+Chr(&H6c)+Chr(&H54)+Chr(&H68)+Chr(117)+Chr(109)+Chr(98)+Chr(110)+Chr(97)+Chr(105)+Chr(&H6c)+Chr(&H44)+Chr(&H61)+Chr(116)+Chr(&H61)),"thumbnails":parsedData},(1=1))
-_10O_0O010111.callFunc((Chr(&H73)+Chr(101)+Chr(116)+Chr(&H52)+Chr(&H65)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(&H74)),(1=1),contentNode,_O00O1IO01OI1)
+if error=Chr(0)
+contentNode=CreateObject((Chr(114)+Chr(&H6f)+Chr(&H53)+Chr(71)+Chr(78)+Chr(111)+Chr(&H64)+Chr(&H65)),(Chr(&H43)+Chr(111)+Chr(&H6e)+Chr(&H74)+Chr(101)+Chr(&H6e)+Chr(&H74)+Chr(&H4e)+Chr(&H6f)+Chr(&H64)+Chr(101)))
+contentNode.update({id:(Chr(97)+Chr(&H6c)+Chr(108)+Chr(84)+Chr(104)+Chr(117)+Chr(109)+Chr(&H62)+Chr(&H6e)+Chr(97)+Chr(&H69)+Chr(108)+Chr(&H44)+Chr(&H61)+Chr(&H74)+Chr(&H61)),"thumbnails":parsedData},(1=1))
+__0OIO101_0O0.callFunc((Chr(115)+Chr(101)+Chr(&H74)+Chr(&H52)+Chr(101)+Chr(&H73)+Chr(117)+Chr(&H6c)+Chr(&H74)),(1=1),contentNode,_1O10I_0OI11_)
 else 
-_10O_0O010111.callFunc((Chr(&H73)+Chr(101)+Chr(&H74)+Chr(&H52)+Chr(101)+Chr(&H73)+Chr(117)+Chr(108)+Chr(&H74)),(1=2),invalid,_O00O1IO01OI1,error)
+__0OIO101_0O0.callFunc((Chr(115)+Chr(101)+Chr(&H74)+Chr(82)+Chr(101)+Chr(&H73)+Chr(117)+Chr(108)+Chr(116)),(1=2),invalid,_1O10I_0OI11_,error)
 end if
 end function
-onError=function(__O1O_OII0IIO,____OOI0I1_0I,_0I1_110OI0O1)
-_0I1_110OI0O1.callFunc((Chr(115)+Chr(&H65)+Chr(116)+Chr(82)+Chr(&H65)+Chr(115)+Chr(117)+Chr(108)+Chr(116)),(1=2),__O1O_OII0IIO,____OOI0I1_0I,__O1O_OII0IIO.error)
+onError=function(_10IOI1_II0_0,_00I0__00__00,_OOOI10I0O1II)
+_OOOI10I0O1II.callFunc((Chr(&H73)+Chr(101)+Chr(116)+Chr(82)+Chr(&H65)+Chr(&H73)+Chr(117)+Chr(&H6c)+Chr(116)),(1=2),_10IOI1_II0_0,_00I0__00__00,_10IOI1_II0_0.error)
 end function
-_0III10O01II1(getVttRequest,(Chr(71)+Chr(69)+Chr(84)),onSuccess,onError,_01OI010O0111)
+_1001IIOO_O_O(getVttRequest,(Chr(71)+Chr(69)+Chr(84)),onSuccess,onError,_010_1IO1_0_0)
 end sub

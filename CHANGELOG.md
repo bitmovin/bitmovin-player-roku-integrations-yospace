@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Bitmovin Player to version [1.41.2](https://bitmovin.com/docs/player/releases/roku/roku-1-41-2)
+
 ## [1.4.0]
 ### Added
 - Callback for BitmovinFields.METADATA

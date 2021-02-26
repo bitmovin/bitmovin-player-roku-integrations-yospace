@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPInitializationService" extends="Node">
+<component name="BMPInitializationService" extends="BMPBaseService">
   <interface>
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
-
-    <function name="initializeService" />
     <function name="setup" />
     <function name="load" />
     <function name="unload" />

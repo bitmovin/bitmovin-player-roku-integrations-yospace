@@ -1,89 +1,97 @@
-function _1OO_001I0I1I(_OO1000_I111_,__O_011001O0I)
-if _OO1000_I111_=invalid
+function _10_O10O0_11I(_IO0O10100I_I,__001_IIO110_)
+if _IO0O10100I_I=invalid
 return invalid 
-else if not _OI0I1OII_00I(__O_011001O0I)or __O_011001O0I.count()=0
-return _OO1000_I111_ 
-else if __O_011001O0I.count()=1
-return _OO1000_I111_[__O_011001O0I[0]] 
+else if not _0O1I_O1I_II0(__001_IIO110_)or __001_IIO110_.count()=0
+return _IO0O10100I_I 
+else if __001_IIO110_.count()=1
+return _IO0O10100I_I[__001_IIO110_[0]] 
 else 
-field=__O_011001O0I[0]
-__O_011001O0I.shift()
-return _1OO_001I0I1I(_OO1000_I111_[field],__O_011001O0I) 
+field=__001_IIO110_[0]
+__001_IIO110_.shift()
+return _10_O10O0_11I(_IO0O10100I_I[field],__001_IIO110_) 
 end if
 end function
-function ___0O_II_00I_(_II_O1__O1IOO)
-if _II_O1__O1IOO=invalid
+function _OO_O1_O1O0O_(_0O001I0O0100)
+if _0O001I0O0100=invalid
 return(1=1) 
 else 
 return(1=2) 
 end if
 end function
-function _0II10I01_00_(_II_O_I0011O1)
-return getInterface(_II_O_I0011O1,(Chr(105)+Chr(&H66)+Chr(&H42)+Chr(&H6f)+Chr(&H6f)+Chr(&H6c)+Chr(101)+Chr(97)+Chr(&H6e)))<>invalid 
+function _IIOO1_11I00I(_IOOIIII_OIOI)
+return getInterface(_IOOIIII_OIOI,(Chr(&H69)+Chr(&H66)+Chr(66)+Chr(&H6f)+Chr(&H6f)+Chr(108)+Chr(&H65)+Chr(&H61)+Chr(&H6e)))<>invalid 
 end function
-function __I_O0I_0_O_O(_1OI10__IO000)
-return getInterface(_1OI10__IO000,(Chr(105)+Chr(102)+Chr(&H53)+Chr(&H74)+Chr(114)+Chr(&H69)+Chr(&H6e)+Chr(&H67)))<>invalid 
+function _1_0II0__1OOI(_100I1IOOOIOO)
+return getInterface(_100I1IOOOIOO,(Chr(105)+Chr(102)+Chr(&H53)+Chr(&H74)+Chr(114)+Chr(&H69)+Chr(&H6e)+Chr(&H67)))<>invalid 
 end function
-function _OI0I1OII_00I(_OOO1IOI011_O)
-return getInterface(_OOO1IOI011_O,(Chr(&H69)+Chr(&H66)+Chr(65)+Chr(114)+Chr(&H72)+Chr(&H61)+Chr(121)))<>invalid 
+function _0O1I_O1I_II0(_O1O_OOI1_1_I)
+return getInterface(_O1O_OOI1_1_I,(Chr(&H69)+Chr(102)+Chr(&H41)+Chr(&H72)+Chr(114)+Chr(&H61)+Chr(121)))<>invalid 
 end function
-function _O__00IO1IOOI(_I_1I1I_O_00O)
-return getInterface(_I_1I1I_O_00O,(Chr(105)+Chr(102)+Chr(65)+Chr(115)+Chr(115)+Chr(111)+Chr(99)+Chr(105)+Chr(&H61)+Chr(116)+Chr(105)+Chr(&H76)+Chr(101)+Chr(65)+Chr(&H72)+Chr(&H72)+Chr(&H61)+Chr(121)))<>invalid 
+function _OO0I11IO1_I_(_0O_0I0001OII)
+return getInterface(_0O_0I0001OII,(Chr(&H69)+Chr(102)+Chr(65)+Chr(115)+Chr(115)+Chr(111)+Chr(&H63)+Chr(&H69)+Chr(&H61)+Chr(116)+Chr(&H69)+Chr(118)+Chr(&H65)+Chr(&H41)+Chr(114)+Chr(&H72)+Chr(&H61)+Chr(121)))<>invalid 
 end function
-function _I0III10_1O_I(_011_1_0I100O)
-return type(_011_1_0I100O)=(Chr(114)+Chr(&H6f)+Chr(83)+Chr(&H47)+Chr(78)+Chr(&H6f)+Chr(100)+Chr(101)) and _011_1_0I100O.isSubtype((Chr(&H43)+Chr(&H6f)+Chr(110)+Chr(116)+Chr(101)+Chr(&H6e)+Chr(116)+Chr(&H4e)+Chr(&H6f)+Chr(&H64)+Chr(&H65))) 
+function __1O0__O__O11(_OII0I11I__IO)
+return type(_OII0I11I__IO)=(Chr(&H72)+Chr(111)+Chr(83)+Chr(71)+Chr(&H4e)+Chr(111)+Chr(&H64)+Chr(101)) and _OII0I11I__IO.isSubtype((Chr(67)+Chr(&H6f)+Chr(&H6e)+Chr(&H74)+Chr(101)+Chr(110)+Chr(116)+Chr(&H4e)+Chr(111)+Chr(&H64)+Chr(&H65))) 
 end function
-function _O1O1O0I0_1II(_O11O0OOOII_0)
-return _O11O0OOOII_0 
+function _0OO1OIOI_1O1(_000_10IIO11I)
+return _000_10IIO11I 
 end function
-function _IO0_IIIO010_()
+function _OI1OI0I_1_O0()
 end function
-function _0IO__0I_1O00(_OIOO__OII__O)
+function _110_1_0O101_(_OI0_OO_1_I01)
 copy={}
-copy.append(_OIOO__OII__O)
+copy.append(_OI0_OO_1_I01)
 return copy 
 end function
-function __11O0I011I0I(_O01O1I_0_I1O,_O00100I_0O0_)
-if _O01O1I_0_I1O=invalid return invalid 
-if _O00100I_0O0_=invalid return invalid 
-newArr=CreateObject((Chr(114)+Chr(&H6f)+Chr(&H41)+Chr(114)+Chr(114)+Chr(97)+Chr(&H79)),0,(1=1))
-count=_O01O1I_0_I1O.Count()
+function _OI00OO1OO1_1(_IO_O00_1I__0,_I11___I0__1O)
+if _IO_O00_1I__0=invalid return invalid 
+if _I11___I0__1O=invalid return invalid 
+newArr=CreateObject((Chr(&H72)+Chr(&H6f)+Chr(65)+Chr(&H72)+Chr(114)+Chr(&H61)+Chr(&H79)),0,(1=1))
+count=_IO_O00_1I__0.Count()
 for i=0 to count-1
-if _O00100I_0O0_(_O01O1I_0_I1O[i])=(1=1)
-newArr.push(_O01O1I_0_I1O[i])
+if _I11___I0__1O(_IO_O00_1I__0[i])=(1=1)
+newArr.push(_IO_O00_1I__0[i])
 end if
 end for
 return newArr 
 end function
-function _1001I10OIO_O(_0_01II11I01O,_OOO1I_0_0IO0)
-if _0_01II11I01O=invalid return invalid 
-if _OOO1I_0_0IO0=invalid return invalid 
-count=_0_01II11I01O.Count()
-if count=0 return _0_01II11I01O 
-newArr=CreateObject((Chr(&H72)+Chr(111)+Chr(&H41)+Chr(&H72)+Chr(&H72)+Chr(&H61)+Chr(&H79)),0,(1=1))
+function _O11011I10010(_1_1IO0_00I01,__0O01O_0O011)
+if _1_1IO0_00I01=invalid return invalid 
+if __0O01O_0O011=invalid return invalid 
+count=_1_1IO0_00I01.Count()
+if count=0 return _1_1IO0_00I01 
+newArr=CreateObject((Chr(&H72)+Chr(&H6f)+Chr(65)+Chr(&H72)+Chr(&H72)+Chr(97)+Chr(121)),0,(1=1))
 for i=0 to count-1
-newArr.push(_OOO1I_0_0IO0(_0_01II11I01O[i]))
+newArr.push(__0O01O_0O011(_1_1IO0_00I01[i]))
 end for
 return newArr 
 end function
-function _OOI1_1OO1I_I(__OI0I_OI_OIO,__I1IO_10I1__,_OI11I010I0I_)
-if ___0O_II_00I_(__OI0I_OI_OIO)or ___0O_II_00I_(__I1IO_10I1__)or ___0O_II_00I_(_OI11I010I0I_)
+function __I0_IOII_OIO(_O0IO10I1_0_1,__I1_O_OO1I11,_I__IIO_1IIO_)
+if _OO_O1_O1O0O_(_O0IO10I1_0_1)or _OO_O1_O1O0O_(__I1_O_OO1I11)or _OO_O1_O1O0O_(_I__IIO_1IIO_)
 return invalid 
 end if
-if __OI0I_OI_OIO>=__I1IO_10I1__ and __OI0I_OI_OIO<=_OI11I010I0I_
+if _O0IO10I1_0_1>=__I1_O_OO1I11 and _O0IO10I1_0_1<=_I__IIO_1IIO_
 return(1=1) 
 end if
 return(1=2) 
 end function
-function __010OI___1_1(_00__O111_IO1,_I0_IO101_O1I=0)
-return _00__O111_IO1.content.getChild(_I0_IO101_O1I) 
+function __OO1II10O_0O(_O_1_OOI1I_II,_OO001_110I0O=0)
+return _O_1_OOI1I_II.content.getChild(_OO001_110I0O) 
 end function
-function _01_1O10IOO0I()
+function _III1O0I101OO()
 return cint(2147483647) 
 end function
-function _O_OI1IOO1O00(_10000_OI1I_I,_101OOO1I_0_0,_II0_011__I1I=0.0000000001)
-if ___0O_II_00I_(_10000_OI1I_I)or ___0O_II_00I_(_101OOO1I_0_0)or ___0O_II_00I_(_II0_011__I1I)
+function __1IO010110_I(__1_0_OII_OI0,_O11001OI__O_,_1O____0O_11O=0.0000000001)
+if _OO_O1_O1O0O_(__1_0_OII_OI0)or _OO_O1_O1O0O_(_O11001OI__O_)or _OO_O1_O1O0O_(_1O____0O_11O)
 return(1=2) 
 end if
-return Abs(_10000_OI1I_I-_101OOO1I_0_0)<_II0_011__I1I 
+return Abs(__1_0_OII_OI0-_O11001OI__O_)<_1O____0O_11O 
+end function
+function _111000O0I00_(__01OO01O___1,___O_O_II_I_I)
+if _OO_O1_O1O0O_(__01OO01O___1)or _OO_O1_O1O0O_(___O_O_II_I_I)return invalid 
+return(__01OO01O___1/___O_O_II_I_I)*100 
+end function
+function __1OOIO_I___I(_II1IOO__0IIO,__OI_110OOO_0)
+if _OO_O1_O1O0O_(_II1IOO__0IIO)or _OO_O1_O1O0O_(__OI_110OOO_0)return invalid 
+return Left(_II1IOO__0IIO,Len(__OI_110OOO_0))=__OI_110OOO_0 
 end function

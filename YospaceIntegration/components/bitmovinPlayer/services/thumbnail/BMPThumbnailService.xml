@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPThumbnailService" extends="Node">
+<component name="BMPThumbnailService" extends="BMPBaseService">
   <interface>
-    <function name="initializeService" />
-    <function name="startService" />
-    <function name="stopService" />
     <function name="getThumbnail" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/BMPThumbnailService.brs" />

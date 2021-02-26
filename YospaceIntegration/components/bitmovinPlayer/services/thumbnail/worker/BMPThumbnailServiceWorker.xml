@@ -3,5 +3,4 @@
   <interface>
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/worker/BMPThumbnailServiceWorker.brs" />
-  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/thumbnail/VttParser.brs" />
 </component>

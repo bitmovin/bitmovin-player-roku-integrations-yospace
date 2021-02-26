@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPCaptionService" extends="Node">
+<component name="BMPCaptionService" extends="BMPBaseService">
   <interface>
-    <function name="initializeService" />
-
     <function name="setCaptionMode" />
     <function name="availableSubtitles" />
     <function name="getSubtitle" />
     <function name="setSubtitle" />
     <function name="setSubtitleStyles" />
     <function name="getSubtitleStyles" />
-
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/caption/BMPCaptionService.brs" />

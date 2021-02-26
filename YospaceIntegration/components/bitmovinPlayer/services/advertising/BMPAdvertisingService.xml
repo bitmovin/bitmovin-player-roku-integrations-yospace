@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPAdvertisingService" extends="Node">
+<component name="BMPAdvertisingService" extends="BMPBaseService">
   <interface>
-    <function name="initializeService" />
-    <function name="startService" />
-    <function name="stopService" />
     <function name="getAdList" />
     <function name="scheduleAds" />
     <function name="getActiveAdBreak" />
     <function name="discardAdBreak" />
-
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
+    <function name="isAd" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/BMPAdvertisingService.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />

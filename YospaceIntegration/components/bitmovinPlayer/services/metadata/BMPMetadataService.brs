@@ -1,179 +1,181 @@
 sub init()
 m.metadataTimeline=[]
-m.BitmovinFields=_O_10OO110010()
-m.HttpRequestTypes=___OIO_III0O0()
-m.BitmovinMetadataEventTypes=_I_00_O101_1O()
-m.hlsManifestParser=CreateObject((Chr(&H72)+Chr(&H6f)+Chr(&H53)+Chr(&H47)+Chr(&H4e)+Chr(&H6f)+Chr(100)+Chr(&H65)),(Chr(&H42)+Chr(77)+Chr(80)+Chr(&H48)+Chr(108)+Chr(&H73)+Chr(&H4d)+Chr(97)+Chr(110)+Chr(105)+Chr(102)+Chr(&H65)+Chr(&H73)+Chr(116)+Chr(&H50)+Chr(97)+Chr(114)+Chr(&H73)+Chr(&H65)+Chr(&H72)))
-m.BitmovinAsyncOperationTypes=_1IO1O1I_1001()
-m.asyncOperationFactory=createObject((Chr(114)+Chr(&H6f)+Chr(83)+Chr(&H47)+Chr(78)+Chr(111)+Chr(100)+Chr(&H65)),(Chr(&H42)+Chr(&H4d)+Chr(&H50)+Chr(&H41)+Chr(&H73)+Chr(&H79)+Chr(110)+Chr(&H63)+Chr(&H4f)+Chr(&H70)+Chr(101)+Chr(&H72)+Chr(97)+Chr(116)+Chr(105)+Chr(111)+Chr(&H6e)+Chr(70)+Chr(&H61)+Chr(&H63)+Chr(116)+Chr(&H6f)+Chr(114)+Chr(121)))
-m.bitmovinModelObjectMapper=createObject((Chr(&H72)+Chr(111)+Chr(83)+Chr(71)+Chr(&H4e)+Chr(111)+Chr(100)+Chr(&H65)),(Chr(&H42)+Chr(77)+Chr(&H50)+Chr(66)+Chr(105)+Chr(&H74)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(&H69)+Chr(110)+Chr(77)+Chr(111)+Chr(&H64)+Chr(101)+Chr(&H6c)+Chr(&H4f)+Chr(98)+Chr(&H6a)+Chr(&H65)+Chr(99)+Chr(116)+Chr(&H4d)+Chr(97)+Chr(&H70)+Chr(112)+Chr(101)+Chr(&H72)))
-m.eventFactory=_0_1_1IO_0_IO()
-_00I_O0_O10I_()
+m.BitmovinFields=_I__1I0I_O__0()
+m.HttpRequestTypes=_OI1OI100I_1I()
+m.BitmovinMetadataEventTypes=_01O1001IO__I()
+m.hlsManifestParser=CreateObject((Chr(114)+Chr(111)+Chr(&H53)+Chr(71)+Chr(&H4e)+Chr(111)+Chr(100)+Chr(101)),(Chr(66)+Chr(&H4d)+Chr(80)+Chr(72)+Chr(&H6c)+Chr(&H73)+Chr(&H4d)+Chr(&H61)+Chr(&H6e)+Chr(105)+Chr(&H66)+Chr(101)+Chr(&H73)+Chr(116)+Chr(&H50)+Chr(97)+Chr(&H72)+Chr(&H73)+Chr(101)+Chr(&H72)))
+m.BitmovinAsyncOperationTypes=__OI0_00O_00_()
+m.asyncOperationFactory=createObject((Chr(&H72)+Chr(111)+Chr(&H53)+Chr(71)+Chr(&H4e)+Chr(111)+Chr(&H64)+Chr(101)),(Chr(66)+Chr(&H4d)+Chr(80)+Chr(&H41)+Chr(115)+Chr(121)+Chr(110)+Chr(&H63)+Chr(79)+Chr(112)+Chr(101)+Chr(&H72)+Chr(97)+Chr(&H74)+Chr(105)+Chr(111)+Chr(&H6e)+Chr(&H46)+Chr(97)+Chr(99)+Chr(116)+Chr(&H6f)+Chr(&H72)+Chr(&H79)))
+m.bitmovinModelObjectMapper=createObject((Chr(114)+Chr(&H6f)+Chr(83)+Chr(71)+Chr(78)+Chr(111)+Chr(&H64)+Chr(101)),(Chr(&H42)+Chr(77)+Chr(&H50)+Chr(66)+Chr(&H69)+Chr(&H74)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(&H69)+Chr(&H6e)+Chr(77)+Chr(&H6f)+Chr(100)+Chr(&H65)+Chr(108)+Chr(79)+Chr(&H62)+Chr(&H6a)+Chr(&H65)+Chr(&H63)+Chr(&H74)+Chr(77)+Chr(97)+Chr(&H70)+Chr(112)+Chr(101)+Chr(114)))
+m.eventFactory=_I1I_O1I0I100()
+_O_OI0IOOOIO0()
 end sub
-sub _00I_O0_O10I_()
+sub _O_OI0IOOOIO0()
 m.scteEvents=[]
 m.parsedMasterPlaylist=invalid
 m.parsedVariantPlaylist=invalid
 m.playlistVariantBitrate=invalid
 m.videoStreamingSegmentCount=0
 end sub
-sub initializeService(__0IIII10I__I,_O1O__1I__I0I,_0_1_0_O0OI01,__IOIO_IO0O0I)
-m.video=__0IIII10I__I
+sub initializeService(_O_O00II0IOO0,___OOI__I1__0,_OI_I_1II0_O_,_IO001OOII_II)
+m.video=_O_O00II0IOO0
 m.video.timedMetaDataSelectionKeys=[(Chr(42))]
-m.bitmovinPlayer=_O1O__1I__I0I
-m.mediaQualityService=_0_1_0_O0OI01.mediaQualityService
-m.playbackService=_0_1_0_O0OI01.playbackService
-m.bitmovinPlayerTask=__IOIO_IO0O0I
-m.configurationService=_0_1_0_O0OI01.configurationService
+m.bitmovinPlayer=___OOI__I1__0
+m.mediaQualityService=_OI_I_1II0_O_.mediaQualityService
+m.playbackService=_OI_I_1II0_O_.playbackService
+m.bitmovinPlayerTask=_IO001OOII_II
+m.configurationService=_OI_I_1II0_O_.configurationService
+m.timeService=_OI_I_1II0_O_.timeService
 end sub
-sub startService(_OO1I100I11_O=invalid)
-m.bitmovinPlayer.observeFieldScoped((Chr(&H73)+Chr(&H65)+Chr(&H65)+Chr(107)),(Chr(&H5f)+Chr(&H31)+Chr(79)+Chr(79)+Chr(95)+Chr(73)+Chr(&H4f)+Chr(&H49)+Chr(&H5f)+Chr(&H49)+Chr(79)+Chr(&H4f)+Chr(&H4f)))
-m.video.observeFieldScoped((Chr(112)+Chr(111)+Chr(115)+Chr(&H69)+Chr(&H74)+Chr(&H69)+Chr(&H6f)+Chr(110)),(Chr(&H5f)+Chr(95)+Chr(73)+Chr(&H49)+Chr(79)+Chr(&H31)+Chr(95)+Chr(48)+Chr(&H4f)+Chr(48)+Chr(&H4f)+Chr(&H4f)+Chr(&H31)))
-m.video.observeFieldScoped((Chr(&H74)+Chr(105)+Chr(&H6d)+Chr(101)+Chr(&H64)+Chr(&H4d)+Chr(&H65)+Chr(116)+Chr(&H61)+Chr(&H44)+Chr(97)+Chr(116)+Chr(97)),(Chr(95)+Chr(&H31)+Chr(&H4f)+Chr(&H49)+Chr(&H5f)+Chr(49)+Chr(&H31)+Chr(73)+Chr(95)+Chr(49)+Chr(&H5f)+Chr(&H49)+Chr(48)))
-isNativeHlsParsingEnabled=_1OO_001I0I1I(m.configurationService.callFunc((Chr(103)+Chr(&H65)+Chr(116)+Chr(&H43)+Chr(111)+Chr(&H6e)+Chr(&H66)+Chr(105)+Chr(&H67))),[(Chr(&H74)+Chr(119)+Chr(&H65)+Chr(&H61)+Chr(107)+Chr(&H73)),(Chr(&H6e)+Chr(97)+Chr(116)+Chr(105)+Chr(118)+Chr(&H65)+Chr(72)+Chr(108)+Chr(&H73)+Chr(80)+Chr(97)+Chr(114)+Chr(&H73)+Chr(&H69)+Chr(&H6e)+Chr(103)+Chr(&H45)+Chr(110)+Chr(97)+Chr(&H62)+Chr(&H6c)+Chr(101)+Chr(&H64))])
-if isNativeHlsParsingEnabled=(1=1)_I_I101__1_0I()
+sub startService(_OIO_1_O_010O=invalid)
+m.bitmovinPlayer.observeFieldScoped((Chr(&H73)+Chr(&H65)+Chr(101)+Chr(107)),(Chr(95)+Chr(&H30)+Chr(73)+Chr(49)+Chr(73)+Chr(&H30)+Chr(&H5f)+Chr(79)+Chr(79)+Chr(95)+Chr(&H4f)+Chr(&H31)+Chr(49)))
+m.video.observeFieldScoped((Chr(112)+Chr(&H6f)+Chr(115)+Chr(&H69)+Chr(116)+Chr(105)+Chr(111)+Chr(110)),(Chr(&H5f)+Chr(&H31)+Chr(79)+Chr(49)+Chr(&H30)+Chr(&H49)+Chr(&H49)+Chr(49)+Chr(48)+Chr(49)+Chr(&H5f)+Chr(49)+Chr(95)))
+m.video.observeFieldScoped((Chr(&H74)+Chr(105)+Chr(&H6d)+Chr(101)+Chr(100)+Chr(&H4d)+Chr(101)+Chr(&H74)+Chr(&H61)+Chr(&H44)+Chr(97)+Chr(116)+Chr(&H61)),(Chr(95)+Chr(&H5f)+Chr(&H30)+Chr(79)+Chr(48)+Chr(&H4f)+Chr(&H49)+Chr(73)+Chr(73)+Chr(&H31)+Chr(48)+Chr(&H4f)+Chr(49)))
+isNativeHlsParsingEnabled=_10_O10O0_11I(m.configurationService.callFunc((Chr(&H67)+Chr(&H65)+Chr(116)+Chr(&H43)+Chr(111)+Chr(110)+Chr(&H66)+Chr(&H69)+Chr(103))),[(Chr(&H74)+Chr(119)+Chr(101)+Chr(97)+Chr(107)+Chr(115)),(Chr(&H6e)+Chr(&H61)+Chr(116)+Chr(105)+Chr(&H76)+Chr(101)+Chr(72)+Chr(&H6c)+Chr(&H73)+Chr(&H50)+Chr(&H61)+Chr(&H72)+Chr(115)+Chr(&H69)+Chr(110)+Chr(&H67)+Chr(&H45)+Chr(110)+Chr(97)+Chr(&H62)+Chr(108)+Chr(101)+Chr(100))])
+if isNativeHlsParsingEnabled=(1=1)_O0_0_0_1II1_()
 end sub
-sub _I_I101__1_0I()
-m.mediaQualityService.observeFieldScoped((Chr(101)+Chr(118)+Chr(&H65)+Chr(&H6e)+Chr(116)+Chr(79)+Chr(99)+Chr(99)+Chr(117)+Chr(114)+Chr(114)+Chr(&H65)+Chr(100)),(Chr(&H5f)+Chr(73)+Chr(&H31)+Chr(49)+Chr(&H5f)+Chr(95)+Chr(79)+Chr(79)+Chr(79)+Chr(73)+Chr(&H49)+Chr(&H49)+Chr(&H5f)))
-m.video.observeFieldScoped((Chr(115)+Chr(116)+Chr(114)+Chr(101)+Chr(97)+Chr(109)+Chr(105)+Chr(110)+Chr(103)+Chr(&H53)+Chr(&H65)+Chr(103)+Chr(109)+Chr(&H65)+Chr(&H6e)+Chr(&H74)),(Chr(&H5f)+Chr(&H31)+Chr(&H49)+Chr(&H49)+Chr(&H31)+Chr(49)+Chr(&H4f)+Chr(&H5f)+Chr(79)+Chr(&H49)+Chr(&H4f)+Chr(95)+Chr(48)))
+sub _O0_0_0_1II1_()
+m.mediaQualityService.observeFieldScoped((Chr(101)+Chr(118)+Chr(101)+Chr(&H6e)+Chr(116)+Chr(79)+Chr(99)+Chr(&H63)+Chr(117)+Chr(114)+Chr(114)+Chr(101)+Chr(100)),(Chr(&H5f)+Chr(79)+Chr(73)+Chr(&H5f)+Chr(95)+Chr(&H30)+Chr(&H49)+Chr(&H4f)+Chr(&H31)+Chr(&H31)+Chr(79)+Chr(48)+Chr(&H4f)))
+m.video.observeFieldScoped((Chr(&H73)+Chr(116)+Chr(&H72)+Chr(&H65)+Chr(&H61)+Chr(109)+Chr(105)+Chr(&H6e)+Chr(&H67)+Chr(&H53)+Chr(&H65)+Chr(103)+Chr(109)+Chr(&H65)+Chr(&H6e)+Chr(116)),(Chr(&H5f)+Chr(79)+Chr(&H31)+Chr(48)+Chr(&H4f)+Chr(79)+Chr(73)+Chr(95)+Chr(&H49)+Chr(79)+Chr(&H49)+Chr(&H49)+Chr(48)))
 end sub
-sub stopService(__0011I__OOI1=invalid)
-m.bitmovinPlayer.unobserveFieldScoped((Chr(115)+Chr(&H65)+Chr(&H65)+Chr(107)))
-m.video.unobserveFieldScoped((Chr(112)+Chr(&H6f)+Chr(115)+Chr(&H69)+Chr(116)+Chr(&H69)+Chr(&H6f)+Chr(&H6e)))
-m.video.unobserveFieldScoped((Chr(&H74)+Chr(&H69)+Chr(&H6d)+Chr(&H65)+Chr(100)+Chr(77)+Chr(&H65)+Chr(&H74)+Chr(97)+Chr(68)+Chr(97)+Chr(116)+Chr(97)))
-m.video.unobserveFieldScoped((Chr(115)+Chr(116)+Chr(&H72)+Chr(101)+Chr(&H61)+Chr(109)+Chr(105)+Chr(110)+Chr(103)+Chr(&H53)+Chr(101)+Chr(&H67)+Chr(&H6d)+Chr(101)+Chr(&H6e)+Chr(&H74)))
-m.mediaQualityService.unobserveFieldScoped((Chr(&H65)+Chr(118)+Chr(101)+Chr(110)+Chr(&H74)+Chr(&H4f)+Chr(99)+Chr(&H63)+Chr(117)+Chr(&H72)+Chr(101)+Chr(&H64)))
-_00I_O0_O10I_()
+sub stopService(_0I_IO0I0I000=invalid)
+m.bitmovinPlayer.unobserveFieldScoped((Chr(115)+Chr(&H65)+Chr(&H65)+Chr(&H6b)))
+m.video.unobserveFieldScoped((Chr(112)+Chr(111)+Chr(&H73)+Chr(&H69)+Chr(116)+Chr(105)+Chr(&H6f)+Chr(110)))
+m.video.unobserveFieldScoped((Chr(116)+Chr(105)+Chr(&H6d)+Chr(&H65)+Chr(100)+Chr(77)+Chr(101)+Chr(116)+Chr(&H61)+Chr(&H44)+Chr(&H61)+Chr(&H74)+Chr(&H61)))
+m.video.unobserveFieldScoped((Chr(115)+Chr(&H74)+Chr(114)+Chr(&H65)+Chr(&H61)+Chr(&H6d)+Chr(&H69)+Chr(&H6e)+Chr(103)+Chr(83)+Chr(101)+Chr(&H67)+Chr(109)+Chr(&H65)+Chr(110)+Chr(&H74)))
+m.mediaQualityService.unobserveFieldScoped((Chr(&H65)+Chr(118)+Chr(&H65)+Chr(110)+Chr(&H74)+Chr(79)+Chr(99)+Chr(99)+Chr(117)+Chr(114)+Chr(&H65)+Chr(100)))
+_O_OI0IOOOIO0()
 end sub
-sub _1OI_11I_1_I0(__1II1OOI__0O)
-metadata=__1II1OOI__0O.getData()
-if metadata.Source<>invalid and metadata.Source=(Chr(101)+Chr(109)+Chr(&H73)+Chr(103))
-_O_O0_1IO1OI_(metadata)
+sub __0O0OIII10O1(_O0O0IO_OO_O1)
+metadata=_O0O0IO_OO_O1.getData()
+if metadata.Source<>invalid and metadata.Source=(Chr(&H65)+Chr(109)+Chr(&H73)+Chr(103))
+__O__I1_0OII0(metadata)
 return 
 end if
 m.bitmovinPlayer.metadata=metadata
 end sub
-sub _1OO_IOI_IOOO()
+sub _0I1I0_OO_O11()
 m.metadataTimeline.Clear()
 end sub
-sub _O_O0_1IO1OI_(_IIOI_I_1O01I)
-m.metadataTimeline.Push(__1_OO0110IO1(_IIOI_I_1O01I))
-__IIO1_0O0OO1()
+sub __O__I1_0OII0(_1_1O1I00O0__)
+m.metadataTimeline.Push(_I_1O01I1111I(_1_1O1I00O0__))
+_1O10II101_1_()
 end sub
-sub __IIO1_0O0OO1()
+sub _1O10II101_1_()
 alreadyFired=0
 for i=0 to(m.metadataTimeline.Count()-1)step 1
 currentIndex=i-alreadyFired
-if m.metadataTimeline[currentIndex].BMP_scheduledTime<=m.bitmovinPlayer.currentTime
+if m.metadataTimeline[currentIndex].BMP_scheduledTime<=m.timeService.callFunc((Chr(103)+Chr(101)+Chr(116)+Chr(67)+Chr(&H75)+Chr(&H72)+Chr(&H72)+Chr(&H65)+Chr(&H6e)+Chr(116)+Chr(84)+Chr(&H69)+Chr(109)+Chr(101)),invalid)
 m.bitmovinPlayer.metadata=m.metadataTimeline[currentIndex]
 m.metadataTimeline.Delete(currentIndex)
 alreadyFired++
 end if
 end for
 end sub
-function __1_OO0110IO1(_OI_I10_0OOOI)
-_OI_I10_0OOOI.AddReplace((Chr(66)+Chr(&H4d)+Chr(&H50)+Chr(&H5f)+Chr(&H73)+Chr(99)+Chr(&H68)+Chr(101)+Chr(100)+Chr(117)+Chr(&H6c)+Chr(101)+Chr(100)+Chr(84)+Chr(105)+Chr(&H6d)+Chr(&H65)),_1_0I1O1_1II_(_OI_I10_0OOOI))
-return _OI_I10_0OOOI 
+function _I_1O01I1111I(_0O_OI_0I1O_1)
+_0O_OI_0I1O_1.AddReplace((Chr(&H42)+Chr(77)+Chr(&H50)+Chr(&H5f)+Chr(115)+Chr(&H63)+Chr(104)+Chr(&H65)+Chr(&H64)+Chr(&H75)+Chr(108)+Chr(101)+Chr(100)+Chr(84)+Chr(105)+Chr(109)+Chr(&H65)),__0O0I111_0OO(_0O_OI_0I1O_1))
+return _0O_OI_0I1O_1 
 end function
-function _1_0I1O1_1II_(__O1_0OI_0___)
-scheduledTime=__O1_0OI_0___._decodeInfo_pts
-if __O1_0OI_0___.Offset<>invalid and __O1_0OI_0___.Offset>0 and __O1_0OI_0___.Timescale<>invalid and __O1_0OI_0___.Timescale>0
-scheduledTime+=(__O1_0OI_0___.Offset/__O1_0OI_0___.Timescale)
+function __0O0I111_0OO(_11O10_11O11_)
+scheduledTime=_11O10_11O11_._decodeInfo_pts
+if _11O10_11O11_.Offset<>invalid and _11O10_11O11_.Offset>0 and _11O10_11O11_.Timescale<>invalid and _11O10_11O11_.Timescale>0
+scheduledTime+=(_11O10_11O11_.Offset/_11O10_11O11_.Timescale)
 end if
 return scheduledTime 
 end function
-sub _I11__OOOIII_(_OI0_O1OI0I_0)
-eventData=_OI0_O1OI0I_0.getData()
-if eventData.type=m.BitmovinFields.VIDEO_DOWNLOAD_QUALITY_CHANGED and not ___0O_II_00I_(m.video.streamInfo)
-if ___0O_II_00I_(m.parsedMasterPlaylist)
-_0_0OO0II_1OI(m.video.streamInfo.streamUrl,eventData.targetquality.bitrate)
+sub _OI__0IO11O0O(_O_OI_I0__1_I)
+eventData=_O_OI_I0__1_I.getData()
+if eventData.type=m.BitmovinFields.VIDEO_DOWNLOAD_QUALITY_CHANGED and not _OO_O1_O1O0O_(m.video.streamInfo)
+if _OO_O1_O1O0O_(m.parsedMasterPlaylist)
+__O1I010I_I10(m.video.streamInfo.streamUrl,eventData.targetquality.bitrate)
 else 
-__II101_1_OO_(eventData.targetquality.bitrate)
+_OI10O__I10I0(eventData.targetquality.bitrate)
 end if
 end if
 end sub
-sub _0_0OO0II_1OI(_I1_010IO_IIO,_I__0OOO0_O1O)
-m.hlsMasterPlaylistOperation=m.asyncOperationFactory.callFunc((Chr(&H63)+Chr(114)+Chr(101)+Chr(&H61)+Chr(116)+Chr(&H65)+Chr(65)+Chr(&H73)+Chr(121)+Chr(&H6e)+Chr(99)+Chr(79)+Chr(112)+Chr(&H65)+Chr(114)+Chr(&H61)+Chr(116)+Chr(105)+Chr(&H6f)+Chr(&H6e)),m.BitmovinAsyncOperationTypes.HLS_MASTER_PLAYLIST,_I1_010IO_IIO,{playlistVariantBitrate:_I__0OOO0_O1O})
-m.hlsMasterPlaylistOperation.observeFieldScoped((Chr(&H72)+Chr(101)+Chr(115)+Chr(117)+Chr(108)+Chr(116)),(Chr(&H5f)+Chr(49)+Chr(49)+Chr(95)+Chr(&H5f)+Chr(79)+Chr(&H5f)+Chr(73)+Chr(79)+Chr(79)+Chr(79)+Chr(&H49)+Chr(49)))
-m.hlsMasterPlaylistOperation.callFunc((Chr(&H65)+Chr(120)+Chr(101)+Chr(&H63)+Chr(117)+Chr(116)+Chr(&H65)),m.bitmovinPlayerTask)
+sub __O1I010I_I10(_0O_0O00O0OOO,_1OI1II0O_1IO)
+m.hlsMasterPlaylistOperation=m.asyncOperationFactory.callFunc((Chr(&H63)+Chr(114)+Chr(101)+Chr(97)+Chr(&H74)+Chr(101)+Chr(65)+Chr(115)+Chr(&H79)+Chr(&H6e)+Chr(99)+Chr(&H4f)+Chr(&H70)+Chr(101)+Chr(114)+Chr(97)+Chr(&H74)+Chr(105)+Chr(&H6f)+Chr(&H6e)),m.BitmovinAsyncOperationTypes.HLS_MASTER_PLAYLIST,_0O_0O00O0OOO,{playlistVariantBitrate:_1OI1II0O_1IO})
+m.hlsMasterPlaylistOperation.observeFieldScoped((Chr(114)+Chr(101)+Chr(115)+Chr(117)+Chr(108)+Chr(&H74)),(Chr(95)+Chr(48)+Chr(48)+Chr(&H5f)+Chr(&H4f)+Chr(&H31)+Chr(&H4f)+Chr(&H4f)+Chr(&H5f)+Chr(48)+Chr(&H30)+Chr(79)+Chr(&H4f)))
+m.hlsMasterPlaylistOperation.callFunc((Chr(&H65)+Chr(&H78)+Chr(&H65)+Chr(&H63)+Chr(&H75)+Chr(&H74)+Chr(&H65)),m.bitmovinPlayerTask)
 end sub
-sub _11__O_IOOOI1(_I01___1_I__O)
-result=_I01___1_I__O.getData()
-m.hlsMasterPlaylistOperation.unobserveFieldScoped((Chr(&H72)+Chr(&H65)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(&H74)))
+sub _00_O1OO_00OO(_1I00OOOIOOI0)
+result=_1I00OOOIOOI0.getData()
+m.hlsMasterPlaylistOperation.unobserveFieldScoped((Chr(&H72)+Chr(101)+Chr(115)+Chr(&H75)+Chr(&H6c)+Chr(&H74)))
 if not result.successful return 
 playlistVariantBitrate=result.response.playlistVariantBitrate
-m.parsedMasterPlaylist=m.hlsManifestParser.callFunc((Chr(112)+Chr(97)+Chr(114)+Chr(115)+Chr(101)+Chr(77)+Chr(&H61)+Chr(115)+Chr(&H74)+Chr(&H65)+Chr(&H72)+Chr(80)+Chr(108)+Chr(&H61)+Chr(&H79)+Chr(108)+Chr(&H69)+Chr(&H73)+Chr(&H74)),result.response.rawPlaylist,result.response.playlistUrl)
-__II101_1_OO_(playlistVariantBitrate)
+m.parsedMasterPlaylist=m.hlsManifestParser.callFunc((Chr(&H70)+Chr(97)+Chr(114)+Chr(115)+Chr(&H65)+Chr(&H4d)+Chr(&H61)+Chr(&H73)+Chr(&H74)+Chr(&H65)+Chr(&H72)+Chr(80)+Chr(&H6c)+Chr(&H61)+Chr(121)+Chr(&H6c)+Chr(&H69)+Chr(115)+Chr(116)),result.response.rawPlaylist,result.response.playlistUrl)
+_OI10O__I10I0(playlistVariantBitrate)
 end sub
-function _IOO_I0O00_OI(_IO_IOO1_0O0O,_1001I00_10OO)
-if ___0O_II_00I_(_IO_IOO1_0O0O)or ___0O_II_00I_(_1001I00_10OO)return invalid 
+function _IO100I11I1OI(_O_O01_IIII1O,__O0I__O_O0I0)
+if _OO_O1_O1O0O_(_O_O01_IIII1O)or _OO_O1_O1O0O_(__O0I__O_O0I0)return invalid 
 playlistVariantUrl=invalid
-for each streamInf in _IO_IOO1_0O0O.ext_x_stream_inf
-if not ___0O_II_00I_(streamInf.bandwidth) and streamInf.bandwidth.ToInt()=_1001I00_10OO
+for each streamInf in _O_O01_IIII1O.ext_x_stream_inf
+if not _OO_O1_O1O0O_(streamInf.bandwidth) and streamInf.bandwidth.ToInt()=__O0I__O_O0I0
 playlistVariantUrl=streamInf.url
 exit for
 end if
 end for
 return playlistVariantUrl 
 end function
-sub __II101_1_OO_(_I_OI10I01I11)
-playlistVariantUrl=_IOO_I0O00_OI(m.parsedMasterPlaylist,_I_OI10I01I11)
-if ___0O_II_00I_(playlistVariantUrl)return 
-m.hlsVariantPlaylistOperation=m.asyncOperationFactory.callFunc((Chr(99)+Chr(&H72)+Chr(&H65)+Chr(97)+Chr(&H74)+Chr(101)+Chr(65)+Chr(&H73)+Chr(121)+Chr(110)+Chr(99)+Chr(&H4f)+Chr(&H70)+Chr(101)+Chr(&H72)+Chr(&H61)+Chr(116)+Chr(&H69)+Chr(&H6f)+Chr(&H6e)),m.BitmovinAsyncOperationTypes.HLS_VARIANT_PLAYLIST,playlistVariantUrl,{playlistVariantBitrate:_I_OI10I01I11})
-m.hlsVariantPlaylistOperation.observeFieldScoped((Chr(&H72)+Chr(101)+Chr(115)+Chr(&H75)+Chr(108)+Chr(&H74)),(Chr(&H5f)+Chr(49)+Chr(79)+Chr(&H4f)+Chr(&H5f)+Chr(95)+Chr(&H30)+Chr(49)+Chr(&H49)+Chr(79)+Chr(73)+Chr(79)+Chr(49)))
-m.hlsVariantPlaylistOperation.callFunc((Chr(&H65)+Chr(&H78)+Chr(&H65)+Chr(99)+Chr(117)+Chr(&H74)+Chr(101)),m.bitmovinPlayerTask)
+sub _OI10O__I10I0(_O1OO_OO_I0I1)
+playlistVariantUrl=_IO100I11I1OI(m.parsedMasterPlaylist,_O1OO_OO_I0I1)
+if _OO_O1_O1O0O_(playlistVariantUrl)return 
+m.hlsVariantPlaylistOperation=m.asyncOperationFactory.callFunc((Chr(&H63)+Chr(&H72)+Chr(101)+Chr(&H61)+Chr(116)+Chr(101)+Chr(65)+Chr(115)+Chr(&H79)+Chr(110)+Chr(&H63)+Chr(79)+Chr(&H70)+Chr(&H65)+Chr(&H72)+Chr(97)+Chr(116)+Chr(105)+Chr(&H6f)+Chr(110)),m.BitmovinAsyncOperationTypes.HLS_VARIANT_PLAYLIST,playlistVariantUrl,{playlistVariantBitrate:_O1OO_OO_I0I1})
+m.hlsVariantPlaylistOperation.observeFieldScoped((Chr(&H72)+Chr(101)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(&H74)),(Chr(&H5f)+Chr(&H30)+Chr(&H5f)+Chr(&H5f)+Chr(49)+Chr(79)+Chr(73)+Chr(&H5f)+Chr(&H4f)+Chr(&H31)+Chr(&H49)+Chr(48)+Chr(&H31)))
+m.hlsVariantPlaylistOperation.callFunc((Chr(101)+Chr(120)+Chr(&H65)+Chr(99)+Chr(&H75)+Chr(&H74)+Chr(&H65)),m.bitmovinPlayerTask)
 end sub
-sub _1OO__01IOIO1(_O1I0O10_100O)
-result=_O1I0O10_100O.getData()
-m.hlsVariantPlaylistOperation.unobserveFieldScoped((Chr(&H72)+Chr(&H65)+Chr(115)+Chr(&H75)+Chr(108)+Chr(116)))
+sub _0__1OI_O1I01(__I0OIO_0IO01)
+result=__I0OIO_0IO01.getData()
+m.hlsVariantPlaylistOperation.unobserveFieldScoped((Chr(&H72)+Chr(101)+Chr(115)+Chr(117)+Chr(&H6c)+Chr(116)))
 if not result.successful return 
 m.playlistVariantBitrate=result.response.playlistVariantBitrate
-m.parsedVariantPlaylist=m.hlsManifestParser.callFunc((Chr(112)+Chr(&H61)+Chr(114)+Chr(&H73)+Chr(101)+Chr(80)+Chr(108)+Chr(&H61)+Chr(&H79)+Chr(108)+Chr(&H69)+Chr(115)+Chr(&H74)+Chr(&H56)+Chr(97)+Chr(&H72)+Chr(105)+Chr(&H61)+Chr(&H6e)+Chr(116)),result.response.rawPlaylist)
+m.parsedVariantPlaylist=m.hlsManifestParser.callFunc((Chr(112)+Chr(&H61)+Chr(114)+Chr(115)+Chr(101)+Chr(80)+Chr(&H6c)+Chr(&H61)+Chr(121)+Chr(&H6c)+Chr(&H69)+Chr(&H73)+Chr(116)+Chr(86)+Chr(&H61)+Chr(114)+Chr(105)+Chr(97)+Chr(110)+Chr(116)),result.response.rawPlaylist,result.response.playlistVariantUrl)
 m.numberOfSegmentsInVariant=m.parsedVariantPlaylist.ext_inf.Count()
-_0O_OOII_OO0_(m.parsedVariantPlaylist.scte)
+_1__OI0_1_011(m.parsedVariantPlaylist.scte)
 end sub
-sub _0O_OOII_OO0_(_O_0_01I10O_O)
-if ___0O_II_00I_(_O_0_01I10O_O)return 
-for each parsedEvent in _O_0_01I10O_O
-if not _OI11O10IIO_O(parsedEvent)m.scteEvents.Push(parsedEvent)
+sub _1__OI0_1_011(_I_1_O1_10O_1)
+if _OO_O1_O1O0O_(_I_1_O1_10O_1)return 
+for each parsedEvent in _I_1_O1_10O_1
+if not _1I0OOOI_IIIO(parsedEvent)m.scteEvents.Push(parsedEvent)
 end for
 end sub
-function _OI11O10IIO_O(_II0II011I111)
+function _1I0OOOI_IIIO(_I_11_III_1__)
 isSctePresent=(1=2)
 for each presentScteEvent in m.scteEvents
-if presentScteEvent.id=_II0II011I111.id and presentScteEvent.segmenturl=_II0II011I111.segmenturl
+if presentScteEvent.id=_I_11_III_1__.id and presentScteEvent.segmenturl=_I_11_III_1__.segmenturl
 isSctePresent=(1=1)
 end if
 end for
 return isSctePresent 
 end function
-sub _1II11O_OIO_0(_OIOII010I0OI)
+sub _O10OOI_IOII0(_OO0_I0I_1_OO)
 if m.scteEvents.Count()=0 return 
-streamingSegment=_OIOII010I0OI.getData()
-_00_1O1I__O1_(streamingSegment)
-if m.playbackService.callFunc((Chr(105)+Chr(&H73)+Chr(&H4c)+Chr(105)+Chr(&H76)+Chr(101)))
-___0OO0IOOOI0(streamingSegment)
-_O1OOO_OO0IOO()
+streamingSegment=_OO0_I0I_1_OO.getData()
+_OO101_O0II0I(streamingSegment)
+if m.playbackService.callFunc((Chr(&H69)+Chr(&H73)+Chr(76)+Chr(105)+Chr(118)+Chr(&H65)))
+___1__I11OI_O(streamingSegment)
+_O_O_11O1O0I_()
 end if
 end sub
-sub _00_1O1I__O1_(_IO_OI0OI_1_1)
+sub _OO101_O0II0I(_01_O10O1I_0_)
 for each scteEvent in m.scteEvents
-if scteEvent.segmentUrl=_IO_OI0OI_1_1.segUrl
-m.bitmovinPlayer.metadata=m.eventFactory.createScteMetadataEvent(scteEvent,m.video.position,m.BitmovinMetadataEventTypes,m.bitmovinFields)
+if __1OOIO_I___I(_01_O10O1I_0_.segUrl,scteEvent.segmentUrl)
+currentTime=m.timeService.callFunc((Chr(&H67)+Chr(101)+Chr(&H74)+Chr(&H43)+Chr(&H75)+Chr(&H72)+Chr(&H72)+Chr(&H65)+Chr(&H6e)+Chr(116)+Chr(84)+Chr(&H69)+Chr(&H6d)+Chr(101)),invalid)
+m.bitmovinPlayer.metadata=m.eventFactory.createScteMetadataEvent(scteEvent,currentTime,m.BitmovinMetadataEventTypes,m.bitmovinFields)
 end if
 end for
 end sub
-sub ___0OO0IOOOI0(_1__IO0O_00_0)
-streamingSegmentType=m.bitmovinModelObjectMapper.callfunc((Chr(114)+Chr(111)+Chr(&H6b)+Chr(&H75)+Chr(&H53)+Chr(101)+Chr(103)+Chr(109)+Chr(&H65)+Chr(110)+Chr(116)+Chr(&H54)+Chr(&H79)+Chr(&H70)+Chr(&H65)+Chr(&H54)+Chr(&H6f)+Chr(&H42)+Chr(105)+Chr(&H74)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(&H69)+Chr(110)+Chr(&H48)+Chr(&H74)+Chr(116)+Chr(&H70)+Chr(&H52)+Chr(&H65)+Chr(113)+Chr(&H75)+Chr(101)+Chr(&H73)+Chr(&H74)+Chr(&H54)+Chr(&H79)+Chr(112)+Chr(101)),_1__IO0O_00_0.segType)
+sub ___1__I11OI_O(_11_1I_10_IO_)
+streamingSegmentType=m.bitmovinModelObjectMapper.callfunc((Chr(&H72)+Chr(&H6f)+Chr(&H6b)+Chr(117)+Chr(83)+Chr(&H65)+Chr(&H67)+Chr(109)+Chr(&H65)+Chr(110)+Chr(&H74)+Chr(&H54)+Chr(121)+Chr(112)+Chr(&H65)+Chr(84)+Chr(&H6f)+Chr(&H42)+Chr(105)+Chr(116)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(&H69)+Chr(110)+Chr(72)+Chr(116)+Chr(116)+Chr(&H70)+Chr(&H52)+Chr(101)+Chr(&H71)+Chr(117)+Chr(101)+Chr(115)+Chr(116)+Chr(&H54)+Chr(&H79)+Chr(&H70)+Chr(101)),_11_1I_10_IO_.segType)
 if streamingSegmentType=m.HttpRequestTypes.MEDIA_VIDEO
 m.videoStreamingSegmentCount++
 end if
 end sub
-sub _O1OOO_OO0IOO()
-if not __OO11O00__10()return 
+sub _O_O_11O1O0I_()
+if not _0_I0O1001_1_()return 
 m.videoStreamingSegmentCount=0
-__II101_1_OO_(m.playlistVariantBitrate)
+_OI10O__I10I0(m.playlistVariantBitrate)
 end sub
-function __OO11O00__10()
+function _0_I0O1001_1_()
 return m.videoStreamingSegmentCount=m.numberOfSegmentsInVariant 
 end function

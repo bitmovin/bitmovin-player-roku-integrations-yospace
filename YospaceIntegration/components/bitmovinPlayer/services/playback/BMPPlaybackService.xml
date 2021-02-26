@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPPlaybackService" extends="Node">
+<component name="BMPPlaybackService" extends="BMPBaseService">
   <interface>
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
-
-    <function name="initializeService" />
-    <function name="startService" />
-
     <function name="setPlayerState" />
-    <function name="stopService" />
-
     <function name="play" />
     <function name="pause" />
     <function name="seek" />

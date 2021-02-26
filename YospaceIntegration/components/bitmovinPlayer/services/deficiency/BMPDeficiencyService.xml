@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPDeficiencyService" extends="Node">
+<component name="BMPDeficiencyService" extends="BMPBaseService">
   <interface>
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
-
-    <function name="initializeService" />
     <function name="onError" />
     <function name="removeErrorViewIfPresent" />
     <function name="getErrorViewIfPresent" />

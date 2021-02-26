@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="BMPMediaQualityService" extends="Node">
-  <interface>
-    <field id="eventOccurred" type="assocarray" alwaysNotify="true" />
-
-    <function name="initializeService" />
-    <function name="startService" />
-    <function name="stopService" />
-  </interface>
+<component name="BMPMediaQualityService" extends="BMPBaseService">
+  <interface></interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/mediaQuality/BMPMediaQualityService.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />

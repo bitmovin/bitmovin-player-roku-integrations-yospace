@@ -5,284 +5,284 @@ m.eventListener=invalid
 m.scheduleAdBreakEventListener=invalid
 m.previousPlayerPosition=0
 m.adBreakList=[]
-m.deviceInfo=CreateObject((Chr(114)+Chr(&H6f)+Chr(&H44)+Chr(101)+Chr(118)+Chr(105)+Chr(&H63)+Chr(101)+Chr(73)+Chr(110)+Chr(&H66)+Chr(111)))
+m.deviceInfo=CreateObject((Chr(114)+Chr(111)+Chr(68)+Chr(&H65)+Chr(118)+Chr(&H69)+Chr(&H63)+Chr(101)+Chr(73)+Chr(110)+Chr(102)+Chr(111)))
 m.activeAdBreak=invalid
-m.PREROLL=(Chr(&H70)+Chr(&H72)+Chr(&H65)+Chr(114)+Chr(&H6f)+Chr(108)+Chr(&H6c))
-m.POSTROLL=(Chr(&H70)+Chr(&H6f)+Chr(115)+Chr(&H74)+Chr(&H72)+Chr(111)+Chr(108)+Chr(108))
-m.MIDROLL=(Chr(109)+Chr(105)+Chr(&H64)+Chr(&H72)+Chr(&H6f)+Chr(&H6c)+Chr(108))
-m.RokuAdEvents=_OOIO0I_O1O01()
-m.InternalAdEvents=_0_110I0I1_1_()
-m.BitmovinAsyncOperationTypes=___IO10I10001()
-m.adQuartileEventHandler=_O_10_II_IO_I({calculatePercentage:_1_0_00I__IOI,isBetweenBound:_I11OO1IO_OI1})
-m.ExternalBitmovinPlayerFields=_OO0OOO1IOII_()
+m.PREROLL=(Chr(112)+Chr(114)+Chr(&H65)+Chr(&H72)+Chr(111)+Chr(108)+Chr(108))
+m.POSTROLL=(Chr(&H70)+Chr(111)+Chr(115)+Chr(&H74)+Chr(&H72)+Chr(111)+Chr(108)+Chr(108))
+m.MIDROLL=(Chr(&H6d)+Chr(105)+Chr(100)+Chr(&H72)+Chr(&H6f)+Chr(108)+Chr(108))
+m.RokuAdEvents=___0___IOIOO1()
+m.InternalAdEvents=_1OII_1_0_II_()
+m.BitmovinAsyncOperationTypes=__OI0_00O_00_()
+m.adQuartileEventHandler=__OIO_10I10_1({calculatePercentage:_111000O0I00_,isBetweenBound:__I0_IOII_OIO})
+m.ExternalBitmovinPlayerFields=_I__1I0I_O__0()
 end sub
-sub executeOperation(__III_1I_1I1I,__IIIIO11OIOI=invalid)
-if __OOI0OI11_O0(__III_1I_1I1I.data)
-?(Chr(&H41)+Chr(&H64)+Chr(118)+Chr(&H65)+Chr(&H72)+Chr(&H74)+Chr(105)+Chr(&H73)+Chr(&H69)+Chr(&H6e)+Chr(&H67)+Chr(32)+Chr(&H53)+Chr(101)+Chr(114)+Chr(118)+Chr(&H69)+Chr(&H63)+Chr(&H65)+Chr(32)+Chr(&H57)+Chr(111)+Chr(&H72)+Chr(&H6b)+Chr(101)+Chr(&H72)+Chr(32)+Chr(&H63)+Chr(&H61)+Chr(110)+Chr(&H27)+Chr(116)+Chr(&H20)+Chr(101)+Chr(&H78)+Chr(101)+Chr(&H63)+Chr(&H75)+Chr(&H74)+Chr(&H65)+Chr(32)+Chr(&H74)+Chr(104)+Chr(&H65)+Chr(32)+Chr(&H6f)+Chr(112)+Chr(&H65)+Chr(&H72)+Chr(&H61)+Chr(&H74)+Chr(105)+Chr(&H6f)+Chr(&H6e)+Chr(33)+Chr(32)+Chr(65)+Chr(&H73)+Chr(&H79)+Chr(&H6e)+Chr(99)+Chr(&H4f)+Chr(&H70)+Chr(&H65)+Chr(114)+Chr(&H61)+Chr(&H74)+Chr(105)+Chr(111)+Chr(110)+Chr(&H20)+Chr(105)+Chr(&H6e)+Chr(&H76)+Chr(&H61)+Chr(&H6c)+Chr(&H69)+Chr(100)+Chr(32)+Chr(&H64)+Chr(&H61)+Chr(&H74)+Chr(97)+Chr(&H2e))
+sub executeOperation(_0_OIO1I0O01O,_OOOI0IO10_00=invalid)
+if _OO_O1_O1O0O_(_0_OIO1I0O01O.data)
+?(Chr(65)+Chr(&H64)+Chr(&H76)+Chr(101)+Chr(114)+Chr(116)+Chr(&H69)+Chr(115)+Chr(105)+Chr(&H6e)+Chr(&H67)+Chr(&H20)+Chr(83)+Chr(&H65)+Chr(114)+Chr(118)+Chr(&H69)+Chr(99)+Chr(101)+Chr(&H20)+Chr(87)+Chr(111)+Chr(&H72)+Chr(107)+Chr(101)+Chr(114)+Chr(32)+Chr(99)+Chr(&H61)+Chr(&H6e)+Chr(&H27)+Chr(116)+Chr(&H20)+Chr(&H65)+Chr(120)+Chr(101)+Chr(&H63)+Chr(117)+Chr(&H74)+Chr(101)+Chr(&H20)+Chr(116)+Chr(&H68)+Chr(101)+Chr(32)+Chr(&H6f)+Chr(&H70)+Chr(&H65)+Chr(&H72)+Chr(&H61)+Chr(&H74)+Chr(&H69)+Chr(&H6f)+Chr(&H6e)+Chr(&H21)+Chr(32)+Chr(65)+Chr(&H73)+Chr(&H79)+Chr(&H6e)+Chr(99)+Chr(&H4f)+Chr(112)+Chr(101)+Chr(114)+Chr(&H61)+Chr(&H74)+Chr(&H69)+Chr(111)+Chr(110)+Chr(32)+Chr(&H69)+Chr(&H6e)+Chr(118)+Chr(97)+Chr(&H6c)+Chr(&H69)+Chr(&H64)+Chr(&H20)+Chr(100)+Chr(97)+Chr(&H74)+Chr(&H61)+Chr(&H2e))
 return 
 end if
-if __III_1I_1I1I.type=m.BitmovinAsyncOperationTypes.SET_UP_AD_HANDLER _O1I_OIOI01IO(__III_1I_1I1I,__IIIIO11OIOI)
-if __III_1I_1I1I.type=m.BitmovinAsyncOperationTypes.SCHEDULE_ADS scheduleAds(__III_1I_1I1I)
-if __III_1I_1I1I.type=m.BitmovinAsyncOperationTypes.DISCARD_AD_BREAK discardAdBreak(__III_1I_1I1I)
-if __III_1I_1I1I.type=m.BitmovinAsyncOperationTypes.CLEAR_AD_BREAKS _OII01I_1OO0O(__III_1I_1I1I)
+if _0_OIO1I0O01O.type=m.BitmovinAsyncOperationTypes.SET_UP_AD_HANDLER __0_OO0__0_IO(_0_OIO1I0O01O,_OOOI0IO10_00)
+if _0_OIO1I0O01O.type=m.BitmovinAsyncOperationTypes.SCHEDULE_ADS scheduleAds(_0_OIO1I0O01O)
+if _0_OIO1I0O01O.type=m.BitmovinAsyncOperationTypes.DISCARD_AD_BREAK discardAdBreak(_0_OIO1I0O01O)
+if _0_OIO1I0O01O.type=m.BitmovinAsyncOperationTypes.CLEAR_AD_BREAKS _0I1O_1O1_1_1(_0_OIO1I0O01O)
 end sub
-function _0_O00I10I_I_()
+function _OO10I1I1_00_()
 if m.options=invalid return(1=2) 
 if m.options.view=invalid return(1=2) 
 if m.options.videoNode=invalid return(1=2) 
 return(1=1) 
 end function
-sub _0O_OO_111I11(_I00IOI0I11O_,_IOO_1O___OI1)
-if _IOO_1O___OI1.genre<>invalid _I00IOI0I11O_.setContentGenre(_IOO_1O___OI1.genre.name,_IOO_1O___OI1.genre.isKidsContent)
-if _IOO_1O___OI1.id<>invalid _I00IOI0I11O_.setContentID(_IOO_1O___OI1.id)
-if _IOO_1O___OI1.length<>invalid _I00IOI0I11O_.setContentLength(_IOO_1O___OI1.length)
+sub _1OII0I0110I1(_100_0__IO00I,__110IO1_O01O)
+if __110IO1_O01O.genre<>invalid _100_0__IO00I.setContentGenre(__110IO1_O01O.genre.name,__110IO1_O01O.genre.isKidsContent)
+if __110IO1_O01O.id<>invalid _100_0__IO00I.setContentID(__110IO1_O01O.id)
+if __110IO1_O01O.length<>invalid _100_0__IO00I.setContentLength(__110IO1_O01O.length)
 end sub
-sub _OIIOIO0OOOO_()
-if not _0_O00I10I_I_()return 
+sub _IIOIIOO_1111()
+if not _OO10I1I1_00_()return 
 video=m.options.videoNode
 m.previousPlayerPosition=video.position
-video.control=(Chr(&H53)+Chr(84)+Chr(&H4f)+Chr(80))
+video.control=(Chr(83)+Chr(&H54)+Chr(79)+Chr(80))
 end sub
-sub _OI0__I00_1O1()
-if not _0_O00I10I_I_()return 
+sub _I0__O10IIOI0()
+if not _OO10I1I1_00_()return 
 video=m.options.videoNode
 if m.previousPlayerPosition>0 video.seek=m.previousPlayerPosition
-video.control=(Chr(&H50)+Chr(76)+Chr(65)+Chr(&H59))
+video.control=(Chr(80)+Chr(&H4c)+Chr(65)+Chr(&H59))
 m.previousPlayerPosition=0
 end sub
-function _1OIIO10O__O1()
+function _0I_O_IIII0O_()
 return m.deviceInfo.GetRandomUUID() 
 end function
-sub _IO0_0IIO0_1I(_I_00OO_IOO__)
-if _I_00OO_IOO__=invalid return 
-for each ad in _I_00OO_IOO__
-if ad.adId=invalid or Len(ad.adId)=0 ad.adId=_1OIIO10O__O1()
+sub _O0_1__OI110I(___O1OO0_O_00)
+if ___O1OO0_O_00=invalid return 
+for each ad in ___O1OO0_O_00
+if ad.adId=invalid or Len(ad.adId)=0 ad.adId=_0I_O_IIII0O_()
 end for
 end sub
-sub _I__OI11I_1I_(_1I000O_1000O,_I0IIO1II1O00)
-if _1I000O_1000O=invalid return 
-_OIO_O_100__I(_1I000O_1000O,_I0IIO1II1O00)
-if type(_I0IIO1II1O00.position)<>(Chr(114)+Chr(&H6f)+Chr(&H53)+Chr(116)+Chr(114)+Chr(105)+Chr(110)+Chr(103))
-_0I0II1OO0IO1(_1I000O_1000O,_I0IIO1II1O00.position)
-else if _I0IIO1II1O00.position=(Chr(&H70)+Chr(&H72)+Chr(101))or _I0IIO1II1O00.position=invalid
-_1I000O_1000O.renderSequence=m.PREROLL
-_1I000O_1000O.renderTime=0
-else if _I0IIO1II1O00.position=(Chr(&H70)+Chr(111)+Chr(115)+Chr(116))
-_1I000O_1000O.renderSequence=m.POSTROLL
-else if right(_I0IIO1II1O00.position,1)=(Chr(&H25))
-percentage=_I0IIO1II1O00.position.split((Chr(&H25)))[0].toFloat()
-position=_I11_O____OI_(percentage)
-if position<0 position=_I0IIO1II1O00.position
-_0I0II1OO0IO1(_1I000O_1000O,position)
-else if Instr(1,_I0IIO1II1O00.position,(Chr(&H3a)))>0
-_0I0II1OO0IO1(_1I000O_1000O,_O111IO0_10OI(_I0IIO1II1O00.position))
+sub __01_II1I00II(_0O0IOI0_011O,_I11II0O_I111)
+if _0O0IOI0_011O=invalid return 
+__1O_O__IIIOI(_0O0IOI0_011O,_I11II0O_I111)
+if type(_I11II0O_I111.position)<>(Chr(&H72)+Chr(&H6f)+Chr(83)+Chr(&H74)+Chr(114)+Chr(&H69)+Chr(&H6e)+Chr(&H67))
+_O1OIOOI_II1_(_0O0IOI0_011O,_I11II0O_I111.position)
+else if _I11II0O_I111.position=(Chr(112)+Chr(&H72)+Chr(&H65))or _I11II0O_I111.position=invalid
+_0O0IOI0_011O.renderSequence=m.PREROLL
+_0O0IOI0_011O.renderTime=0
+else if _I11II0O_I111.position=(Chr(112)+Chr(&H6f)+Chr(&H73)+Chr(&H74))
+_0O0IOI0_011O.renderSequence=m.POSTROLL
+else if right(_I11II0O_I111.position,1)=(Chr(&H25))
+percentage=_I11II0O_I111.position.split((Chr(37)))[0].toFloat()
+position=_IO00O_0OOO__(percentage)
+if position<0 position=_I11II0O_I111.position
+_O1OIOOI_II1_(_0O0IOI0_011O,position)
+else if Instr(1,_I11II0O_I111.position,(Chr(58)))>0
+_O1OIOOI_II1_(_0O0IOI0_011O,_101_OI01OOI0(_I11II0O_I111.position))
 end if
 end sub
-function _I11_O____OI_(_1I0I1_10_O0_)
+function _IO00O_0OOO__(_I0III10IOI_I)
 duration=m.options.VideoNode.duration
-position=_1I0I1_10_O0_
+position=_I0III10IOI_I
 if not duration>0 return-1 
 return duration*(position/100) 
 end function
-function _O111IO0_10OI(_O0IO00_I0110)
+function _101_OI01OOI0(_I000O1I_O_O0)
 positionInSeconds=0
-milliSeconds=_O0IO00_I0110.Split((Chr(46)))[1]
+milliSeconds=_I000O1I_O_O0.Split((Chr(46)))[1]
 if milliSeconds<>invalid
 positionInSeconds+=milliSeconds.toFloat()
 end if
-time=_O0IO00_I0110.Split((Chr(46)))[0].Split((Chr(58)))
+time=_I000O1I_O_O0.Split((Chr(&H2e)))[0].Split((Chr(&H3a)))
 for i=(time.count()-1)to(0 or(time.count()-3))step -1
 positionInSeconds+=time[i].toFloat()*(60^((time.count()-i)-1))
 end for
 return positionInSeconds 
 end function
-sub _0I0II1OO0IO1(_0OO00_O0I1I_,_O1_00OIII1O0)
-_0OO00_O0I1I_.renderSequence=m.MIDROLL
-_0OO00_O0I1I_.renderTime=_O1_00OIII1O0
+sub _O1OIOOI_II1_(_1I001I0IO1I0,_III01IO__0__)
+_1I001I0IO1I0.renderSequence=m.MIDROLL
+_1I001I0IO1I0.renderTime=_III01IO__0__
 end sub
-sub _O_IO011_OO1_()
+sub _I1I1IO_10_I0()
 for each adBreak in m.adBreakList
 if adBreak.renderSequence=m.POSTROLL and adBreak.viewed=(1=2)
-shouldResume=_I_O1__I11_01(adBreak,(1=1))
+shouldResume=__0_01__IIIO0(adBreak,(1=1))
 if not shouldResume exit for
 end if
 end for
 end sub
-sub _O0II10_011__(_I_10O00010_1)
+sub _I_10O1O1II0O(_O1OO__I01O0O)
 for each adBreak in m.adBreakList
 if(adBreak.renderSequence=m.MIDROLL or adBreak.renderSequence=m.PREROLL) and adBreak.viewed=(1=2)
-if type(adBreak.renderTime)<>(Chr(114)+Chr(111)+Chr(83)+Chr(&H74)+Chr(&H72)+Chr(&H69)+Chr(&H6e)+Chr(&H67)) and _I_10O00010_1>=adBreak.renderTime
-shouldResume=_I_O1__I11_01(adBreak)
+if type(adBreak.renderTime)<>(Chr(&H72)+Chr(&H6f)+Chr(83)+Chr(&H74)+Chr(114)+Chr(105)+Chr(110)+Chr(103)) and _O1OO__I01O0O>=adBreak.renderTime
+shouldResume=__0_01__IIIO0(adBreak)
 if not shouldResume exit for
 end if
 end if
 end for
 end sub
-function _I_O1__I11_01(_I101IOOIO1_I,_OO1_0O0OOO0I=(1=2))
-m.activeAdBreak=_I101IOOIO1_I
-shouldResume=_O_O1O101O0_1(_I101IOOIO1_I,_OO1_0O0OOO0I)
+function __0_01__IIIO0(_1_O1II_OO_0I,_O00___0O01_0=(1=2))
+m.activeAdBreak=_1_O1II_OO_0I
+shouldResume=_10_1I1_0II_0(_1_O1II_OO_0I,_O00___0O01_0)
 m.activeAdBreak=invalid
-_I101IOOIO1_I.viewed=(1=1)
+_1_O1II_OO_0I.viewed=(1=1)
 return shouldResume 
 end function
-function _O_O1O101O0_1(_1OO_00O00OI_,_II_IO00_0I__=(1=2))
-_OIIOIO0OOOO_()
-shouldResume=m.adInterface.showAds(_1OO_00O00OI_,invalid,m.options.view)
-if shouldResume and not _II_IO00_0I__ _OI0__I00_1O1()
+function _10_1I1_0II_0(_0I01IIII0_00,_1_0I__0II111=(1=2))
+_IIOIIOO_1111()
+shouldResume=m.adInterface.showAds(_0I01IIII0_00,invalid,m.options.view)
+if shouldResume and not _1_0I__0II111 _I0__O10IIOI0()
 return shouldResume 
 end function
-sub _OIO_O_100__I(_00O0O00_O_II,_010OOI__1IOO)
-if _00O0O00_O_II=invalid or _010OOI__1IOO=invalid return 
-id=_010OOI__1IOO.id
-if id=invalid id=_1OIIO10O__O1()
-_00O0O00_O_II.id=id
+sub __1O_O__IIIOI(__I_1__O10I11,_I0___I__1I01)
+if __I_1__O10I11=invalid or _I0___I__1I01=invalid return 
+id=_I0___I__1I01.id
+if id=invalid id=_0I_O_IIII0O_()
+__I_1__O10I11.id=id
 end sub
-sub _O1I_OIOI01IO(__10IO0100OO_,__OI1___0OOII)
-m.options=__10IO0100OO_.data.options
+sub __0_OO0__0_IO(_0II1OO00010I,_O01_II_I_00O)
+m.options=_0II1OO00010I.data.options
 m.adInterface=Roku_Ads()
-_I_O__1II1OOO(__OI1___0OOII)
-_O11O1I10I0_0(__OI1___0OOII)
-_0O_OO_111I11(m.adInterface,m.options.adContentMetadata)
-m.bitmovinAdvertisingEventFactory=_III0OO_011_1()
-trackingCallback=function(_00101I1O01_0=invalid,_I1OOI0_0_O_0=invalid,_1II110_1IO11=invalid) as Void
-if _00101I1O01_0.eventListener=invalid return 
+_I_I0_OO1I0O0(_O01_II_I_00O)
+_O_1I__011__I(_O01_II_I_00O)
+_1OII0I0110I1(m.adInterface,m.options.adContentMetadata)
+m.bitmovinAdvertisingEventFactory=_I1I_O1I0I100()
+trackingCallback=function(___0I1IIO0___=invalid,__1I00O_O0II1=invalid,_1I_I00OII_O1=invalid) as Void
+if ___0I1IIO0___.eventListener=invalid return 
 internalAdvertisingEventType=Chr(0)
 externalAdvertisingData=invalid
-adPlayhead=_1II110_1IO11.time
-adDuration=_1II110_1IO11.duration
+adPlayhead=_1I_I00OII_O1.time
+adDuration=_1I_I00OII_O1.duration
 if adPlayhead<>invalid
-_00101I1O01_0.eventListener.eventOccurred={internalEventType:_00101I1O01_0.InternalAdEvents.AD_PLAYHEAD,externalEventData:_00101I1O01_0.bitmovinAdvertisingEventFactory.createTimeChangedEvent(adPlayhead,_00101I1O01_0.ExternalBitmovinPlayerFields)}
+___0I1IIO0___.eventListener.eventOccurred={internalEventType:___0I1IIO0___.InternalAdEvents.AD_PLAYHEAD,externalEventData:___0I1IIO0___.bitmovinAdvertisingEventFactory.createTimeChangedEvent(adPlayhead,___0I1IIO0___.ExternalBitmovinPlayerFields)}
 end if
-if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.POD_START
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_BREAK_STARTED
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdBreakEvent(_00101I1O01_0.activeAdBreak,_I1OOI0_0_O_0)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.POD_COMPLETE
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_BREAK_FINISHED
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdBreakEvent(_00101I1O01_0.activeAdBreak,_I1OOI0_0_O_0)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.ACCEPT_INVITATION
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_INTERACTION
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1II110_1IO11)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.ERROR or _I1OOI0_0_O_0=(Chr(&H4e)+Chr(111)+Chr(&H41)+Chr(100)+Chr(&H73)+Chr(69)+Chr(114)+Chr(&H72)+Chr(&H6f)+Chr(114))
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_ERROR
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdErrorEvent(_1II110_1IO11,_I1OOI0_0_O_0)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.COMPLETE
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_FINISHED
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1II110_1IO11)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.START
-_00101I1O01_0.adQuartileEventHandler.resetQuartileAdEventReachedFlags()
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_STARTED
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1II110_1IO11)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.SKIP or _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.CLOSE
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_SKIPPED
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1II110_1IO11)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.PAUSE
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_PAUSE
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1II110_1IO11)
-else if _I1OOI0_0_O_0=_00101I1O01_0.RokuAdEvents.RESUME
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_RESUME
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1II110_1IO11)
-else if _00101I1O01_0.adQuartileEventHandler.isFirstQuartileReached(adPlayhead,adDuration)
-_00101I1O01_0.adQuartileEventHandler.setFirstQuartileReachedFlag((1=1))
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_QUARTILE
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdQuartileEvent(_00101I1O01_0.RokuAdEvents.FIRST_QUARTILE)
-else if _00101I1O01_0.adQuartileEventHandler.isMidpointReached(adPlayhead,adDuration)
-_00101I1O01_0.adQuartileEventHandler.setMidpointReachedFlag((1=1))
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_QUARTILE
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdQuartileEvent(_00101I1O01_0.RokuAdEvents.MIDPOINT)
-else if _00101I1O01_0.adQuartileEventHandler.isThirdQuartileReached(adPlayhead,adDuration)
-_00101I1O01_0.adQuartileEventHandler.setThirdQuartileReachedFlag((1=1))
-internalAdvertisingEventType=_00101I1O01_0.InternalAdEvents.AD_QUARTILE
-externalAdvertisingData=_00101I1O01_0.bitmovinAdvertisingEventFactory.createBitmovinAdQuartileEvent(_00101I1O01_0.RokuAdEvents.THIRD_QUARTILE)
+if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.POD_START
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_BREAK_STARTED
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdBreakEvent(___0I1IIO0___.activeAdBreak,__1I00O_O0II1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.POD_COMPLETE
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_BREAK_FINISHED
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdBreakEvent(___0I1IIO0___.activeAdBreak,__1I00O_O0II1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.ACCEPT_INVITATION
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_INTERACTION
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1I_I00OII_O1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.ERROR or __1I00O_O0II1=(Chr(78)+Chr(111)+Chr(65)+Chr(&H64)+Chr(115)+Chr(&H45)+Chr(&H72)+Chr(&H72)+Chr(&H6f)+Chr(&H72))
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_ERROR
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdErrorEvent(_1I_I00OII_O1,__1I00O_O0II1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.COMPLETE
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_FINISHED
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1I_I00OII_O1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.START
+___0I1IIO0___.adQuartileEventHandler.resetQuartileAdEventReachedFlags()
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_STARTED
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1I_I00OII_O1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.SKIP or __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.CLOSE
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_SKIPPED
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1I_I00OII_O1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.PAUSE
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_PAUSE
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1I_I00OII_O1)
+else if __1I00O_O0II1=___0I1IIO0___.RokuAdEvents.RESUME
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_RESUME
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdEvent(_1I_I00OII_O1)
+else if ___0I1IIO0___.adQuartileEventHandler.isFirstQuartileReached(adPlayhead,adDuration)
+___0I1IIO0___.adQuartileEventHandler.setFirstQuartileReachedFlag((1=1))
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_QUARTILE
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdQuartileEvent(___0I1IIO0___.RokuAdEvents.FIRST_QUARTILE)
+else if ___0I1IIO0___.adQuartileEventHandler.isMidpointReached(adPlayhead,adDuration)
+___0I1IIO0___.adQuartileEventHandler.setMidpointReachedFlag((1=1))
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_QUARTILE
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdQuartileEvent(___0I1IIO0___.RokuAdEvents.MIDPOINT)
+else if ___0I1IIO0___.adQuartileEventHandler.isThirdQuartileReached(adPlayhead,adDuration)
+___0I1IIO0___.adQuartileEventHandler.setThirdQuartileReachedFlag((1=1))
+internalAdvertisingEventType=___0I1IIO0___.InternalAdEvents.AD_QUARTILE
+externalAdvertisingData=___0I1IIO0___.bitmovinAdvertisingEventFactory.createBitmovinAdQuartileEvent(___0I1IIO0___.RokuAdEvents.THIRD_QUARTILE)
 else 
 return 
 end if
-_00101I1O01_0.eventListener.eventOccurred={internalEventType:internalAdvertisingEventType,externalEventData:externalAdvertisingData}
+___0I1IIO0___.eventListener.eventOccurred={internalEventType:internalAdvertisingEventType,externalEventData:externalAdvertisingData}
 end function
 m.adInterface.setTrackingCallback(trackingCallback,m)
 end sub
-sub scheduleAds(_0I_1O1OO_100)
-if not _0_O00I10I_I_()return 
-adBreaks=_0I_1O1OO_100.data.options.adBreaks
+sub scheduleAds(_1_1_10OIOO_I)
+if not _OO10I1I1_00_()return 
+adBreaks=_1_1_10OIOO_I.data.options.adBreaks
 for each adBreak in adBreaks
 m.adInterface.setAdUrl(adBreak.tag.url)
 rokuFormattedAdBreaks=m.adInterface.getAds()
-if adBreak.tag.type=(Chr(&H76)+Chr(97)+Chr(115)+Chr(&H74))
+if adBreak.tag.type=(Chr(&H76)+Chr(97)+Chr(115)+Chr(116))
 formattedAdBreak=rokuFormattedAdBreaks[0]
-_I_0O_O_OOIO_(formattedAdBreak,adBreak)
-else if adBreak.tag.type=(Chr(118)+Chr(109)+Chr(97)+Chr(&H70))
+__OIOOIO00O_1(formattedAdBreak,adBreak)
+else if adBreak.tag.type=(Chr(118)+Chr(109)+Chr(&H61)+Chr(&H70))
 for each formattedAdBreak in rokuFormattedAdBreaks
-_O_OIOO1I0OOI(formattedAdBreak,adBreak)
+_1OO_O_I00___(formattedAdBreak,adBreak)
 end for
 end if
-if formattedAdBreak<>invalid _IO0_0IIO0_1I(formattedAdBreak.ads)
+if formattedAdBreak<>invalid _O0_1__OI110I(formattedAdBreak.ads)
 end for
 end sub
-sub _I_0O_O_OOIO_(_100O0I00IOIO,_11_IIO_1O__O)
-if __OOI0OI11_O0(_100O0I00IOIO)return 
-_I__OI11I_1I_(_100O0I00IOIO,_11_IIO_1O__O)
-_IO0_0IIO0_1I(_100O0I00IOIO.ads)
-m.adBreakList.push(_100O0I00IOIO)
-_I0_I10O1_I1O()
-if _100O0I00IOIO.renderSequence=m.PREROLL _I_O1__I11_01(_100O0I00IOIO)
+sub __OIOOIO00O_1(_1I_0O0O_100I,_0IO11_OIOOIO)
+if _OO_O1_O1O0O_(_1I_0O0O_100I)return 
+__01_II1I00II(_1I_0O0O_100I,_0IO11_OIOOIO)
+_O0_1__OI110I(_1I_0O0O_100I.ads)
+m.adBreakList.push(_1I_0O0O_100I)
+_IOO1OIO10O01()
+if _1I_0O0O_100I.renderSequence=m.PREROLL __0_01__IIIO0(_1I_0O0O_100I)
 end sub
-sub _O_OIOO1I0OOI(_0I11001III1O,_0_IOII1__1O0)
-if __OOI0OI11_O0(_0I11001III1O)return 
-_OIO_O_100__I(_0I11001III1O,_0_IOII1__1O0)
-m.adBreakList.push(_0I11001III1O)
-_I0_I10O1_I1O()
-if _0I11001III1O.renderSequence=m.PREROLL
-_0I11001III1O.renderTime=0
-_I_O1__I11_01(_0I11001III1O)
+sub _1OO_O_I00___(_IIIOI0I00OO_,_OI1I_1O1I_O0)
+if _OO_O1_O1O0O_(_IIIOI0I00OO_)return 
+__1O_O__IIIOI(_IIIOI0I00OO_,_OI1I_1O1I_O0)
+m.adBreakList.push(_IIIOI0I00OO_)
+_IOO1OIO10O01()
+if _IIIOI0I00OO_.renderSequence=m.PREROLL
+_IIIOI0I00OO_.renderTime=0
+__0_01__IIIO0(_IIIOI0I00OO_)
 end if
 end sub
-sub discardAdBreak(_I1110O_1III0)
-if not _0_O00I10I_I_()return 
+sub discardAdBreak(_O1I101OIII0O)
+if not _OO10I1I1_00_()return 
 updatedAdBreakList=[]
 for each adBreak in m.adBreakList
-if adBreak.id<>_I1110O_1III0.data.options.adBreakId
+if adBreak.id<>_O1I101OIII0O.data.options.adBreakId
 updatedAdBreakList.push(adBreak)
 end if
 end for
 m.adBreakList=updatedAdBreakList
-_I1110O_1III0.callFunc((Chr(115)+Chr(101)+Chr(116)+Chr(82)+Chr(&H65)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(&H74)),(1=1),{adList:m.adBreakList})
+_O1I101OIII0O.callFunc((Chr(115)+Chr(101)+Chr(116)+Chr(&H52)+Chr(101)+Chr(115)+Chr(&H75)+Chr(&H6c)+Chr(&H74)),(1=1),{adList:m.adBreakList})
 end sub
-sub _OII01I_1OO0O(_0_OO0__100I_)
-if not _0_O00I10I_I_()return 
+sub _0I1O_1O1_1_1(_O1I1_OOO0OOO)
+if not _OO10I1I1_00_()return 
 m.adBreakList=[]
-_0_OO0__100I_.callFunc((Chr(115)+Chr(101)+Chr(&H74)+Chr(&H52)+Chr(101)+Chr(115)+Chr(117)+Chr(108)+Chr(116)),(1=1),{adList:m.adBreakList})
+_O1I1_OOO0OOO.callFunc((Chr(&H73)+Chr(&H65)+Chr(116)+Chr(82)+Chr(&H65)+Chr(115)+Chr(&H75)+Chr(&H6c)+Chr(116)),(1=1),{adList:m.adBreakList})
 end sub
-sub durationChanged(_0OO00O_IIO0_=invalid)
+sub durationChanged(_01110011IO__=invalid)
 for each adBreak in m.adBreakList
-if type(adBreak.renderTime)=(Chr(&H72)+Chr(111)+Chr(83)+Chr(&H74)+Chr(114)+Chr(&H69)+Chr(110)+Chr(103)) and Instr(1,adBreak.renderTime,(Chr(&H25)))>0
+if type(adBreak.renderTime)=(Chr(&H72)+Chr(&H6f)+Chr(&H53)+Chr(&H74)+Chr(114)+Chr(105)+Chr(110)+Chr(103)) and Instr(1,adBreak.renderTime,(Chr(37)))>0
 percentage=adBreak.renderTime.split((Chr(37)))[0].toFloat()
-adBreak.renderTime=_I11_O____OI_(percentage)
+adBreak.renderTime=_IO00O_0OOO__(percentage)
 end if
 end for
 end sub
-sub checkAds(_0_I_I11_I0_0,_IOO1II0OO0OO)
-if not _0_O00I10I_I_()return 
-if _0_I_I11_I0_0=(Chr(115)+Chr(&H74)+Chr(97)+Chr(&H74)+Chr(101)) and _IOO1II0OO0OO=(Chr(&H66)+Chr(105)+Chr(&H6e)+Chr(&H69)+Chr(115)+Chr(104)+Chr(&H65)+Chr(100))
-_O_IO011_OO1_()
+sub checkAds(_O_I10O_OO1__,__OI00_IIO0II)
+if not _OO10I1I1_00_()return 
+if _O_I10O_OO1__=(Chr(115)+Chr(&H74)+Chr(&H61)+Chr(116)+Chr(&H65)) and __OI00_IIO0II=(Chr(&H66)+Chr(&H69)+Chr(&H6e)+Chr(105)+Chr(&H73)+Chr(104)+Chr(&H65)+Chr(&H64))
+_I1I1IO_10_I0()
 else 
-_O0II10_011__(_IOO1II0OO0OO)
+_I_10O1O1II0O(__OI00_IIO0II)
 end if
 end sub
-sub _O11O1I10I0_0(_1O01___0I111)
-if not _0_O00I10I_I_()return 
-_1O01___0I111.video=m.options.videoNode
-_1O01___0I111.setVideoNodeObservers=(1=1)
+sub _O_1I__011__I(_I1I00IIII_I_)
+if not _OO10I1I1_00_()return 
+_I1I00IIII_I_.video=m.options.videoNode
+_I1I00IIII_I_.setVideoNodeObservers=(1=1)
 end sub
-sub _I_O__1II1OOO(_I_I0_O011011)
-if not _0_O00I10I_I_()return 
-_I_I0_O011011.callFunc((Chr(114)+Chr(&H65)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(101)+Chr(&H56)+Chr(&H69)+Chr(&H64)+Chr(101)+Chr(111)+Chr(78)+Chr(111)+Chr(100)+Chr(101)+Chr(&H4f)+Chr(98)+Chr(&H73)+Chr(&H65)+Chr(&H72)+Chr(118)+Chr(101)+Chr(114)+Chr(115)),m.options.videoNode)
+sub _I_I0_OO1I0O0(_10O111O1_OII)
+if not _OO10I1I1_00_()return 
+_10O111O1_OII.callFunc((Chr(&H72)+Chr(101)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(&H65)+Chr(86)+Chr(105)+Chr(&H64)+Chr(&H65)+Chr(111)+Chr(&H4e)+Chr(&H6f)+Chr(&H64)+Chr(101)+Chr(79)+Chr(98)+Chr(&H73)+Chr(&H65)+Chr(114)+Chr(&H76)+Chr(101)+Chr(114)+Chr(115)),m.options.videoNode)
 end sub
-sub setAdEventListener(_0I_001I0I11O)
-m.eventListener=_0I_001I0I11O
+sub setAdEventListener(_1OO_O001I000)
+m.eventListener=_1OO_O001I000
 end sub
-sub setScheduleAdBreakEventListener(_1__10O100IIO)
-m.scheduleAdBreakEventListener=_1__10O100IIO
+sub setScheduleAdBreakEventListener(_O__IOI_OO_0I)
+m.scheduleAdBreakEventListener=_O__IOI_OO_0I
 end sub
-sub _I0_I10O1_I1O()
-if __OOI0OI11_O0(m.scheduleAdBreakEventListener)return 
+sub _IOO1OIO10O01()
+if _OO_O1_O1O0O_(m.scheduleAdBreakEventListener)return 
 m.scheduleAdBreakEventListener.eventOccurred={internalEventType:m.InternalAdEvents.AD_BREAK_SCHEDULED,eventData:{adBreakList:m.adBreakList}}
 end sub

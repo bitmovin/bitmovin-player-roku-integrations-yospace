@@ -1,46 +1,46 @@
 sub init()
-m.BitmovinFields=_OO0OOO1IOII_()
-m.RokuAdEvents=_OOIO0I_O1O01()
-m.HttpRequestTypes=_1I1__OOO_01O()
-m.BitmovinPlayerStates=_0_1_OI101_0I()
+m.BitmovinFields=_I__1I0I_O__0()
+m.RokuAdEvents=___0___IOIOO1()
+m.HttpRequestTypes=_OI1OI100I_1I()
+m.BitmovinPlayerStates=_1_0I_0I00O_0()
 end sub
-function createBitmovinAdFromRokuAd(_0_1O_OIOO0OI)
+function createBitmovinAdFromRokuAd(_IO0___OO_11O)
 bitmovinAd={}
 bitmovinAd.data={}
 bitmovinAd.clickThroughUrl=Chr(0)
 bitmovinAd.companionAds=[]
 bitmovinAd.id=Chr(0)
-if _0_1O_OIOO0OI=invalid or _0_1O_OIOO0OI.Count()=0
+if _IO0___OO_11O=invalid or _IO0___OO_11O.Count()=0
 return bitmovinAd 
 else 
-bitmovinAd.data=_0_1O_OIOO0OI
+bitmovinAd.data=_IO0___OO_11O
 end if
-if _0_1O_OIOO0OI.clickThrough<>invalid bitmovinAd.clickThroughUrl=_0_1O_OIOO0OI.clickThrough
-if _0_1O_OIOO0OI.companionAds<>invalid bitmovinAd.companionAds=_0_1O_OIOO0OI.companionAds
-if _0_1O_OIOO0OI.adId<>invalid bitmovinAd.id=_0_1O_OIOO0OI.adId
+if _IO0___OO_11O.clickThrough<>invalid bitmovinAd.clickThroughUrl=_IO0___OO_11O.clickThrough
+if _IO0___OO_11O.companionAds<>invalid bitmovinAd.companionAds=_IO0___OO_11O.companionAds
+if _IO0___OO_11O.adId<>invalid bitmovinAd.id=_IO0___OO_11O.adId
 return bitmovinAd 
 end function
-function createBitmovinAdBreakFromRokuAdBreak(_IOIO_O10_1_I)
+function createBitmovinAdBreakFromRokuAdBreak(_1I01OOII_O11)
 bitmovinAdBreak={}
 bitmovinAdBreak.ads=[]
 bitmovinAdBreak.id=Chr(0)
 bitmovinAdBreak.scheduleTime=-1
-if _IOIO_O10_1_I=invalid return bitmovinAdBreak 
-if _IOIO_O10_1_I.ads<>invalid
-for each ad in _IOIO_O10_1_I.ads
+if _1I01OOII_O11=invalid return bitmovinAdBreak 
+if _1I01OOII_O11.ads<>invalid
+for each ad in _1I01OOII_O11.ads
 bitmovinAdBreak.ads.Push(createBitmovinAdFromRokuAd(ad))
 end for
 end if
-if _IOIO_O10_1_I.id<>invalid bitmovinAdBreak.id=_IOIO_O10_1_I.id
-if _IOIO_O10_1_I.renderTime<>invalid bitmovinAdBreak.scheduleTime=_IOIO_O10_1_I.renderTime
+if _1I01OOII_O11.id<>invalid bitmovinAdBreak.id=_1I01OOII_O11.id
+if _1I01OOII_O11.renderTime<>invalid bitmovinAdBreak.scheduleTime=_1I01OOII_O11.renderTime
 return bitmovinAdBreak 
 end function
-function getAdQuartile(__1_O__11__01)
-if __1_O__11__01=m.RokuAdEvents.FIRST_QUARTILE return(Chr(102)+Chr(105)+Chr(&H72)+Chr(115)+Chr(116)+Chr(&H51)+Chr(&H75)+Chr(&H61)+Chr(114)+Chr(116)+Chr(&H69)+Chr(108)+Chr(&H65)) 
-if __1_O__11__01=m.RokuAdEvents.MIDPOINT return(Chr(&H6d)+Chr(&H69)+Chr(&H64)+Chr(112)+Chr(111)+Chr(105)+Chr(&H6e)+Chr(116)) 
-if __1_O__11__01=m.RokuAdEvents.THIRD_QUARTILE return(Chr(&H74)+Chr(104)+Chr(&H69)+Chr(114)+Chr(&H64)+Chr(&H51)+Chr(&H75)+Chr(&H61)+Chr(114)+Chr(116)+Chr(105)+Chr(&H6c)+Chr(&H65)) 
+function getAdQuartile(_00O1OI10IO0I)
+if _00O1OI10IO0I=m.RokuAdEvents.FIRST_QUARTILE return(Chr(102)+Chr(105)+Chr(114)+Chr(115)+Chr(&H74)+Chr(&H51)+Chr(117)+Chr(&H61)+Chr(114)+Chr(116)+Chr(&H69)+Chr(&H6c)+Chr(101)) 
+if _00O1OI10IO0I=m.RokuAdEvents.MIDPOINT return(Chr(&H6d)+Chr(&H69)+Chr(&H64)+Chr(&H70)+Chr(&H6f)+Chr(&H69)+Chr(&H6e)+Chr(&H74)) 
+if _00O1OI10IO0I=m.RokuAdEvents.THIRD_QUARTILE return(Chr(&H74)+Chr(&H68)+Chr(105)+Chr(&H72)+Chr(100)+Chr(&H51)+Chr(117)+Chr(97)+Chr(114)+Chr(&H74)+Chr(&H69)+Chr(108)+Chr(&H65)) 
 end function
-function rokuEventTypeToBitmovinEventField(_0I00OII_0_0O=invalid)
+function rokuEventTypeToBitmovinEventField(__OO0_IO1_I01=invalid)
 map={}
 map[m.RokuAdEvents.POD_START]=m.BitmovinFields.AD_BREAK_STARTED
 map[m.RokuAdEvents.POD_COMPLETE]=m.BitmovinFields.AD_BREAK_FINISHED
@@ -58,51 +58,51 @@ map[m.RokuAdEvents.PAUSE]=m.BitmovinPlayerStates.PAUSED
 map[m.RokuAdEvents.RESUME]=m.BitmovinPlayerStates.PLAYING
 return map 
 end function
-function rokuSegmentTypeToBitmovinHttpRequestType(_0I00I0O0O001)
-if _0I00I0O0O001=0 or _0I00I0O0O001=2 return m.HttpRequestTypes.MEDIA_VIDEO 
-if _0I00I0O0O001=1 return m.HttpRequestTypes.MEDIA_AUDIO 
-if _0I00I0O0O001=3 return m.HttpRequestTypes.MEDIA_SUBTITLES 
+function rokuSegmentTypeToBitmovinHttpRequestType(_0O1I01_011I1)
+if _0O1I01_011I1=0 or _0O1I01_011I1=2 return m.HttpRequestTypes.MEDIA_VIDEO 
+if _0O1I01_011I1=1 return m.HttpRequestTypes.MEDIA_AUDIO 
+if _0O1I01_011I1=3 return m.HttpRequestTypes.MEDIA_SUBTITLES 
 end function
-function rokuSegmentInformationToDownloadFinishedEvent(__10III_00I_I)
+function rokuSegmentInformationToDownloadFinishedEvent(___0I101_O_I1)
 event={}
-event.downloadTime=(__10III_00I_I.downloadDuration/1000)
-event.downloadType=rokuSegmentTypeToBitmovinHttpRequestType(__10III_00I_I.SegType)
-event.size=__10III_00I_I.SegSize
-event.url=__10III_00I_I.SegUrl
+event.downloadTime=(___0I101_O_I1.downloadDuration/1000)
+event.downloadType=rokuSegmentTypeToBitmovinHttpRequestType(___0I101_O_I1.SegType)
+event.size=___0I101_O_I1.SegSize
+event.url=___0I101_O_I1.SegUrl
 event.type=m.BitmovinFields.DOWNLOAD_FINISHED
-if __10III_00I_I.Status=0
+if ___0I101_O_I1.Status=0
 event.success=(1=1)
 else 
 event.success=(1=2)
 end if
 return event 
 end function
-function createBitmovinSegmentFromRokuSegment(_I_0I0___0_11)
+function createBitmovinSegmentFromRokuSegment(_I_0OI_II_0O_)
 bitmovinSegment={}
-quality={bitrate:_I_0I0___0_11.BitrateBPS}
-bitmovinSegment.downloadType=rokuSegmentTypeToBitmovinHttpRequestType(_I_0I0___0_11.segType)
+quality={bitrate:_I_0OI_II_0O_.BitrateBPS}
+bitmovinSegment.downloadType=rokuSegmentTypeToBitmovinHttpRequestType(_I_0OI_II_0O_.segType)
 bitmovinSegment.quality=quality
 return bitmovinSegment 
 end function
-function rokuVideoErrorCodeToBitmovinErrorCode(_I0__1_000O_1)
+function rokuVideoErrorCodeToBitmovinErrorCode(_01_0I01IO1_0)
 errors={"0":1400,"-1":1400,"-2":1400,"-3":1000,"-4":1201,"-5":1300,"-6":2000}
-error=errors[_I0__1_000O_1.toStr()]
+error=errors[_01_0I01IO1_0.toStr()]
 if error<>invalid
 return error 
 else 
 return 1000 
 end if
 end function
-function mapThumbnailTileAndRokuSpriteToBitmovinSprite(__I_1OOO0O_10,_0001I00I_1I_)
+function mapThumbnailTileAndRokuSpriteToBitmovinSprite(_0O1IIO_1010I,_01__O1O0I1I_)
 bitmovinSprite={}
-bitmovinSprite.url=_0001I00I_1I_[0]
-bitmovinSprite.start=_0001I00I_1I_[1]
-bitmovinSprite.duration=__I_1OOO0O_10.duration
-bitmovinSprite.numberOfColumns=__I_1OOO0O_10.htiles
-bitmovinSprite.numberOfRows=__I_1OOO0O_10.vtiles
-bitmovinSprite.singleThumbnailHeight=__I_1OOO0O_10.height
-bitmovinSprite.singleThumbnailWidth=__I_1OOO0O_10.width
-bitmovinSprite.singleThumbnailDuration=__I_1OOO0O_10.duration/(__I_1OOO0O_10.htiles*__I_1OOO0O_10.vtiles)
+bitmovinSprite.url=_01__O1O0I1I_[0]
+bitmovinSprite.start=_01__O1O0I1I_[1]
+bitmovinSprite.duration=_0O1IIO_1010I.duration
+bitmovinSprite.numberOfColumns=_0O1IIO_1010I.htiles
+bitmovinSprite.numberOfRows=_0O1IIO_1010I.vtiles
+bitmovinSprite.singleThumbnailHeight=_0O1IIO_1010I.height
+bitmovinSprite.singleThumbnailWidth=_0O1IIO_1010I.width
+bitmovinSprite.singleThumbnailDuration=_0O1IIO_1010I.duration/(_0O1IIO_1010I.htiles*_0O1IIO_1010I.vtiles)
 bitmovinSprite.end=invalid
 bitmovinSprite.numberOfThumbnails=invalid
 bitmovinSprite.xPositionMap=invalid

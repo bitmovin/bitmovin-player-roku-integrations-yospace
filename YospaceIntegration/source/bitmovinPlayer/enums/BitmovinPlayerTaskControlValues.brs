@@ -1,3 +1,3 @@
-function _IOOO0II0_OIO()
-return{RUN:(Chr(114)+Chr(&H75)+Chr(&H6e)),stop:(Chr(115)+Chr(116)+Chr(&H6f)+Chr(112))} 
+function _0I0O_11O_1IO()
+return{RUN:(Chr(&H72)+Chr(117)+Chr(110)),stop:(Chr(&H73)+Chr(116)+Chr(&H6f)+Chr(112))} 
 end function

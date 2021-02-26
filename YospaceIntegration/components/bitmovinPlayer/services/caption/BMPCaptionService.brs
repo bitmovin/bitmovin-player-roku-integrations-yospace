@@ -1,53 +1,53 @@
 sub init()
 m.video=invalid
-m.deviceInfo=CreateObject((Chr(&H72)+Chr(&H6f)+Chr(68)+Chr(&H65)+Chr(118)+Chr(105)+Chr(&H63)+Chr(&H65)+Chr(&H49)+Chr(110)+Chr(&H66)+Chr(&H6f)))
-m.BitmovinFields=_OO0OOO1IOII_()
+m.deviceInfo=CreateObject((Chr(114)+Chr(111)+Chr(68)+Chr(101)+Chr(&H76)+Chr(105)+Chr(&H63)+Chr(&H65)+Chr(&H49)+Chr(110)+Chr(&H66)+Chr(&H6f)))
+m.BitmovinFields=_I__1I0I_O__0()
 end sub
-sub initializeService(__0O0I0II_OOO)
-m.video=__0O0I0II_OOO
+sub initializeService(__O1OI_II1IO_)
+m.video=__O1OI_II1IO_
 end sub
-sub setCaptionMode(_0_I00OIIO_1I)
-m.deviceInfo.SetCaptionsMode(_0_I00OIIO_1I)
+sub setCaptionMode(__OOI_O0I1_O1)
+m.deviceInfo.SetCaptionsMode(__OOI_O0I1_O1)
 end sub
-function availableSubtitles(_0_0_O0O01_II=invalid)
-return _0OOI01_I011O(m.Video.availableSubtitleTracks,_100I_OI1I_II) 
+function availableSubtitles(__IOOOIO_10I_=invalid)
+return _O11011I10010(m.Video.availableSubtitleTracks,_IIII1OIOI0OO) 
 end function
-function getSubtitle(_I0_IIO0IO100=invalid)
+function getSubtitle(__0_1_OI__II0=invalid)
 trackID=m.mideo.subtitleTrack
 if trackID=Chr(0)
 return Chr(0) 
 else 
-track=_I0O0I111_O1I(trackID)
-if __OOI0OI11_O0(track)
+track=_O_1IO101___0(trackID)
+if _OO_O1_O1O0O_(track)
 return invalid 
 end if
-return _100I_OI1I_II(track) 
+return _IIII1OIOI0OO(track) 
 end if
 end function
-sub setSubtitle(_I00I0I_0O1_O)
+sub setSubtitle(_10_0I_1I00OO)
 currentTime=m.video.position
-subtitle=_I0O0I111_O1I(_I00I0I_0O1_O)
-if __OOI0OI11_O0(subtitle)
-warning={code:1001,message:(Chr(65)+Chr(&H50)+Chr(&H49)+Chr(95)+Chr(73)+Chr(&H4e)+Chr(86)+Chr(&H41)+Chr(&H4c)+Chr(&H49)+Chr(68)+Chr(95)+Chr(65)+Chr(&H52)+Chr(71)+Chr(85)+Chr(&H4d)+Chr(69)+Chr(&H4e)+Chr(84)+Chr(&H3a)+Chr(&H20)+Chr(&H41)+Chr(&H6e)+Chr(&H20)+Chr(105)+Chr(110)+Chr(&H76)+Chr(&H61)+Chr(108)+Chr(105)+Chr(100)+Chr(32)+Chr(97)+Chr(&H72)+Chr(103)+Chr(&H75)+Chr(&H6d)+Chr(101)+Chr(110)+Chr(&H74)+Chr(32)+Chr(104)+Chr(97)+Chr(&H73)+Chr(&H20)+Chr(98)+Chr(&H65)+Chr(101)+Chr(110)+Chr(&H20)+Chr(&H70)+Chr(97)+Chr(115)+Chr(&H73)+Chr(&H65)+Chr(&H64)+Chr(32)+Chr(&H69)+Chr(&H6e)+Chr(116)+Chr(111)+Chr(&H20)+Chr(&H61)+Chr(&H20)+Chr(80)+Chr(108)+Chr(97)+Chr(121)+Chr(101)+Chr(&H72)+Chr(32)+Chr(65)+Chr(80)+Chr(&H49)+Chr(32)+Chr(&H63)+Chr(97)+Chr(108)+Chr(&H6c)+Chr(46))}
+subtitle=_O_1IO101___0(_10_0I_1I00OO)
+if _OO_O1_O1O0O_(subtitle)
+warning={code:1001,message:(Chr(65)+Chr(&H50)+Chr(&H49)+Chr(&H5f)+Chr(&H49)+Chr(&H4e)+Chr(86)+Chr(&H41)+Chr(76)+Chr(73)+Chr(68)+Chr(&H5f)+Chr(65)+Chr(&H52)+Chr(&H47)+Chr(&H55)+Chr(&H4d)+Chr(69)+Chr(78)+Chr(84)+Chr(&H3a)+Chr(&H20)+Chr(&H41)+Chr(&H6e)+Chr(32)+Chr(105)+Chr(110)+Chr(118)+Chr(&H61)+Chr(108)+Chr(105)+Chr(100)+Chr(32)+Chr(&H61)+Chr(114)+Chr(103)+Chr(&H75)+Chr(&H6d)+Chr(101)+Chr(110)+Chr(&H74)+Chr(32)+Chr(&H68)+Chr(&H61)+Chr(115)+Chr(32)+Chr(98)+Chr(&H65)+Chr(101)+Chr(&H6e)+Chr(32)+Chr(112)+Chr(&H61)+Chr(&H73)+Chr(&H73)+Chr(&H65)+Chr(&H64)+Chr(32)+Chr(&H69)+Chr(110)+Chr(&H74)+Chr(111)+Chr(&H20)+Chr(&H61)+Chr(32)+Chr(80)+Chr(108)+Chr(&H61)+Chr(&H79)+Chr(&H65)+Chr(&H72)+Chr(&H20)+Chr(65)+Chr(80)+Chr(73)+Chr(&H20)+Chr(&H63)+Chr(97)+Chr(108)+Chr(108)+Chr(46))}
 m.top.eventOccurred={eventName:m.BitmovinFields.WARNING,eventData:warning}
 else 
 m.video.SubtitleTrack=subtitle.TrackName
 end if
 end sub
-sub setSubtitleStyles(_II1100OOI___)
-m.video.captionStyle=_II1100OOI___
+sub setSubtitleStyles(_0I0_111O_1_1)
+m.video.captionStyle=_0I0_111O_1_1
 end sub
-function getSubtitleStyles(_0_0O1_I_OI_I=invalid)
+function getSubtitleStyles(___0OOI0_O_0O=invalid)
 return m.video.captionStyle 
 end function
-function _100I_OI1I_II(_I_II1I1I1O_1)
-return{id:_I_II1I1I1O_1.trackName,language:_I_II1I1I1O_1.language,label:_I_II1I1I1O_1.description} 
+function _IIII1OIOI0OO(_0OII_00_I_0_)
+return{id:_0OII_00_I_0_.trackName,language:_0OII_00_I_0_.language,label:_0OII_00_I_0_.description} 
 end function
-function _I0O0I111_O1I(_0O01_OO0OI__)
+function _O_1IO101___0(_1OOOII_II1OI)
 available=m.video.availableSubtitleTracks
 count=available.count()
 for i=0 to count-1
-if available[i].trackName=_0O01_OO0OI__
+if available[i].trackName=_1OOOII_II1OI
 return available[i] 
 end if
 end for

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.1]
+### Fixed
+- Conviva tracking for non-YoSpace content that autoplays
+
 ## [1.4.0]
 ### Added
 - Callback for BitmovinFields.METADATA

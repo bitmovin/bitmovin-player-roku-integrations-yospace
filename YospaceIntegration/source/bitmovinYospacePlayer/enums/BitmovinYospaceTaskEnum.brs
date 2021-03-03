@@ -22,6 +22,7 @@ function getBitmovinYospaceTaskEnum()
       INITIALIZE_CONVIVA: "initializeConviva",
       MONITOR_VIDEO: "monitorVideo",
       MONITOR_YOSPACE_SDK: "monitorYoSpaceSDK",
+      SOURCE_LOADED: "sourceLoaded",
       VIDEO_ERROR: "videoError",
       UPDATE_CONTENT_METADATA: "updateContentMetadata",
       END_SESSION: "endSession",
@@ -29,7 +30,6 @@ function getBitmovinYospaceTaskEnum()
       REPORT_SEEK_STARTED: "reportSeekStarted",
       SEND_CUSTOM_APPLICATION_EVENT: "sendCustomApplicationEvent",
       SEND_CUSTOM_PLAYBACK_EVENT: "sendCustomPlaybackEvent"
-
     }
   }
 end function

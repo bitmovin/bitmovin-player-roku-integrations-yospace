@@ -155,6 +155,8 @@ end sub
 
 ' OVERRIDEN load method
 sub load(source)
+  unload(Invalid) 'Explicitly unload to control timing of YoSpace task reset
+
   m.retryExcludingYospace = source.retryExcludingYospace
   url = ""
   assetType = "vod"
@@ -384,6 +386,13 @@ sub onUrlReceived()
   else if type(m.source) = "roSGNode" and m.source.isSubtype("ContentNode")
     m.source.url = m.yospaceTask.PlaybackURL
   end if
+
+  ' adjust startOffset for ads
+  if m.source.options <> invalid and m.source.options.startOffset <> invalid
+    list = m.yospaceTask.adList
+    m.source.options.startOffset = toAbsoluteTime(m.source.options.startOffset, list)
+  end if
+
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
   m.top.playbackUrl = m.yospaceTask.PlaybackURL
 end sub

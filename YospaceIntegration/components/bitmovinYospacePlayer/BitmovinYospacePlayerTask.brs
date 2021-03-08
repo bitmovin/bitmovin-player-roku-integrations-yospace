@@ -59,12 +59,11 @@ sub onSessionReady(data = invalid as Dynamic)
   else
     m.session.RegisterPlayer(m.player)
     m.top.StreamType = m.session.GetSession().GetStreamType()
-    m.top.PlaybackURL = m.session.GetMasterPlaylist()
     tl = m.session.GetSession().GetTimeline()
     if (tl <> invalid) then
       updateTimeline(tl)
     end if
-
+    m.top.PlaybackURL = m.session.GetMasterPlaylist()
   end if
 end sub
 
@@ -283,6 +282,8 @@ function isLastAd(miid)
   if m.top.bitmovinYospacePlayer.callFunc("isLive", invalid) then return true
 
   adList = m.top.adList
+  if adList.Count() <= 0 then return true
+
   lastAdBreak = adList[adList.Count() - 1].ads
   lastAd = lastAdBreak[lastAdBreak.Count() - 1]
   return lastAd.id = miid

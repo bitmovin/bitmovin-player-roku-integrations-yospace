@@ -3,6 +3,11 @@ sub init()
   m.lastAd = invalid
 
   m.top.functionName  = "MonitorSDK"
+  m.top.control = "RUN"
+end sub
+
+' ---------------------------- Bitmovin YO Space ----------------------------
+sub MonitorSDK()
   m.session   = YSSessionManager()
 
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
@@ -15,11 +20,7 @@ sub init()
 
   GetGlobalAA().timer = YSTimer()
   GetGlobalAA().taskman = YORokuTasks(false)
-  m.top.control = "RUN"
-end sub
 
-' ---------------------------- Bitmovin YO Space ----------------------------
-sub MonitorSDK()
   port = CreateObject("roMessagePort")
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT, port)
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT, port)

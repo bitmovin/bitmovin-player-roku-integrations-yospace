@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - Adjust startOffset for stitched ads
+- Moved creation of RAF off render thread to task thread
 
 ## [1.4.1]
 ### Fixed

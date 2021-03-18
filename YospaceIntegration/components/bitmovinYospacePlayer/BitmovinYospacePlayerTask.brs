@@ -3,6 +3,11 @@ sub init()
   m.lastAd = invalid
 
   m.top.functionName  = "MonitorSDK"
+  m.top.control = "RUN"
+end sub
+
+' ---------------------------- Bitmovin YO Space ----------------------------
+sub MonitorSDK()
   m.session   = YSSessionManager()
 
   YO_INFO("Initialized Yospace SDK Version: {0}", m.session.GetVersion())
@@ -15,11 +20,7 @@ sub init()
 
   GetGlobalAA().timer = YSTimer()
   GetGlobalAA().taskman = YORokuTasks(false)
-  m.top.control = "RUN"
-end sub
 
-' ---------------------------- Bitmovin YO Space ----------------------------
-sub MonitorSDK()
   port = CreateObject("roMessagePort")
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT, port)
   m.top.ObserveField(m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT, port)
@@ -59,12 +60,11 @@ sub onSessionReady(data = invalid as Dynamic)
   else
     m.session.RegisterPlayer(m.player)
     m.top.StreamType = m.session.GetSession().GetStreamType()
-    m.top.PlaybackURL = m.session.GetMasterPlaylist()
     tl = m.session.GetSession().GetTimeline()
     if (tl <> invalid) then
       updateTimeline(tl)
     end if
-
+    m.top.PlaybackURL = m.session.GetMasterPlaylist()
   end if
 end sub
 
@@ -283,6 +283,8 @@ function isLastAd(miid)
   if m.top.bitmovinYospacePlayer.callFunc("isLive", invalid) then return true
 
   adList = m.top.adList
+  if adList.Count() <= 0 then return true
+
   lastAdBreak = adList[adList.Count() - 1].ads
   lastAd = lastAdBreak[lastAdBreak.Count() - 1]
   return lastAd.id = miid

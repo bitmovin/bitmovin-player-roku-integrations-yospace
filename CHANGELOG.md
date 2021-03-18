@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.1]
+### Fixed
+- Adjust startOffset for stitched ads
+- Moved creation of RAF off render thread to task thread
+- Conviva tracking for non-YoSpace content that autoplays
+
 ## [1.5.0]
 ### Changed
 - Bitmovin Player to version [1.41.2](https://bitmovin.com/docs/player/releases/roku/roku-1-41-2)

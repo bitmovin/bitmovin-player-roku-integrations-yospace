@@ -96,6 +96,15 @@ sub onVideoError()
   end if
 end sub
 
+sub onSourceLoaded()
+  ' Conviva 3.0.9 starts content monitoring by watching for the video.control to go to "play". If video.control was already "play"
+  ' in createConvivaSession (e.g. for autoplay) then the Conviva session won't go into content monitoring unless explicitly
+  ' nudged to do so. Only resume monitoring if the control is currently "play" so non-autoplay video stay in the correct state.
+  if m.video <> invalid and m.video.control = "play"
+    setContentResumeMonitoring()
+  end if
+end sub
+
 sub createConvivaSession()
   m.video = m.top.player.findNode("MainVideo") ' Get latest video node
   buildContentMetadata()
@@ -192,6 +201,8 @@ sub callFunction(data)
     setEnableRAF(data.arguments.enableRAF)
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA
     initializeConviva()
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SOURCE_LOADED
+    onSourceLoaded()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR
     onVideoError()
   else if data.id = m.BitmovinYospaceTaskEnums.Functions.END_SESSION

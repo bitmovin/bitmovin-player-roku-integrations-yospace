@@ -11,6 +11,7 @@ end sub
 sub onSourceLoaded()
   updateContentMetadata()
   m.top.sourceLoaded = m.bitmovinPlayer.sourceLoaded
+  m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.SOURCE_LOADED }
 end sub
 
 sub onTimeShift()

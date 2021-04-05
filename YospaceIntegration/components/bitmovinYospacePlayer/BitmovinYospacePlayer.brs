@@ -383,6 +383,7 @@ sub onInitializationFailure()
 end sub
 
 sub verifyStartOffsetForLiveEvents()
+  if m.source = invalid or m.source.options = invalid or m.source.options.startOffset = invalid then return
   if m.source.LIVE and m.source.options.startOffset = 0 then
     m.source.options.startOffset = -1
     m.source.options.startOffsetTimelineReference = "end"

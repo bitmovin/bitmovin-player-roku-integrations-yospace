@@ -362,6 +362,7 @@ end sub
 
 sub requestYospaceURL(url, assetType)
   if assetType = invalid or Lcase(assetType) = "none"
+    verifyStartOffsetForLiveEvents()
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
   else if Lcase(assetType) = "live"
      m.yospaceTask.StreamContent = {type: "live", url: url, options: {USE_ID3: true}}
@@ -376,7 +377,16 @@ sub onInitializationFailure()
   print "Initialization failed; ", m.yospaceTask.InitializationFailure
   if m.retryExcludingYospace = true
     print "Retrying excluding Yospace"
+    verifyStartOffsetForLiveEvents()
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
+  end if
+end sub
+
+sub verifyStartOffsetForLiveEvents()
+  if m.source = invalid or m.source.options = invalid or m.source.options.startOffset = invalid then return
+  if m.source.LIVE and m.source.options.startOffset = 0 then
+    m.source.options.startOffset = -1
+    m.source.options.startOffsetTimelineReference = "end"
   end if
 end sub
 

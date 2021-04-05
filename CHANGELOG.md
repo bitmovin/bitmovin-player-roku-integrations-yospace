@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.2]
+### Fixed
+- startOffset of live events when not going through YoSpace
+- Conviva tracking of non-YS streams
+
 ## [1.5.1]
 ### Fixed
 - Adjust startOffset for stitched ads

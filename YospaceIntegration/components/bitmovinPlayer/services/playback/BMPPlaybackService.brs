@@ -1,19 +1,19 @@
 sub init()
 m.video=invalid
 m.maxTimeShift=invalid
-m.BitmovinPlayerState=_1_0I_0I00O_0()
-m.BitmovinFields=_I__1I0I_O__0()
-m.VideoNodeControlValues=_10IO_1_OOI__()
+m.BitmovinPlayerState=_I1O_I1IO0010()
+m.BitmovinFields=_0OOO_00I01OO()
+m.VideoNodeControlValues=__11110O_I_0I()
 m.playerState=invalid
-m.stallingHandler=_010III1O_I1I(m.BitmovinPlayerState)
+m.stallingHandler=_OOII0I_1001O(m.BitmovinPlayerState)
 end sub
-sub initializeService(_IOO_0_1I0_OI)
-m.video=_IOO_0_1I0_OI
+sub initializeService(__O_O_O0I_I00)
+m.video=__O_O_O0I_I00
 end sub
-sub startService(_O1O__O_00_0I=invalid)
-m.video.observeFieldScoped((Chr(115)+Chr(116)+Chr(&H61)+Chr(116)+Chr(&H65)),(Chr(&H5f)+Chr(95)+Chr(95)+Chr(&H49)+Chr(&H30)+Chr(&H49)+Chr(&H31)+Chr(&H31)+Chr(&H4f)+Chr(73)+Chr(48)+Chr(73)+Chr(48)))
+sub startService(_IO__0O__IOOO=invalid)
+m.video.observeFieldScoped((Chr(&H73)+Chr(116)+Chr(97)+Chr(116)+Chr(101)),(Chr(95)+Chr(&H30)+Chr(&H31)+Chr(&H31)+Chr(&H4f)+Chr(73)+Chr(&H49)+Chr(&H5f)+Chr(&H5f)+Chr(49)+Chr(95)+Chr(&H5f)+Chr(&H30)))
 end sub
-sub play(_1_0_1O10___0=invalid)
+sub play(_1O_I_I01_O_I=invalid)
 if not m.stallingHandler.isPrePlaybackStallingInProgress() and(m.playerState=m.BitmovinPlayerState.STALLING or m.playerState=m.BitmovinPlayerState.PLAYING)
 return 
 end if
@@ -21,88 +21,88 @@ onPlay=function()
 m.top.eventOccurred={eventName:m.BitmovinFields.PLAY,eventData:(1=1)}
 end function
 if isPaused()
-_11_11_1O0O_O((Chr(99)+Chr(&H6f)+Chr(110)+Chr(116)+Chr(114)+Chr(&H6f)+Chr(&H6c)),m.VideoNodeControlValues.RESUME,onPlay)
+_0IOOIOI1_III((Chr(&H63)+Chr(&H6f)+Chr(&H6e)+Chr(116)+Chr(&H72)+Chr(&H6f)+Chr(108)),m.VideoNodeControlValues.RESUME,onPlay)
 else 
-_11_11_1O0O_O((Chr(&H63)+Chr(111)+Chr(110)+Chr(116)+Chr(&H72)+Chr(&H6f)+Chr(&H6c)),m.VideoNodeControlValues.PLAY,onPlay)
+_0IOOIOI1_III((Chr(&H63)+Chr(111)+Chr(&H6e)+Chr(116)+Chr(&H72)+Chr(111)+Chr(108)),m.VideoNodeControlValues.PLAY,onPlay)
 end if
 end sub
-sub pause(_IO100_II_010=invalid)
-_11_11_1O0O_O((Chr(&H63)+Chr(111)+Chr(110)+Chr(&H74)+Chr(&H72)+Chr(111)+Chr(108)),m.VideoNodeControlValues.PAUSE)
+sub pause(_I0IOO00I__0I=invalid)
+_0IOOIOI1_III((Chr(&H63)+Chr(111)+Chr(110)+Chr(&H74)+Chr(114)+Chr(&H6f)+Chr(108)),m.VideoNodeControlValues.PAUSE)
 end sub
-sub seek(_OIO_1I01__IO)
+sub seek(_O11O001I_0_O)
 if isLive()return 
 onSeek=function()
 m.top.eventOccurred={eventName:m.BitmovinFields.SEEK,eventData:(1=1)}
 end function
-_11_11_1O0O_O((Chr(115)+Chr(&H65)+Chr(&H65)+Chr(&H6b)),_OIO_1I01__IO,onSeek)
+_0IOOIOI1_III((Chr(115)+Chr(&H65)+Chr(101)+Chr(&H6b)),_O11O001I_0_O,onSeek)
 end sub
-sub instantReplay(_OIIII_I010O0=invalid)
+sub instantReplay(_110II000O1_1=invalid)
 if m.playerState<>m.BitmovinPlayerState.STALLING and m.playerState<>m.BitmovinPlayerState.PLAYING
 m.top.eventOccurred={eventName:m.BitmovinFields.PLAY,eventData:(1=1)}
 end if
-_11_11_1O0O_O((Chr(&H63)+Chr(111)+Chr(110)+Chr(&H74)+Chr(114)+Chr(111)+Chr(108)),m.VideoNodeControlValues.INSTANT_REPLAY)
+_0IOOIOI1_III((Chr(99)+Chr(111)+Chr(&H6e)+Chr(116)+Chr(114)+Chr(111)+Chr(&H6c)),m.VideoNodeControlValues.INSTANT_REPLAY)
 end sub
-sub mute(_0IOO0_0_1100=invalid)
+sub mute(_1IO_000O0O0I=invalid)
 if isMuted()return 
 onMute=function()
 m.top.eventOccurred={eventName:m.BitmovinFields.MUTED,eventData:(1=1)}
 end function
-_11_11_1O0O_O((Chr(&H6d)+Chr(&H75)+Chr(116)+Chr(&H65)),(1=1),onMute)
+_0IOOIOI1_III((Chr(109)+Chr(117)+Chr(&H74)+Chr(101)),(1=1),onMute)
 end sub
-sub unmute(_1__1I_1__10O=invalid)
+sub unmute(_011_11O0I_1I=invalid)
 if not isMuted()return 
 onUnmute=function()
 m.top.eventOccurred={eventName:m.BitmovinFields.UNMUTED,eventData:(1=1)}
 end function
-_11_11_1O0O_O((Chr(&H6d)+Chr(117)+Chr(116)+Chr(101)),(1=2),onUnmute)
+_0IOOIOI1_III((Chr(109)+Chr(117)+Chr(116)+Chr(101)),(1=2),onUnmute)
 end sub
-function isMuted(__0O_100I_1_0=invalid)
+function isMuted(_O_OI111_II_O=invalid)
 return m.video.mute 
 end function
-function isPaused(_0O__I00_1IOO=invalid)
-return __0_0O0IOI10I((Chr(112)+Chr(&H61)+Chr(&H75)+Chr(115)+Chr(101)+Chr(&H64))) 
+function isPaused(_I1OI011_IO0I=invalid)
+return _11I_I01__II1((Chr(&H70)+Chr(&H61)+Chr(117)+Chr(115)+Chr(&H65)+Chr(&H64))) 
 end function
-function isPlaying(_00O1__OO01I1=invalid)
-return __0_0O0IOI10I((Chr(&H70)+Chr(&H6c)+Chr(97)+Chr(&H79)+Chr(105)+Chr(&H6e)+Chr(103))) 
+function isPlaying(_IIO0O_I01101=invalid)
+return _11I_I01__II1((Chr(&H70)+Chr(108)+Chr(&H61)+Chr(121)+Chr(&H69)+Chr(&H6e)+Chr(&H67))) 
 end function
-function isStalled(__O0II0OI__IO=invalid)
-return __0_0O0IOI10I((Chr(98)+Chr(117)+Chr(&H66)+Chr(&H66)+Chr(101)+Chr(&H72)+Chr(105)+Chr(110)+Chr(&H67))) 
+function isStalled(_1OO_0_IO1O1O=invalid)
+return _11I_I01__II1((Chr(&H62)+Chr(117)+Chr(&H66)+Chr(&H66)+Chr(101)+Chr(&H72)+Chr(105)+Chr(&H6e)+Chr(103))) 
 end function
-function isLive(_100O_1_1010_=invalid)
-if m.video.content=invalid or _0IOO001I1O1O()=invalid return(1=2) 
-currentPlaylistItem=_0IOO001I1O1O()
+function isLive(_O_0I0I1_001_=invalid)
+if m.video.content=invalid or _IOI0_IO01110()=invalid return(1=2) 
+currentPlaylistItem=_IOI0_IO01110()
 return currentPlaylistItem.live 
 end function
-sub preload(_I00I_1IO0O_0=invalid)
-_11_11_1O0O_O((Chr(&H63)+Chr(111)+Chr(&H6e)+Chr(&H74)+Chr(114)+Chr(&H6f)+Chr(108)),m.VideoNodeControlValues.PREBUFFER)
+sub preload(_OOIO00IO100_=invalid)
+_0IOOIOI1_III((Chr(99)+Chr(111)+Chr(110)+Chr(&H74)+Chr(114)+Chr(111)+Chr(&H6c)),m.VideoNodeControlValues.PREBUFFER)
 end sub
-function getDuration(__O_II_IOO0I0=invalid)
+function getDuration(_I_01I0I01_I_=invalid)
 if isLive()return-1 
 return m.video.duration 
 end function
-sub timeShift(_1111I_00_I_O)
+sub timeShift(_1001_O_0I1_O)
 if isLive()=(1=2)return 
-if(_1111I_00_I_O>=getMaxTimeShift()) and(_1111I_00_I_O<=0)
-newTime=m.video.duration+_1111I_00_I_O
-onTimeShift=function(_1_I101011OI1)
-m.top.eventOccurred={eventName:m.BitmovinFields.TIME_SHIFT,eventData:_1_I101011OI1}
+if(_1001_O_0I1_O>=getMaxTimeShift()) and(_1001_O_0I1_O<=0)
+newTime=m.video.duration+_1001_O_0I1_O
+onTimeShift=function(_OI_0__O00__I)
+m.top.eventOccurred={eventName:m.BitmovinFields.TIME_SHIFT,eventData:_OI_0__O00__I}
 end function
-_11_11_1O0O_O((Chr(&H73)+Chr(101)+Chr(&H65)+Chr(&H6b)),newTime,onTimeShift,_1111I_00_I_O)
+_0IOOIOI1_III((Chr(&H73)+Chr(101)+Chr(&H65)+Chr(107)),newTime,onTimeShift,_1001_O_0I1_O)
 end if
 end sub
-function getTimeShift(__O1IO0I1O_1O=invalid)
+function getTimeShift(_1_IOI_II_I_O=invalid)
 if isLive()=(1=2)return invalid 
 return(m.Video.position-m.Video.duration) 
 end function
-function getMaxTimeShift(_0I0O_I_I00_I=invalid)
+function getMaxTimeShift(__OO01OOO1I0_=invalid)
 if isLive()=(1=2)return invalid 
 return m.maxTimeShift 
 end function
-sub setPlayerState(_OOOO__01II_1)
-if _0110100O__I_(_OOOO__01II_1)=m.BitmovinPlayerState.PLAYING and m.maxTimeShift=invalid and isLive()
+sub setPlayerState(_IIOOI0O__0O1)
+if __1_0_I0_0I0O(_IIOOI0O__0O1)=m.BitmovinPlayerState.PLAYING and m.maxTimeShift=invalid and isLive()
 m.maxTimeShift=-m.video.duration
 end if
-newState=_0110100O__I_(_OOOO__01II_1)
+newState=__1_0_I0_0I0O(_IIOOI0O__0O1)
 m.playerState=newState
 m.top.eventOccurred={eventName:m.BitmovinFields.PLAYER_STATE,eventData:newState}
 end sub
@@ -111,29 +111,29 @@ m.video.unobserveFieldScoped((Chr(115)+Chr(&H74)+Chr(&H61)+Chr(116)+Chr(101)))
 m.maxTimeShift=invalid
 m.playerState=m.BitmovinPlayerState.NONE
 end sub
-sub _11_11_1O0O_O(___I1_O1IIO0I,_O_I_11I1_01O,_101_1OI00111=_OI1OI0I_1_O0,___I0O110__11=invalid)
+sub _0IOOIOI1_III(_II0OOIO_O010,_0I1_I0_110_I,___1II0I1II00=_01_1_III_0_1,_I_0_II100_IO=invalid)
 if m.video.content=invalid
-m.top.eventOccurred={eventName:m.BitmovinFields.WARNING,eventData:{code:(Chr(&H53)+Chr(&H4f)+Chr(85)+Chr(82)+Chr(&H43)+Chr(69)),message:(Chr(&H4e)+Chr(111)+Chr(&H20)+Chr(&H76)+Chr(105)+Chr(&H64)+Chr(&H65)+Chr(111)+Chr(32)+Chr(115)+Chr(&H6f)+Chr(117)+Chr(114)+Chr(&H63)+Chr(&H65)+Chr(&H20)+Chr(&H69)+Chr(&H73)+Chr(32)+Chr(&H63)+Chr(117)+Chr(&H72)+Chr(114)+Chr(101)+Chr(&H6e)+Chr(116)+Chr(108)+Chr(121)+Chr(32)+Chr(&H6c)+Chr(&H6f)+Chr(&H61)+Chr(&H64)+Chr(&H65)+Chr(100)+Chr(&H2e)+Chr(32)+Chr(80)+Chr(108)+Chr(&H61)+Chr(121)+Chr(&H65)+Chr(&H72)+Chr(&H20)+Chr(&H63)+Chr(111)+Chr(110)+Chr(&H74)+Chr(&H72)+Chr(111)+Chr(108)+Chr(115)+Chr(32)+Chr(97)+Chr(&H72)+Chr(&H65)+Chr(32)+Chr(&H75)+Chr(&H6e)+Chr(97)+Chr(118)+Chr(97)+Chr(105)+Chr(108)+Chr(&H61)+Chr(&H62)+Chr(108)+Chr(101)+Chr(46))}}
+m.top.eventOccurred={eventName:m.BitmovinFields.WARNING,eventData:{code:(Chr(83)+Chr(79)+Chr(85)+Chr(&H52)+Chr(&H43)+Chr(&H45)),message:(Chr(78)+Chr(&H6f)+Chr(32)+Chr(&H76)+Chr(105)+Chr(&H64)+Chr(101)+Chr(111)+Chr(32)+Chr(115)+Chr(&H6f)+Chr(117)+Chr(&H72)+Chr(99)+Chr(&H65)+Chr(32)+Chr(105)+Chr(115)+Chr(32)+Chr(&H63)+Chr(117)+Chr(&H72)+Chr(&H72)+Chr(101)+Chr(&H6e)+Chr(116)+Chr(108)+Chr(121)+Chr(32)+Chr(&H6c)+Chr(&H6f)+Chr(97)+Chr(100)+Chr(101)+Chr(100)+Chr(&H2e)+Chr(32)+Chr(&H50)+Chr(108)+Chr(&H61)+Chr(&H79)+Chr(&H65)+Chr(&H72)+Chr(32)+Chr(99)+Chr(&H6f)+Chr(&H6e)+Chr(&H74)+Chr(&H72)+Chr(111)+Chr(&H6c)+Chr(115)+Chr(&H20)+Chr(&H61)+Chr(&H72)+Chr(&H65)+Chr(32)+Chr(&H75)+Chr(110)+Chr(97)+Chr(118)+Chr(97)+Chr(&H69)+Chr(&H6c)+Chr(&H61)+Chr(&H62)+Chr(&H6c)+Chr(101)+Chr(46))}}
 else 
-m.video[___I1_O1IIO0I]=_O_I_11I1_01O
-if ___I0O110__11=invalid
-_101_1OI00111()
+m.video[_II0OOIO_O010]=_0I1_I0_110_I
+if _I_0_II100_IO=invalid
+___1II0I1II00()
 else 
-_101_1OI00111(___I0O110__11)
+___1II0I1II00(_I_0_II100_IO)
 end if
 end if
 end sub
-function __0_0O0IOI10I(_01_01O0111_0)
-return m.Video.state=_01_01O0111_0 
+function _11I_I01__II1(_OI0011OOI11_)
+return m.Video.state=_OI0011OOI11_ 
 end function
-function _0IOO001I1O1O()
+function _IOI0_IO01110()
 if m.video.contentIndex=-1 return invalid 
 return m.video.content.getChild(m.video.contentIndex) 
 end function
-function _0110100O__I_(_0_10_OOO1111)
-if _0_10_OOO1111=(Chr(&H62)+Chr(&H75)+Chr(102)+Chr(102)+Chr(101)+Chr(&H72)+Chr(&H69)+Chr(110)+Chr(103))return m.BitmovinPlayerState.STALLING 
-return _0_10_OOO1111 
+function __1_0_I0_0I0O(_0_0O0I_O1_1O)
+if _0_0O0I_O1_1O=(Chr(98)+Chr(&H75)+Chr(102)+Chr(&H66)+Chr(101)+Chr(114)+Chr(105)+Chr(&H6e)+Chr(103))return m.BitmovinPlayerState.STALLING 
+return _0_0O0I_O1_1O 
 end function
-sub ___I0I11OI0I0(_I_1_O1OIIOO1)
-m.stallingHandler.setStallingStatus(_0110100O__I_(_I_1_O1OIIOO1.getData()))
+sub _011OII__1__0(__I0I00_O01_0)
+m.stallingHandler.setStallingStatus(__1_0_I0_0I0O(__I0I00_O01_0.getData()))
 end sub

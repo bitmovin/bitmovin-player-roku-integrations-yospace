@@ -3,6 +3,7 @@
   <interface>
     <function name="execute" />
     <function name="setResult" />
+    <function name="updateData" />
     <!--
       Data field can contain:
       {String} url - request url, required

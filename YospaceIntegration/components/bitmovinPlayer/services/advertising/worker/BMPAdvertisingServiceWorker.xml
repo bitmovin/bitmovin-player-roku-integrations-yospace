@@ -8,9 +8,12 @@
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/worker/BMPAdvertisingServiceWorker.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/worker/AdQuartileEventHandler.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/AdBufferingScreenHandler.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/ui/config/AdBufferingScreenDefaultConfig.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/RokuAdEvents.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

@@ -1,8 +1,8 @@
 sub init()
 end sub
-sub initializeService(__O_1I011II0I)
-m.video=__O_1I011II0I
+sub initializeService(_OIO10I1OOIOI)
+m.video=_OIO10I1OOIOI
 end sub
-function getCurrentTime(_1__I_O0_I_O1=invalid)
+function getCurrentTime(_0_10OIOI_IO_=invalid)
 return m.video.position 
 end function

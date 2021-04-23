@@ -1,3 +1,3 @@
-function _I00OI__I1100()
-return{LIVE:(Chr(&H6c)+Chr(105)+Chr(&H76)+Chr(&H65)),VOD:(Chr(118)+Chr(111)+Chr(100))} 
+function __1_I0101OI_I()
+return{LIVE:(Chr(108)+Chr(105)+Chr(118)+Chr(&H65)),VOD:(Chr(118)+Chr(&H6f)+Chr(100))} 
 end function

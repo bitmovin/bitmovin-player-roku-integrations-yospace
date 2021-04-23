@@ -1,30 +1,30 @@
 sub init()
-m.BitmovinAsyncOperationTypes=__OI0_00O_00_()
+m.BitmovinAsyncOperationTypes=__10IOO1OII0I()
 end sub
-sub executeOperation(_01O0__I_100O)
-if _OO_O1_O1O0O_(_01O0__I_100O.data)or _OO_O1_O1O0O_(_01O0__I_100O.data.url)return 
-if _01O0__I_100O.type=m.BitmovinAsyncOperationTypes.HLS_MASTER_PLAYLIST _O1IO0I_I1OOI(_01O0__I_100O)
-if _01O0__I_100O.type=m.BitmovinAsyncOperationTypes.HLS_VARIANT_PLAYLIST _I0__1I_O1_I0(_01O0__I_100O)
+sub executeOperation(__1O00O_O__1O)
+if _1100IO1O_0_I(__1O00O_O__1O.data)or _1100IO1O_0_I(__1O00O_O__1O.data.url)return 
+if __1O00O_O__1O.type=m.BitmovinAsyncOperationTypes.HLS_MASTER_PLAYLIST _II1OIO_O011I(__1O00O_O__1O)
+if __1O00O_O__1O.type=m.BitmovinAsyncOperationTypes.HLS_VARIANT_PLAYLIST _11OI__10III0(__1O00O_O__1O)
 end sub
-sub _O1IO0I_I1OOI(_IO0IO_OI0_O1)
-playlistRequest=_11I00IO1OI10(_IO0IO_OI0_O1.data.url)
-onSuccess=function(_O0OO1_I00010,_10OO1I_O_0_0,_0OOII00I11II)
-responseWithSegmentBitrate={playlistUrl:_0OOII00I11II.data.url,rawPlaylist:_O0OO1_I00010,playlistVariantBitrate:_0OOII00I11II.data.options.playlistVariantBitrate}
-_0OOII00I11II.callFunc((Chr(115)+Chr(&H65)+Chr(&H74)+Chr(82)+Chr(101)+Chr(&H73)+Chr(117)+Chr(&H6c)+Chr(116)),(1=1),responseWithSegmentBitrate,_10OO1I_O_0_0)
+sub _II1OIO_O011I(_O1I00__OOI10)
+playlistRequest=_000OO__IO0O1(_O1I00__OOI10.data.url)
+onSuccess=function(_O00IO_I0_1_1,_O_I_1__I_I0O,__OOOIII_O0I_)
+responseWithSegmentBitrate={playlistUrl:__OOOIII_O0I_.data.url,rawPlaylist:_O00IO_I0_1_1,playlistVariantBitrate:__OOOIII_O0I_.data.options.playlistVariantBitrate}
+__OOOIII_O0I_.callFunc((Chr(115)+Chr(&H65)+Chr(&H74)+Chr(82)+Chr(101)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(116)),(1=1),responseWithSegmentBitrate,_O_I_1__I_I0O)
 end function
-onError=function(__00I_10001O0,_II00IO__II1_,__0__0_11__I0)
-__0__0_11__I0.callFunc((Chr(&H73)+Chr(&H65)+Chr(116)+Chr(&H52)+Chr(101)+Chr(115)+Chr(&H75)+Chr(108)+Chr(&H74)),(1=2),__00I_10001O0,_II00IO__II1_)
+onError=function(_II1_O1I10OII,_1_00OIO1I0I_,_0000110O0I1_)
+_0000110O0I1_.callFunc((Chr(115)+Chr(&H65)+Chr(&H74)+Chr(82)+Chr(&H65)+Chr(115)+Chr(117)+Chr(&H6c)+Chr(&H74)),(1=2),_II1_O1I10OII,_1_00OIO1I0I_)
 end function
-_1001IIOO_O_O(playlistRequest,(Chr(&H47)+Chr(&H45)+Chr(84)),onSuccess,onError,_IO0IO_OI0_O1)
+__I_O1II01O1I(playlistRequest,(Chr(71)+Chr(&H45)+Chr(&H54)),onSuccess,onError,_O1I00__OOI10)
 end sub
-sub _I0__1I_O1_I0(_10II10101O11)
-playlistRequest=_11I00IO1OI10(_10II10101O11.data.url)
-onSuccess=function(_O11OI011II11,_OIIO1OI0OII_,_I01_0II1OI_O)
-responseWithSegmentBitrate={rawPlaylist:_O11OI011II11,playlistVariantBitrate:_I01_0II1OI_O.data.options.playlistVariantBitrate,playlistVariantUrl:_I01_0II1OI_O.data.url}
-_I01_0II1OI_O.callFunc((Chr(115)+Chr(&H65)+Chr(116)+Chr(82)+Chr(101)+Chr(115)+Chr(117)+Chr(&H6c)+Chr(&H74)),(1=1),responseWithSegmentBitrate,_OIIO1OI0OII_)
+sub _11OI__10III0(_OI_011I11I_O)
+playlistRequest=_000OO__IO0O1(_OI_011I11I_O.data.url)
+onSuccess=function(_I0_IOO01O0II,_OOI11_0O_1I1,_1OI1I_II1_I0)
+responseWithSegmentBitrate={rawPlaylist:_I0_IOO01O0II,playlistVariantBitrate:_1OI1I_II1_I0.data.options.playlistVariantBitrate,playlistVariantUrl:_1OI1I_II1_I0.data.url}
+_1OI1I_II1_I0.callFunc((Chr(&H73)+Chr(&H65)+Chr(&H74)+Chr(82)+Chr(&H65)+Chr(115)+Chr(117)+Chr(&H6c)+Chr(116)),(1=1),responseWithSegmentBitrate,_OOI11_0O_1I1)
 end function
-onError=function(_I11O_011O1IO,_1IIO_I0O_0_1,___1O01_OO010)
-___1O01_OO010.callFunc((Chr(115)+Chr(101)+Chr(&H74)+Chr(82)+Chr(&H65)+Chr(115)+Chr(&H75)+Chr(108)+Chr(&H74)),(1=2),_I11O_011O1IO,_1IIO_I0O_0_1)
+onError=function(_0I11O_I_0IOI,_III_11OO0_10,__1O1101I0_O0)
+__1O1101I0_O0.callFunc((Chr(115)+Chr(101)+Chr(&H74)+Chr(82)+Chr(101)+Chr(&H73)+Chr(&H75)+Chr(108)+Chr(&H74)),(1=2),_0I11O_I_0IOI,_III_11OO0_10)
 end function
-_1001IIOO_O_O(playlistRequest,(Chr(&H47)+Chr(69)+Chr(84)),onSuccess,onError,_10II10101O11)
+__I_O1II01O1I(playlistRequest,(Chr(&H47)+Chr(&H45)+Chr(84)),onSuccess,onError,_OI_011I11I_O)
 end sub

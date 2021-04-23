@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Updated to bitmovin player [v1.44.0](https://bitmovin.com/docs/player/releases/roku/roku-1-44-0)
+
+### Fixed
+- Crash when CUE tag of SCTE35 event contains ID character set
+
 ## [1.5.2]
 ### Fixed
 - startOffset of live events when not going through YoSpace

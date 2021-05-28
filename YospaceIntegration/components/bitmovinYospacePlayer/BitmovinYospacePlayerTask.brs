@@ -58,13 +58,11 @@ sub onSessionReady(data = invalid as Dynamic)
     YO_ERROR("Initialization failed: {0}", data.status)
     m.top.InitializationFailure = data.status
   else
-    m.session.RegisterPlayer(m.player)
     m.top.StreamType = m.session.GetSession().GetStreamType()
     tl = m.session.GetSession().GetTimeline()
     if (tl <> invalid) then
       updateTimeline(tl)
     end if
-    m.top.PlaybackURL = m.session.GetMasterPlaylist()
   end if
 end sub
 
@@ -210,11 +208,21 @@ sub requestYospaceURL(data)
     m.session.CreateForLive(data.url, data.options, yo_Callback(onSessionReady, m))
     m.top.IsLive = true
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.VOD)
-    m.session.CreateForVOD(data.url, data.options, yo_Callback(onSessionReady, m))
+    m.session.CreateForVOD(data.url, data.options, yo_Callback(onSessionReady, m), yo_Callback(onPlaybackReady, m))
     m.top.IsLive = false
   else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE)
     m.session.CreateForNonLinear(data.url, data.options, yo_Callback(onSessionReady, m))
     m.top.IsLive = true
+  end if
+end sub
+
+sub onPlaybackReady(data = invalid as dynamic)
+  if (data.result <> YSSessionResult().INITIALISED) then
+    YO_ERROR("Initialization failed: {0}", data.status)
+    m.top.InitializationFailure = data.status
+  else
+    m.top.PlaybackURL = m.session.GetMasterPlaylist()
+    m.session.RegisterPlayer(m.player)
   end if
 end sub
 

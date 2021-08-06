@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.6.1]
+### Fixed
+- Seek error when m.conviva is not defined
+
 ## [1.6.0]
 ### Changed
 - Updated to bitmovin player [v1.44.0](https://bitmovin.com/docs/player/releases/roku/roku-1-44-0)

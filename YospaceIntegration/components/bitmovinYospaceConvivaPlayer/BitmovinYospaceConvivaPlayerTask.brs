@@ -78,7 +78,9 @@ sub setContentResumeMonitoring()
 end sub
 
 sub reportSeekStarted()
-  m.conviva.reportSeekStarted(m.video, -1)
+  if isSessionActive()
+    m.conviva.reportSeekStarted(m.video, -1)
+  end if
 end sub
 
 sub onPlay()

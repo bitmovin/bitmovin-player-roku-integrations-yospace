@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.6.2]
+### Udpate
+- Changed to TurnerOpenPlatform as per [MEC-4053](https://jiraprod.turner.com/browse/MEC-4053)
+
 ## [1.6.1]
 ### Fixed
 - Seek error when m.conviva is not defined

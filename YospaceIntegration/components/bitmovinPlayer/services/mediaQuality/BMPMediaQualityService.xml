@@ -2,9 +2,5 @@
 <component name="BMPMediaQualityService" extends="BMPBaseService">
   <interface></interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/mediaQuality/BMPMediaQualityService.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/HttpRequestTypes.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

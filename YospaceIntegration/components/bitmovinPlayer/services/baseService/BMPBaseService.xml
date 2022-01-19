@@ -7,4 +7,10 @@
     <function name="stopService" />
     <function name="initializeService" />
   </interface>
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinInternalEventTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinInternalEventFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

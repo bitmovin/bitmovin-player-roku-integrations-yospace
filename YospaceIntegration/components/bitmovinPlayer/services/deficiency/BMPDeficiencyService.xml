@@ -4,7 +4,10 @@
     <function name="onError" />
     <function name="removeErrorViewIfPresent" />
     <function name="getErrorViewIfPresent" />
+    <function name="isErrorViewPresent" />
+    <function name="shouldEmitSourceUnloadedEventExternally" />
+    <function name="emitSourceUnloadedEvent" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/deficiency/BMPDeficiencyService.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/deficiency/DeficiencyEventsHandler.brs" />
 </component>

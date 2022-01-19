@@ -3,16 +3,19 @@
   <interface>
     <function name="getAdList" />
     <function name="scheduleAds" />
+    <function name="initializeDemandApi" />
     <function name="getActiveAdBreak" />
     <function name="discardAdBreak" />
     <function name="isAd" />
-    <function name="setAudienceMeasurementMetadata" />
     <function name="customizeAdBufferingScreen" />
-    <function name="updateAdBufferingScreenWithMetadata" />
+    <function name="onVideoError" />
+    <function name="checkPrerollAdBreak" />
+    <function name="checkAdBreaks" />
+    <function name="contentDurationChanged" />
+    <function name="setAdvertisingDebugOutput" />
+    <function name="updateMetadata" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/BMPAdvertisingService.brs" />
-  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerFactory.brs" />
 </component>

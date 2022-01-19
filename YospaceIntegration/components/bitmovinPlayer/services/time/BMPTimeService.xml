@@ -2,6 +2,8 @@
 <component name="BMPTimeService" extends="BMPBaseService">
   <interface>
     <function name="getCurrentTime" />
+    <function name="setNativePlayerObservers" />
+    <function name="removeNativePlayerObservers" />
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/time/BMPTimeService.brs" />

@@ -45,6 +45,7 @@
     <function name="destroy" />
     <function name="getCurrentTime" />
     <function name="ad_isAd" />
+    <function name="demandApiQueryAds" />
 
     <field id="playerState" type="string" value="" />
     <field id="error" type="assocarray" alwaysNotify="true" />
@@ -76,19 +77,25 @@
     <field id="impression" type="assocarray" alwaysNotify="true" />
     <field id="licenseValidated" type="assocarray" alwaysNotify="true" />
     <field id="timeChanged" type="assocarray" alwaysNotify="true" />
+    <field id="subtitleAdded" type="assocarray" alwaysNotify="true" />
+    <field id="subtitleChanged" type="assocarray" alwaysNotify="true" />
+    <field id="demandApiQueryAdsResult" type="assocarray" alwaysNotify="true" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/bitmovinPlayer/BitmovinPlayer.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinComponentIds.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFunctionNames.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/RokuNativePlayerStates.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinConfigAssetTypes.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinInternalEventTypes.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/asyncOperation/BitmovinAsyncOperationTypes.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/bitmovinPlayer/ServiceEndpoints.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinMetadataEventTypes.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/HttpRequestTypes.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/TimelineReferencePoints.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinExternalEventFactory.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

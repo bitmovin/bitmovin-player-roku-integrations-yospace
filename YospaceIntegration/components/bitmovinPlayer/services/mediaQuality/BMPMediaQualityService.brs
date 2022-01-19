@@ -1,62 +1,64 @@
 sub init()
-m.HttpRequestTypes=_II0I000III__()
-m.BitmovinFieldNames=_0OOO_00I01OO()
-m.bitmovinEventFactory=_0I__010_III_()
-m.bitmovinModelObjectMapper=CreateObject((Chr(&H72)+Chr(&H6f)+Chr(83)+Chr(71)+Chr(&H4e)+Chr(111)+Chr(&H64)+Chr(&H65)),(Chr(&H42)+Chr(77)+Chr(&H50)+Chr(66)+Chr(105)+Chr(116)+Chr(&H6d)+Chr(111)+Chr(118)+Chr(&H69)+Chr(&H6e)+Chr(&H4d)+Chr(&H6f)+Chr(100)+Chr(&H65)+Chr(&H6c)+Chr(&H4f)+Chr(&H62)+Chr(&H6a)+Chr(101)+Chr(99)+Chr(&H74)+Chr(&H4d)+Chr(97)+Chr(&H70)+Chr(&H70)+Chr(&H65)+Chr(114)))
+m.HttpRequestTypes=_00I110IO0OOI()
+m.bitmovinModelObjectMapper=CreateObject((Chr(114)+Chr(111)+Chr(&H53)+Chr(71)+Chr(78)+Chr(111)+Chr(&H64)+Chr(101)),(Chr(66)+Chr(&H4d)+Chr(80)+Chr(66)+Chr(105)+Chr(&H74)+Chr(109)+Chr(&H6f)+Chr(118)+Chr(&H69)+Chr(110)+Chr(77)+Chr(111)+Chr(100)+Chr(101)+Chr(&H6c)+Chr(79)+Chr(98)+Chr(106)+Chr(&H65)+Chr(&H63)+Chr(&H74)+Chr(&H4d)+Chr(&H61)+Chr(&H70)+Chr(112)+Chr(101)+Chr(114)))
+m.bitmovinInternalEventFactory=_IOI0_011_1O1()
+m.BitmovinInternalEventTypes=___00__0_1OI_()
 end sub
-sub initializeService(_IIO__IOO0__I)
-m.Video=_IIO__IOO0__I
+sub initializeService(___IO_11I1_I0)
+m.Video=___IO_11I1_I0.videoNode
 end sub
-sub startService(_IOI10_OII100=invalid)
-m.Video.observeFieldScoped((Chr(100)+Chr(111)+Chr(119)+Chr(110)+Chr(&H6c)+Chr(111)+Chr(&H61)+Chr(&H64)+Chr(&H65)+Chr(&H64)+Chr(83)+Chr(101)+Chr(103)+Chr(&H6d)+Chr(&H65)+Chr(&H6e)+Chr(116)),(Chr(&H5f)+Chr(&H30)+Chr(49)+Chr(&H5f)+Chr(&H5f)+Chr(&H49)+Chr(48)+Chr(&H4f)+Chr(&H5f)+Chr(&H5f)+Chr(&H30)+Chr(95)+Chr(48)))
+sub startService(_O1I_O_1O1O00=invalid)
+m.Video.observeFieldScoped((Chr(100)+Chr(111)+Chr(119)+Chr(&H6e)+Chr(108)+Chr(&H6f)+Chr(97)+Chr(100)+Chr(101)+Chr(100)+Chr(83)+Chr(101)+Chr(103)+Chr(109)+Chr(&H65)+Chr(110)+Chr(116)),(Chr(&H5f)+Chr(&H4f)+Chr(73)+Chr(49)+Chr(73)+Chr(&H4f)+Chr(&H49)+Chr(95)+Chr(&H5f)+Chr(&H31)+Chr(&H4f)+Chr(&H30)+Chr(79)))
 end sub
-sub stopService(_I0IIO0OI0I00=invalid)
-m.Video.unobserveFieldScoped((Chr(&H64)+Chr(&H6f)+Chr(&H77)+Chr(&H6e)+Chr(108)+Chr(111)+Chr(97)+Chr(100)+Chr(&H65)+Chr(&H64)+Chr(83)+Chr(&H65)+Chr(&H67)+Chr(109)+Chr(&H65)+Chr(110)+Chr(&H74)))
+sub stopService(_I____O1__O01=invalid)
+m.Video.unobserveFieldScoped((Chr(&H64)+Chr(111)+Chr(119)+Chr(110)+Chr(108)+Chr(111)+Chr(&H61)+Chr(&H64)+Chr(&H65)+Chr(100)+Chr(83)+Chr(&H65)+Chr(103)+Chr(109)+Chr(&H65)+Chr(110)+Chr(&H74)))
 m.previousVideoDownloadedSegment=invalid
 m.previousAudioDownloadedSegment=invalid
 end sub
-sub _01__I0O__0_0(_001__I01_IO1)
-downloadedRokuSegment=_001__I01_IO1.getData()
-if _1100IO1O_0_I(downloadedRokuSegment)return 
-m.top.eventOccurred=m.BitmovinEventFactory.createDownloadFinishedEvent(downloadedRokuSegment)
-__11001_11__1(downloadedRokuSegment)
+sub _OI1IOI__1O0O(_01O_1I_1_OI0)
+downloadedRokuSegment=_01O_1I_1_OI0.getData()
+if _110__I1O00_I(downloadedRokuSegment)return 
+m.top.eventOccurred=m.bitmovinInternalEventFactory.createInternalEvent(m.BitmovinInternalEventTypes.DOWNLOAD_FINISHED,downloadedRokuSegment)
+_00I00I_10OO0(downloadedRokuSegment)
 end sub
-sub __11001_11__1(_11I1I_O_1_0O)
-downloadedSegment=m.bitmovinModelObjectMapper.callFunc((Chr(&H63)+Chr(114)+Chr(&H65)+Chr(97)+Chr(116)+Chr(&H65)+Chr(&H42)+Chr(105)+Chr(116)+Chr(109)+Chr(111)+Chr(118)+Chr(&H69)+Chr(110)+Chr(83)+Chr(101)+Chr(&H67)+Chr(&H6d)+Chr(101)+Chr(110)+Chr(116)+Chr(&H46)+Chr(&H72)+Chr(111)+Chr(&H6d)+Chr(82)+Chr(111)+Chr(&H6b)+Chr(&H75)+Chr(&H53)+Chr(101)+Chr(&H67)+Chr(109)+Chr(&H65)+Chr(110)+Chr(116)),_11I1I_O_1_0O)
-if __I_01OO1O0_O(m.previousVideoDownloadedSegment,downloadedSegment)
-__O_IO0111OI1(m.previousVideoDownloadedSegment,downloadedSegment)
-else if _OOOOO__OIOIO(m.previousAudioDownloadedSegment,downloadedSegment)
-_O__00III_0I0(m.previousAudioDownloadedSegment,downloadedSegment)
+sub _00I00I_10OO0(__1II0__III11)
+downloadedSegment=m.bitmovinModelObjectMapper.callFunc((Chr(&H63)+Chr(114)+Chr(&H65)+Chr(97)+Chr(&H74)+Chr(&H65)+Chr(&H42)+Chr(&H69)+Chr(116)+Chr(109)+Chr(111)+Chr(118)+Chr(105)+Chr(110)+Chr(&H53)+Chr(101)+Chr(&H67)+Chr(109)+Chr(&H65)+Chr(&H6e)+Chr(&H74)+Chr(&H46)+Chr(114)+Chr(111)+Chr(109)+Chr(82)+Chr(&H6f)+Chr(&H6b)+Chr(&H75)+Chr(83)+Chr(&H65)+Chr(103)+Chr(&H6d)+Chr(&H65)+Chr(&H6e)+Chr(&H74)),__1II0__III11)
+if _10I1OI1_OOOI(m.previousVideoDownloadedSegment,downloadedSegment)
+_I00I00O1__11(m.previousVideoDownloadedSegment,downloadedSegment)
+else if _II0I01II01II(m.previousAudioDownloadedSegment,downloadedSegment)
+_O_OI10O11OO1(m.previousAudioDownloadedSegment,downloadedSegment)
 end if
-_01OIOO_O_1O_(downloadedSegment)
+_O_0OOI1O1_OO(downloadedSegment)
 end sub
-function __I_01OO1O0_O(_O10101O10III,_IOIO_1111I1O)
-return _IOIO_1111I1O.downloadType=m.HttpRequestTypes.MEDIA_VIDEO and _1I1_O1I_011I(_IOIO_1111I1O,_O10101O10III) 
+function _10I1OI1_OOOI(_011I_O1_0_I_,_OIO0100O__I_)
+return _OIO0100O__I_.downloadType=m.HttpRequestTypes.MEDIA_VIDEO and _O1___1_II_IO(_OIO0100O__I_,_011I_O1_0_I_) 
 end function
-function _OOOOO__OIOIO(_1I1IOIIO1_II,_0I_I11_01I11)
-return _0I_I11_01I11.downloadType=m.HttpRequestTypes.MEDIA_AUDIO and _1I1_O1I_011I(_0I_I11_01I11,_1I1IOIIO1_II) 
+function _II0I01II01II(_1O0O00O1__II,_1001I11I0000)
+return _1001I11I0000.downloadType=m.HttpRequestTypes.MEDIA_AUDIO and _O1___1_II_IO(_1001I11I0000,_1O0O00O1__II) 
 end function
-function _1I1_O1I_011I(_O__0II_11O10,__IO_10OO0O__)
-if __IO_10OO0O__=invalid return(1=1) 
-if _O__0II_11O10.downloadType<>__IO_10OO0O__.downloadType return(1=2) 
-downloadedSegmentQuality=_O__0II_11O10.quality
-previousSegmentQuality=__IO_10OO0O__.quality
+function _O1___1_II_IO(_I_110OIO10IO,_100O00O1__I1)
+if _100O00O1__I1=invalid return(1=1) 
+if _I_110OIO10IO.downloadType<>_100O00O1__I1.downloadType return(1=2) 
+downloadedSegmentQuality=_I_110OIO10IO.quality
+previousSegmentQuality=_100O00O1__I1.quality
 return downloadedSegmentQuality.bitrate<>previousSegmentQuality.bitrate 
 end function
-sub _01OIOO_O_1O_(_O10100__O1I0)
-if _O10100__O1I0.downloadType=m.HttpRequestTypes.MEDIA_VIDEO m.previousVideoDownloadedSegment=_O10100__O1I0
-if _O10100__O1I0.downloadType=m.HttpRequestTypes.MEDIA_AUDIO m.previousAudioDownloadedSegment=_O10100__O1I0
+sub _O_0OOI1O1_OO(_IO1IOIII_00O)
+if _IO1IOIII_00O.downloadType=m.HttpRequestTypes.MEDIA_VIDEO m.previousVideoDownloadedSegment=_IO1IOIII_00O
+if _IO1IOIII_00O.downloadType=m.HttpRequestTypes.MEDIA_AUDIO m.previousAudioDownloadedSegment=_IO1IOIII_00O
 end sub
-sub __O_IO0111OI1(_I_O000OI1101,_0_IO_IO0OO1_)
-if not _OI01OO_00_10(_I_O000OI1101,_0_IO_IO0OO1_,m.HttpRequestTypes.MEDIA_VIDEO)return 
-m.top.eventOccurred=m.bitmovinEventFactory.createMediaQualityChangeEvent(_I_O000OI1101,_0_IO_IO0OO1_,m.BitmovinFieldNames.VIDEO_DOWNLOAD_QUALITY_CHANGED)
+sub _I00I00O1__11(__1IO010I_010,_O_O_01I11OIO)
+if not _010I_01O1_O1(__1IO010I_010,_O_O_01I11OIO,m.HttpRequestTypes.MEDIA_VIDEO)return 
+eventData={previousVideoDownloadedSegment:__1IO010I_010,downloadedSegment:_O_O_01I11OIO}
+m.top.eventOccurred=m.bitmovinInternalEventFactory.createInternalEvent(m.BitmovinInternalEventTypes.VIDEO_DOWNLOAD_QUALITY_CHANGED,eventData)
 end sub
-sub _O__00III_0I0(_I111__1_O0OO,_O10_00I010_I)
-if not _OI01OO_00_10(_I111__1_O0OO,_O10_00I010_I,m.HttpRequestTypes.MEDIA_AUDIO)return 
-m.top.eventOccurred=m.bitmovinEventFactory.createMediaQualityChangeEvent(_I111__1_O0OO,_O10_00I010_I,m.BitmovinFieldNames.AUDIO_DOWNLOAD_QUALITY_CHANGED)
+sub _O_OI10O11OO1(_1001IIO1I0_1,_I00II1_I0_1I)
+if not _010I_01O1_O1(_1001IIO1I0_1,_I00II1_I0_1I,m.HttpRequestTypes.MEDIA_AUDIO)return 
+eventData={previousAudioDownloadedSegment:_1001IIO1I0_1,downloadedSegment:_I00II1_I0_1I}
+m.top.eventOccurred=m.bitmovinInternalEventFactory.createInternalEvent(m.BitmovinInternalEventTypes.AUDIO_DOWNLOAD_QUALITY_CHANGED,eventData)
 end sub
-function _OI01OO_00_10(_O__11_O11001,_0_0O_1O__O01,_OOO1I1I0_0__)
-if _0_0O_1O__O01.downloadType<>_OOO1I1I0_0__ return(1=2) 
-if not _1100IO1O_0_I(_O__11_O11001) and _O__11_O11001.downloadType<>_OOO1I1I0_0__ return(1=2) 
+function _010I_01O1_O1(_IIO11_____OI,___I1O__OO01I,_10011_OO1IO_)
+if ___I1O__OO01I.downloadType<>_10011_OO1IO_ return(1=2) 
+if not _110__I1O00_I(_IIO11_____OI) and _IIO11_____OI.downloadType<>_10011_OO1IO_ return(1=2) 
 return(1=1) 
 end function

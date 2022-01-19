@@ -5,11 +5,10 @@
     <function name="load" />
     <function name="unload" />
     <function name="setHttpHeaders" />
+    <function name="internalUnload" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/initialization/BMPInitializationService.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinConfigAssetTypes.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/TimelineReferencePoints.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

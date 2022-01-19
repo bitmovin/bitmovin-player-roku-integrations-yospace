@@ -1,3 +1,3 @@
-function _IIII_1001I11()
-return{RUN:(Chr(&H72)+Chr(117)+Chr(&H6e)),stop:(Chr(&H73)+Chr(116)+Chr(111)+Chr(&H70))} 
+function _I_I010110O0_()
+return{RUN:(Chr(&H72)+Chr(&H75)+Chr(110)),stop:(Chr(&H73)+Chr(&H74)+Chr(&H6f)+Chr(&H70))} 
 end function

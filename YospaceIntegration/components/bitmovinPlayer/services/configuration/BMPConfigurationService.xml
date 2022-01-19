@@ -4,7 +4,7 @@
     <function name="setConfig" />
     <function name="getConfig" />
     <function name="updateSource" />
+    <function name="pluckConfig" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/configuration/BMPConfigurationService.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

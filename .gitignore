@@ -12,3 +12,5 @@ node_modules
 /YospaceIntegration/out/
 /BitmovinConviva/
 /out/
+**/.DS_Store
+**/.idea/

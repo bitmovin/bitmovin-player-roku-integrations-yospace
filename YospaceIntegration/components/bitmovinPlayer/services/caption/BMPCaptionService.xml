@@ -10,6 +10,4 @@
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/caption/BMPCaptionService.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

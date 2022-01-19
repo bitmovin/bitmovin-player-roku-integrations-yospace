@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="BMPAdvertisingServiceWorker" extends="BMPBaseServiceWorker">
   <interface>
-    <function name="checkAds" />
-    <function name="durationChanged" />
     <function name="setAdEventListener" />
     <function name="setScheduleAdBreakEventListener" />
   </interface>
@@ -11,7 +9,8 @@
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/advertising/AdBufferingScreenHandler.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/task/eventListener/EventListenerEnums.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/ui/config/AdBufferingScreenDefaultConfig.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinEventFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/BitmovinInternalEventFactory.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinInternalEventTypes.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/RokuAdEvents.brs" />

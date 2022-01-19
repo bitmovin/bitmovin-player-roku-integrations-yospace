@@ -2,6 +2,7 @@
 <component name="BMPPlaybackService" extends="BMPBaseService">
   <interface>
     <function name="setPlayerState" />
+    <function name="getPlayerState" />
     <function name="play" />
     <function name="pause" />
     <function name="seek" />
@@ -18,12 +19,16 @@
     <function name="timeShift" />
     <function name="getTimeShift" />
     <function name="getMaxTimeShift" />
+    <function name="internalStopPlayback" />
+    <function name="internalPlay" />
+    <function name="setNativePlayerObservers" />
+    <function name="removeNativePlayerObservers" />
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/playback/BMPPlaybackService.brs" />
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/playback/StallingHandler.brs" />
+  <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/playback/UnsupportedFinishedEventHandler.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinPlayerStates.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
+  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/RokuNativePlayerStates.brs" />
   <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/VideoNodeControlValues.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

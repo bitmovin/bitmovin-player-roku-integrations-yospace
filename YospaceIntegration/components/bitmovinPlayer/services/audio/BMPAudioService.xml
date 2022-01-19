@@ -6,6 +6,4 @@
     <function name="setAudio" />
   </interface>
   <script type="text/brightscript" uri="pkg:/components/bitmovinPlayer/services/audio/BMPAudioService.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/enums/BitmovinFieldNames.brs" />
-  <script type="text/brightscript" uri="pkg:/source/bitmovinPlayer/utils/util.brs" />
 </component>

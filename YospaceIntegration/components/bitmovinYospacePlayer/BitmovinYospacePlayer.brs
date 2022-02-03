@@ -28,7 +28,7 @@ sub init()
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEK, "onSeek")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SEEKED, "onSeeked")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.PLAYER_STATE, "onPlayerStateChanged")
-  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.CURRENT_TIME, "onCurrentTimeChanged")
+  m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_CHANGED, "onCurrentTimeChanged")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFT, "onTimeShift")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.TIME_SHIFTED, "onTimeShifted")
   m.bitmovinPlayer.ObserveField(m.top.BitmovinFields.SOURCE_LOADED, "onSourceLoaded")
@@ -336,8 +336,8 @@ sub reportPlayerStateChanged(videoState)
 end sub
 
 sub onCurrentTimeChanged()
-  m.top.currentTime = toMagicTime(getCurrentTime(), m.yospaceTask.Timeline)
-  m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: getCurrentTime()}
+  m.top.currentTime = toMagicTime(m.bitmovinPlayer.timeChanged.time, m.yospaceTask.Timeline)
+  m.yospaceTask.EventReport = {id: YSPlayerEvents().POSITION, data: m.bitmovinPlayer.timeChanged.time}
 end sub
 
 sub onMetadata()
@@ -470,7 +470,7 @@ sub onFocusChanged(event)
 end sub
 
 function getCurrentTime(params = invalid)
-  return m.bitmovinPlayer.currentTime
+  return m.bitmovinplayer.callFunc(m.BitmovinFunctions.GET_CURRENT_TIME, invalid)
 end function
 
 function getCurrentElement(currentTime)

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Swap out Deprecated bitmovinPlayer field listener `currentTime` in favor of new field listener `timeChanged`
+
 ## [1.7.0]
 ### Changed
 - Updated to bitmovin player [v1.57.0](https://bitmovin.com/docs/player/releases/roku/roku-1-57-0)

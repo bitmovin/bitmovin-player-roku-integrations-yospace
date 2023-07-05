@@ -21,7 +21,7 @@ end sub
 
 sub onPlayerStateChanged()
   m.top.playerState = m.bitmovinPlayer.playerState
-  if m.top.playerState = m.top.BitmovinPlayerState.FINISHED or m.top.playerState = m.top.BitmovinPlayerState.ERROR or m.top.playerState = "stopped"
+  if m.top.playerState = m.top.BitmovinPlayerState.FINISHED or m.top.playerState = m.top.BitmovinPlayerState.ERROR or m.top.playerState = "stopped" then
     m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.END_SESSION }
   end if
   reportPlayerStateChanged(m.top.playerState)
@@ -38,24 +38,24 @@ sub onSeek()
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED }
 end sub
 ' ---------------------------- bitmovin conviva api function ----------------------------
-function setupConvivaAnalytics(player, customerKey, config)
+sub setupConvivaAnalytics(player, customerKey, config)
   m.yospaceTask.player = player
   m.yospaceTask.customerKey = customerKey
   m.yospaceTask.config = config
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA }
-end function
+end sub
 
-function updateContentMetadata(contentMetadataOverrides = invalid)
+sub updateContentMetadata(contentMetadataOverrides = invalid)
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.UPDATE_CONTENT_METADATA, arguments: { contentMetaData: contentMetadataOverrides } }
-end function
+end sub
 
-function monitorVideo(contentMetadataOverrides)
+sub monitorVideo(contentMetadataOverrides)
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.MONITOR_VIDEO, arguments: { contentMetaData: contentMetadataOverrides } }
-end function
+end sub
 
-function monitorYoSpaceSDK()
+sub monitorYoSpaceSDK()
   m.yospaceTask.callFunction = { id: m.BitmovinYospaceTaskEnums.Functions.MONITOR_YOSPACE_SDK }
-end function
+end sub
 
 ' Sends a custom application-level event to Conviva's Player Insight. An application-level event can always
 ' be sent and is not tied to a specific video.

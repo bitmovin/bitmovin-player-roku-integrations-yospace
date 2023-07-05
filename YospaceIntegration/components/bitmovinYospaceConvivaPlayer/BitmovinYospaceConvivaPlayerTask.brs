@@ -14,7 +14,7 @@ sub initializeConviva()
   settings = {}
   settings.customerKey = apiKey
 
-  if m.top.config.gatewayUrl <> invalid
+  if m.top.config.gatewayUrl <> invalid then
     settings.gatewayUrl = m.top.config.gatewayUrl
   end if
   m.conviva = ConvivaClient(settings)
@@ -25,7 +25,7 @@ sub sendCustomApplicationEvent(eventName, attributes)
 end sub
 
 sub sendCustomPlaybackEvent(eventName, attributes)
-  if not isSessionActive()
+  if not isSessionActive() then
     debugLog("Cannot send playback event, no active monitoring session")
     return
   end if
@@ -34,27 +34,27 @@ sub sendCustomPlaybackEvent(eventName, attributes)
 end sub
 
 sub updateContentMetadata(metadataOverrides = invalid)
-  if metadataOverrides <> invalid
+  if metadataOverrides <> invalid then
     m.contentMetadataBuilder.callFunc("setOverrides", metadataOverrides)
   end if
-  if isSessionActive()
+  if isSessionActive() then
     buildContentMetadata()
     updateSession()
   end if
 end sub
 
-function monitorVideo(metadataOverrides)
-  if isSessionActive()
+sub monitorVideo(metadataOverrides)
+  if isSessionActive() then
     ' Ending Session must be called earlier as possible than CreateConvivaSession because it takes time to clean up session
     ' Can't call createConvivaSession right after endSession()
     endSession()
   end if
   m.contentMetadataBuilder.callFunc("setOverrides", metadataOverrides)
   createConvivaSession()
-end function
+end sub
 
 sub monitorYoSpaceSDK()
-  if m.conviva.getConvivaTask(m.video) = invalid
+  if m.conviva.getConvivaTask(m.video) = invalid then
     return
   end if
   m.conviva.convivaYoSpaceVideoNode = m.video
@@ -66,19 +66,19 @@ sub monitorYoSpaceSDK()
 end sub
 
 sub setContentPauseMonitoring()
-  if isSessionActive()
+  if isSessionActive() then
     m.conviva.setContentPauseMonitoring(m.video)
   end if
 end sub
 
 sub setContentResumeMonitoring()
-  if isSessionActive()
+  if isSessionActive() then
     m.conviva.setContentResumeMonitoring(m.video)
   end if
 end sub
 
 sub reportSeekStarted()
-  if isSessionActive()
+  if isSessionActive() then
     m.conviva.reportSeekStarted(m.video, -1)
   end if
 end sub
@@ -93,7 +93,7 @@ sub onPlaying()
 end sub
 
 sub onVideoError()
-  if isSessionActive()
+  if isSessionActive() then
     reportPlaybackDeficiency(m.top.player.error.message, true, true) ' close session on video error
   end if
 end sub
@@ -102,7 +102,7 @@ sub onSourceLoaded()
   ' Conviva 3.0.9 starts content monitoring by watching for the video.control to go to "play". If video.control was already "play"
   ' in createConvivaSession (e.g. for autoplay) then the Conviva session won't go into content monitoring unless explicitly
   ' nudged to do so. Only resume monitoring if the control is currently "play" so non-autoplay video stay in the correct state.
-  if m.video <> invalid and m.video.control = "play"
+  if m.video <> invalid and m.video.control = "play" then
     setContentResumeMonitoring()
   end if
 end sub
@@ -132,12 +132,12 @@ sub reportPlaybackDeficiency(message, isFatal, closeSession = true)
 
   m.conviva.reportContentError(m.video, message, isFatal)
 
-  if closeSession
+  if closeSession then
     endSession()
   end if
 end sub
 
-function isSessionActive()
+function isSessionActive() as Boolean
   return m.top.cSession
 end function
 
@@ -150,23 +150,23 @@ sub buildContentMetadata()
   }
 
   config = m.top.bitmovinYospacePlayer.callFunc("getConfig")
-  if config.playback <> invalid and config.playback.autoplay <> invalid
+  if config.playback <> invalid and config.playback.autoplay <> invalid then
     internalCustomTags.autoplay = ToString(config.playback.autoplay)
   end if
 
-  if config.adaptation <> invalid and config.adaptation.preload <> invalid
+  if config.adaptation <> invalid and config.adaptation.preload <> invalid then
     internalCustomTags.preload = ToString(config.adaptation.preload)
   end if
 
   m.contentMetadataBuilder.callFunc("setCustom", internalCustomTags)
   source = config.source
-  if source <> invalid
+  if source <> invalid then
     buildSourceRelatedMetadata(source)
   end if
 end sub
 
 sub buildSourceRelatedMetadata(source)
-  if source.title <> invalid
+  if source.title <> invalid then
     m.contentMetadataBuilder.callFunc("setAssetName", source.title)
   else
     m.contentMetadataBuilder.callFunc("setAssetName", "Untitled (no source.title set)")
@@ -186,9 +186,9 @@ end sub
 
 ' ---------------------------- Overridden methods ----------------------------
 sub callFunction(data)
-  if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
+  if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD then
     skipAd()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA then
     genre = data.arguments[0]
     kidsContent = data.arguments[1]
     id = data.arguments[2]
@@ -196,34 +196,34 @@ sub callFunction(data)
     nielsenGenre = data.arguments[4]
     nielsenAppId = data.arguments[5]
     setContentMetaData(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL then
     setDebugLevel(data.arguments.debugLevel)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF then
     print "Enable RAF: "; data.arguments.enableRAF
     setEnableRAF(data.arguments.enableRAF)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.INITIALIZE_CONVIVA then
     initializeConviva()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SOURCE_LOADED
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SOURCE_LOADED then
     onSourceLoaded()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.VIDEO_ERROR then
     onVideoError()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.END_SESSION
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.END_SESSION then
     endSession()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_VIDEO
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_VIDEO then
     monitorVideo(data.arguments.contentMetaData)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_YOSPACE_SDK
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.MONITOR_YOSPACE_SDK then
     monitorYoSpaceSDK()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.UPDATE_CONTENT_METADATA
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.UPDATE_CONTENT_METADATA then
     updateContentMetadata(data.arguments.contentMetaData)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_SEEK_STARTED then
     reportSeekStarted()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_PLAYBACK_DEFICIENCY
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_PLAYBACK_DEFICIENCY then
     reportPlaybackDeficiency(data.arguments.message, data.arguments.isFatal, data.arguments.endSession)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_APPLICATION_EVENT
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_APPLICATION_EVENT then
     sendCustomApplicationEvent(data.arguments.name, data.arguments.attributes)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_PLAYBACK_EVENT
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SEND_CUSTOM_PLAYBACK_EVENT then
     sendCustomPlaybackEvent(data.arguments.name, data.arguments.attributes)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT then
     reportCompanionEvent(data.arguments.companionId, data.arguments.event)
   end if
 end sub
@@ -270,7 +270,7 @@ sub onAdStart(miid as string)
 end sub
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as string)
-  if miid = m.lastAd
+  if miid = m.lastAd then
     YO_INFO("onAdEnd - miid {0} matches m.lastAd {1}; setting m.lastAd back to invalid", miid, m.lastAd)
     m.lastAd = invalid
   end if

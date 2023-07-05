@@ -104,17 +104,17 @@ end sub
 ' OVERRIDEN setup method
 sub setup(params)
   ' yospace config
-  if params.yospaceConfig.debugVerbosity <> invalid
+  if params.yospaceConfig.debugVerbosity <> invalid then
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL, arguments: {debugLevel: params.yospaceConfig.debugVerbosity}}
   end if
 
-  if params.yospaceConfig.enableRAF <> invalid
+  if params.yospaceConfig.enableRAF <> invalid then
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF, arguments: {enableRAF: params.yospaceConfig.enableRAF}}
   end if
 
   config = {}
   config.append(params.config)
-  if (config.source <> invalid)
+  if (config.source <> invalid) then
     setupCfg = {}
     setupCfg.append(config)
     setupCfg.source = invalid
@@ -130,7 +130,7 @@ sub play(params)
 end sub
 
 sub pause(params)
-  if m.policy.canPause()
+  if m.policy.canPause() then
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.PAUSE, params)
   end if
 end sub
@@ -144,7 +144,7 @@ sub preload(params)
 end sub
 
 sub seek(params)
-  if m.policy.canSeek()
+  if m.policy.canSeek() then
     seekDestination = m.policy.canSeekTo(params, getCurrentTime())
     list = m.yospaceTask.adList
     seekDestination = toAbsoluteTime(seekDestination, list) - 1
@@ -161,15 +161,15 @@ sub load(source)
   url = ""
   assetType = "vod"
 
-  if type(source) = "roAssociativeArray"
+  if type(source) = "roAssociativeArray" then
     url = source.hls
     assetType = source.assetType
-  else if type(source) = "roSGNode" and source.isSubtype("ContentNode")
+  else if type(source) = "roSGNode" and source.isSubtype("ContentNode") then
     url = source.url
     if source.live then assetType = "live"
   end if
 
-  if url = invalid or url = ""
+  if url = invalid or url = "" then
     ' If the source is invalid we purposly call load on the Bitmovin Player with an invalid source to let the player handle the error
     ' That way we do not have to expose the error handling or import it into the Yospace integration
     m.bitmovinPlayer.callFunc("load", {})
@@ -181,7 +181,7 @@ sub load(source)
 end sub
 
 sub mute(params)
-  if m.policy.canMute()
+  if m.policy.canMute() then
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.MUTE, params)
   end if
 end sub
@@ -190,7 +190,7 @@ sub unmute(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.UNMUTE, params)
 end sub
 
-function isMuted(params)
+function isMuted(params) as Boolean
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_MUTED, params)
 end function
 
@@ -198,15 +198,15 @@ sub captionMode(params)
   m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.CAPTION_MODE, params)
 end sub
 
-function isPlaying(params)
+function isPlaying(params) as Boolean
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PLAYING, params)
 end function
 
-function isPaused(params)
+function isPaused(params) as Boolean
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_PAUSED, params)
 end function
 
-function isStalled(params)
+function isStalled(params) as Boolean
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_STALLED, params)
 end function
 
@@ -246,7 +246,7 @@ function getMaxTimeShift(params = invalid)
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.GET_MAX_TIME_SHIFT, params)
 end function
 
-function isLive(params = invalid)
+function isLive(params = invalid) as Boolean
   return m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.IS_LIVE, params)
 end function
 
@@ -263,7 +263,7 @@ sub setHttpHeaders(headers)
 end sub
 
 sub instantReplay(params = invalid)
-  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.INSTANT_REPLAY, param)
+  m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.INSTANT_REPLAY, params)
 end sub
 
 ' ---------------------------- ad api ----------------------------
@@ -276,7 +276,7 @@ sub setSkipWatchedAdBreaks(params)
 end sub
 
 sub ad_skip(params = invalid)
-  if m.policy.canSkip() = 0
+  if m.policy.canSkip() = 0 then
     m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.SKIP_AD}
   end if
 end sub
@@ -297,17 +297,17 @@ end function
 
 sub companionRendered(companionId = invalid)
   print "bm ysplayer companionRendered"
-  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT, arguments: {companionId: companionId, event: "creativeView"}}.
+  m.yospaceTask.callFunction = {id: m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT, arguments: {companionId: companionId, event: "creativeView"}}
 end sub
 
-function isKeyPressValid(key)
-  if key = "right" or key = "left" or key = "fastforward" or key = "rewind"
-    if m.policy.canSeek()
+function isKeyPressValid(key) as Boolean
+  if key = "right" or key = "left" or key = "fastforward" or key = "rewind" then
+    if m.policy.canSeek() then
       return true
     end if
     return false
-  else if key = "play"
-    if m.policy.canPause()
+  else if key = "play" then
+    if m.policy.canPause() then
       return true
     end if
     return false
@@ -320,15 +320,15 @@ sub onAdQuartile(quartile)
 end sub
 
 sub reportPlayerStateChanged(videoState)
-  if videoState = m.top.BitmovinPlayerState.FINISHED
+  if videoState = m.top.BitmovinPlayerState.FINISHED then
     m.yospaceTask.EventReport = {id: YSPlayerEvents().END}
-  else if videoState = m.top.BitmovinPlayerState.STALLING
+  else if videoState = m.top.BitmovinPlayerState.STALLING then
     m.yospaceTask.EventReport = {id: YSPlayerEvents().BUFFER}
-  else if videoState = m.top.BitmovinPlayerState.PLAYING
+  else if videoState = m.top.BitmovinPlayerState.PLAYING then
     m.yospaceTask.EventReport = {id: YSPlayerEvents().RESUME}
-  else if videoState = m.top.BitmovinPlayerState.PAUSED
+  else if videoState = m.top.BitmovinPlayerState.PAUSED then
     m.yospaceTask.EventReport = {id: YSPlayerEvents().PAUSE}
-  else if videoState = m.top.BitmovinPlayerState.ERROR
+  else if videoState = m.top.BitmovinPlayerState.ERROR then
     m.yospaceTask.EventReport = {id: YSPlayerEvents().ERROR}
   else
     print "Not reporting video state to Yospace: "; videoState
@@ -349,11 +349,11 @@ sub onMetadata()
       metadata = mapID3MetaData(metadata)
     end if
 
-    if metadata = invalid or metadata.Count() = 0
+    if metadata = invalid or metadata.Count() = 0 then
       print "Received meta data was invalid, not reporting to Yospace"
       return
     end if
-    if isLive() = true
+    if isLive() = true then
       m.yospaceTask.EventReport = {id: YSPlayerEvents().METADATA, data: metadata}
     end if
   end if
@@ -361,12 +361,12 @@ sub onMetadata()
 end sub
 
 sub requestYospaceURL(url, assetType)
-  if assetType = invalid or Lcase(assetType) = "none"
+  if assetType = invalid or Lcase(assetType) = "none" then
     verifyStartOffsetForLiveEvents()
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
-  else if Lcase(assetType) = "live"
+  else if Lcase(assetType) = "live" then
      m.yospaceTask.StreamContent = {type: "live", url: url, options: {USE_ID3: true}}
-  else if Lcase(assetType) = "vod"
+  else if Lcase(assetType) = "vod" then
     m.yospaceTask.StreamContent = {type: "vod", url: url, options: {USE_ID3: false}}
   else
     print "not supported asset type!"
@@ -375,7 +375,7 @@ end sub
 
 sub onInitializationFailure()
   print "Initialization failed; ", m.yospaceTask.InitializationFailure
-  if m.retryExcludingYospace = true
+  if m.retryExcludingYospace = true then
     print "Retrying excluding Yospace"
     verifyStartOffsetForLiveEvents()
     m.bitmovinPlayer.callFunc(m.top.BitmovinFunctions.LOAD, m.source)
@@ -391,14 +391,14 @@ sub verifyStartOffsetForLiveEvents()
 end sub
 
 sub onUrlReceived()
-  if type(m.source) = "roAssociativeArray"
+  if type(m.source) = "roAssociativeArray" then
     m.source.hls = m.yospaceTask.PlaybackURL
-  else if type(m.source) = "roSGNode" and m.source.isSubtype("ContentNode")
+  else if type(m.source) = "roSGNode" and m.source.isSubtype("ContentNode") then
     m.source.url = m.yospaceTask.PlaybackURL
   end if
 
   ' adjust startOffset for ads
-  if m.source.options <> invalid and m.source.options.startOffset <> invalid
+  if m.source.options <> invalid and m.source.options.startOffset <> invalid then
     list = m.yospaceTask.adList
     m.source.options.startOffset = toAbsoluteTime(m.source.options.startOffset, list)
   end if
@@ -456,7 +456,7 @@ sub checkIfSeekWasAllowed()
   ' the check if seeking is allowed has to be made after seeking has happened
   ' and, if necessary, has to be corrected.
   allowedSeek = m.policy.canSeekTo(currentPlayerPosition, m.policyHelper_seekStartPosition)
-  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1)
+  if (currentPlayerPosition <> allowedSeek) and (m.policyHelper_seekStartPosition > -1) then
     print "Seeking again because seek wasnt allowed: " + Str(allowedSeek)
     m.bitmovinPlayer.callFunc("seek", allowedSeek)
   end if
@@ -464,7 +464,7 @@ sub checkIfSeekWasAllowed()
 end sub
 
 sub onFocusChanged(event)
-  if event.getNode() = m.top.id
+  if event.getNode() = m.top.id then
     m.bitmovinPlayer.setFocus(true)
   end if
 end sub

@@ -33,15 +33,15 @@ sub MonitorSDK()
     ' For the last ad it could happen that the playback finished event is fired before the actual adFinished / adBreakFinished event
     if m.lastAd <> invalid then checkLastAdFinishedWorkaround()
 
-    if type(msg) = "roSGNodeEvent"
+    if type(msg) = "roSGNodeEvent" then
       field = msg.GetField()
       data = msg.GetData()
 
-      if (field = m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT)
+      if (field = m.BitmovinYospaceTaskEnums.ObservableFields.STREAM_CONTENT) then
         requestYospaceURL(data)
-      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT)
+      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.EVENT_REPORT) then
         reportPlayerEvent(data)
-      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION)
+      else if (field = m.BitmovinYospaceTaskEnums.ObservableFields.CALL_FUNCTION) then
         callFunction(data)
       end if
     else
@@ -98,7 +98,7 @@ end sub
 
 ' Called whenever an individual advert completes
 sub onAdEnd(miid as String)
-  if miid = m.lastAd
+  if miid = m.lastAd then
     YO_INFO("onAdEnd - miid {0} matches m.lastAd {1}; setting m.lastAd back to invalid", miid, m.lastAd)
     m.lastAd = invalid
   end if
@@ -161,10 +161,10 @@ end sub
 sub updateAdList()
   advertElements = []
   timeline = m.session.GetTimeline()
-  if timeline <> invalid
+  if timeline <> invalid then
     timelineElements = timeline.GetAllElements()
     for each tlElement in timelineElements
-      if tlElement.getType() = "ADVERT"
+      if tlElement.getType() = "ADVERT" then
         advertElements.push(tlElement)
       end if
     end for
@@ -179,7 +179,7 @@ sub updateAdList()
 end sub
 
 sub skipAd()
-  if isAdActive()
+  if isAdActive() then
     ad = getCurrentAd()
     m.bitmovinPlayer.callFunc("seek", (getAdStartTime(ad) + ad.GetDuration()))
     m.top.adSkipped = ad.GetMediaID()
@@ -190,14 +190,14 @@ function getCurrentAd()
   return m.session.GetSession().GetCurrentAdvert()
 end function
 
-function isAdActive()
+function isAdActive() as Boolean
   return getCurrentAd() <> invalid
 end function
 
 function getAdStartTime(ad)
   adStartTime = ad.GetBreak().GetStart()
   for each advert in ad.GetBreak().GetAdverts()
-    if advert._INSTANCEID = ad._INSTANCEID
+    if advert._INSTANCEID = ad._INSTANCEID then
       return adStartTime
     else
       adStartTime += advert.GetDuration()
@@ -206,24 +206,24 @@ function getAdStartTime(ad)
 end function
 
 sub requestYospaceURL(data)
-  if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE)
+  if (data.type = m.BitmovinYospaceTaskEnums.StreamType.LIVE) then
     m.session.CreateForLive(data.url, data.options, yo_Callback(onSessionReady, m))
     m.top.IsLive = true
-  else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.VOD)
+  else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.VOD) then
     m.session.CreateForVOD(data.url, data.options, yo_Callback(onSessionReady, m))
     m.top.IsLive = false
-  else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE)
+  else if (data.type = m.BitmovinYospaceTaskEnums.StreamType.V_LIVE) then
     m.session.CreateForNonLinear(data.url, data.options, yo_Callback(onSessionReady, m))
     m.top.IsLive = true
   end if
 end sub
 
 sub reportPlayerEvent(data)
-  if (data.id = "suppress")
+  if (data.id = "suppress") then
     m.session.GetSession().SuppressAnalytics(true)
-  else if (data.id = "unsuppress")
+  else if (data.id = "unsuppress") then
     missed = m.session.GetSession().SuppressAnalytics(false)
-    if (missed <> invalid)
+    if (missed <> invalid) then
       for i = 0 to missed.Count() - 1
         item = missed[i]
         YO_DEBUG("Missed: {0} Event: {1} with URL: {2}", i, item.event, item.url)
@@ -235,9 +235,9 @@ sub reportPlayerEvent(data)
 end sub
 
 sub callFunction(data)
-  if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD
+  if data.id = m.BitmovinYospaceTaskEnums.Functions.SKIP_AD then
     skipAd()
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_CONTENT_METADATA then
     genre = data.arguments[0]
     kidsContent = data.arguments[1]
     id = data.arguments[2]
@@ -245,12 +245,12 @@ sub callFunction(data)
     nielsenGenre = data.arguments[4]
     nielsenAppId = data.arguments[5]
     setContentMetaData(genre, kidsContent, id, length, nielsenGenre, nielsenAppId)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_DEBUG_LEVEL then
     setDebugLevel(data.arguments.debugLevel)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.SET_ENABLE_RAF then
     print "Enable RAF: "; data.arguments.enableRAF
     setEnableRAF(data.arguments.enableRAF)
-  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT
+  else if data.id = m.BitmovinYospaceTaskEnums.Functions.REPORT_COMPANION_EVENT then
     reportCompanionEvent(data.arguments.companionId, data.arguments.event)
   end if
 end sub
@@ -279,7 +279,7 @@ sub reportCompanionEvent(companionId, event)
   m.session.GetSession().ReportCompanionEvent(companionId, event)
 end sub
 
-function isLastAd(miid)
+function isLastAd(miid) as Boolean
   if m.top.bitmovinYospacePlayer.callFunc("isLive", invalid) then return true
 
   adList = m.top.adList
@@ -295,10 +295,10 @@ function checkLastAdFinishedWorkaround()
   if Invalid <> video AND video.position >= (video.duration) then firePostRollFinishedEvents()
 end function
 
-function firePostRollFinishedEvents()
+sub firePostRollFinishedEvents()
   lastAdMediaId = m.lastAd
   m.lastAd = invalid
 
   onAdEnd(lastAdMediaId)
   onAdBreakEnd(invalid)
-end function
+end sub

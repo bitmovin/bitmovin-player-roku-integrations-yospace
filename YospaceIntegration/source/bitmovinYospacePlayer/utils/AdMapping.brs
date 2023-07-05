@@ -52,14 +52,14 @@ function toAbsoluteTime(relativeTime, list)
   ' Multiple ads in an adbreak will have the same start offset, the offset of the ad break
   offset = 0
 
-  if list = invalid
+  if list = invalid then
     return mTime
   end if
 
   for each br in list
     print br
     print relativeTime
-    if br.scheduleTime < relativeTime
+    if br.scheduleTime < relativeTime then
       for each ad in br.ads
         mTime += ad.duration
       end for
@@ -77,16 +77,16 @@ function toMagicTime(playbackTime, timeline)
   ' Multiple ads in an adbreak will have the same start offset, the offset of the ad break
   offset = 0
 
-  if timeline = invalid
+  if timeline = invalid then
     return mTime
   end if
 
   for each timelineElement in timeline.elements
-    if timelineElement.mode = "ADVERT"
-      if ((timelineElement.offset + offset) + timelineElement.size) < playbackTime
+    if timelineElement.mode = "ADVERT" then
+      if ((timelineElement.offset + offset) + timelineElement.size) < playbackTime then
         mTime -= timelineElement.size
         offset += timelineElement.size
-      else if (playbackTime > (timelineElement.offset + offset)) and (playbackTime < ((timelineElement.offset + offset) + timelineElement.size))
+      else if (playbackTime > (timelineElement.offset + offset)) and (playbackTime < ((timelineElement.offset + offset) + timelineElement.size)) then
         mTime = (playbackTime - (timelineElement.offset + offset)) ' Subtract the time elapsed from content start to ad start
         exit for ' No need to check the rest of the elements when we are currently in an ad
       end if

@@ -1,0 +1,6 @@
+demo/source
+demo/components/bitmovinPlayer
+demo/components/bitmovinYospacePlayer
+
+YospaceIntegration/components/bitmovinPlayer
+YospaceIntegration/source/bitmovinPlayer

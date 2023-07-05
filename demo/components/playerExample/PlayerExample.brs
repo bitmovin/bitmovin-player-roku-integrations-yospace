@@ -18,8 +18,8 @@ sub init()
   m.bitmovinYospacePlayer.observeField("isPlayerReady", "onPlayerReady")
 end sub
 
-function onPlayerReady()
-  if m.bitmovinYospacePlayer.isPlayerReady = true
+sub onPlayerReady()
+  if m.bitmovinYospacePlayer.isPlayerReady = true then
     ' Set ad events listeners
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_BREAK_STARTED, "onAdBreakStart")
     m.bitmovinYospacePlayer.ObserveField(m.BitmovinFields.AD_STARTED, "onAdStart")
@@ -58,7 +58,7 @@ function onPlayerReady()
     'initializeConviva()
     m.bitmovinYospacePlayer.callFunc(m.BitmovinFunctions.SETUP, params)
   end if
-end function
+end sub
 
 
 sub initializeConviva()

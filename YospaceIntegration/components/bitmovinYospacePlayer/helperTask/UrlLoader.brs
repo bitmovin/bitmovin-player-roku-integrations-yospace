@@ -10,7 +10,7 @@ sub handleWebRequests()
 
   while true
     msg = wait(0, port)
-    if type(msg) = "roSGNodeEvent" and msg.GetField() = "targeturl"
+    if type(msg) = "roSGNodeEvent" and msg.GetField() = "targeturl" then
       url = msg.GetData()
       request = CreateObject("roUrlTransfer")
       requestPort = CreateObject("roMessagePort")
@@ -25,9 +25,9 @@ sub handleWebRequests()
 
       while true
         response = wait(m.requestTimeoutWindow, requestPort)
-        if response <> invalid and type(response) = "roUrlEvent"
+        if response <> invalid and type(response) = "roUrlEvent" then
           responseCode = response.GetResponseCode()
-          if (responseCode >= 200) and (responseCode < 400)
+          if (responseCode >= 200) and (responseCode < 400) then
             responseMessage = response.GetString()
           end if
           exit while

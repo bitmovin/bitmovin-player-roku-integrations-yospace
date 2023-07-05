@@ -16,6 +16,7 @@
     }
   },
   "scripts": {
+    "lint": "kacl lint",
     "clean": "rm -rf ./demo/components/bitmovinYospacePlayer && rm -rf ./demo/components/bitmovinYospaceConvivaPlayer && rm -rf ./demo/components/bitmovinConviva && rm -rf ./demo/components/conviva && rm -rf ./demo/source/yospace/ && rm -rf ./demo/source/bitmovinYospacePlayer/ && rm -rf ./demo/source/bitmovinPlayer/ && rm -rf ./demo/components/bitmovinPlayer/",
     "serve": "npm run clean && npm run build && npm-watch build",
     "serve-conviva": "npm run clean && npm run build-conviva && npm-watch build-conviva",
@@ -24,6 +25,7 @@
 
   },
   "devDependencies": {
+    "kacl": "^1.1.1",
     "npm-watch": "^0.6.0"
   }
 }
